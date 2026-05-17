@@ -137,6 +137,11 @@
   .crit-go .crit-title { color: var(--green); }
   .crit-wait .crit-title { color: var(--red); }
   .crit-list { font-size: 11px; color: var(--text-muted); padding-left: 13px; line-height: 1.9; }
+
+  /* ── ASK CLAUDE BUTTON ── */
+  .ask-claude-btn { width:100%; background: var(--navy-mid); border: 1px solid rgba(139,92,246,0.4); border-radius: var(--radius-sm); padding: 10px 16px; font-family: inherit; font-size: 11px; font-weight: 600; color: #c4b5fd; cursor: pointer; transition: all 0.15s; margin-top: 8px; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; }
+  .ask-claude-btn:hover { background: rgba(139,92,246,0.1); border-color: rgba(139,92,246,0.6); }
+  .ask-claude-note { font-size: 10px; color: var(--text-dim); text-align: center; margin-top: 6px; }
   .dot-teal { background: rgba(13,148,136,0.2); color: var(--teal-light); }
   .dot-amber { background: rgba(245,158,11,0.2); color: var(--amber); }
   .dot-red2 { background: rgba(239,68,68,0.2); color: #fca5a5; }
@@ -268,6 +273,12 @@
 
         <div id="p-result"></div>
 
+        <!-- Ask Claude Button -->
+        <a class="ask-claude-btn" id="ask-claude-btn" href="#" target="_blank" onclick="return openClaude()" style="display:none">
+          🤖 Ask Claude for a recommendation
+        </a>
+        <div class="ask-claude-note" id="ask-claude-note" style="display:none">Opens Claude.ai pre-filled with your conditions · requires Claude account</div>
+
       </div>
     </div>
   </div>
@@ -286,7 +297,7 @@
     <div class="seg-body" id="sb1">
       <div class="resources">
         <a class="res-link cg" href="https://captaingeorgia.com/fl-port-weather" target="_blank">↗ FL Port Weather</a>
-        <a class="res-link" href="https://www.ndbc.noaa.gov/station_page.php?station=41047" target="_blank">↗ Buoy 41047 SE FL</a>
+        <a class="res-link" href="https://www.ndbc.noaa.gov/station_page.php?station=41122" target="_blank">↗ Buoy 41122 Hollywood Beach FL</a>
         <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8722670" target="_blank">↗ Ft. Pierce Inlet Tides</a>
         <a class="res-link" href="https://windy.com/?waves,25.8,-80.2,7" target="_blank">↗ Windy — Miami</a>
       </div>
@@ -304,7 +315,7 @@
     <div class="seg-body" id="sb2">
       <div class="note"><strong>St. Augustine or Fernandina — your call leaving Ft. Pierce.</strong> Fernandina (~60 nm) is shorter. St. Aug (~75 nm) closer to Charleston. <strong>St. Augustine bar: cross at or near high tide only.</strong></div>
       <div class="resources">
-        <a class="res-link" href="https://www.ndbc.noaa.gov/station_page.php?station=41047" target="_blank">↗ Buoy 41047 NE FL</a>
+        <a class="res-link" href="https://www.ndbc.noaa.gov/station_page.php?station=41114" target="_blank">↗ Buoy 41114 Fort Pierce FL</a>
         <a class="res-link tide key" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8720218" target="_blank">↗ St. Augustine Inlet Tides ⚠</a>
         <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8720219" target="_blank">↗ Fernandina Beach Tides</a>
       </div>
@@ -322,7 +333,8 @@
     <div class="seg-body" id="sb3">
       <div class="note-green"><strong>Now comfortable with T4 props and 200 nm range.</strong> Brunswick / St. Simons Island GA (~130 nm) is a solid backup if conditions deteriorate mid-run.</div>
       <div class="resources">
-        <a class="res-link" href="https://www.ndbc.noaa.gov/station_page.php?station=41004" target="_blank">↗ Buoy 41004 SE Atlantic</a>
+        <a class="res-link" href="https://www.ndbc.noaa.gov/station_page.php?station=41112" target="_blank">↗ Buoy 41112 Fernandina Offshore</a>
+        <a class="res-link" href="https://www.ndbc.noaa.gov/station_page.php?station=41008" target="_blank">↗ Buoy 41008 Grays Reef SE Savannah</a>
         <a class="res-link cg" href="https://captaingeorgia.com/south-east-port-weather" target="_blank">↗ SE Port Weather</a>
         <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8665530" target="_blank">↗ Charleston Tides</a>
       </div>
@@ -340,7 +352,7 @@
     <div class="seg-body" id="sb4">
       <div class="resources">
         <a class="res-link cg" href="https://captaingeorgia.com/south-east-port-weather" target="_blank">↗ SE Port Weather SC/NC</a>
-        <a class="res-link" href="https://www.ndbc.noaa.gov/station_page.php?station=41004" target="_blank">↗ Buoy 41004 SE Atlantic</a>
+        <a class="res-link" href="https://www.ndbc.noaa.gov/station_page.php?station=41008" target="_blank">↗ Buoy 41008 Grays Reef SE Savannah</a>
         <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8658163" target="_blank">↗ Cape Fear River Tides</a>
       </div>
     </div>
@@ -436,7 +448,7 @@
     <div class="seg-body" id="sb9">
       <div class="note-blue"><strong>Outside preferred.</strong> Exit Cape Henry, pass Chesapeake Light Tower, run NE offshore to Ocean City. Wants SW/W winds under 15 kts, seas under 4 ft, no NE for 24 hrs. Chincoteague Inlet VA is an emergency option only if conditions deteriorate mid-run.</div>
       <div class="resources">
-        <a class="res-link key" href="https://www.ndbc.noaa.gov/station_page.php?station=44100" target="_blank">↗ Buoy 44100 Chesapeake Light ⚠</a>
+        <a class="res-link key" href="https://www.ndbc.noaa.gov/station_page.php?station=44099" target="_blank">↗ Buoy 44099 Cape Henry VA ⚠</a>
         <a class="res-link" href="https://www.ndbc.noaa.gov/station_page.php?station=44009" target="_blank">↗ Buoy 44009 Delaware Bay</a>
         <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8570283" target="_blank">↗ Ocean City Inlet Tides</a>
         <a class="res-link" href="https://windy.com/?waves,38.0,-74.5,7" target="_blank">↗ Windy — Mid-Atlantic Offshore</a>
@@ -466,6 +478,7 @@
       </div>
       <div class="resources">
         <a class="res-link key tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8534720" target="_blank">↗ Barnegat Inlet Tides ⚠</a>
+        <a class="res-link" href="https://www.ndbc.noaa.gov/station_page.php?station=44091" target="_blank">↗ Buoy 44091 Barnegat NJ</a>
         <a class="res-link" href="https://www.ndbc.noaa.gov/station_page.php?station=44025" target="_blank">↗ Buoy 44025 NY Bight</a>
         <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8536110" target="_blank">↗ Cape May Inlet Tides</a>
         <a class="res-link" href="https://windy.com/?waves,39.7,-74.1,8" target="_blank">↗ Windy — NJ Shore</a>
@@ -562,19 +575,19 @@ var STOPS = [
 ];
 
 var LEGS = {
-  'mia-ftp': { name:'Miami Beach → Ft. Pierce', nm:110, buoys:['41047'],
+  'mia-ftp': { name:'Miami Beach → Ft. Pierce', nm:110, buoys:['41122'],
     go:'Winds S–SW under 15 kts; Seas under 3 ft offshore; No fronts within 24 hrs',
     wait:'NE or E winds any strength; Seas 4 ft or more; Front approaching within 12 hrs',
     nextLeg:'Ft. Pierce to St. Augustine — watch St. Augustine bar tide timing on arrival' },
-  'ftp-sta': { name:'Ft. Pierce → St. Augustine or Fernandina Beach', nm:70, buoys:['41047'],
+  'ftp-sta': { name:'Ft. Pierce → St. Augustine or Fernandina Beach', nm:70, buoys:['41114','41117'],
     go:'Winds SE–SW under 15 kts; Seas under 3 ft; St. Augustine bar: enter near HIGH tide only',
     wait:'NE winds — St. Aug bar breaks badly in NE swell; Seas 4 ft or more; Arriving at low tide',
     nextLeg:'St. Augustine / Fernandina to Charleston (~175 nm) — longest southern leg, depart with full fuel' },
-  'sta-chs': { name:'St. Augustine / Fernandina → Charleston', nm:175, buoys:['41004'],
+  'sta-chs': { name:'St. Augustine / Fernandina → Charleston', nm:175, buoys:['41112','41008'],
     go:'Winds SW–W under 15 kts; Seas under 4 ft full leg; No fronts within 36 hrs; Full fuel',
     wait:'NE winds — uncomfortable full-day run; Seas 5 ft or more',
     nextLeg:'Charleston to Southport (~145 nm) — Cape Fear River: strong tidal current on arrival' },
-  'chs-spt': { name:'Charleston → Southport', nm:145, buoys:['41004'],
+  'chs-spt': { name:'Charleston → Southport', nm:145, buoys:['41008'],
     go:'Winds SW–NW under 15 kts; Seas under 4 ft',
     wait:'NE or E winds building; Seas 5 ft or more',
     nextLeg:'Southport to Morehead City via ICW and Masonboro Inlet — transit at mid-to-high tide' },
@@ -590,15 +603,15 @@ var LEGS = {
     go:'Great Bridge lock: check schedule; Protected route — most weather acceptable',
     wait:'Great Bridge lock out of service; Severe weather only',
     nextLeg:'Hampton VA to Ocean City MD (~125 nm) — outside, wants SW/W winds under 15 kts, no NE for 24 hrs' },
-  'hva-ocy': { name:'Hampton VA → Ocean City MD', nm:125, buoys:['44100','44009'],
+  'hva-ocy': { name:'Hampton VA → Ocean City MD', nm:125, buoys:['44099','44014','44009'],
     go:'Winds SW–W under 15 kts; Seas under 4 ft at Chesapeake Light Tower; No NE in 36-hr forecast',
     wait:'NE winds building; Seas 5 ft or more; Front timing uncertain',
     nextLeg:'Ocean City to Barnegat Light — Barnegat Inlet timing is critical. Check tide before committing to this next leg.' },
-  'ocy-bnl': { name:'Ocean City MD → Barnegat Light NJ', nm:75, buoys:['44025'],
+  'ocy-bnl': { name:'Ocean City MD → Barnegat Light NJ', nm:75, buoys:['44091','44025'],
     go:'Barnegat: FLOOD tide mid-flood only; Morning entry only; Winds W or SW under 10 kts; No NE swell whatsoever; Favor north jetty',
     wait:'ANY NE wind or swell; Ebb tide — never enter on ebb; Afternoon — dangerous; Any doubt: Cape May staging instead',
     nextLeg:'Barnegat Light stay — use Passage Planner to compare exit windows and plan Port Washington + Falmouth legs' },
-  'bnl-pwy': { name:'Barnegat Light → Port Washington NY', nm:110, buoys:['44025'],
+  'bnl-pwy': { name:'Barnegat Light → Port Washington NY', nm:110, buoys:['44065','44025'],
     go:'Winds SW–W under 15 kts; Seas under 3 ft offshore NJ; Barnegat exit: flood tide morning only north jetty',
     wait:'NE or E winds — Barnegat exit gets rough; Seas 4 ft or more',
     nextLeg:'Port Washington to Falmouth (~185 nm) — time The Race for fair current, arrive before early afternoon' },
@@ -901,7 +914,88 @@ async function runPlanner() {
   }
   setStatus('');
   btn.disabled = false;
+  showClaudeButton();
 }
+
+/* ══════════════════════════════════════
+   OPTION B — OPEN IN CLAUDE.AI
+══════════════════════════════════════ */
+var claudePrompt = '';
+
+function buildClaudePrompt() {
+  if (currentStop < 0) return '';
+  var stop = STOPS[currentStop];
+  var leg = LEGS[stop.legId];
+  var optLabel = selectedOpt === 0 ? 'tomorrow' : (selectedOpt === 1 ? 'the day after tomorrow' : 'in two days');
+
+  // Collect any data chips that were generated
+  var chipsEl = document.getElementById('p-chips');
+  var chipsText = '';
+  if (chipsEl && chipsEl.style.display !== 'none') {
+    var chips = chipsEl.querySelectorAll('.chip');
+    chips.forEach(function(c) { chipsText += '- ' + c.textContent + '\n'; });
+  }
+
+  // Collect manual input if present
+  var manualText = '';
+  var manualArea = document.getElementById('manual-area');
+  if (manualArea && manualArea.classList.contains('open')) {
+    var inp = document.getElementById('manual-input');
+    if (inp && inp.value.trim()) manualText = inp.value.trim();
+  }
+
+  var prompt = 'I am making a solo passage from Miami Beach to East Falmouth MA on a Formula 40PC with twin Volvo Penta IPS500/D6 engines and T4 props (~200 nm comfortable range).\n\n';
+  prompt += 'I am currently stopped at: ' + stop.name + '\n';
+  prompt += 'My next leg is: ' + leg.name + ' (~' + leg.nm + ' nm)\n';
+  prompt += 'I am considering departing: ' + optLabel + '\n\n';
+
+  prompt += 'GO criteria for this leg: ' + leg.go + '\n';
+  prompt += 'WAIT criteria: ' + leg.wait + '\n\n';
+
+  if (chipsText) {
+    prompt += 'Live data I have collected:\n' + chipsText + '\n';
+  }
+  if (manualText) {
+    prompt += 'Current conditions (what I am seeing):\n' + manualText + '\n\n';
+  }
+
+  prompt += 'Context about me:\n';
+  prompt += '- I had a previous incident at Barnegat Inlet — I treat it with extra caution\n';
+  prompt += '- I found Pamlico Sound unexpectedly rough on a past crossing\n';
+  prompt += '- My comfort zone is winds under 15 kts and seas under 3-4 ft\n';
+  prompt += '- My goal is a harmonious, low-stress passage — I can stay extra days if needed\n\n';
+
+  prompt += 'Please give me a GO / WAIT / CAUTION recommendation for departing ' + optLabel + ', explain your reasoning, compare all three departure options (tomorrow, +1 day, +2 days), and tell me what to watch for before committing.\n\n';
+  prompt += 'Next leg context: ' + leg.nextLeg;
+
+  return prompt;
+}
+
+function openClaude() {
+  claudePrompt = buildClaudePrompt();
+  if (!claudePrompt) { alert('Please select your current stop first.'); return false; }
+  // Copy to clipboard then open Claude.ai
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(claudePrompt).then(function() {
+      alert('Your passage brief has been copied to clipboard.\n\nClaude.ai will open — paste it into the chat with Cmd+V or long-press → Paste.');
+      window.open('https://claude.ai/new', '_blank');
+    }).catch(function() {
+      // Fallback: just open Claude
+      window.open('https://claude.ai/new', '_blank');
+    });
+  } else {
+    window.open('https://claude.ai/new', '_blank');
+  }
+  return false;
+}
+
+function showClaudeButton() {
+  var btn = document.getElementById('ask-claude-btn');
+  var note = document.getElementById('ask-claude-note');
+  if (btn) btn.style.display = 'flex';
+  if (note) note.style.display = 'block';
+}
+
 </script>
 </body>
 </html>
