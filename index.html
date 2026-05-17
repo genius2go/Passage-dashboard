@@ -8,931 +8,899 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
     --navy: #0a1628; --navy-mid: #112240; --teal: #0d9488; --teal-light: #14b8a6;
-    --amber: #f59e0b; --red: #ef4444; --green: #22c55e;
+    --amber: #f59e0b; --red: #ef4444; --green: #22c55e; --blue: #3b82f6;
     --text: #e2e8f0; --text-muted: #94a3b8; --text-dim: #64748b;
     --border: rgba(255,255,255,0.08); --card-bg: rgba(255,255,255,0.04);
     --card-hover: rgba(255,255,255,0.08); --radius: 10px; --radius-sm: 6px;
   }
   body { background: var(--navy); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; font-size: 15px; line-height: 1.5; min-height: 100vh; }
-
-  .topbar { background: var(--navy-mid); border-bottom: 1px solid var(--border); padding: 14px 20px; position: sticky; top: 0; z-index: 100; display: flex; align-items: center; gap: 12px; }
-  .topbar-title { font-size: 15px; font-weight: 600; }
+  .topbar { background: var(--navy-mid); border-bottom: 1px solid var(--border); padding: 12px 20px; position: sticky; top: 0; z-index: 100; display: flex; align-items: center; gap: 10px; }
+  .topbar-title { font-size: 14px; font-weight: 600; }
   .topbar-sub { font-size: 11px; color: var(--text-muted); margin-left: auto; }
-  .container { max-width: 940px; margin: 0 auto; padding: 20px 16px 50px; }
-
-  .today-box { background: var(--navy-mid); border: 1px solid var(--teal); border-radius: var(--radius); padding: 14px 16px; margin-bottom: 20px; }
-  .today-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal-light); margin-bottom: 10px; }
-  .today-stops { display: flex; flex-wrap: wrap; gap: 6px; }
-  .stop-btn { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 5px 12px; font-size: 12px; color: var(--text-muted); cursor: pointer; transition: all 0.15s; white-space: nowrap; }
+  .container { max-width: 860px; margin: 0 auto; padding: 16px 16px 60px; }
+  .dep-banner { background: rgba(13,148,136,0.1); border: 1px solid rgba(13,148,136,0.3); border-radius: var(--radius); padding: 10px 16px; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+  .dep-date { font-size: 13px; font-weight: 700; color: var(--teal-light); }
+  .dep-detail { font-size: 11px; color: var(--text-muted); }
+  .dep-arrival { margin-left: auto; font-size: 11px; font-weight: 600; color: var(--text-muted); }
+  .dep-arrival span { color: var(--green); }
+  .stop-picker { background: var(--navy-mid); border: 1px solid var(--teal); border-radius: var(--radius); padding: 12px 14px; margin-bottom: 16px; }
+  .stop-picker-label { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal-light); margin-bottom: 10px; }
+  .stop-btns { display: flex; flex-wrap: wrap; gap: 6px; }
+  .stop-btn { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 5px 11px; font-size: 11px; color: var(--text-muted); cursor: pointer; transition: all 0.15s; white-space: nowrap; font-family: inherit; }
   .stop-btn:hover { border-color: var(--teal); color: var(--text); }
   .stop-btn.active { background: rgba(13,148,136,0.2); border-color: var(--teal); color: var(--teal-light); font-weight: 600; }
-  .today-next { margin-top: 10px; font-size: 12px; color: var(--text-muted); display: none; }
-  .today-next.visible { display: block; }
-  .today-next strong { color: var(--text); }
-
-  .gonogo { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-  @media (max-width: 520px) { .gonogo { grid-template-columns: 1fr; } }
-  .gonogo-card { border-radius: var(--radius); padding: 14px 16px; border: 1px solid; }
-  .gonogo-go { background: rgba(34,197,94,0.08); border-color: rgba(34,197,94,0.25); }
-  .gonogo-wait { background: rgba(239,68,68,0.08); border-color: rgba(239,68,68,0.25); }
-  .gonogo-title { font-size: 13px; font-weight: 600; margin-bottom: 8px; }
-  .gonogo-go .gonogo-title { color: var(--green); }
-  .gonogo-wait .gonogo-title { color: var(--red); }
-  .gonogo-list { font-size: 12px; color: var(--text-muted); padding-left: 14px; line-height: 2; }
-
-  .segment { margin-bottom: 28px; scroll-margin-top: 70px; transition: opacity 0.3s; }
-  .segment.dimmed { opacity: 0.35; }
-  .seg-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
-  .seg-dot { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
-  .seg-info { flex: 1; }
-  .seg-name { font-size: 14px; font-weight: 600; color: var(--text); }
-  .seg-route { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
-  .seg-dist { font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 20px; white-space: nowrap; }
-  .dist-ok { background: rgba(34,197,94,0.12); color: var(--green); }
-
-  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px, 1fr)); gap: 8px; }
-  @media (max-width: 480px) { .cards { grid-template-columns: 1fr 1fr; } }
-  a.card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 13px; text-decoration: none; display: block; transition: background 0.15s, border-color 0.15s; }
-  a.card:hover { background: var(--card-hover); border-color: rgba(255,255,255,0.15); }
-  .card-icon { font-size: 18px; margin-bottom: 5px; }
-  .card-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 3px; line-height: 1.3; }
-  .card-sub { font-size: 11px; color: var(--text-muted); line-height: 1.4; }
-  .card-badge { display: inline-block; font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 20px; margin-top: 6px; }
-  .badge-key { background: rgba(239,68,68,0.15); color: #fca5a5; }
-  .badge-fuel { background: rgba(245,158,11,0.15); color: #fcd34d; }
-  .badge-cg { background: rgba(13,148,136,0.15); color: var(--teal-light); }
-  .badge-outside { background: rgba(59,130,246,0.15); color: #93c5fd; }
-  .badge-inside { background: rgba(139,92,246,0.15); color: #c4b5fd; }
-
-  .note { background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.2); border-radius: var(--radius); padding: 12px 14px; margin-bottom: 10px; font-size: 12px; color: #fcd34d; line-height: 1.6; }
-  .note strong { color: var(--amber); }
-  .note-green { background: rgba(34,197,94,0.07); border: 1px solid rgba(34,197,94,0.2); border-radius: var(--radius); padding: 12px 14px; margin-bottom: 10px; font-size: 12px; color: #86efac; line-height: 1.6; }
-  .note-green strong { color: var(--green); }
-
-  .decision { background: rgba(139,92,246,0.07); border: 1px solid rgba(139,92,246,0.2); border-radius: var(--radius); padding: 14px 16px; margin-bottom: 10px; }
-  .decision-title { font-size: 13px; font-weight: 600; color: #c4b5fd; margin-bottom: 10px; }
-  .decision-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  @media (max-width: 520px) { .decision-grid { grid-template-columns: 1fr; } }
-  .decision-opt { font-size: 12px; background: rgba(255,255,255,0.03); border-radius: var(--radius-sm); padding: 10px 12px; border: 1px solid rgba(255,255,255,0.06); }
-  .opt-label { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 6px; }
-  .opt-inside { color: #c4b5fd; }
-  .opt-outside { color: #93c5fd; }
-  .decision-opt p { color: var(--text-muted); line-height: 1.6; }
-
-  .divider { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
-  .section-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 12px; }
-
-  .route-line { display: flex; align-items: center; overflow-x: auto; padding: 12px 0 16px; scrollbar-width: none; }
+  .route-wrap { margin-bottom: 16px; }
+  .route-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 8px; }
+  .route-line { display: flex; align-items: center; overflow-x: auto; padding: 8px 0 12px; scrollbar-width: none; }
   .route-line::-webkit-scrollbar { display: none; }
   .route-stop { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
-  .route-stop-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--teal); border: 2px solid var(--navy); transition: transform 0.2s, box-shadow 0.2s; }
-  .route-stop-dot.red-dot { background: var(--red); }
-  .route-stop-dot.purple-dot { background: #a78bfa; }
-  .route-stop-dot.green-dot { background: var(--green); }
-  .route-stop-dot.current { background: var(--amber) !important; transform: scale(1.6); box-shadow: 0 0 8px var(--amber); }
-  .route-stop-label { font-size: 9px; color: var(--text-muted); margin-top: 4px; text-align: center; max-width: 54px; line-height: 1.2; }
-  .route-stop-label.active-lbl { color: var(--amber); font-weight: 700; }
-  .route-connector { height: 2px; background: var(--border); flex: 1; min-width: 14px; flex-shrink: 0; margin-bottom: 18px; }
-  .route-connector.inside { background: rgba(139,92,246,0.4); }
+  .route-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--teal); border: 2px solid var(--navy); transition: transform 0.2s, box-shadow 0.2s; }
+  .route-dot.dot-red { background: var(--red); }
+  .route-dot.dot-purple { background: #a78bfa; }
+  .route-dot.dot-green { background: var(--green); }
+  .route-dot.dot-current { background: var(--amber) !important; transform: scale(1.7); box-shadow: 0 0 8px var(--amber); }
+  .route-lbl { font-size: 8px; color: var(--text-muted); margin-top: 4px; text-align: center; max-width: 50px; line-height: 1.2; }
+  .route-lbl.lbl-current { color: var(--amber); font-weight: 700; }
+  .route-conn { height: 2px; background: var(--border); flex: 1; min-width: 12px; flex-shrink: 0; margin-bottom: 16px; }
+  .route-conn.conn-inside { background: rgba(139,92,246,0.4); }
+  .route-conn.conn-done { background: rgba(13,148,136,0.25); }
 
-  .dot-blue { background: rgba(59,130,246,0.2); color: #93c5fd; }
+  /* PASSAGE PLANNER */
+  .planner { background: var(--navy-mid); border: 1px solid rgba(13,148,136,0.35); border-radius: var(--radius); margin-bottom: 20px; overflow: hidden; }
+  .planner-header { padding: 13px 16px; display: flex; align-items: center; gap: 10px; cursor: pointer; user-select: none; -webkit-user-select: none; }
+  .planner-header:hover { background: rgba(13,148,136,0.05); }
+  .planner-icon { font-size: 18px; }
+  .planner-title { font-size: 13px; font-weight: 700; color: var(--teal-light); flex: 1; }
+  .planner-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+  .planner-chev { font-size: 10px; color: var(--text-dim); transition: transform 0.2s; }
+  .planner-chev.open { transform: rotate(180deg); }
+  .planner-body { display: none; border-top: 1px solid var(--border); }
+  .planner-body.open { display: block; }
+  .planner-pad { padding: 14px 16px; }
+  .option-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 14px; }
+  @media(max-width:480px){ .option-row { grid-template-columns: 1fr; } }
+  .option-card { border-radius: var(--radius-sm); padding: 10px 12px; border: 1px solid var(--border); background: var(--card-bg); cursor: pointer; transition: all 0.15s; text-align: center; font-family: inherit; width: 100%; }
+  .option-card:hover { border-color: rgba(13,148,136,0.4); background: var(--card-hover); }
+  .option-card.selected { border-color: var(--teal); background: rgba(13,148,136,0.12); }
+  .option-title { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+  .option-sub { font-size: 10px; color: var(--text-muted); }
+  .tide-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; padding: 10px 12px; background: rgba(59,130,246,0.06); border: 1px solid rgba(59,130,246,0.15); border-radius: var(--radius-sm); }
+  .tide-lbl { font-size: 11px; color: var(--text-muted); white-space: nowrap; }
+  .tide-inp { background: var(--navy); border: 1px solid rgba(59,130,246,0.3); border-radius: 4px; padding: 5px 8px; font-family: inherit; font-size: 11px; color: var(--text); outline: none; }
+  .tide-inp:focus { border-color: rgba(59,130,246,0.6); }
+  .tide-inp[type=number] { width: 62px; }
+  .tide-inp[type=time] { width: 105px; }
+  .analyze-btn { width: 100%; background: var(--teal); color: #040a12; border: none; border-radius: var(--radius-sm); padding: 11px 16px; font-family: inherit; font-size: 12px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; transition: background 0.15s; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+  .analyze-btn:hover { background: #0dd9be; }
+  .analyze-btn:disabled { background: var(--card-bg); color: var(--text-dim); cursor: not-allowed; }
+  .manual-toggle { font-size: 11px; color: var(--text-muted); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; display: inline-block; margin-bottom: 10px; }
+  .manual-toggle:hover { color: var(--teal-light); }
+  .manual-area { display: none; margin-bottom: 12px; }
+  .manual-area.open { display: block; }
+  .manual-lbl { font-size: 10px; color: var(--text-muted); margin-bottom: 5px; }
+  .manual-area textarea { width: 100%; background: var(--navy); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px; font-family: inherit; font-size: 11px; color: var(--text); resize: vertical; min-height: 80px; outline: none; }
+  .manual-area textarea:focus { border-color: rgba(13,148,136,0.4); }
+  .manual-area textarea::placeholder { color: var(--text-dim); }
+  .p-status { font-size: 11px; color: var(--text-muted); margin-bottom: 8px; min-height: 16px; }
+  .sp { display: inline-block; width: 9px; height: 9px; border: 2px solid currentColor; border-top-color: transparent; border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: middle; margin-right: 4px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .chips { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px; }
+  .chip { font-size: 10px; font-weight: 600; padding: 3px 8px; border-radius: 4px; background: var(--card-bg); border: 1px solid var(--border); color: var(--text-muted); }
+  .chip-ok { border-color: rgba(34,197,94,0.3); color: #86efac; }
+  .chip-bad { border-color: rgba(239,68,68,0.3); color: #fca5a5; }
+  .chip-tide { border-color: rgba(59,130,246,0.3); color: #93c5fd; }
+  .p-result { border-radius: var(--radius-sm); overflow: hidden; }
+  .r-hdr { padding: 11px 14px; display: flex; align-items: flex-start; gap: 10px; }
+  .r-go { background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); }
+  .r-wait { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); }
+  .r-caution { background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3); }
+  .r-icon { font-size: 20px; flex-shrink: 0; }
+  .r-verdict { font-size: 13px; font-weight: 700; line-height: 1.3; }
+  .r-go .r-verdict { color: var(--green); }
+  .r-wait .r-verdict { color: var(--red); }
+  .r-caution .r-verdict { color: var(--amber); }
+  .r-body { background: var(--card-bg); border: 1px solid var(--border); border-top: none; padding: 12px 14px; }
+  .r-text { font-size: 12px; color: var(--text); line-height: 1.85; white-space: pre-wrap; }
+
+  .divider { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+  .section-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 12px; }
+  .segment { margin-bottom: 20px; scroll-margin-top: 60px; transition: opacity 0.3s; }
+  .segment.dimmed { opacity: 0.28; pointer-events: none; }
+  .seg-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  .seg-dot { width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+  .seg-info { flex: 1; }
+  .seg-name { font-size: 13px; font-weight: 600; color: var(--text); }
+  .seg-route { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+  .seg-dist { font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 20px; white-space: nowrap; background: rgba(34,197,94,0.12); color: var(--green); }
+  .seg-toggle { font-size: 10px; color: var(--text-dim); cursor: pointer; margin-bottom: 8px; display: inline-block; text-decoration: underline; text-underline-offset: 2px; }
+  .seg-toggle:hover { color: var(--text-muted); }
+  .seg-body { display: none; }
+  .seg-body.open { display: block; }
+  .note { background: rgba(245,158,11,0.07); border: 1px solid rgba(245,158,11,0.18); border-radius: var(--radius-sm); padding: 10px 12px; margin-bottom: 10px; font-size: 11px; color: #fcd34d; line-height: 1.6; }
+  .note strong { color: var(--amber); }
+  .note-green { background: rgba(34,197,94,0.06); border: 1px solid rgba(34,197,94,0.18); border-radius: var(--radius-sm); padding: 10px 12px; margin-bottom: 10px; font-size: 11px; color: #86efac; line-height: 1.6; }
+  .note-green strong { color: var(--green); }
+  .note-blue { background: rgba(59,130,246,0.06); border: 1px solid rgba(59,130,246,0.18); border-radius: var(--radius-sm); padding: 10px 12px; margin-bottom: 10px; font-size: 11px; color: #93c5fd; line-height: 1.6; }
+  .note-blue strong { color: #7dd3fc; }
+  .resources { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .res-link { font-size: 10px; font-weight: 600; padding: 4px 10px; border-radius: 4px; border: 1px solid var(--border); color: var(--text-muted); background: var(--card-bg); text-decoration: none; transition: all 0.15s; }
+  .res-link:hover { border-color: rgba(13,148,136,0.4); color: var(--teal-light); }
+  .res-link.key { border-color: rgba(239,68,68,0.25); color: #fca5a5; }
+  .res-link.tide { border-color: rgba(59,130,246,0.25); color: #93c5fd; }
+  .res-link.cg { border-color: rgba(13,148,136,0.25); color: var(--teal-light); }
+  .crit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  @media(max-width:480px){ .crit-grid { grid-template-columns: 1fr; } }
+  .crit-box { border-radius: var(--radius-sm); padding: 10px 12px; border: 1px solid; }
+  .crit-go { background: rgba(34,197,94,0.07); border-color: rgba(34,197,94,0.2); }
+  .crit-wait { background: rgba(239,68,68,0.07); border-color: rgba(239,68,68,0.2); }
+  .crit-title { font-size: 11px; font-weight: 700; margin-bottom: 6px; }
+  .crit-go .crit-title { color: var(--green); }
+  .crit-wait .crit-title { color: var(--red); }
+  .crit-list { font-size: 11px; color: var(--text-muted); padding-left: 13px; line-height: 1.9; }
   .dot-teal { background: rgba(13,148,136,0.2); color: var(--teal-light); }
   .dot-amber { background: rgba(245,158,11,0.2); color: var(--amber); }
-  .dot-red { background: rgba(239,68,68,0.2); color: #fca5a5; }
+  .dot-red2 { background: rgba(239,68,68,0.2); color: #fca5a5; }
   .dot-purple { background: rgba(139,92,246,0.2); color: #c4b5fd; }
   .dot-green { background: rgba(34,197,94,0.2); color: var(--green); }
   .dot-sky { background: rgba(14,165,233,0.2); color: #7dd3fc; }
-
-  .quick-links { display: flex; flex-wrap: wrap; gap: 8px; }
-  .quick-link { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 7px 12px; font-size: 12px; color: var(--text-muted); text-decoration: none; transition: background 0.15s, color 0.15s; white-space: nowrap; }
-  .quick-link:hover { background: var(--card-hover); color: var(--text); }
-
-  .dep-banner { background: rgba(13,148,136,0.1); border: 1px solid rgba(13,148,136,0.3); border-radius: var(--radius); padding: 10px 16px; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; font-size: 12px; }
-  .dep-date { font-size: 14px; font-weight: 700; color: var(--teal-light); }
-  .dep-detail { color: var(--text-muted); }
-  .dep-arrival { margin-left: auto; font-size: 12px; font-weight: 600; color: var(--text-muted); }
-  .dep-arrival span { color: var(--green); }
-
-  /* ══ WEATHER ADVISOR PANEL ══ */
-  .wx-panel { margin-top: 14px; border: 1px solid rgba(13,148,136,0.2); border-radius: var(--radius); overflow: hidden; }
-  .wx-trigger { width: 100%; background: rgba(13,148,136,0.07); border: none; border-bottom: 1px solid rgba(13,148,136,0.15); padding: 10px 14px; display: flex; align-items: center; gap: 10px; cursor: pointer; color: var(--teal-light); font-size: 12px; font-weight: 600; font-family: inherit; transition: background 0.15s; text-align: left; }
-  .wx-trigger:hover { background: rgba(13,148,136,0.12); }
-  .wx-trigger .wx-chev { margin-left: auto; font-size: 10px; transition: transform 0.2s; }
-  .wx-trigger.open .wx-chev { transform: rotate(180deg); }
-  .wx-body { display: none; padding: 14px; background: rgba(0,0,0,0.15); }
-  .wx-body.open { display: block; }
-
-  .wx-criteria { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
-  @media(max-width:500px){ .wx-criteria { grid-template-columns: 1fr; } }
-  .wx-crit-box { background: var(--card-bg); border-radius: var(--radius-sm); padding: 9px 11px; border: 1px solid var(--border); }
-  .wx-crit-label { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 5px; }
-  .wx-crit-go .wx-crit-label { color: var(--green); }
-  .wx-crit-wait .wx-crit-label { color: var(--red); }
-  .wx-crit-list { font-size: 11px; color: var(--text-muted); line-height: 1.9; padding-left: 12px; }
-
-  /* Tide display */
-  .tide-box { background: rgba(59,130,246,0.07); border: 1px solid rgba(59,130,246,0.2); border-radius: var(--radius-sm); padding: 11px 13px; margin-bottom: 12px; }
-  .tide-box-label { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #93c5fd; margin-bottom: 8px; }
-  .tide-dep-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
-  .tide-dep-label { font-size: 11px; color: var(--text-muted); white-space: nowrap; }
-  .tide-dep-input { background: var(--navy); border: 1px solid rgba(59,130,246,0.3); border-radius: 4px; padding: 4px 8px; font-family: inherit; font-size: 11px; color: var(--text); width: 90px; outline: none; }
-  .tide-dep-input:focus { border-color: rgba(59,130,246,0.6); }
-  .tide-speed-label { font-size: 11px; color: var(--text-muted); white-space: nowrap; }
-  .tide-calc-btn { background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3); border-radius: 4px; padding: 4px 10px; font-family: inherit; font-size: 11px; color: #93c5fd; cursor: pointer; transition: background 0.15s; }
-  .tide-calc-btn:hover { background: rgba(59,130,246,0.25); }
-  .tide-result { font-size: 12px; line-height: 1.8; }
-  .tide-go { color: #86efac; }
-  .tide-wait { color: #fca5a5; }
-  .tide-neutral { color: var(--text-muted); }
-  .tide-predictions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
-  .tide-chip { font-size: 10px; font-weight: 600; padding: 3px 9px; border-radius: 4px; background: var(--card-bg); border: 1px solid var(--border); color: var(--text-muted); }
-  .tide-chip.hi { border-color: rgba(59,130,246,0.3); color: #93c5fd; }
-  .tide-chip.lo { border-color: rgba(100,116,139,0.3); color: var(--text-dim); }
-
-  .wx-sources { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 12px; }
-  .wx-source { font-size: 10px; font-weight: 600; padding: 3px 9px; border-radius: 4px; border: 1px solid var(--border); color: var(--text-muted); background: var(--card-bg); text-decoration: none; transition: all 0.15s; }
-  .wx-source:hover { border-color: rgba(13,148,136,0.4); color: var(--teal-light); }
-
-  .wx-fetch-btn { width: 100%; background: var(--teal); color: #040a12; border: none; border-radius: var(--radius-sm); padding: 10px 16px; font-family: inherit; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; transition: background 0.15s; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 7px; }
-  .wx-fetch-btn:hover { background: #0dd9be; }
-  .wx-fetch-btn:disabled { background: var(--card-bg); color: var(--text-dim); cursor: not-allowed; }
-
-  .wx-manual-toggle { font-size: 11px; color: var(--text-muted); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; display: inline-block; margin-bottom: 10px; }
-  .wx-manual-toggle:hover { color: var(--teal-light); }
-  .wx-manual-area { display: none; margin-bottom: 10px; }
-  .wx-manual-area.open { display: block; }
-  .wx-manual-area textarea { width: 100%; background: var(--navy); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px; font-family: inherit; font-size: 11px; color: var(--text); resize: vertical; min-height: 80px; outline: none; }
-  .wx-manual-area textarea:focus { border-color: rgba(13,148,136,0.4); }
-  .wx-manual-area textarea::placeholder { color: var(--text-dim); }
-
-  .wx-status { font-size: 11px; color: var(--text-muted); margin-bottom: 8px; min-height: 16px; }
-  .wx-status .sp { display: inline-block; width: 9px; height: 9px; border: 2px solid currentColor; border-top-color: transparent; border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: middle; margin-right: 4px; }
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  .wx-data-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
-  .wx-data-chip { font-size: 10px; font-weight: 600; padding: 3px 9px; border-radius: 4px; background: var(--card-bg); border: 1px solid var(--border); color: var(--text-muted); }
-
-  .wx-result { border-radius: var(--radius-sm); overflow: hidden; }
-  .wx-result-hdr { padding: 10px 13px; display: flex; align-items: center; gap: 8px; }
-  .wx-result-go { background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.25); }
-  .wx-result-wait { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.25); }
-  .wx-result-caution { background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.25); }
-  .wx-verdict { font-size: 13px; font-weight: 700; }
-  .wx-result-go .wx-verdict { color: var(--green); }
-  .wx-result-wait .wx-verdict { color: var(--red); }
-  .wx-result-caution .wx-verdict { color: var(--amber); }
-  .wx-result-body { background: var(--card-bg); border: 1px solid var(--border); border-top: none; padding: 12px 13px; }
-  .wx-result-text { font-size: 11px; color: var(--text); line-height: 1.8; white-space: pre-wrap; }
+  .dot-blue { background: rgba(59,130,246,0.2); color: #93c5fd; }
 </style>
 </head>
 <body>
 
 <div class="topbar">
-  <span style="font-size:20px">🧭</span>
-  <span class="topbar-title">Miami → Falmouth Passage Dashboard</span>
-  <span class="topbar-sub">Formula 40PC · IPS500/D6 · ~200 nm range (T4 props)</span>
+  <span style="font-size:18px">🧭</span>
+  <span class="topbar-title">Miami → Falmouth</span>
+  <span class="topbar-sub">Formula 40PC · IPS500 · T4 props · ~200 nm</span>
 </div>
 
 <div class="container">
 
   <div class="dep-banner">
-    <span style="font-size:20px">⚓</span>
+    <span style="font-size:18px">⚓</span>
     <div>
       <div class="dep-date">Depart June 1, 2026</div>
-      <div class="dep-detail">Miami Beach · Sunset Harbour → East Falmouth, MA</div>
+      <div class="dep-detail">Sunset Harbour, Miami Beach → East Falmouth, MA</div>
     </div>
     <div class="dep-arrival">Est. arrival <span>~June 11–12</span></div>
   </div>
 
-  <div class="today-box">
-    <div class="today-label">📍 Where am I today? — tap your current stop</div>
-    <div class="today-stops">
-      <button class="stop-btn" onclick="setStop(0,'Miami Beach','Ft. Pierce (~110 nm) — Day 1, all outside')">Miami Beach</button>
-      <button class="stop-btn" onclick="setStop(1,'Ft. Pierce','St. Augustine or Fernandina Beach — weather/fuel dependent (~60–75 nm)')">Ft. Pierce</button>
-      <button class="stop-btn" onclick="setStop(2,'St. Augustine / Fernandina','Charleston (~175 nm) — full range day, comfortable with T4 props')">St. Aug / Fernandina</button>
-      <button class="stop-btn" onclick="setStop(3,'Charleston','Southport (~145 nm)')">Charleston</button>
-      <button class="stop-btn" onclick="setStop(4,'Southport','Morehead City via Snow\'s Cut → Masonboro Inlet (~75 nm)')">Southport</button>
-      <button class="stop-btn" onclick="setStop(5,'Morehead City','WEATHER HOLD — check Pamlico Sound conditions')">Morehead City</button>
-      <button class="stop-btn" onclick="setStop(6,'Coinjock','Hampton VA (~40 nm) — easy half day via Virginia Cut')">Coinjock</button>
-      <button class="stop-btn" onclick="setStop(7,'Hampton VA','Ocean City MD (~125 nm) — outside, straight offshore preferred')">Hampton VA</button>
-      <button class="stop-btn" onclick="setStop(8,'Ocean City MD','Barnegat Light (~75 nm) OR Cape May (~35 nm) to stage')">Ocean City MD</button>
-      <button class="stop-btn" onclick="setStop(9,'Cape May NJ','Barnegat Light (~40 nm) — morning only, flooding tide required')">Cape May NJ</button>
-      <button class="stop-btn" onclick="setStop(10,'Barnegat Light','2-night stay — cousin visit 🎉')">Barnegat Light</button>
-      <button class="stop-btn" onclick="setStop(11,'Port Washington','Falmouth MA (~185 nm) — direct, within range')">Port Washington</button>
+  <div class="stop-picker">
+    <div class="stop-picker-label">📍 Where am I now? — tap to update</div>
+    <div class="stop-btns">
+      <button class="stop-btn" onclick="setStop(0)">Miami Beach</button>
+      <button class="stop-btn" onclick="setStop(1)">Ft. Pierce</button>
+      <button class="stop-btn" onclick="setStop(2)">St. Aug / Fernandina</button>
+      <button class="stop-btn" onclick="setStop(3)">Charleston</button>
+      <button class="stop-btn" onclick="setStop(4)">Southport</button>
+      <button class="stop-btn" onclick="setStop(5)">Morehead City</button>
+      <button class="stop-btn" onclick="setStop(6)">Coinjock</button>
+      <button class="stop-btn" onclick="setStop(7)">Hampton VA</button>
+      <button class="stop-btn" onclick="setStop(8)">Ocean City MD</button>
+      <button class="stop-btn" onclick="setStop(9)">Cape May NJ</button>
+      <button class="stop-btn" onclick="setStop(10)">Barnegat Light</button>
+      <button class="stop-btn" onclick="setStop(11)">Port Washington</button>
     </div>
-    <div class="today-next" id="today-next"></div>
   </div>
 
-  <div class="section-label">Your route</div>
-  <div class="route-line">
-    <div class="route-stop"><div class="route-stop-dot" id="rd0"></div><div class="route-stop-label" id="rl0">Miami Beach</div></div>
-    <div class="route-connector"></div>
-    <div class="route-stop"><div class="route-stop-dot" id="rd1"></div><div class="route-stop-label" id="rl1">Ft. Pierce</div></div>
-    <div class="route-connector"></div>
-    <div class="route-stop"><div class="route-stop-dot red-dot" id="rd2"></div><div class="route-stop-label" id="rl2">St. Aug / Fernandina</div></div>
-    <div class="route-connector"></div>
-    <div class="route-stop"><div class="route-stop-dot" id="rd3"></div><div class="route-stop-label" id="rl3">Charleston</div></div>
-    <div class="route-connector"></div>
-    <div class="route-stop"><div class="route-stop-dot" id="rd4"></div><div class="route-stop-label" id="rl4">Southport</div></div>
-    <div class="route-connector"></div>
-    <div class="route-stop"><div class="route-stop-dot red-dot" id="rd5"></div><div class="route-stop-label" id="rl5">Morehead City ⚠️</div></div>
-    <div class="route-connector inside"></div>
-    <div class="route-stop"><div class="route-stop-dot purple-dot" id="rd6"></div><div class="route-stop-label" id="rl6">Coinjock</div></div>
-    <div class="route-connector"></div>
-    <div class="route-stop"><div class="route-stop-dot red-dot" id="rd7"></div><div class="route-stop-label" id="rl7">Hampton VA</div></div>
-    <div class="route-connector"></div>
-    <div class="route-stop"><div class="route-stop-dot" id="rd8"></div><div class="route-stop-label" id="rl8">Ocean City MD</div></div>
-    <div class="route-connector"></div>
-    <div class="route-stop"><div class="route-stop-dot" id="rd9"></div><div class="route-stop-label" id="rl9">Cape May NJ</div></div>
-    <div class="route-connector"></div>
-    <div class="route-stop"><div class="route-stop-dot green-dot" id="rd10"></div><div class="route-stop-label" id="rl10">Barnegat 🎉×2</div></div>
-    <div class="route-connector"></div>
-    <div class="route-stop"><div class="route-stop-dot" id="rd11"></div><div class="route-stop-label" id="rl11">Port Washington</div></div>
-    <div class="route-connector"></div>
-    <div class="route-stop"><div class="route-stop-dot" id="rd12"></div><div class="route-stop-label" id="rl12">Falmouth 🏁</div></div>
+  <div class="route-wrap">
+    <div class="route-label">Route</div>
+    <div class="route-line">
+      <div class="route-stop"><div class="route-dot" id="rd0"></div><div class="route-lbl" id="rl0">Miami Beach</div></div>
+      <div class="route-conn" id="rc0"></div>
+      <div class="route-stop"><div class="route-dot" id="rd1"></div><div class="route-lbl" id="rl1">Ft. Pierce</div></div>
+      <div class="route-conn" id="rc1"></div>
+      <div class="route-stop"><div class="route-dot dot-red" id="rd2"></div><div class="route-lbl" id="rl2">St. Aug / Fernandina</div></div>
+      <div class="route-conn" id="rc2"></div>
+      <div class="route-stop"><div class="route-dot" id="rd3"></div><div class="route-lbl" id="rl3">Charleston</div></div>
+      <div class="route-conn" id="rc3"></div>
+      <div class="route-stop"><div class="route-dot" id="rd4"></div><div class="route-lbl" id="rl4">Southport</div></div>
+      <div class="route-conn" id="rc4"></div>
+      <div class="route-stop"><div class="route-dot dot-red" id="rd5"></div><div class="route-lbl" id="rl5">Morehead City ⚠️</div></div>
+      <div class="route-conn conn-inside" id="rc5"></div>
+      <div class="route-stop"><div class="route-dot dot-purple" id="rd6"></div><div class="route-lbl" id="rl6">Coinjock</div></div>
+      <div class="route-conn" id="rc6"></div>
+      <div class="route-stop"><div class="route-dot dot-red" id="rd7"></div><div class="route-lbl" id="rl7">Hampton VA</div></div>
+      <div class="route-conn" id="rc7"></div>
+      <div class="route-stop"><div class="route-dot" id="rd8"></div><div class="route-lbl" id="rl8">Ocean City MD</div></div>
+      <div class="route-conn" id="rc8"></div>
+      <div class="route-stop"><div class="route-dot" id="rd9"></div><div class="route-lbl" id="rl9">Cape May NJ</div></div>
+      <div class="route-conn" id="rc9"></div>
+      <div class="route-stop"><div class="route-dot dot-green" id="rd10"></div><div class="route-lbl" id="rl10">Barnegat 🎉</div></div>
+      <div class="route-conn" id="rc10"></div>
+      <div class="route-stop"><div class="route-dot" id="rd11"></div><div class="route-lbl" id="rl11">Port Washington</div></div>
+      <div class="route-conn" id="rc11"></div>
+      <div class="route-stop"><div class="route-dot" id="rd12"></div><div class="route-lbl" id="rl12">Falmouth 🏁</div></div>
+    </div>
+  </div>
+
+  <!-- PASSAGE PLANNER -->
+  <div class="planner" id="planner">
+    <div class="planner-header" onclick="togglePlanner()">
+      <span class="planner-icon">🌊</span>
+      <div style="flex:1">
+        <div class="planner-title">Passage Planner</div>
+        <div class="planner-sub" id="planner-sub">Tap your current stop above, then open this to analyze your options</div>
+      </div>
+      <span class="planner-chev" id="planner-chev">▼</span>
+    </div>
+    <div class="planner-body" id="planner-body">
+      <div class="planner-pad">
+
+        <div class="section-label" style="margin-bottom:8px">When are you planning to leave?</div>
+        <div class="option-row">
+          <button class="option-card selected" id="opt0" onclick="selectOpt(0)">
+            <div class="option-title">Tomorrow</div>
+            <div class="option-sub" id="opt0-sub">earliest</div>
+          </button>
+          <button class="option-card" id="opt1" onclick="selectOpt(1)">
+            <div class="option-title">+1 day</div>
+            <div class="option-sub" id="opt1-sub">one extra night</div>
+          </button>
+          <button class="option-card" id="opt2" onclick="selectOpt(2)">
+            <div class="option-title">+2 days</div>
+            <div class="option-sub" id="opt2-sub">two extra nights</div>
+          </button>
+        </div>
+
+        <div id="tide-inputs" style="display:none">
+          <div class="tide-row">
+            <span class="tide-lbl">🌊 Planned departure:</span>
+            <input class="tide-inp" type="time" id="plan-deptime" value="07:00">
+            <span class="tide-lbl">Speed:</span>
+            <input class="tide-inp" type="number" id="plan-speed" value="28" min="10" max="45">
+            <span class="tide-lbl">kts</span>
+          </div>
+        </div>
+
+        <div class="p-status" id="p-status"></div>
+        <div class="chips" id="p-chips" style="display:none"></div>
+
+        <button class="analyze-btn" id="analyze-btn" onclick="runPlanner()">
+          ⚡ Analyze conditions + get recommendation
+        </button>
+
+        <span class="manual-toggle" onclick="toggleManual()">or paste your own forecast data instead</span>
+        <div class="manual-area" id="manual-area">
+          <div class="manual-lbl">Paste any forecast, buoy readings, or describe what you're seeing in Windy:</div>
+          <textarea id="manual-input" placeholder="e.g. NE 15-20 kts, seas 3-4 ft, front passing tomorrow afternoon, Pamlico Sound buoy 41036 showing 2.8 ft..."></textarea>
+        </div>
+
+        <div id="p-result"></div>
+
+      </div>
+    </div>
   </div>
 
   <hr class="divider">
-
-  <div class="section-label">Pamlico Sound — go / no-go · check every morning in Morehead City</div>
-  <div class="gonogo">
-    <div class="gonogo-card gonogo-go">
-      <div class="gonogo-title">✓ Go — depart for Coinjock</div>
-      <ul class="gonogo-list"><li>Winds SW–NW under 15 kts</li><li>Pamlico Sound seas under 2 ft</li><li>No fronts within 36 hrs</li><li>Depart early — cross before noon</li></ul>
-    </div>
-    <div class="gonogo-card gonogo-wait">
-      <div class="gonogo-title">✗ Wait in Morehead City</div>
-      <ul class="gonogo-list"><li>NE or N winds 15 kts or more</li><li>Any wind 20+ kts</li><li>Front approaching from west</li><li>Pamlico buoy showing 2 ft+</li></ul>
-    </div>
-  </div>
-
-  <div class="section-label">Barnegat Inlet — entry · this dictates where you stage the night before</div>
-  <div class="gonogo">
-    <div class="gonogo-card gonogo-go">
-      <div class="gonogo-title">✓ Go — enter Barnegat Inlet</div>
-      <ul class="gonogo-list"><li>Flood tide — enter mid-flood only</li><li>Morning entry only</li><li>Winds W or SW under 10 kts</li><li>No NE swell whatsoever</li><li>Favor north jetty</li></ul>
-    </div>
-    <div class="gonogo-card gonogo-wait">
-      <div class="gonogo-title">✗ Stage in Cape May</div>
-      <ul class="gonogo-list"><li>Any NE wind or swell</li><li>Ebb tide — never enter on ebb</li><li>Afternoon — sea breeze + ebb = dangerous</li><li>When in doubt: Cape May → Barnegat next morning</li></ul>
-    </div>
-  </div>
-
-  <hr class="divider">
-
-  <!-- SEG 0 -->
-  <div class="segment" id="seg0">
-    <div class="seg-header">
-      <div class="seg-dot dot-blue">①</div>
-      <div class="seg-info"><div class="seg-name">Big picture — synoptic pattern</div><div class="seg-route">Check before committing to departure week · refresh every morning underway</div></div>
-    </div>
-    <div class="cards">
-      <a class="card" href="https://captaingeorgia.com/weather-analysis-1" target="_blank"><div class="card-icon">🌊</div><div class="card-title">Captain Georgia</div><div class="card-sub">Wind, pressure, waves, radar. Start here every morning.</div><span class="card-badge badge-cg">Daily first check</span></a>
-      <a class="card" href="https://captaingeorgia.com/noaa-surface-analysis" target="_blank"><div class="card-icon">🗺️</div><div class="card-title">NOAA Surface Analysis</div><div class="card-sub">5-day charts — fronts, highs, lows. You want a High over the SE.</div><span class="card-badge badge-cg">Synoptic view</span></a>
-      <a class="card" href="https://windy.com/?waves,25.8,-80.2,5" target="_blank"><div class="card-icon">📱</div><div class="card-title">Windy</div><div class="card-sub">Best mobile visual. Toggle Wave + Wind layer.</div></a>
-      <a class="card" href="https://captaingeorgia.com/7-day-tropical-outlook" target="_blank"><div class="card-icon">🌀</div><div class="card-title">7-Day Tropical Outlook</div><div class="card-sub">Early June — check before departure and weekly en route.</div></a>
-    </div>
-  </div>
+  <div class="section-label">Route notes — tap any leg to expand</div>
 
   <!-- SEG 1 -->
   <div class="segment" id="seg1">
     <div class="seg-header">
-      <div class="seg-dot dot-teal">②</div>
-      <div class="seg-info"><div class="seg-name">Miami Beach → Ft. Pierce</div><div class="seg-route">Day 1 · June 1 — all outside, straightforward first leg</div></div>
-      <span class="seg-dist dist-ok">~110 nm ✓</span>
+      <div class="seg-dot dot-teal">①</div>
+      <div class="seg-info"><div class="seg-name">Miami Beach → Ft. Pierce</div><div class="seg-route">Day 1 · June 1 · All outside · straightforward first leg</div></div>
+      <span class="seg-dist">~110 nm</span>
     </div>
-    <div class="cards">
-      <a class="card" href="https://captaingeorgia.com/fl-port-weather" target="_blank"><div class="card-icon">⚓</div><div class="card-title">FL Port Weather</div><div class="card-sub">South Florida departure zone buoy data</div><span class="card-badge badge-cg">Departure check</span></a>
-      <a class="card" href="https://www.ndbc.noaa.gov/station_page.php?station=41047" target="_blank"><div class="card-icon">📡</div><div class="card-title">SE FL Offshore Buoy (41047)</div><div class="card-sub">Offshore conditions en route to Ft. Pierce</div></a>
-      <a class="card" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8722670" target="_blank"><div class="card-icon">🌊</div><div class="card-title">Ft. Pierce Inlet Tides</div><div class="card-sub">Time your inlet entry for arrival</div></a>
+    <span class="seg-toggle" onclick="toggleSeg('sb1',this)">show resources ▾</span>
+    <div class="seg-body" id="sb1">
+      <div class="resources">
+        <a class="res-link cg" href="https://captaingeorgia.com/fl-port-weather" target="_blank">↗ FL Port Weather</a>
+        <a class="res-link" href="https://www.ndbc.noaa.gov/station_page.php?station=41047" target="_blank">↗ Buoy 41047 SE FL</a>
+        <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8722670" target="_blank">↗ Ft. Pierce Inlet Tides</a>
+        <a class="res-link" href="https://windy.com/?waves,25.8,-80.2,7" target="_blank">↗ Windy — Miami</a>
+      </div>
     </div>
-    <div class="wx-panel" id="wx1"><button class="wx-trigger" onclick="toggleWx('wx1','mia-ftp')">⚡ Check conditions for this leg <span class="wx-chev">▼</span></button><div class="wx-body" id="wx1-body"></div></div>
   </div>
 
   <!-- SEG 2 -->
   <div class="segment" id="seg2">
     <div class="seg-header">
-      <div class="seg-dot dot-amber">③</div>
-      <div class="seg-info"><div class="seg-name">Ft. Pierce → St. Augustine or Fernandina Beach</div><div class="seg-route">Day 2 — stage here to set up next day's Charleston run</div></div>
-      <span class="seg-dist dist-ok">~60–75 nm ✓</span>
+      <div class="seg-dot dot-amber">②</div>
+      <div class="seg-info"><div class="seg-name">Ft. Pierce → St. Augustine or Fernandina Beach</div><div class="seg-route">Day 2 · staging leg · St. Aug bar: enter near high tide</div></div>
+      <span class="seg-dist">~60–75 nm</span>
     </div>
-    <div class="note"><strong>St. Augustine or Fernandina — your call based on conditions leaving Ft. Pierce.</strong> Fernandina (~60 nm) is shorter. St. Aug (~75 nm) puts you closer to Charleston. <strong>St. Augustine bar: cross at or near high tide — the advisor will calculate this for your departure time.</strong></div>
-    <div class="cards">
-      <a class="card" href="https://www.ndbc.noaa.gov/station_page.php?station=41047" target="_blank"><div class="card-icon">📡</div><div class="card-title">NE FL Offshore Buoy (41047)</div><div class="card-sub">Offshore conditions en route</div></a>
-      <a class="card" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8720218" target="_blank"><div class="card-icon">🌊</div><div class="card-title">St. Augustine Inlet Tides</div><div class="card-sub">Cross the bar at or near high tide</div><span class="card-badge badge-fuel">Inlet timing critical</span></a>
+    <span class="seg-toggle" onclick="toggleSeg('sb2',this)">show notes + resources ▾</span>
+    <div class="seg-body" id="sb2">
+      <div class="note"><strong>St. Augustine or Fernandina — your call leaving Ft. Pierce.</strong> Fernandina (~60 nm) is shorter. St. Aug (~75 nm) closer to Charleston. <strong>St. Augustine bar: cross at or near high tide only.</strong></div>
+      <div class="resources">
+        <a class="res-link" href="https://www.ndbc.noaa.gov/station_page.php?station=41047" target="_blank">↗ Buoy 41047 NE FL</a>
+        <a class="res-link tide key" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8720218" target="_blank">↗ St. Augustine Inlet Tides ⚠</a>
+        <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8720219" target="_blank">↗ Fernandina Beach Tides</a>
+      </div>
     </div>
-    <div class="wx-panel" id="wx2"><button class="wx-trigger" onclick="toggleWx('wx2','ftp-sta')">⚡ Check conditions + St. Augustine bar timing <span class="wx-chev">▼</span></button><div class="wx-body" id="wx2-body"></div></div>
   </div>
 
   <!-- SEG 3 -->
   <div class="segment" id="seg3">
     <div class="seg-header">
-      <div class="seg-dot dot-teal">④</div>
-      <div class="seg-info"><div class="seg-name">St. Augustine / Fernandina Beach → Charleston</div><div class="seg-route">Day 3 — comfortable with 200 nm range · formerly the tight leg</div></div>
-      <span class="seg-dist dist-ok">~165–175 nm ✓</span>
+      <div class="seg-dot dot-teal">③</div>
+      <div class="seg-info"><div class="seg-name">St. Augustine / Fernandina → Charleston</div><div class="seg-route">Day 3 · full range day · comfortable with T4 props</div></div>
+      <span class="seg-dist">~165–175 nm</span>
     </div>
-    <div class="note-green"><strong>Now comfortable with T4 props.</strong> Brunswick / St. Simons Island GA (~130 nm) remains a solid backup if fuel burn is high or conditions deteriorate mid-run.</div>
-    <div class="cards">
-      <a class="card" href="https://www.ndbc.noaa.gov/station_page.php?station=41004" target="_blank"><div class="card-icon">📡</div><div class="card-title">SE Atlantic Buoy (41004)</div><div class="card-sub">Offshore between Savannah and Charleston</div><span class="card-badge badge-outside">Mid-leg check</span></a>
-      <a class="card" href="https://captaingeorgia.com/south-east-port-weather" target="_blank"><div class="card-icon">📡</div><div class="card-title">SE Port Weather</div><div class="card-sub">Charleston buoy and harbor conditions</div><span class="card-badge badge-cg">Captain Georgia</span></a>
-      <a class="card" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8665530" target="_blank"><div class="card-icon">🌊</div><div class="card-title">Charleston Tides</div><div class="card-sub">5+ ft mean range — strong harbor current on arrival</div></a>
+    <span class="seg-toggle" onclick="toggleSeg('sb3',this)">show notes + resources ▾</span>
+    <div class="seg-body" id="sb3">
+      <div class="note-green"><strong>Now comfortable with T4 props and 200 nm range.</strong> Brunswick / St. Simons Island GA (~130 nm) is a solid backup if conditions deteriorate mid-run.</div>
+      <div class="resources">
+        <a class="res-link" href="https://www.ndbc.noaa.gov/station_page.php?station=41004" target="_blank">↗ Buoy 41004 SE Atlantic</a>
+        <a class="res-link cg" href="https://captaingeorgia.com/south-east-port-weather" target="_blank">↗ SE Port Weather</a>
+        <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8665530" target="_blank">↗ Charleston Tides</a>
+      </div>
     </div>
-    <div class="wx-panel" id="wx3"><button class="wx-trigger" onclick="toggleWx('wx3','sta-chs')">⚡ Check conditions for this leg <span class="wx-chev">▼</span></button><div class="wx-body" id="wx3-body"></div></div>
   </div>
 
   <!-- SEG 4 -->
   <div class="segment" id="seg4">
     <div class="seg-header">
-      <div class="seg-dot dot-amber">⑤</div>
-      <div class="seg-info"><div class="seg-name">Charleston → Southport</div><div class="seg-route">Day 4 — outside, check fuel for arrival</div></div>
-      <span class="seg-dist dist-ok">~145 nm ✓</span>
+      <div class="seg-dot dot-amber">④</div>
+      <div class="seg-info"><div class="seg-name">Charleston → Southport</div><div class="seg-route">Day 4 · outside · Cape Fear River: strong tidal current on arrival</div></div>
+      <span class="seg-dist">~145 nm</span>
     </div>
-    <div class="cards">
-      <a class="card" href="https://captaingeorgia.com/south-east-port-weather" target="_blank"><div class="card-icon">📡</div><div class="card-title">SE Port Weather — SC/NC</div><div class="card-sub">Buoy data Charleston through Wilmington</div><span class="card-badge badge-cg">Captain Georgia</span></a>
-      <a class="card" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8658163" target="_blank"><div class="card-icon">🌊</div><div class="card-title">Cape Fear River Tides</div><div class="card-sub">Strong tidal current on Southport approach</div></a>
+    <span class="seg-toggle" onclick="toggleSeg('sb4',this)">show resources ▾</span>
+    <div class="seg-body" id="sb4">
+      <div class="resources">
+        <a class="res-link cg" href="https://captaingeorgia.com/south-east-port-weather" target="_blank">↗ SE Port Weather SC/NC</a>
+        <a class="res-link" href="https://www.ndbc.noaa.gov/station_page.php?station=41004" target="_blank">↗ Buoy 41004 SE Atlantic</a>
+        <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8658163" target="_blank">↗ Cape Fear River Tides</a>
+      </div>
     </div>
-    <div class="wx-panel" id="wx4"><button class="wx-trigger" onclick="toggleWx('wx4','chs-spt')">⚡ Check conditions for this leg <span class="wx-chev">▼</span></button><div class="wx-body" id="wx4-body"></div></div>
   </div>
 
   <!-- SEG 5 -->
   <div class="segment" id="seg5">
     <div class="seg-header">
-      <div class="seg-dot dot-amber">⑥</div>
-      <div class="seg-info"><div class="seg-name">Southport → Morehead City</div><div class="seg-route">Day 5 · ICW via Snow's Cut → Myrtle Grove → Masonboro Inlet outside → Morehead City</div></div>
-      <span class="seg-dist dist-ok">~75 nm ✓</span>
+      <div class="seg-dot dot-amber">⑤</div>
+      <div class="seg-info"><div class="seg-name">Southport → Morehead City</div><div class="seg-route">Day 5 · ICW via Snow's Cut → Myrtle Grove → Masonboro Inlet → outside to Morehead</div></div>
+      <span class="seg-dist">~75 nm</span>
     </div>
-    <div class="note"><strong>ICW routing:</strong> Cape Fear River → <strong>Snow's Cut (MM 295)</strong> → Myrtle Grove Sound → exit <strong>Masonboro Inlet</strong> → outside to Morehead City. <strong>Transit at mid-to-high tide.</strong> Check Aqua Map for shoaling at MM 293.7 morning of departure.</div>
-    <div class="cards">
-      <a class="card" href="https://www.navcen.uscg.gov/?pageName=lnmDistrict&region=05" target="_blank"><div class="card-icon">⚠️</div><div class="card-title">USCG D5 LNMs</div><div class="card-sub">Current shoaling on ICW — check morning of departure</div><span class="card-badge badge-key">Check morning of</span></a>
-      <a class="card" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8656483" target="_blank"><div class="card-icon">🌊</div><div class="card-title">Wrightsville / Masonboro Tides</div><div class="card-sub">Time your Masonboro Inlet exit</div></a>
+    <span class="seg-toggle" onclick="toggleSeg('sb5',this)">show notes + resources ▾</span>
+    <div class="seg-body" id="sb5">
+      <div class="note"><strong>ICW routing:</strong> Cape Fear River → Snow's Cut (MM 295) → Myrtle Grove → exit Masonboro Inlet → outside to Morehead City. <strong>Transit at mid-to-high tide.</strong> Check Aqua Map for shoaling at MM 293.7.</div>
+      <div class="resources">
+        <a class="res-link key" href="https://www.navcen.uscg.gov/?pageName=lnmDistrict&region=05" target="_blank">↗ USCG D5 LNMs — check morning of ⚠</a>
+        <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8656483" target="_blank">↗ Wrightsville / Masonboro Tides</a>
+      </div>
     </div>
-    <div class="wx-panel" id="wx5"><button class="wx-trigger" onclick="toggleWx('wx5','spt-mhc')">⚡ Check conditions for this leg <span class="wx-chev">▼</span></button><div class="wx-body" id="wx5-body"></div></div>
   </div>
 
-  <!-- SEG 6 -->
+  <!-- SEG 6 — MOREHEAD HOLD -->
   <div class="segment" id="seg6">
     <div class="seg-header">
-      <div class="seg-dot dot-red">⑦</div>
-      <div class="seg-info"><div class="seg-name">Morehead City — WEATHER HOLD</div><div class="seg-route">Day 6+ · Wait for the right Pamlico Sound window before heading to Coinjock</div></div>
+      <div class="seg-dot dot-red2">⑥</div>
+      <div class="seg-info"><div class="seg-name">Morehead City — Weather Hold</div><div class="seg-route">Day 6+ · wait for the right Pamlico Sound window · use Passage Planner above</div></div>
     </div>
-    <div class="note"><strong>Do not rush this decision.</strong> Pamlico Sound is wide, shallow, and builds steep chop quickly in NE or N winds. You know this firsthand. <strong>Depart early morning, cross Pamlico before noon winds build.</strong></div>
-    <div class="cards">
-      <a class="card" href="https://www.ndbc.noaa.gov/station_page.php?station=41036" target="_blank"><div class="card-icon">📡</div><div class="card-title">Pamlico Sound Buoy (41036)</div><div class="card-sub">Primary go/no-go — live wind and wave height</div><span class="card-badge badge-key">Most critical check</span></a>
-      <a class="card" href="https://windy.com/?waves,34.7,-76.7,8" target="_blank"><div class="card-icon">📱</div><div class="card-title">Windy — Pamlico Sound</div><div class="card-sub">Wave layer shows conditions clearly</div></a>
-      <a class="card" href="https://captaingeorgia.com/noaa-surface-analysis" target="_blank"><div class="card-icon">🗺️</div><div class="card-title">NOAA Surface Analysis</div><div class="card-sub">3-day synoptic picture — pick your window</div><span class="card-badge badge-cg">Captain Georgia</span></a>
+    <span class="seg-toggle" onclick="toggleSeg('sb6',this)">show criteria + resources ▾</span>
+    <div class="seg-body" id="sb6">
+      <div class="note"><strong>Do not rush this decision.</strong> Pamlico Sound builds steep chop quickly in NE or N winds — you know this firsthand. <strong>Depart early morning, cross before noon.</strong></div>
+      <div class="crit-grid">
+        <div class="crit-box crit-go">
+          <div class="crit-title">✓ Go — depart for Coinjock</div>
+          <ul class="crit-list"><li>Winds SW–NW under 15 kts</li><li>Pamlico Sound seas under 2 ft</li><li>No fronts within 36 hrs</li><li>Cross before noon</li></ul>
+        </div>
+        <div class="crit-box crit-wait">
+          <div class="crit-title">✗ Wait in Morehead City</div>
+          <ul class="crit-list"><li>NE or N winds 15 kts+</li><li>Any wind 20+ kts</li><li>Front approaching from west</li><li>Pamlico buoy 2 ft+</li></ul>
+        </div>
+      </div>
+      <div class="resources">
+        <a class="res-link key" href="https://www.ndbc.noaa.gov/station_page.php?station=41036" target="_blank">↗ Buoy 41036 Pamlico Sound ⚠</a>
+        <a class="res-link" href="https://windy.com/?waves,34.7,-76.7,8" target="_blank">↗ Windy — Pamlico Sound</a>
+        <a class="res-link cg" href="https://captaingeorgia.com/noaa-surface-analysis" target="_blank">↗ NOAA Surface Analysis</a>
+      </div>
     </div>
-    <div class="wx-panel" id="wx6"><button class="wx-trigger" onclick="toggleWx('wx6','mhc-cjk')">⚡ Check Pamlico Sound conditions — go or wait? <span class="wx-chev">▼</span></button><div class="wx-body" id="wx6-body"></div></div>
   </div>
 
   <!-- SEG 7 -->
   <div class="segment" id="seg7">
     <div class="seg-header">
-      <div class="seg-dot dot-purple">⑧</div>
-      <div class="seg-info"><div class="seg-name">Morehead City → Coinjock</div><div class="seg-route">Your proven 2025 route · Neuse River → Pamlico Sound → Alligator River → Albemarle Sound → Coinjock</div></div>
-      <span class="seg-dist dist-ok">~110 nm ✓</span>
+      <div class="seg-dot dot-purple">⑦</div>
+      <div class="seg-info"><div class="seg-name">Morehead City → Coinjock</div><div class="seg-route">Proven 2025 route · Neuse River → Pamlico Sound → Alligator River → Albemarle Sound</div></div>
+      <span class="seg-dist">~110 nm</span>
     </div>
-    <div class="note"><strong>Speed notes:</strong> Rivers and wide channels: on plane. <strong>Pamlico + Albemarle Sound: on plane, depart early, cross before noon.</strong> Canal sections: 6–7 knots, no wake. Coinjock Marina: one of the easiest stops on the East Coast.</div>
-    <div class="cards">
-      <a class="card" href="https://www.ndbc.noaa.gov/station_page.php?station=41036" target="_blank"><div class="card-icon">📡</div><div class="card-title">Pamlico Sound Buoy (41036)</div><div class="card-sub">Monitor during your crossing</div><span class="card-badge badge-inside">Inside route</span></a>
-      <a class="card" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8651370" target="_blank"><div class="card-icon">🌊</div><div class="card-title">Duck / Currituck Sound Tides</div><div class="card-sub">Northern Albemarle / Currituck approach to Coinjock</div></a>
+    <span class="seg-toggle" onclick="toggleSeg('sb7',this)">show notes + resources ▾</span>
+    <div class="seg-body" id="sb7">
+      <div class="note"><strong>Speed:</strong> Rivers + open water: on plane. <strong>Pamlico + Albemarle: on plane, cross before noon.</strong> Canal sections: 6–7 kts, no wake. Coinjock Marina: easy approach, great prime rib.</div>
+      <div class="resources">
+        <a class="res-link" href="https://www.ndbc.noaa.gov/station_page.php?station=41036" target="_blank">↗ Buoy 41036 Pamlico Sound</a>
+        <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8651370" target="_blank">↗ Duck / Currituck Tides</a>
+        <a class="res-link" href="https://www.navcen.uscg.gov/?pageName=lnmDistrict&region=05" target="_blank">↗ USCG D5 LNMs</a>
+      </div>
     </div>
   </div>
 
   <!-- SEG 8 -->
   <div class="segment" id="seg8">
     <div class="seg-header">
-      <div class="seg-dot dot-purple">⑨</div>
-      <div class="seg-info"><div class="seg-name">Coinjock → Hampton VA</div><div class="seg-route">Easy half day · North Landing River → Great Bridge → Virginia Cut → Hampton Roads</div></div>
-      <span class="seg-dist dist-ok">~40 nm ✓</span>
+      <div class="seg-dot dot-purple">⑧</div>
+      <div class="seg-info"><div class="seg-name">Coinjock → Hampton VA</div><div class="seg-route">Easy half day · North Landing River → Great Bridge lock → Virginia Cut → Hampton Roads</div></div>
+      <span class="seg-dist">~40 nm</span>
     </div>
-    <div class="note"><strong>Check Great Bridge lock schedule before departing Coinjock</strong> — factor opening into your departure time. Hampton Roads: heavy ship traffic, monitor VHF 16.</div>
-    <div class="cards">
-      <a class="card" href="https://www.navcen.uscg.gov/?pageName=lnmDistrict&region=05" target="_blank"><div class="card-icon">🔒</div><div class="card-title">Great Bridge Lock Schedule</div><div class="card-sub">Check opening times before departing</div><span class="card-badge badge-key">Check before departing</span></a>
-      <a class="card" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8638901" target="_blank"><div class="card-icon">🌊</div><div class="card-title">Hampton Roads Tides</div><div class="card-sub">Tidal current in the channel</div></a>
+    <span class="seg-toggle" onclick="toggleSeg('sb8',this)">show notes + resources ▾</span>
+    <div class="seg-body" id="sb8">
+      <div class="note"><strong>Check Great Bridge lock schedule before departing Coinjock.</strong> Hampton Roads: heavy ship traffic, monitor VHF 16.</div>
+      <div class="resources">
+        <a class="res-link key" href="https://www.navcen.uscg.gov/?pageName=lnmDistrict&region=05" target="_blank">↗ Great Bridge Lock Schedule ⚠</a>
+        <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8638901" target="_blank">↗ Hampton Roads Tides</a>
+      </div>
     </div>
   </div>
 
   <!-- SEG 9 -->
   <div class="segment" id="seg9">
     <div class="seg-header">
-      <div class="seg-dot dot-blue">⑩</div>
-      <div class="seg-info"><div class="seg-name">Hampton VA → Ocean City MD</div><div class="seg-route">Straight offshore preferred · Cape Henry → Chesapeake Light → Ocean City</div></div>
-      <span class="seg-dist dist-ok">~125 nm ✓</span>
+      <div class="seg-dot dot-blue">⑨</div>
+      <div class="seg-info"><div class="seg-name">Hampton VA → Ocean City MD</div><div class="seg-route">Straight offshore · Cape Henry → Chesapeake Light → Ocean City</div></div>
+      <span class="seg-dist">~125 nm</span>
     </div>
-    <div class="decision">
-      <div class="decision-title">⚖️ Straight offshore or inlet-hop — decide the morning you leave Hampton</div>
-      <div class="decision-grid">
-        <div class="decision-opt"><div class="opt-label opt-outside">▶ Straight offshore (preferred)</div><p>Exit Cape Henry, pass Chesapeake Light Tower, run NE offshore to Ocean City. Wants SW/W winds under 15 kts, seas under 4 ft, no NE on horizon for 24 hrs.</p></div>
-        <div class="decision-opt"><div class="opt-label opt-inside">▶ Inlet-hop contingency</div><p>Chincoteague Inlet VA (~65 nm) or Indian River Inlet DE (~95 nm) if a front approaches mid-run.</p></div>
+    <span class="seg-toggle" onclick="toggleSeg('sb9',this)">show notes + resources ▾</span>
+    <div class="seg-body" id="sb9">
+      <div class="note-blue"><strong>Outside preferred.</strong> Exit Cape Henry, pass Chesapeake Light Tower, run NE offshore to Ocean City. Wants SW/W winds under 15 kts, seas under 4 ft, no NE for 24 hrs. Chincoteague Inlet VA is an emergency option only if conditions deteriorate mid-run.</div>
+      <div class="resources">
+        <a class="res-link key" href="https://www.ndbc.noaa.gov/station_page.php?station=44100" target="_blank">↗ Buoy 44100 Chesapeake Light ⚠</a>
+        <a class="res-link" href="https://www.ndbc.noaa.gov/station_page.php?station=44009" target="_blank">↗ Buoy 44009 Delaware Bay</a>
+        <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8570283" target="_blank">↗ Ocean City Inlet Tides</a>
+        <a class="res-link" href="https://windy.com/?waves,38.0,-74.5,7" target="_blank">↗ Windy — Mid-Atlantic Offshore</a>
       </div>
     </div>
-    <div class="cards">
-      <a class="card" href="https://www.ndbc.noaa.gov/station_page.php?station=44100" target="_blank"><div class="card-icon">📡</div><div class="card-title">Chesapeake Light Tower (44100)</div><div class="card-sub">Departure waypoint — open ocean conditions</div><span class="card-badge badge-outside">Departure buoy</span></a>
-      <a class="card" href="https://www.ndbc.noaa.gov/station_page.php?station=44009" target="_blank"><div class="card-icon">📡</div><div class="card-title">Delaware Bay Buoy (44009)</div><div class="card-sub">Mid-leg and arrival conditions offshore DE/MD</div></a>
-      <a class="card" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8570283" target="_blank"><div class="card-icon">🌊</div><div class="card-title">Ocean City MD Inlet Tides</div><div class="card-sub">Time your arrival</div></a>
-    </div>
-    <div class="wx-panel" id="wx9"><button class="wx-trigger" onclick="toggleWx('wx9','hva-ocy')">⚡ Check conditions for this leg <span class="wx-chev">▼</span></button><div class="wx-body" id="wx9-body"></div></div>
   </div>
 
   <!-- SEG 10 -->
   <div class="segment" id="seg10">
     <div class="seg-header">
-      <div class="seg-dot dot-sky">⑪</div>
-      <div class="seg-info"><div class="seg-name">Ocean City MD → Cape May NJ (conditional) → Barnegat Light NJ</div><div class="seg-route">Barnegat Inlet entry dictates where you stage · Cape May is your safety valve</div></div>
-      <span class="seg-dist dist-ok">~75 nm direct · ~35+40 nm via Cape May</span>
+      <div class="seg-dot dot-sky">⑩</div>
+      <div class="seg-info"><div class="seg-name">Ocean City MD → Cape May NJ (conditional) → Barnegat Light</div><div class="seg-route">Barnegat inlet timing dictates where you stage · Cape May is your safety valve</div></div>
+      <span class="seg-dist">~75 nm direct</span>
     </div>
-    <div class="note"><strong>Barnegat Inlet is the most critical inlet of this passage.</strong> You have had a previous incident here. <strong>Never enter on ebb. Never in the afternoon. No NE swell.</strong> Any doubt: Cape May is 35 nm, wait for the right morning window. Favor north jetty on entry.</div>
-    <div class="cards">
-      <a class="card" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8534720" target="_blank"><div class="card-icon">🌊</div><div class="card-title">Barnegat Inlet Tides</div><div class="card-sub">Enter mid-flood, morning only</div><span class="card-badge badge-key">Most critical timing</span></a>
-      <a class="card" href="https://www.ndbc.noaa.gov/station_page.php?station=44025" target="_blank"><div class="card-icon">📡</div><div class="card-title">NY Bight Buoy (44025)</div><div class="card-sub">Offshore NJ — swell conditions for Barnegat approach</div></a>
-      <a class="card" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8536110" target="_blank"><div class="card-icon">🌊</div><div class="card-title">Cape May Inlet Tides</div><div class="card-sub">Staging option if Barnegat conditions not right</div><span class="card-badge badge-inside">Staging option</span></a>
+    <span class="seg-toggle" onclick="toggleSeg('sb10',this)">show criteria + resources ▾</span>
+    <div class="seg-body" id="sb10">
+      <div class="note"><strong>Barnegat Inlet is the most critical inlet of this passage.</strong> Previous incident here — extra caution required. <strong>Never enter on ebb. Never in the afternoon. No NE swell.</strong> Favor north jetty. Any doubt: Cape May (35 nm), wait for the right morning.</div>
+      <div class="crit-grid">
+        <div class="crit-box crit-go">
+          <div class="crit-title">✓ Go — enter Barnegat</div>
+          <ul class="crit-list"><li>Flood tide — mid-flood only</li><li>Morning entry only</li><li>Winds W or SW under 10 kts</li><li>No NE swell whatsoever</li><li>Favor north jetty</li></ul>
+        </div>
+        <div class="crit-box crit-wait">
+          <div class="crit-title">✗ Stage in Cape May</div>
+          <ul class="crit-list"><li>Any NE wind or swell</li><li>Ebb tide — never</li><li>Afternoon — dangerous</li><li>Any doubt at all</li></ul>
+        </div>
+      </div>
+      <div class="resources">
+        <a class="res-link key tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8534720" target="_blank">↗ Barnegat Inlet Tides ⚠</a>
+        <a class="res-link" href="https://www.ndbc.noaa.gov/station_page.php?station=44025" target="_blank">↗ Buoy 44025 NY Bight</a>
+        <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8536110" target="_blank">↗ Cape May Inlet Tides</a>
+        <a class="res-link" href="https://windy.com/?waves,39.7,-74.1,8" target="_blank">↗ Windy — NJ Shore</a>
+      </div>
     </div>
-    <div class="wx-panel" id="wx10"><button class="wx-trigger" onclick="toggleWx('wx10','ocy-bnl')">⚡ Check Barnegat Inlet conditions + tide timing <span class="wx-chev">▼</span></button><div class="wx-body" id="wx10-body"></div></div>
   </div>
 
   <!-- SEG 11 -->
   <div class="segment" id="seg11">
     <div class="seg-header">
-      <div class="seg-dot dot-green">⑫</div>
-      <div class="seg-info"><div class="seg-name">Barnegat Light — 2 nights 🎉</div><div class="seg-route">Cousin visit · rest · check Port Washington → Falmouth weather window</div></div>
-      <span class="seg-dist dist-ok">Planned 2-night stay</span>
+      <div class="seg-dot dot-green">⑪</div>
+      <div class="seg-info"><div class="seg-name">Barnegat Light — 2+ nights 🎉</div><div class="seg-route">Cousin visit · rest · use Passage Planner to find your ideal exit window and plan the final legs</div></div>
     </div>
-    <div class="note-green"><strong>Enjoy the stop.</strong> Use this time to confirm fuel state and check the Port Washington → Falmouth window. <strong>Exiting Barnegat: same rules as entry — flood tide, north jetty, morning only.</strong></div>
-    <div class="cards">
-      <a class="card" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8534720" target="_blank"><div class="card-icon">🌊</div><div class="card-title">Barnegat Inlet Tides</div><div class="card-sub">Plan your exit — flood tide, morning, north jetty</div><span class="card-badge badge-key">Exit timing</span></a>
-      <a class="card" href="https://captaingeorgia.com/north-east-port-weather" target="_blank"><div class="card-icon">🌊</div><div class="card-title">NE Port Weather</div><div class="card-sub">Monitor conditions for the run north</div><span class="card-badge badge-cg">Captain Georgia</span></a>
+    <span class="seg-toggle" onclick="toggleSeg('sb11',this)">show notes + resources ▾</span>
+    <div class="seg-body" id="sb11">
+      <div class="note-green"><strong>Stay as long as conditions and the visit warrant.</strong> The Passage Planner compares exit windows for tomorrow, +1, and +2 days — factoring Barnegat tide timing, Port Washington conditions, and how each option sets up the final leg to Falmouth. <strong>Exit Barnegat: same rules as entry — flood tide, morning only, north jetty.</strong></div>
+      <div class="resources">
+        <a class="res-link key tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8534720" target="_blank">↗ Barnegat Inlet Tides — exit planning ⚠</a>
+        <a class="res-link cg" href="https://captaingeorgia.com/north-east-port-weather" target="_blank">↗ NE Port Weather</a>
+        <a class="res-link" href="https://windy.com/?waves,39.7,-74.1,8" target="_blank">↗ Windy — NJ/NY</a>
+      </div>
     </div>
   </div>
 
   <!-- SEG 12 -->
   <div class="segment" id="seg12">
     <div class="seg-header">
-      <div class="seg-dot dot-sky">⑬</div>
-      <div class="seg-info"><div class="seg-name">Barnegat Light → Port Washington NY</div><div class="seg-route">Outside around Sandy Hook · Ambrose Channel · up to Port Washington</div></div>
-      <span class="seg-dist dist-ok">~110 nm ✓</span>
+      <div class="seg-dot dot-sky">⑫</div>
+      <div class="seg-info"><div class="seg-name">Barnegat Light → Port Washington NY</div><div class="seg-route">Outside around Sandy Hook · Ambrose Channel · Long Island Sound</div></div>
+      <span class="seg-dist">~110 nm</span>
     </div>
-    <div class="note"><strong>Ambrose Channel:</strong> Heavy commercial ship traffic — vessels have right of way. Monitor VHF 16 through NY Harbor. Time Sandy Hook entry for fair current.</div>
-    <div class="decision">
-      <div class="decision-title">⚖️ Outside around Sandy Hook or inside via Manasquan</div>
-      <div class="decision-grid">
-        <div class="decision-opt"><div class="opt-label opt-outside">▶ Outside around Sandy Hook (preferred)</div><p>Exit Barnegat, run north offshore, round Sandy Hook, enter Lower NY Bay via Ambrose Channel.</p></div>
-        <div class="decision-opt"><div class="opt-label opt-inside">▶ Manasquan Inlet contingency</div><p>If offshore is rough, Manasquan Inlet (~25 nm) puts you into Raritan Bay. Check bar conditions — can be rough in SE swell.</p></div>
+    <span class="seg-toggle" onclick="toggleSeg('sb12',this)">show notes + resources ▾</span>
+    <div class="seg-body" id="sb12">
+      <div class="note"><strong>Ambrose Channel:</strong> Heavy ship traffic — right of way. Monitor VHF 16. Time Sandy Hook for fair current. <strong>Exit Barnegat: flood tide, morning, north jetty.</strong></div>
+      <div class="resources">
+        <a class="res-link" href="https://www.ndbc.noaa.gov/station_page.php?station=44025" target="_blank">↗ Buoy 44025 NY Bight</a>
+        <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8531680" target="_blank">↗ Sandy Hook Tides</a>
+        <a class="res-link cg" href="https://captaingeorgia.com/north-east-port-weather" target="_blank">↗ NE Port Weather</a>
       </div>
     </div>
-    <div class="cards">
-      <a class="card" href="https://www.ndbc.noaa.gov/station_page.php?station=44025" target="_blank"><div class="card-icon">📡</div><div class="card-title">NY Bight Buoy (44025)</div><div class="card-sub">Offshore NJ/NY — Barnegat to Sandy Hook</div><span class="card-badge badge-outside">Offshore check</span></a>
-      <a class="card" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8531680" target="_blank"><div class="card-icon">🌊</div><div class="card-title">Sandy Hook Tides</div><div class="card-sub">Time your Ambrose Channel entry for fair current</div></a>
-    </div>
-    <div class="wx-panel" id="wx12"><button class="wx-trigger" onclick="toggleWx('wx12','bnl-pwy')">⚡ Check conditions for this leg <span class="wx-chev">▼</span></button><div class="wx-body" id="wx12-body"></div></div>
   </div>
 
   <!-- SEG 13 -->
   <div class="segment" id="seg13">
     <div class="seg-header">
-      <div class="seg-dot dot-sky">⑭</div>
-      <div class="seg-info"><div class="seg-name">Port Washington → Falmouth MA — DIRECT 🏁</div><div class="seg-route">Long Island Sound · exit The Race · Vineyard Sound into Falmouth</div></div>
-      <span class="seg-dist dist-ok">~185 nm ✓ within range</span>
+      <div class="seg-dot dot-green">⑬</div>
+      <div class="seg-info"><div class="seg-name">Port Washington → Falmouth MA 🏁</div><div class="seg-route">Long Island Sound · exit The Race · Vineyard Sound · ~5.5–7 hrs depending on speed</div></div>
+      <span class="seg-dist">~185 nm ✓</span>
     </div>
-    <div class="note-green"><strong>Direct run within your 200 nm range with T4 props.</strong> Depart early — time The Race / Plum Gut for fair current. <strong>Aim to arrive Falmouth before early afternoon — Vineyard Sound builds chop with SW wind against ebb.</strong> The advisor below will calculate your Race timing based on your departure time.</div>
-    <div class="cards">
-      <a class="card" href="https://www.ndbc.noaa.gov/station_page.php?station=44017" target="_blank"><div class="card-icon">📡</div><div class="card-title">Montauk Pt Buoy (44017)</div><div class="card-sub">Eastern LI Sound / The Race exit conditions</div></a>
-      <a class="card" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8461490" target="_blank"><div class="card-icon">🌊</div><div class="card-title">The Race / New London Tides</div><div class="card-sub">Strong current — time departure from Port Washington for fair tide</div><span class="card-badge badge-fuel">Current timing critical</span></a>
-      <a class="card" href="https://www.ndbc.noaa.gov/station_page.php?station=44020" target="_blank"><div class="card-icon">📡</div><div class="card-title">Nantucket Sound Buoy (44020)</div><div class="card-sub">Final approach to Falmouth</div><span class="card-badge badge-key">Final leg check</span></a>
+    <span class="seg-toggle" onclick="toggleSeg('sb13',this)">show notes + resources ▾</span>
+    <div class="seg-body" id="sb13">
+      <div class="note-green"><strong>Direct run within your 200 nm range with T4 props.</strong> Depart early — time The Race for fair current (adds 1–2 kts). <strong>Aim to arrive Falmouth before early afternoon — Vineyard Sound builds chop with SW wind against ebb.</strong></div>
+      <div class="resources">
+        <a class="res-link" href="https://www.ndbc.noaa.gov/station_page.php?station=44017" target="_blank">↗ Buoy 44017 Montauk Pt</a>
+        <a class="res-link tide key" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8461490" target="_blank">↗ The Race / New London Tides ⚠</a>
+        <a class="res-link" href="https://www.ndbc.noaa.gov/station_page.php?station=44020" target="_blank">↗ Buoy 44020 Nantucket Sound</a>
+        <a class="res-link" href="https://windy.com/?waves,41.2,-72.0,7" target="_blank">↗ Windy — LI Sound + Vineyard</a>
+      </div>
     </div>
-    <div class="wx-panel" id="wx13"><button class="wx-trigger" onclick="toggleWx('wx13','pwy-fal')">⚡ Check conditions + The Race current timing <span class="wx-chev">▼</span></button><div class="wx-body" id="wx13-body"></div></div>
   </div>
 
   <hr class="divider">
-  <div class="section-label">Captain Georgia — quick links</div>
-  <div class="quick-links">
-    <a class="quick-link" href="https://captaingeorgia.com/weather-analysis-1" target="_blank">🌊 Weather Analysis</a>
-    <a class="quick-link" href="https://captaingeorgia.com/fl-port-weather" target="_blank">FL Port Weather</a>
-    <a class="quick-link" href="https://captaingeorgia.com/south-east-port-weather" target="_blank">SE Port Weather</a>
-    <a class="quick-link" href="https://captaingeorgia.com/north-east-port-weather" target="_blank">NE Port Weather</a>
-    <a class="quick-link" href="https://captaingeorgia.com/noaa-surface-analysis" target="_blank">NOAA Surface Analysis</a>
-    <a class="quick-link" href="https://captaingeorgia.com/7-day-tropical-outlook" target="_blank">7-Day Tropical Outlook</a>
-    <a class="quick-link" href="https://captaingeorgia.com/cyclonic-weather-status" target="_blank">Cyclonic Status</a>
-    <a class="quick-link" href="https://windy.com/?waves,25.8,-80.2,5" target="_blank">📱 Windy</a>
+  <div class="section-label">Weather resources</div>
+  <div class="resources" style="margin-bottom:32px">
+    <a class="res-link cg" href="https://captaingeorgia.com/weather-analysis-1" target="_blank">↗ Captain Georgia — main</a>
+    <a class="res-link cg" href="https://captaingeorgia.com/fl-port-weather" target="_blank">↗ FL Port Weather</a>
+    <a class="res-link cg" href="https://captaingeorgia.com/south-east-port-weather" target="_blank">↗ SE Port Weather</a>
+    <a class="res-link cg" href="https://captaingeorgia.com/north-east-port-weather" target="_blank">↗ NE Port Weather</a>
+    <a class="res-link cg" href="https://captaingeorgia.com/noaa-surface-analysis" target="_blank">↗ NOAA Surface Analysis</a>
+    <a class="res-link cg" href="https://captaingeorgia.com/7-day-tropical-outlook" target="_blank">↗ 7-Day Tropical Outlook</a>
+    <a class="res-link" href="https://windy.com/?waves,25.8,-80.2,5" target="_blank">↗ Windy</a>
+    <a class="res-link cg" href="https://captaingeorgia.com/nws-marine-forecast" target="_blank">↗ NWS Marine Forecast</a>
   </div>
-  <div style="margin-top:32px;text-align:center;font-size:11px;color:var(--text-dim)">Formula 40PC · IPS500/D6 · T4 props · ~200 nm range · Depart June 1, 2026 · Miami Beach → East Falmouth MA</div>
 
+  <div style="text-align:center;font-size:10px;color:var(--text-dim)">Formula 40PC · IPS500/D6 · T4 props · ~200 nm range · Depart June 1, 2026 · Sunset Harbour Miami Beach → East Falmouth MA</div>
 </div>
 
 <script>
-/* ── ROUTE PICKER ── */
-function setStop(idx, name, info) {
-  document.querySelectorAll('.stop-btn').forEach((b,i) => b.classList.toggle('active', i===idx));
-  const el = document.getElementById('today-next');
-  el.innerHTML = '<strong>📍 ' + name + ' → </strong>' + info;
-  el.classList.add('visible');
-  for(let i=0;i<14;i++){
-    const d=document.getElementById('rd'+i), l=document.getElementById('rl'+i);
-    if(d) d.classList.remove('current');
-    if(l) l.classList.remove('active-lbl');
-  }
-  const dotMap=[0,1,2,3,4,5,6,7,8,9,10,11,12];
-  const di=dotMap[idx];
-  if(document.getElementById('rd'+di)) document.getElementById('rd'+di).classList.add('current');
-  if(document.getElementById('rl'+di)) document.getElementById('rl'+di).classList.add('active-lbl');
-  for(let i=0;i<14;i++){
-    const s=document.getElementById('seg'+i);
-    if(s) s.classList.toggle('dimmed', i < idx);
-  }
-  const seg=document.getElementById('seg'+idx);
-  if(seg) setTimeout(()=>seg.scrollIntoView({behavior:'smooth',block:'start'}),150);
-}
+'use strict';
 
-/* ── LEG DATA ── */
-const LEGS = {
-  'mia-ftp': {
-    name:'Miami Beach → Ft. Pierce', route:'All outside · ~110 nm',
-    go:['Winds S–SW under 15 kts','Seas under 3 ft offshore','No fronts within 24 hrs'],
-    wait:['NE or E winds any strength','Seas 4 ft or more','Front approaching within 12 hrs'],
-    buoys:['41047'], tideStations:[], tideContext:null,
-    sources:[{l:'41047 SE FL Offshore',u:'https://www.ndbc.noaa.gov/station_page.php?station=41047'},{l:'Windy — Miami',u:'https://windy.com/?waves,25.8,-80.2,7'}]
-  },
-  'ftp-sta': {
-    name:'Ft. Pierce → St. Augustine or Fernandina Beach', route:'Outside · staging leg · ~60–75 nm',
-    go:['Winds SE–SW under 15 kts','Seas under 3 ft','St. Augustine bar: enter at or near HIGH tide only'],
-    wait:['NE winds — St. Aug bar breaks badly in NE swell','Seas 4 ft or more','Arriving at low tide — wait for tide to build'],
-    buoys:['41047'],
-    tideStations:[{id:'8720218', name:'St. Augustine Inlet', role:'arrival', legNm:70, speedKt:28, note:'Bar entry: must be near HIGH tide'}],
-    sources:[{l:'41047 SE FL Offshore',u:'https://www.ndbc.noaa.gov/station_page.php?station=41047'},{l:'St. Aug Tides',u:'https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8720218'}]
-  },
-  'sta-chs': {
-    name:'St. Augustine / Fernandina → Charleston', route:'Full range day · ~165–175 nm',
-    go:['Winds SW–W under 15 kts','Seas under 4 ft full leg','No fronts within 36 hrs','Depart full fuel'],
-    wait:['NE winds — uncomfortable full-day run','Seas 5 ft or more','Front timing puts you offshore at passage'],
-    buoys:['41004'], tideStations:[], tideContext:null,
-    sources:[{l:'41004 SE Atlantic',u:'https://www.ndbc.noaa.gov/station_page.php?station=41004'},{l:'Windy — SC/GA',u:'https://windy.com/?waves,32.0,-80.0,7'}]
-  },
-  'chs-spt': {
-    name:'Charleston → Southport', route:'Outside · ~145 nm',
-    go:['Winds SW–NW under 15 kts','Seas under 4 ft'],
-    wait:['NE or E winds building','Seas 5 ft or more'],
-    buoys:['41004'], tideStations:[], tideContext:null,
-    sources:[{l:'41004 SE Atlantic',u:'https://www.ndbc.noaa.gov/station_page.php?station=41004'}]
-  },
-  'spt-mhc': {
-    name:'Southport → Morehead City', route:"ICW via Snow's Cut → Masonboro Inlet → Morehead · ~75 nm",
-    go:['Winds under 15 kts for ICW sections','Masonboro Inlet calm','Mid-to-high tide for ICW'],
-    wait:['Strong NE at Masonboro exit','LNM advisory for shoaling'],
-    buoys:[], tideStations:[], tideContext:null,
-    sources:[{l:'USCG D5 LNMs',u:'https://www.navcen.uscg.gov/?pageName=lnmDistrict&region=05'}]
-  },
-  'mhc-cjk': {
-    name:'Morehead City → Coinjock (Pamlico Sound)', route:'Inside · proven 2025 route · ~110 nm',
-    go:['Winds SW–NW under 15 kts','Pamlico Sound buoy (41036): seas under 2 ft','No NE in 24-hr forecast','Depart early — cross before noon'],
-    wait:['NE or N winds 15 kts or more','Pamlico Sound showing 2 ft or more','Front approaching from west'],
-    buoys:['41036'], tideStations:[], tideContext:null,
-    sources:[{l:'41036 Pamlico Sound',u:'https://www.ndbc.noaa.gov/station_page.php?station=41036'},{l:'Windy — Pamlico',u:'https://windy.com/?waves,35.3,-76.5,8'}]
-  },
-  'hva-ocy': {
-    name:'Hampton VA → Ocean City MD', route:'Straight offshore · ~125 nm',
-    go:['Winds SW–W under 15 kts','Seas under 4 ft at Chesapeake Light Tower','No NE in 36-hr forecast'],
-    wait:['NE winds building','Seas 5 ft or more'],
-    buoys:['44100','44009'], tideStations:[], tideContext:null,
-    sources:[{l:'44100 Chesapeake Light',u:'https://www.ndbc.noaa.gov/station_page.php?station=44100'},{l:'44009 Delaware Bay',u:'https://www.ndbc.noaa.gov/station_page.php?station=44009'}]
-  },
-  'ocy-bnl': {
-    name:'Ocean City MD → Barnegat Light NJ', route:'Barnegat Inlet timing critical · ⚠️ PREVIOUS INCIDENT HERE',
-    go:['Barnegat: FLOOD tide — mid-flood only','Morning entry only — before sea breeze builds','Winds W or SW under 10 kts','No NE swell whatsoever','Favor north jetty'],
-    wait:['ANY NE wind or swell — Cape May instead','Ebb tide — never','Afternoon — sea breeze + ebb = dangerous','Any doubt: Cape May is 40 nm, next morning'],
-    buoys:['44025'],
-    tideStations:[{id:'8534720', name:'Barnegat Inlet', role:'arrival', legNm:75, speedKt:28, note:'MUST arrive on FLOOD tide, morning only. Previous incident at this inlet — extra caution required.'}],
-    sources:[{l:'Barnegat Tides',u:'https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8534720'},{l:'44025 NY Bight',u:'https://www.ndbc.noaa.gov/station_page.php?station=44025'},{l:'Cape May Tides',u:'https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8536110'}]
-  },
-  'bnl-pwy': {
-    name:'Barnegat Light → Port Washington NY', route:'Outside around Sandy Hook · ~110 nm',
-    go:['Winds SW–W under 15 kts','Seas under 3 ft offshore NJ','Barnegat exit: flood tide, morning, north jetty'],
-    wait:['NE or E winds — Barnegat exit gets rough','Seas 4 ft or more'],
-    buoys:['44025'], tideStations:[], tideContext:null,
-    sources:[{l:'44025 NY Bight',u:'https://www.ndbc.noaa.gov/station_page.php?station=44025'},{l:'Sandy Hook Tides',u:'https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8531680'}]
-  },
-  'pwy-fal': {
-    name:'Port Washington → Falmouth MA', route:'Long Island Sound → The Race → Vineyard Sound → Falmouth · ~185 nm',
-    go:['Winds SW–W under 15 kts full route','The Race: timed for fair current (adds 1-2 kts)','Vineyard Sound seas under 3 ft','Arrive Falmouth before 2pm'],
-    wait:['NE winds anywhere along route','Vineyard Sound NE building against ebb','Too late for fair tide at The Race'],
-    buoys:['44017','44020'],
-    tideStations:[{id:'8461490', name:'The Race / New London', role:'waypoint', legNm:95, speedKt:28, note:'The Race current is significant — fair current adds 1-2 kts, foul current costs fuel and time. Time your Port Washington departure accordingly.'}],
-    sources:[{l:'44017 Montauk Pt',u:'https://www.ndbc.noaa.gov/station_page.php?station=44017'},{l:'44020 Nantucket Sound',u:'https://www.ndbc.noaa.gov/station_page.php?station=44020'},{l:'The Race Tides',u:'https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8461490'}]
-  }
+var STOPS = [
+  { name:'Miami Beach',          segIdx:1,  legId:'mia-ftp', hasTide:false },
+  { name:'Ft. Pierce',           segIdx:2,  legId:'ftp-sta', hasTide:true,  tideId:'8720218', tideName:'St. Augustine Inlet',   tideNm:70,  exitOnly:false },
+  { name:'St. Aug / Fernandina', segIdx:3,  legId:'sta-chs', hasTide:false },
+  { name:'Charleston',           segIdx:4,  legId:'chs-spt', hasTide:false },
+  { name:'Southport',            segIdx:5,  legId:'spt-mhc', hasTide:false },
+  { name:'Morehead City',        segIdx:6,  legId:'mhc-cjk', hasTide:false },
+  { name:'Coinjock',             segIdx:8,  legId:'cjk-hva', hasTide:false },
+  { name:'Hampton VA',           segIdx:9,  legId:'hva-ocy', hasTide:false },
+  { name:'Ocean City MD',        segIdx:10, legId:'ocy-bnl', hasTide:true,  tideId:'8534720', tideName:'Barnegat Inlet',         tideNm:75,  exitOnly:false },
+  { name:'Cape May NJ',          segIdx:10, legId:'ocy-bnl', hasTide:true,  tideId:'8534720', tideName:'Barnegat Inlet',         tideNm:40,  exitOnly:false },
+  { name:'Barnegat Light',       segIdx:12, legId:'bnl-pwy', hasTide:true,  tideId:'8534720', tideName:'Barnegat Inlet (exit)',  tideNm:0,   exitOnly:true  },
+  { name:'Port Washington',      segIdx:13, legId:'pwy-fal', hasTide:true,  tideId:'8461490', tideName:'The Race',               tideNm:95,  exitOnly:false }
+];
+
+var LEGS = {
+  'mia-ftp': { name:'Miami Beach → Ft. Pierce', nm:110, buoys:['41047'],
+    go:'Winds S–SW under 15 kts; Seas under 3 ft offshore; No fronts within 24 hrs',
+    wait:'NE or E winds any strength; Seas 4 ft or more; Front approaching within 12 hrs',
+    nextLeg:'Ft. Pierce to St. Augustine — watch St. Augustine bar tide timing on arrival' },
+  'ftp-sta': { name:'Ft. Pierce → St. Augustine or Fernandina Beach', nm:70, buoys:['41047'],
+    go:'Winds SE–SW under 15 kts; Seas under 3 ft; St. Augustine bar: enter near HIGH tide only',
+    wait:'NE winds — St. Aug bar breaks badly in NE swell; Seas 4 ft or more; Arriving at low tide',
+    nextLeg:'St. Augustine / Fernandina to Charleston (~175 nm) — longest southern leg, depart with full fuel' },
+  'sta-chs': { name:'St. Augustine / Fernandina → Charleston', nm:175, buoys:['41004'],
+    go:'Winds SW–W under 15 kts; Seas under 4 ft full leg; No fronts within 36 hrs; Full fuel',
+    wait:'NE winds — uncomfortable full-day run; Seas 5 ft or more',
+    nextLeg:'Charleston to Southport (~145 nm) — Cape Fear River: strong tidal current on arrival' },
+  'chs-spt': { name:'Charleston → Southport', nm:145, buoys:['41004'],
+    go:'Winds SW–NW under 15 kts; Seas under 4 ft',
+    wait:'NE or E winds building; Seas 5 ft or more',
+    nextLeg:'Southport to Morehead City via ICW and Masonboro Inlet — transit at mid-to-high tide' },
+  'spt-mhc': { name:'Southport → Morehead City', nm:75, buoys:[],
+    go:'Winds under 15 kts; Masonboro Inlet calm; Mid-to-high tide for ICW',
+    wait:'Strong NE at Masonboro exit; LNM advisory for shoaling',
+    nextLeg:'Morehead City weather hold — wait for right Pamlico Sound window. Do not rush.' },
+  'mhc-cjk': { name:'Morehead City → Coinjock (via Pamlico Sound)', nm:110, buoys:['41036'],
+    go:'Winds SW–NW under 15 kts; Pamlico Sound buoy (41036): seas under 2 ft; No NE in 24-hr forecast; Cross before noon',
+    wait:'NE or N winds 15 kts+; Pamlico Sound showing 2 ft+; Front approaching from west',
+    nextLeg:'Coinjock to Hampton VA (~40 nm) — check Great Bridge lock schedule before departing' },
+  'cjk-hva': { name:'Coinjock → Hampton VA', nm:40, buoys:['44099'],
+    go:'Great Bridge lock: check schedule; Protected route — most weather acceptable',
+    wait:'Great Bridge lock out of service; Severe weather only',
+    nextLeg:'Hampton VA to Ocean City MD (~125 nm) — outside, wants SW/W winds under 15 kts, no NE for 24 hrs' },
+  'hva-ocy': { name:'Hampton VA → Ocean City MD', nm:125, buoys:['44100','44009'],
+    go:'Winds SW–W under 15 kts; Seas under 4 ft at Chesapeake Light Tower; No NE in 36-hr forecast',
+    wait:'NE winds building; Seas 5 ft or more; Front timing uncertain',
+    nextLeg:'Ocean City to Barnegat Light — Barnegat Inlet timing is critical. Check tide before committing to this next leg.' },
+  'ocy-bnl': { name:'Ocean City MD → Barnegat Light NJ', nm:75, buoys:['44025'],
+    go:'Barnegat: FLOOD tide mid-flood only; Morning entry only; Winds W or SW under 10 kts; No NE swell whatsoever; Favor north jetty',
+    wait:'ANY NE wind or swell; Ebb tide — never enter on ebb; Afternoon — dangerous; Any doubt: Cape May staging instead',
+    nextLeg:'Barnegat Light stay — use Passage Planner to compare exit windows and plan Port Washington + Falmouth legs' },
+  'bnl-pwy': { name:'Barnegat Light → Port Washington NY', nm:110, buoys:['44025'],
+    go:'Winds SW–W under 15 kts; Seas under 3 ft offshore NJ; Barnegat exit: flood tide morning only north jetty',
+    wait:'NE or E winds — Barnegat exit gets rough; Seas 4 ft or more',
+    nextLeg:'Port Washington to Falmouth (~185 nm) — time The Race for fair current, arrive before early afternoon' },
+  'pwy-fal': { name:'Port Washington → Falmouth MA', nm:185, buoys:['44017','44020'],
+    go:'Winds SW–W under 15 kts full route; The Race: timed for fair current; Vineyard Sound seas under 3 ft; Arrive Falmouth before 2pm',
+    wait:'NE winds anywhere along route; Vineyard Sound NE building against ebb; Too late for fair tide at The Race',
+    nextLeg:"You're home — East Falmouth, MA 🏁" }
 };
 
-/* ── WX PANEL TOGGLE ── */
-const wxBuilt = {};
-function toggleWx(panelId, legId) {
-  const trigger = document.querySelector(`#${panelId} .wx-trigger`);
-  const body = document.getElementById(`${panelId}-body`);
-  const isOpen = body.classList.contains('open');
-  if (!isOpen) {
-    if (!wxBuilt[panelId]) { buildWxBody(panelId, legId); wxBuilt[panelId]=true; }
-    body.classList.add('open'); trigger.classList.add('open');
+var currentStop = -1;
+var selectedOpt = 0;
+var plannerOpen = false;
+
+function setStop(idx) {
+  currentStop = idx;
+  document.querySelectorAll('.stop-btn').forEach(function(b, i) {
+    b.classList.toggle('active', i === idx);
+  });
+  for (var i = 0; i <= 12; i++) {
+    var dot = document.getElementById('rd' + i);
+    var lbl = document.getElementById('rl' + i);
+    var conn = document.getElementById('rc' + i);
+    if (dot) { dot.classList.remove('dot-current'); if (i < idx) dot.classList.add('conn-done'); }
+    if (lbl) lbl.classList.remove('lbl-current');
+    if (conn && i < idx) conn.classList.add('conn-done');
+  }
+  if (document.getElementById('rd' + idx)) document.getElementById('rd' + idx).classList.add('dot-current');
+  if (document.getElementById('rl' + idx)) document.getElementById('rl' + idx).classList.add('lbl-current');
+  for (var j = 1; j <= 13; j++) {
+    var seg = document.getElementById('seg' + j);
+    if (seg) seg.classList.toggle('dimmed', j < idx + 1);
+  }
+  var stop = STOPS[idx];
+  var leg = stop ? LEGS[stop.legId] : null;
+  document.getElementById('planner-sub').textContent = stop && leg
+    ? 'Next: ' + leg.name + ' · tap to analyze'
+    : 'Tap your current stop above, then open this to analyze';
+  document.getElementById('tide-inputs').style.display = (stop && stop.hasTide) ? 'block' : 'none';
+  document.getElementById('p-result').innerHTML = '';
+  document.getElementById('p-status').innerHTML = '';
+  document.getElementById('p-chips').style.display = 'none';
+  document.getElementById('p-chips').innerHTML = '';
+  if (!plannerOpen) togglePlanner();
+  setTimeout(function() {
+    document.getElementById('planner').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 200);
+}
+
+function toggleSeg(bodyId, el) {
+  var body = document.getElementById(bodyId);
+  if (!body) return;
+  var open = body.classList.toggle('open');
+  if (el) el.textContent = open
+    ? el.textContent.replace('show','hide').replace('▾','▴')
+    : el.textContent.replace('hide','show').replace('▴','▾');
+}
+
+function togglePlanner() {
+  plannerOpen = !plannerOpen;
+  document.getElementById('planner-body').classList.toggle('open', plannerOpen);
+  document.getElementById('planner-chev').classList.toggle('open', plannerOpen);
+}
+
+function selectOpt(n) {
+  selectedOpt = n;
+  for (var i = 0; i < 3; i++) {
+    var el = document.getElementById('opt' + i);
+    if (el) el.classList.toggle('selected', i === n);
+  }
+}
+
+(function updateOptionDates() {
+  var today = new Date();
+  var days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  for (var i = 0; i < 3; i++) {
+    var d = new Date(today);
+    d.setDate(today.getDate() + i + 1);
+    var el = document.getElementById('opt' + i + '-sub');
+    if (el) el.textContent = days[d.getDay()] + ' ' + months[d.getMonth()] + ' ' + d.getDate();
+  }
+})();
+
+function toggleManual() {
+  var area = document.getElementById('manual-area');
+  var tog = document.querySelector('.manual-toggle');
+  var open = area.classList.toggle('open');
+  tog.textContent = open ? 'or fetch live data instead' : 'or paste your own forecast data instead';
+}
+
+function fetchWithTimeout(url, ms) {
+  var ctrl = new AbortController();
+  var timer = setTimeout(function() { ctrl.abort(); }, ms);
+  return fetch(url, { signal: ctrl.signal }).then(
+    function(r) { clearTimeout(timer); return r; },
+    function(e) { clearTimeout(timer); throw e; }
+  );
+}
+
+async function fetchBuoy(id) {
+  var url = 'https://www.ndbc.noaa.gov/data/realtime2/' + id + '.txt';
+  var proxies = [
+    'https://api.allorigins.win/raw?url=' + encodeURIComponent(url),
+    'https://corsproxy.io/?' + encodeURIComponent(url),
+    'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(url)
+  ];
+  for (var i = 0; i < proxies.length; i++) {
+    try {
+      var resp = await fetchWithTimeout(proxies[i], 7000);
+      if (!resp.ok) continue;
+      var text = await resp.text();
+      if (!text || text.length < 50) continue;
+      var lines = text.trim().split('\n');
+      var headers = lines[0].replace(/^#\s*/,'').trim().split(/\s+/);
+      var vals = (lines[2] || lines[1]).trim().split(/\s+/);
+      var d = {};
+      headers.forEach(function(h, j) { d[h] = vals[j]; });
+      return d;
+    } catch(e) { continue; }
+  }
+  return null;
+}
+
+async function fetchTides(stationId, daysAhead) {
+  var base = new Date();
+  base.setDate(base.getDate() + daysAhead);
+  var end = new Date(base);
+  end.setDate(end.getDate() + 1);
+  function fmt(d) { return d.getFullYear() + '' + String(d.getMonth()+1).padStart(2,'0') + String(d.getDate()).padStart(2,'0'); }
+  var url = 'https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?begin_date=' + fmt(base) + '&end_date=' + fmt(end) +
+    '&station=' + stationId + '&product=predictions&datum=MLLW&time_zone=lst_ldt&interval=hilo&units=english&application=passage_dashboard&format=json';
+  try {
+    var resp = await fetch(url);
+    var data = await resp.json();
+    return data.predictions || [];
+  } catch(e) { return []; }
+}
+
+function fmtTime(h, m) {
+  var h12 = h > 12 ? h - 12 : (h === 0 ? 12 : h);
+  return h12 + ':' + String(m).padStart(2,'0') + (h >= 12 ? ' PM' : ' AM');
+}
+
+function analyzeTide(preds, depTime, legNm, speedKt) {
+  var parts = depTime.split(':').map(Number);
+  var depMin = parts[0] * 60 + parts[1];
+  var travelMin = legNm > 0 ? Math.round((legNm / speedKt) * 60) : 0;
+  var arrMin = depMin + travelMin;
+  var arrH = Math.floor(arrMin / 60) % 24;
+  var arrM = arrMin % 60;
+  var arrDec = arrH + arrM / 60;
+  var depDec = parts[0] + parts[1] / 60;
+  var checkDec = legNm > 0 ? arrDec : depDec;
+
+  var prev = null, next = null;
+  for (var i = 0; i < preds.length; i++) {
+    var t = preds[i].t.split(' ')[1].split(':');
+    var td = parseInt(t[0]) + parseInt(t[1]) / 60;
+    if (td <= checkDec) prev = preds[i];
+    if (td > checkDec && !next) next = preds[i];
+  }
+
+  var isFlood = prev && next && prev.type === 'L' && next.type === 'H';
+  var minsToNext = next ? (function() {
+    var nt = next.t.split(' ')[1].split(':');
+    return Math.round(((parseInt(nt[0]) + parseInt(nt[1])/60) - checkDec) * 60);
+  })() : null;
+
+  var state, favorable;
+  if (isFlood) {
+    state = minsToNext !== null && minsToNext <= 90
+      ? 'FLOODING — HIGH in ' + minsToNext + ' min ✓'
+      : 'FLOODING ↑ ✓';
+    favorable = true;
+  } else if (prev && next && prev.type === 'H') {
+    state = 'EBBING ↓ ✗';
+    favorable = false;
   } else {
-    body.classList.remove('open'); trigger.classList.remove('open');
-  }
-}
-
-/* ── BUILD WX PANEL HTML ── */
-function buildWxBody(panelId, legId) {
-  const leg = LEGS[legId];
-  if (!leg) return;
-  const body = document.getElementById(`${panelId}-body`);
-
-  // Tide input section (only if leg has tide stations)
-  let tideHtml = '';
-  if (leg.tideStations && leg.tideStations.length > 0) {
-    const ts = leg.tideStations[0];
-    tideHtml = `
-      <div class="tide-box" id="${panelId}-tidebox">
-        <div class="tide-box-label">🌊 Tide timing — ${ts.name}</div>
-        <div class="tide-dep-row">
-          <span class="tide-dep-label">My departure time:</span>
-          <input class="tide-dep-input" type="time" id="${panelId}-deptime" value="07:00">
-          <span class="tide-dep-label">at ~${ts.speedKt} kts</span>
-          <button class="tide-calc-btn" onclick="calcTide('${panelId}','${legId}')">Calculate</button>
-        </div>
-        <div class="tide-result" id="${panelId}-tide-result"><span class="tide-neutral">Enter your planned departure time and tap Calculate to check tide timing at ${ts.name}.</span></div>
-      </div>`;
+    state = 'Tide state unknown';
+    favorable = null;
   }
 
-  body.innerHTML = `
-    <div class="wx-criteria">
-      <div class="wx-crit-box wx-crit-go">
-        <div class="wx-crit-label">✓ Go conditions</div>
-        <ul class="wx-crit-list">${leg.go.map(g=>`<li>${g}</li>`).join('')}</ul>
-      </div>
-      <div class="wx-crit-box wx-crit-wait">
-        <div class="wx-crit-label">✗ Wait / divert</div>
-        <ul class="wx-crit-list">${leg.wait.map(w=>`<li>${w}</li>`).join('')}</ul>
-      </div>
-    </div>
-    ${tideHtml}
-    <div class="wx-sources">${leg.sources.map(s=>`<a class="wx-source" href="${s.u}" target="_blank">↗ ${s.l}</a>`).join('')}</div>
-    <div class="wx-status" id="${panelId}-status"></div>
-    <div class="wx-data-row" id="${panelId}-data" style="display:none"></div>
-    <button class="wx-fetch-btn" id="${panelId}-btn" onclick="runWxCheck('${panelId}','${legId}')">
-      ⚡ Fetch live conditions + get recommendation
-    </button>
-    <span class="wx-manual-toggle" onclick="toggleWxManual('${panelId}')">or paste your own forecast data instead</span>
-    <div class="wx-manual-area" id="${panelId}-manual">
-      <textarea id="${panelId}-input" placeholder="Paste forecast text, buoy readings, or describe what Windy is showing..."></textarea>
-    </div>
-    <div id="${panelId}-result"></div>`;
+  var tideSummary = preds.slice(0, 6).map(function(p) {
+    var t = p.t.split(' ')[1].split(':');
+    var h12 = parseInt(t[0]) > 12 ? parseInt(t[0]) - 12 : (parseInt(t[0]) === 0 ? 12 : parseInt(t[0]));
+    var ampm = parseInt(t[0]) >= 12 ? 'PM' : 'AM';
+    return (p.type === 'H' ? '▲HIGH' : '▽LOW') + ' ' + h12 + ':' + t[1] + ' ' + ampm + ' (' + parseFloat(p.v).toFixed(1) + 'ft)';
+  }).join(' · ');
+
+  return {
+    depDisplay: fmtTime(parts[0], parts[1]),
+    arrDisplay: legNm > 0 ? fmtTime(arrH, arrM) : null,
+    travelHrs: legNm > 0 ? Math.round(travelMin / 6) / 10 : 0,
+    state: state,
+    favorable: favorable,
+    tideSummary: tideSummary,
+    speedKt: speedKt
+  };
 }
 
-/* ── TIDE CALCULATION ── */
-async function calcTide(panelId, legId) {
-  const leg = LEGS[legId];
-  const ts = leg.tideStations[0];
-  const depInput = document.getElementById(`${panelId}-deptime`).value;
-  const resultEl = document.getElementById(`${panelId}-tide-result`);
+async function runPlanner() {
+  if (currentStop < 0) { alert('Tap your current location first.'); return; }
+  var stop = STOPS[currentStop];
+  var leg = LEGS[stop.legId];
+  var btn = document.getElementById('analyze-btn');
+  var statusEl = document.getElementById('p-status');
+  var chipsEl = document.getElementById('p-chips');
+  var resultEl = document.getElementById('p-result');
+  var isManual = document.getElementById('manual-area').classList.contains('open');
 
-  if (!depInput) { resultEl.innerHTML = '<span class="tide-neutral">Please enter a departure time.</span>'; return; }
-
-  // Calculate estimated arrival time
-  const [h, m] = depInput.split(':').map(Number);
-  const depMinutes = h * 60 + m;
-  const travelMinutes = Math.round((ts.legNm / ts.speedKt) * 60);
-  const arrMinutes = depMinutes + travelMinutes;
-  const arrH = Math.floor(arrMinutes / 60) % 24;
-  const arrM = arrMinutes % 60;
-  const arrTime = `${String(arrH).padStart(2,'0')}:${String(arrM).padStart(2,'0')}`;
-  const arrTimeDisplay = `${arrH > 12 ? arrH-12 : arrH === 0 ? 12 : arrH}:${String(arrM).padStart(2,'0')} ${arrH >= 12 ? 'PM' : 'AM'}`;
-  const depTimeDisplay = `${h > 12 ? h-12 : h === 0 ? 12 : h}:${String(m).padStart(2,'0')} ${h >= 12 ? 'PM' : 'AM'}`;
-
-  resultEl.innerHTML = `<span class="tide-neutral"><span class="sp" style="display:inline-block;width:9px;height:9px;border:2px solid currentColor;border-top-color:transparent;border-radius:50%;animation:spin 0.7s linear infinite;vertical-align:middle;margin-right:4px;"></span> Fetching tide predictions for ${ts.name}...</span>`;
-
-  try {
-    // Get today's date for the API call
-    const today = new Date();
-    const dateStr = today.toISOString().slice(0,10).replace(/-/g,'');
-    const tomorrow = new Date(today); tomorrow.setDate(today.getDate()+1);
-    const tomorrowStr = tomorrow.toISOString().slice(0,10).replace(/-/g,'');
-
-    const url = `https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?begin_date=${dateStr}&end_date=${tomorrowStr}&station=${ts.id}&product=predictions&datum=MLLW&time_zone=lst_ldt&interval=hilo&units=english&application=passage_dashboard&format=json`;
-
-    const resp = await fetch(url);
-    const data = await resp.json();
-
-    if (!data.predictions || data.predictions.length === 0) {
-      throw new Error('No tide data returned');
-    }
-
-    const predictions = data.predictions;
-
-    // Find the tide state at estimated arrival
-    // arrTime is HH:MM — compare with prediction times
-    const arrDecimal = arrH + arrM/60;
-
-    // Find surrounding high/low tides
-    let prevTide = null, nextTide = null;
-    for (let i = 0; i < predictions.length; i++) {
-      const tParts = predictions[i].t.split(' ')[1].split(':');
-      const tDecimal = parseInt(tParts[0]) + parseInt(tParts[1])/60;
-      if (tDecimal <= arrDecimal) prevTide = predictions[i];
-      if (tDecimal > arrDecimal && !nextTide) nextTide = predictions[i];
-    }
-
-    // Determine tide direction at arrival
-    let tideState = 'unknown', tideColor = 'tide-neutral', tideIcon = '~';
-    let isGoodForInlet = false;
-
-    if (prevTide && nextTide) {
-      const isFloodingToHigh = prevTide.type === 'L' && nextTide.type === 'H';
-      const isEbbingToLow = prevTide.type === 'H' && nextTide.type === 'L';
-
-      if (isFloodingToHigh) {
-        tideState = 'FLOODING (rising toward high)';
-        tideColor = 'tide-go'; tideIcon = '✓'; isGoodForInlet = true;
-      } else {
-        tideState = 'EBBING (falling toward low)';
-        tideColor = 'tide-wait'; tideIcon = '✗'; isGoodForInlet = false;
-      }
-
-      // Check if arrival is within 2 hrs of high (ideal for bars)
-      if (nextTide.type === 'H') {
-        const nextHParts = nextTide.t.split(' ')[1].split(':');
-        const nextHDecimal = parseInt(nextHParts[0]) + parseInt(nextHParts[1])/60;
-        const minsToHigh = (nextHDecimal - arrDecimal) * 60;
-        if (minsToHigh <= 120) {
-          tideState = `FLOODING — HIGH in ${Math.round(minsToHigh)} min ✓`;
-          tideIcon = '✓'; isGoodForInlet = true;
-        }
-      }
-    }
-
-    // Format upcoming tides
-    const upcomingTides = predictions.slice(0, 6).map(p => {
-      const t = p.t.split(' ')[1];
-      const tParts = t.split(':');
-      const h12 = parseInt(tParts[0]) > 12 ? parseInt(tParts[0])-12 : (parseInt(tParts[0])===0 ? 12 : parseInt(tParts[0]));
-      const ampm = parseInt(tParts[0]) >= 12 ? 'PM' : 'AM';
-      return `<span class="tide-chip ${p.type==='H'?'hi':'lo'}">${p.type==='H'?'HIGH':'LOW'} ${h12}:${tParts[1]} ${ampm} (${parseFloat(p.v).toFixed(1)} ft)</span>`;
-    }).join('');
-
-    const goodBad = isGoodForInlet
-      ? `<strong class="tide-go">${tideIcon} FAVORABLE</strong> — ${tideState}`
-      : `<strong class="tide-wait">${tideIcon} UNFAVORABLE</strong> — ${tideState}`;
-
-    resultEl.innerHTML = `
-      <div style="margin-bottom:6px">
-        Depart <strong>${depTimeDisplay}</strong> → Est. arrival <strong>${ts.name}: ${arrTimeDisplay}</strong>
-        (~${Math.round(travelMinutes/60*10)/10} hrs at ${ts.speedKt} kts)
-      </div>
-      <div style="margin-bottom:8px">Tide at arrival: ${goodBad}</div>
-      <div style="font-size:10px;color:var(--text-dim);margin-bottom:6px">Upcoming tides:</div>
-      <div class="tide-predictions">${upcomingTides}</div>
-      ${!isGoodForInlet && ts.role === 'arrival' ? `<div style="margin-top:8px;font-size:11px;color:#fca5a5">⚠️ ${ts.note} — consider adjusting your departure time or staging closer the night before.</div>` : ''}`;
-
-    // Store tide context for AI recommendation
-    LEGS[legId]._tideContext = `TIDE DATA for ${ts.name}:\nDeparture: ${depTimeDisplay} → Estimated arrival: ${arrTimeDisplay}\nTide state at arrival: ${tideState}\nFavorable for inlet: ${isGoodForInlet ? 'YES' : 'NO — DO NOT ENTER'}\nNote: ${ts.note}`;
-
-  } catch(e) {
-    resultEl.innerHTML = `<span class="tide-neutral">Could not load live tide data — check the tide link above or enter your planned departure time and note conditions manually. Est. arrival at ${ts.name}: ${arrTimeDisplay} (${Math.round(travelMinutes/60*10)/10} hrs at ${ts.speedKt} kts).</span>`;
-    LEGS[legId]._tideContext = `Estimated arrival at ${ts.name}: ${arrTimeDisplay}. Live tide data unavailable — manually check NOAA tides for this station.`;
-  }
-}
-
-/* ── MANUAL PASTE TOGGLE ── */
-function toggleWxManual(panelId) {
-  const area = document.getElementById(`${panelId}-manual`);
-  const toggle = document.querySelector(`#${panelId}-body .wx-manual-toggle`);
-  const open = area.classList.toggle('open');
-  toggle.textContent = open ? 'or fetch live data instead' : 'or paste your own forecast data instead';
-}
-
-/* ── BUOY FETCH ── */
-async function fetchBuoy(stationId) {
-  try {
-    const url = `https://www.ndbc.noaa.gov/data/realtime2/${stationId}.txt`;
-    // Try multiple CORS proxies
-    const proxies = [
-      `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
-      `https://corsproxy.io/?${encodeURIComponent(url)}`,
-      `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`
-    ];
-    for (const proxy of proxies) {
-      try {
-        const resp = await fetch(proxy, {signal: AbortSignal.timeout(5000)});
-        if (!resp.ok) continue;
-        const text = await resp.text();
-        if (!text || text.length < 50) continue;
-        const lines = text.trim().split('\n');
-        const headers = lines[0].replace(/^#\s*/,'').trim().split(/\s+/);
-        const vals = (lines[2] || lines[1]).trim().split(/\s+/);
-        const d = {};
-        headers.forEach((h,i) => d[h]=vals[i]);
-        return d;
-      } catch(e) { continue; }
-    }
-    return null;
-  } catch(e) { return null; }
-}
-
-/* ── MAIN WX CHECK ── */
-async function runWxCheck(panelId, legId) {
-  const leg = LEGS[legId];
-  const btn = document.getElementById(`${panelId}-btn`);
-  const isManual = document.getElementById(`${panelId}-manual`).classList.contains('open');
-  const resultEl = document.getElementById(`${panelId}-result`);
   btn.disabled = true;
   resultEl.innerHTML = '';
+  chipsEl.innerHTML = '';
+  chipsEl.style.display = 'none';
 
-  let contextData = '';
-  const setStatus = html => { document.getElementById(`${panelId}-status`).innerHTML = html; };
+  var setStatus = function(h) { statusEl.innerHTML = h; };
+  var context = '';
+  var tideCtx = '';
 
   if (isManual) {
-    const txt = document.getElementById(`${panelId}-input`)?.value.trim();
-    if (!txt) { btn.disabled=false; return; }
-    contextData = `MANUALLY PROVIDED FORECAST DATA:\n${txt}`;
+    var txt = document.getElementById('manual-input').value.trim();
+    if (!txt) { btn.disabled = false; return; }
+    context = 'MANUALLY PROVIDED CONDITIONS:\n' + txt;
     setStatus('✓ Using your provided data');
   } else {
     if (leg.buoys.length > 0) {
-      setStatus(`<span class="sp"></span> Fetching live buoy data...`);
-      const dataRow = document.getElementById(`${panelId}-data`);
-      dataRow.innerHTML = '';
-      for (const b of leg.buoys) {
-        const d = await fetchBuoy(b);
+      setStatus('<span class="sp"></span> Fetching live buoy data...');
+      for (var bi = 0; bi < leg.buoys.length; bi++) {
+        var d = await fetchBuoy(leg.buoys[bi]);
         if (d && d['WSPD'] && d['WSPD'] !== 'MM') {
-          const wspd = (parseFloat(d['WSPD'])*1.944).toFixed(1);
-          const wvht = d['WVHT'] && d['WVHT'] !== 'MM' ? `${d['WVHT']}m/${(parseFloat(d['WVHT'])*3.28).toFixed(1)}ft` : 'N/A';
-          const wdir = d['WDIR'] && d['WDIR'] !== 'MM' ? `from ${d['WDIR']}°` : '';
-          const dpd = d['DPD'] && d['DPD'] !== 'MM' ? `${d['DPD']}s period` : '';
-          dataRow.style.display='flex';
-          dataRow.innerHTML += `<span class="wx-data-chip">Buoy ${b}: Wind ${wspd}kts ${wdir} · Waves ${wvht} ${dpd}</span>`;
-          contextData += `\nBuoy ${b} live data: Wind ${wspd} kts ${wdir}, Waves ${wvht}, Period ${d['DPD']||'N/A'}s\n`;
+          var wspd = (parseFloat(d['WSPD']) * 1.944).toFixed(1);
+          var wvht = d['WVHT'] && d['WVHT'] !== 'MM' ? d['WVHT'] + 'm/' + (parseFloat(d['WVHT'])*3.28).toFixed(1) + 'ft' : 'N/A';
+          var wdir = d['WDIR'] && d['WDIR'] !== 'MM' ? 'from ' + d['WDIR'] + '°' : '';
+          var dpd = d['DPD'] && d['DPD'] !== 'MM' ? d['DPD'] + 's' : '';
+          chipsEl.style.display = 'flex';
+          chipsEl.innerHTML += '<span class="chip">Buoy ' + leg.buoys[bi] + ': ' + wspd + 'kts ' + wdir + ' · Waves ' + wvht + ' ' + dpd + '</span>';
+          context += '\nBuoy ' + leg.buoys[bi] + ': Wind ' + wspd + ' kts ' + wdir + ', Waves ' + wvht + ', Period ' + (d['DPD']||'N/A') + 's\n';
         } else {
-          contextData += `\nBuoy ${b}: data unavailable\n`;
+          context += '\nBuoy ' + leg.buoys[bi] + ': data unavailable\n';
         }
       }
     }
-    setStatus(`<span class="sp"></span> Getting recommendation...`);
+
+    if (stop.hasTide) {
+      setStatus('<span class="sp"></span> Fetching tide predictions for 3 days...');
+      var depTime = document.getElementById('plan-deptime').value || '07:00';
+      var speedKt = parseFloat(document.getElementById('plan-speed').value) || 28;
+      var dayLabels = ['Tomorrow', '+1 day', '+2 days'];
+
+      for (var dayOff = 0; dayOff <= 2; dayOff++) {
+        var preds = await fetchTides(stop.tideId, dayOff + 1);
+        if (preds.length > 0) {
+          var ta = analyzeTide(preds, depTime, stop.tideNm, speedKt);
+          var label = dayLabels[dayOff];
+          var chipCls = ta.favorable === true ? 'chip-ok' : (ta.favorable === false ? 'chip-bad' : 'chip-tide');
+          chipsEl.style.display = 'flex';
+          var chipText = label + ' · ' + stop.tideName + ': ';
+          if (ta.arrDisplay) chipText += 'Arrive ' + ta.arrDisplay + ' · ';
+          chipText += ta.state;
+          chipsEl.innerHTML += '<span class="chip ' + chipCls + '">' + chipText + '</span>';
+          tideCtx += '\n' + label + ' — ' + stop.tideName + ':\n';
+          tideCtx += '  Depart ' + ta.depDisplay + ' at ' + speedKt + ' kts';
+          if (ta.arrDisplay) tideCtx += ' → arrive ' + ta.arrDisplay + ' (' + ta.travelHrs + ' hrs)';
+          tideCtx += '\n  Tide: ' + ta.state + ' — ' + (ta.favorable ? 'FAVORABLE ✓' : 'UNFAVORABLE ✗') + '\n';
+          tideCtx += '  Tides: ' + ta.tideSummary + '\n';
+        }
+      }
+    }
   }
 
-  // Add tide context if available
-  const tideCtx = leg._tideContext || '';
-  if (tideCtx) contextData += `\n\n${tideCtx}`;
+  setStatus('<span class="sp"></span> Analyzing all options...');
 
-  const system = `You are a passage weather advisor for Peter, an experienced solo powerboat captain on a Formula 40PC with twin Volvo Penta IPS500/D6 engines and T4 props (~200 nm comfortable range). He is making a Miami Beach to East Falmouth MA passage.
+  var optLabel = selectedOpt === 0 ? 'tomorrow' : (selectedOpt === 1 ? 'the day after tomorrow' : 'in two days');
 
-Critical context:
-- He has had a PREVIOUS INCIDENT at Barnegat Inlet — treat this with heightened caution, never minimize the risk
-- He found Pamlico Sound unexpectedly rough on a southbound crossing — take his concern seriously
-- He values honest, direct assessment — never be falsely optimistic
-- Solo passage: deterioration mid-run is a serious concern with no one to assist
-- Comfort zone: winds under 15 kts, seas under 3-4 ft
-- For tide-critical inlets (especially Barnegat): tide state at arrival is as important as wind and wave conditions
+  var sys = 'You are a passage weather advisor for Peter, an experienced solo powerboat captain making a Miami Beach to East Falmouth MA passage on a Formula 40PC with twin Volvo Penta IPS500/D6 engines and T4 props (~200 nm comfortable range). He is currently stopped at ' + stop.name + '.\n\nCritical context:\n- PREVIOUS INCIDENT at Barnegat Inlet — always treat Barnegat with heightened caution\n- Pamlico Sound unexpectedly rough on a past crossing — take his caution seriously  \n- He values honest, direct assessment — never false optimism\n- Solo passage — deterioration mid-run is serious\n- Comfort zone: winds under 15 kts, seas under 3-4 ft\n- Tide timing at Barnegat, St. Augustine bar, and The Race is as important as wind/wave conditions\n- His fundamental goal: a harmonious, pleasant, low-stress trip. He can stay extra days if needed — this is not a problem.\n\nFormat:\nLine 1: VERDICT for ' + optLabel + ' — GO / WAIT / CAUTION — brief reason (one line)\n\nThen:\n1. Immediate assessment (2-3 sentences): conditions for the specific departure window requested\n2. Tide assessment if relevant (1-2 sentences): is the timing working for any tide-critical points\n3. Downstream flow (2 sentences): how this departure sets up the NEXT leg\n4. Comparing options (2-3 sentences): briefly compare tomorrow vs +1 day vs +2 days — which flows best overall\n5. Watch for (1 sentence): what to monitor before committing\n\nBe specific, reference actual data, think about the whole trip as a connected sequence.';
 
-Format:
-Line 1: VERDICT — GO / WAIT / CAUTION followed by a dash and brief reason (one line)
-Lines 2-5: 3-4 sentences of clear, specific reasoning referencing the actual data provided
-If WAIT: final sentence on exactly what to look for or when to recheck`;
-
-  const user = `Leg: ${leg.name}
-Route: ${leg.route}
-
-GO conditions: ${leg.go.join('; ')}
-WAIT conditions: ${leg.wait.join('; ')}
-
-Current data:
-${contextData || 'No live data available. Provide general advice for early June conditions in this area, noting what to check before departing.'}
-
-Provide your recommendation.`;
+  var usr = 'Current stop: ' + stop.name + '\nNext leg: ' + leg.name + ' (~' + leg.nm + ' nm)\nRequested departure: ' + optLabel + ' (option ' + (selectedOpt+1) + ' of 3)\n\nGO criteria: ' + leg.go + '\nWAIT criteria: ' + leg.wait + '\nNext leg context: ' + leg.nextLeg + '\n\nLive buoy data:\n' + (context || 'No live buoy data available — advise based on general early June patterns for this area and region.') + (tideCtx ? '\n\nTIDE ANALYSIS (3-day comparison):\n' + tideCtx : '') + '\n\nAnalyze all three departure options and give your recommendation.';
 
   try {
-    const resp = await fetch('https://api.anthropic.com/v1/messages', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
+    var resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        model:'claude-sonnet-4-20250514',
-        max_tokens:800,
-        system, messages:[{role:'user',content:user}]
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: sys,
+        messages: [{ role: 'user', content: usr }]
       })
     });
-    const json = await resp.json();
-    const text = (json.content?.[0]?.text||'Unable to get recommendation.').trim();
-    const firstLine = text.split('\n')[0].toUpperCase();
-    let cls='wx-result-caution', icon='⚠️';
-    if (firstLine.includes('GO') && !firstLine.includes('WAIT')) { cls='wx-result-go'; icon='✅'; }
-    if (firstLine.includes('WAIT')) { cls='wx-result-wait'; icon='🛑'; }
-    const lines = text.split('\n');
-    resultEl.innerHTML = `
-      <div class="wx-result">
-        <div class="wx-result-hdr ${cls}">
-          <span style="font-size:18px">${icon}</span>
-          <span class="wx-verdict">${lines[0]}</span>
-        </div>
-        <div class="wx-result-body">
-          <div class="wx-result-text">${lines.slice(1).join('\n').trim()}</div>
-        </div>
-      </div>`;
+    var json = await resp.json();
+    var text = ((json.content && json.content[0] && json.content[0].text) || 'Unable to get recommendation.').trim();
+    var fl = text.split('\n')[0].toUpperCase();
+    var cls = 'r-caution', icon = '⚠️';
+    if (fl.indexOf('GO') > -1 && fl.indexOf('WAIT') === -1) { cls = 'r-go'; icon = '✅'; }
+    if (fl.indexOf('WAIT') > -1) { cls = 'r-wait'; icon = '🛑'; }
+    var lines = text.split('\n');
+    resultEl.innerHTML = '<div class="p-result"><div class="r-hdr ' + cls + '"><span class="r-icon">' + icon + '</span><span class="r-verdict">' + lines[0] + '</span></div><div class="r-body"><div class="r-text">' + lines.slice(1).join('\n').trim() + '</div></div></div>';
   } catch(e) {
-    resultEl.innerHTML = `<div class="wx-result"><div class="wx-result-hdr wx-result-caution"><span style="font-size:18px">⚠️</span><span class="wx-verdict">Could not reach advisor — check connection and try again</span></div></div>`;
+    resultEl.innerHTML = '<div class="p-result"><div class="r-hdr r-caution"><span class="r-icon">⚠️</span><span class="r-verdict">Could not reach advisor — check connection and try again</span></div></div>';
   }
-
   setStatus('');
-  btn.disabled=false;
+  btn.disabled = false;
 }
 </script>
 </body>
