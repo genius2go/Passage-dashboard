@@ -208,6 +208,86 @@ body{background:var(--navy);color:var(--text);font-family:-apple-system,BlinkMac
 body.southbound .nb-only{display:none;}body.southbound .sb-only{display:block;}
 .nb-flex{display:flex;}.sb-flex{display:none;}
 body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
+
+/* ── VOYAGE LOG ── */
+.vl-gear{background:none;border:none;font-size:14px;color:var(--text-dim);cursor:pointer;padding:4px 6px;border-radius:4px;flex-shrink:0;}
+.vl-gear:hover{color:var(--text);background:rgba(255,255,255,0.06);}
+.vl-log-btn{font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.04);color:var(--text-dim);cursor:pointer;font-family:inherit;flex-shrink:0;white-space:nowrap;margin-left:4px;}
+.vl-log-btn:hover{border-color:rgba(13,148,136,0.4);color:var(--teal-light);}
+.vl-logged{font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px;background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.25);color:#86efac;margin-left:4px;flex-shrink:0;}
+.vl-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.78);z-index:500;overflow-y:auto;padding:16px;}
+.vl-overlay.open{display:flex;align-items:flex-start;justify-content:center;}
+.vl-modal{background:var(--navy-mid);border:1px solid rgba(255,255,255,0.1);border-radius:12px;width:100%;max-width:540px;overflow:hidden;margin:auto;}
+.vl-modal-hdr{padding:14px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);}
+.vl-modal-title{font-size:13px;font-weight:700;color:var(--teal-light);flex:1;}
+.vl-modal-sub{font-size:11px;color:var(--text-muted);}
+.vl-close{background:none;border:none;font-size:18px;color:var(--text-dim);cursor:pointer;padding:2px 6px;line-height:1;}
+.vl-close:hover{color:var(--text);}
+.vl-form{padding:14px 16px;}
+.vl-section{margin-bottom:16px;}
+.vl-section-title{font-size:10px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--text-dim);margin-bottom:8px;}
+.vl-row{display:flex;gap:8px;margin-bottom:8px;align-items:center;flex-wrap:wrap;}
+.vl-lbl{font-size:11px;color:var(--text-muted);min-width:100px;flex-shrink:0;}
+.vl-inp{background:var(--navy);border:1px solid rgba(255,255,255,0.12);border-radius:4px;padding:6px 8px;font-family:inherit;font-size:11px;color:var(--text);outline:none;}
+.vl-inp:focus{border-color:rgba(13,148,136,0.4);}
+.vl-inp-sm{width:70px;}
+.vl-inp-med{width:90px;}
+.vl-inp-wide{width:100%;}
+.vl-btn-group{display:flex;flex-wrap:wrap;gap:4px;}
+.vl-opt{padding:5px 10px;font-size:11px;font-weight:600;border-radius:4px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03);cursor:pointer;color:var(--text-muted);font-family:inherit;transition:all 0.15s;}
+.vl-opt:hover{border-color:rgba(13,148,136,0.4);color:var(--text);}
+.vl-opt.vl-sel{background:rgba(13,148,136,0.15);border-color:var(--teal);color:var(--teal-light);}
+.vl-opt.vl-sel-b{background:rgba(59,130,246,0.15);border-color:#3b82f6;color:#93c5fd;}
+.vl-opt.vl-sel-p{background:rgba(139,92,246,0.15);border-color:#a78bfa;color:#c4b5fd;}
+.vl-compass{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;width:130px;}
+.vl-compass .vl-opt{text-align:center;padding:4px 2px;font-size:10px;}
+.vl-textarea{background:var(--navy);border:1px solid rgba(255,255,255,0.12);border-radius:4px;padding:8px;font-family:inherit;font-size:11px;color:var(--text);outline:none;width:100%;resize:vertical;min-height:70px;}
+.vl-textarea:focus{border-color:rgba(13,148,136,0.4);}
+.vl-textarea::placeholder{color:var(--text-dim);}
+.vl-calc{font-size:10px;color:var(--teal-light);margin-left:6px;}
+.vl-fault-detail{display:none;margin-top:6px;}
+.vl-fault-detail.open{display:block;}
+.vl-submit-row{margin-top:4px;}
+.vl-submit{width:100%;background:var(--teal);color:#040a12;border:none;border-radius:6px;padding:12px;font-family:inherit;font-size:12px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;cursor:pointer;transition:background 0.15s;}
+.vl-submit:hover{background:#0dd9be;}
+.vl-submit:disabled{background:var(--card-bg);color:var(--text-dim);cursor:not-allowed;}
+.vl-status{font-size:11px;text-align:center;margin-top:8px;min-height:16px;color:var(--text-muted);}
+.vl-settings-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.78);z-index:600;align-items:center;justify-content:center;padding:16px;}
+.vl-settings-overlay.open{display:flex;}
+.vl-settings-box{background:var(--navy-mid);border:1px solid rgba(255,255,255,0.1);border-radius:12px;width:100%;max-width:420px;padding:20px;}
+.vl-settings-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px;}
+.vl-settings-sub{font-size:11px;color:var(--text-muted);margin-bottom:14px;line-height:1.6;}
+.vl-settings-inp{width:100%;background:var(--navy);border:1px solid rgba(255,255,255,0.15);border-radius:4px;padding:8px 10px;font-family:monospace;font-size:11px;color:var(--text);outline:none;margin-bottom:10px;}
+.vl-settings-inp:focus{border-color:rgba(13,148,136,0.4);}
+.vl-settings-btns{display:flex;gap:8px;}
+.vl-settings-save{flex:1;background:var(--teal);color:#040a12;border:none;border-radius:4px;padding:9px;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;}
+.vl-settings-cancel{background:transparent;border:1px solid var(--border);border-radius:4px;padding:9px 14px;font-family:inherit;font-size:11px;color:var(--text-muted);cursor:pointer;}
+.vl-token-status{font-size:10px;margin-top:6px;}
+.vl-token-ok{color:#86efac;}.vl-token-none{color:var(--amber);}
+.vl-log-section{margin-top:20px;}
+.vl-log-hdr{display:flex;align-items:center;gap:8px;cursor:pointer;padding:11px 14px;background:var(--navy-mid);border:1px solid var(--border);border-radius:var(--radius);user-select:none;-webkit-user-select:none;}
+.vl-log-hdr:hover{background:rgba(255,255,255,0.03);}
+.vl-log-hdr-title{font-size:12px;font-weight:700;color:var(--text-muted);flex:1;}
+.vl-log-hdr-count{font-size:10px;color:var(--text-dim);margin-right:4px;}
+.vl-log-body{display:none;border:1px solid var(--border);border-top:none;border-radius:0 0 var(--radius) var(--radius);}
+.vl-log-body.open{display:block;}
+.vl-entry{padding:11px 14px;border-bottom:1px solid var(--border);cursor:pointer;}
+.vl-entry:last-child{border:none;}
+.vl-entry:hover{background:rgba(255,255,255,0.02);}
+.vl-entry-hdr{display:flex;align-items:center;gap:8px;margin-bottom:3px;flex-wrap:wrap;}
+.vl-entry-date{font-size:10px;font-weight:700;color:var(--teal-light);flex-shrink:0;}
+.vl-entry-leg{font-size:12px;font-weight:600;color:var(--text);flex:1;}
+.vl-entry-nm{font-size:10px;font-weight:700;color:var(--green);background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);padding:1px 6px;border-radius:4px;flex-shrink:0;}
+.vl-entry-meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:2px;}
+.vl-entry-chip{font-size:10px;color:var(--text-muted);}
+.vl-entry-notes{font-size:11px;color:var(--text-muted);font-style:italic;margin-top:3px;}
+.vl-entry-detail{display:none;margin-top:8px;padding-top:8px;border-top:1px solid var(--border);}
+.vl-entry-detail.open{display:block;}
+.vl-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px 16px;}
+.vl-detail-item{font-size:10px;color:var(--text-muted);padding:2px 0;}
+.vl-detail-item strong{color:var(--text);}
+.vl-empty-log{padding:20px;text-align:center;font-size:11px;color:var(--text-dim);}
+.vl-loading{padding:16px;text-align:center;font-size:11px;color:var(--text-dim);}
 </style>
 </head>
 <body>
@@ -222,6 +302,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
     <button class="dir-btn active" id="btn-nb" onclick="setDirection('nb')">&#8679; Northbound</button>
     <button class="dir-btn" id="btn-sb" onclick="setDirection('sb')">&#8681; Southbound</button>
   </div>
+  <button class="vl-gear" onclick="vlOpenSettings()" title="Voyage log settings">⚙️</button>
 </div>
 
 <div class="container">
@@ -384,7 +465,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
   <div class="nb-only">
 
     <div class="segment" id="seg1">
-      <div class="seg-header"><div class="seg-dot dot-teal">&#9312;</div><div class="seg-info"><div class="seg-name">Miami Beach &#8594; Ft. Pierce</div><div class="seg-route">Day 1 &middot; June 1 &middot; All outside &middot; straightforward first leg</div></div><span class="seg-dist">~110 nm</span></div>
+      <div class="seg-header"><div class="seg-dot dot-teal">&#9312;</div><div class="seg-info"><div class="seg-name">Miami Beach &#8594; Ft. Pierce</div><div class="seg-route">Day 1 &middot; June 1 &middot; All outside &middot; straightforward first leg</div></div><span class="seg-dist">~120 nm</span><button class="vl-log-btn" id="vl-btn-seg1" onclick="vlOpenLog('seg1','Miami Beach → Ft. Pierce','nb',120)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('sb1',this)">show resources &#9662;</span>
       <div class="seg-body" id="sb1">
         <div class="resources">
@@ -397,7 +478,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
     </div>
 
     <div class="segment" id="seg2">
-      <div class="seg-header"><div class="seg-dot dot-amber">&#9313;</div><div class="seg-info"><div class="seg-name">Ft. Pierce &#8594; St. Augustine or Fernandina Beach</div><div class="seg-route">Day 2 &middot; St. Aug bar: enter near high tide</div></div><span class="seg-dist">~60&#8211;75 nm</span></div>
+      <div class="seg-header"><div class="seg-dot dot-amber">&#9313;</div><div class="seg-info"><div class="seg-name">Ft. Pierce &#8594; St. Augustine or Fernandina Beach</div><div class="seg-route">Day 2 &middot; St. Aug bar: enter near high tide</div></div><span class="seg-dist">~160 nm</span><button class="vl-log-btn" id="vl-btn-seg2" onclick="vlOpenLog('seg2','Ft. Pierce → St. Augustine / Fernandina','nb',160)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('sb2',this)">show notes + resources &#9662;</span>
       <div class="seg-body" id="sb2">
         <div class="note"><strong>St. Augustine bar: cross at or near high tide only.</strong> Fernandina (~60 nm) shorter, St. Aug (~75 nm) closer to Charleston. Your call leaving Ft. Pierce.</div>
@@ -410,7 +491,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
     </div>
 
     <div class="segment" id="seg3">
-      <div class="seg-header"><div class="seg-dot dot-teal">&#9314;</div><div class="seg-info"><div class="seg-name">St. Augustine / Fernandina &#8594; Charleston</div><div class="seg-route">Day 3 &middot; full range day &middot; comfortable with T4 props</div></div><span class="seg-dist">~165&#8211;175 nm</span></div>
+      <div class="seg-header"><div class="seg-dot dot-teal">&#9314;</div><div class="seg-info"><div class="seg-name">St. Augustine / Fernandina &#8594; Charleston</div><div class="seg-route">Day 3 &middot; full range day &middot; comfortable with T4 props</div></div><span class="seg-dist">~200 nm</span><button class="vl-log-btn" id="vl-btn-seg3" onclick="vlOpenLog('seg3','St. Augustine / Fernandina → Charleston','nb',200)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('sb3',this)">show notes + resources &#9662;</span>
       <div class="seg-body" id="sb3">
         <div class="note-green"><strong>200 nm range comfortable with T4 props.</strong> Brunswick / St. Simons Island GA (~130 nm) is a solid backup if conditions deteriorate mid-run.</div>
@@ -424,7 +505,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
     </div>
 
     <div class="segment" id="seg4">
-      <div class="seg-header"><div class="seg-dot dot-amber">&#9315;</div><div class="seg-info"><div class="seg-name">Charleston &#8594; Southport</div><div class="seg-route">Day 4 &middot; outside &middot; Cape Fear River: strong tidal current on arrival</div></div><span class="seg-dist">~145 nm</span></div>
+      <div class="seg-header"><div class="seg-dot dot-amber">&#9315;</div><div class="seg-info"><div class="seg-name">Charleston &#8594; Southport</div><div class="seg-route">Day 4 &middot; outside &middot; Cape Fear River: strong tidal current on arrival</div></div><span class="seg-dist">~135 nm</span><button class="vl-log-btn" id="vl-btn-seg4" onclick="vlOpenLog('seg4','Charleston → Southport','nb',135)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('sb4',this)">show resources &#9662;</span>
       <div class="seg-body" id="sb4">
         <div class="resources">
@@ -436,7 +517,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
     </div>
 
     <div class="segment" id="seg5">
-      <div class="seg-header"><div class="seg-dot dot-amber">&#9316;</div><div class="seg-info"><div class="seg-name">Southport &#8594; Morehead City</div><div class="seg-route">Day 5 &middot; ICW via Snow's Cut &#8594; Myrtle Grove &#8594; Masonboro Inlet &#8594; outside to Morehead</div></div><span class="seg-dist">~75 nm</span></div>
+      <div class="seg-header"><div class="seg-dot dot-amber">&#9316;</div><div class="seg-info"><div class="seg-name">Southport &#8594; Morehead City</div><div class="seg-route">Day 5 &middot; ICW via Snow's Cut &#8594; Myrtle Grove &#8594; Masonboro Inlet &#8594; outside to Morehead</div></div><span class="seg-dist">~90 nm</span><button class="vl-log-btn" id="vl-btn-seg5" onclick="vlOpenLog('seg5','Southport → Morehead City','nb',90)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('sb5',this)">show notes + resources &#9662;</span>
       <div class="seg-body" id="sb5">
         <div class="note"><strong>ICW routing:</strong> Cape Fear River &#8594; Snow's Cut (MM 295) &#8594; Myrtle Grove &#8594; exit Masonboro Inlet &#8594; outside to Morehead City. <strong>Transit at mid-to-high tide.</strong> Check Aqua Map for shoaling at MM 293.7.</div>
@@ -448,7 +529,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
     </div>
 
     <div class="segment" id="seg6">
-      <div class="seg-header"><div class="seg-dot dot-red2">&#9317;</div><div class="seg-info"><div class="seg-name">Morehead City &#8212; Weather Hold</div><div class="seg-route">Day 6+ &middot; wait for the right Pamlico Sound window &middot; use Passage Planner above</div></div></div>
+      <div class="seg-header"><div class="seg-dot dot-red2">&#9317;</div><div class="seg-info"><div class="seg-name">Morehead City &#8212; Weather Hold</div><div class="seg-route">Day 6+ &middot; wait for the right Pamlico Sound window &middot; use Passage Planner above</div></div><button class="vl-log-btn" id="vl-btn-seg6" onclick="vlOpenLog('seg6','Morehead City — Weather Hold','nb',0)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('sb6',this)">show criteria + resources &#9662;</span>
       <div class="seg-body" id="sb6">
         <div class="note"><strong>Do not rush this decision.</strong> Pamlico Sound builds steep chop quickly in NE or N winds. <strong>Depart early morning, cross before noon.</strong></div>
@@ -465,7 +546,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
     </div>
 
     <div class="segment" id="seg7">
-      <div class="seg-header"><div class="seg-dot dot-purple">&#9318;</div><div class="seg-info"><div class="seg-name">Morehead City &#8594; Coinjock</div><div class="seg-route">Neuse River &#8594; Pamlico Sound &#8594; Alligator River &#8594; Albemarle Sound</div></div><span class="seg-dist">~110 nm</span></div>
+      <div class="seg-header"><div class="seg-dot dot-purple">&#9318;</div><div class="seg-info"><div class="seg-name">Morehead City &#8594; Coinjock</div><div class="seg-route">Neuse River &#8594; Pamlico Sound &#8594; Alligator River &#8594; Albemarle Sound</div></div><span class="seg-dist">~110 nm</span><button class="vl-log-btn" id="vl-btn-seg7" onclick="vlOpenLog('seg7','Morehead City → Coinjock','nb',110)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('sb7',this)">show notes + resources &#9662;</span>
       <div class="seg-body" id="sb7">
         <div class="note"><strong>Speed:</strong> Rivers + open water: on plane. <strong>Pamlico + Albemarle: on plane, cross before noon.</strong> Canal sections: 6&#8211;7 kts no wake. Coinjock Marina: easy approach, great prime rib.</div>
@@ -478,7 +559,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
     </div>
     <!-- NB SEG 8 COINJOCK to HAMPTON -->
     <div class="segment" id="seg8">
-      <div class="seg-header"><div class="seg-dot dot-purple">&#9319;</div><div class="seg-info"><div class="seg-name">Coinjock &#8594; Hampton VA &#8212; Bluewater</div><div class="seg-route">ICW &middot; North Landing River &#8594; Great Bridge Lock &#8594; Elizabeth River &#8594; Hampton Roads</div></div><span class="seg-dist">~40 nm</span></div>
+      <div class="seg-header"><div class="seg-dot dot-purple">&#9319;</div><div class="seg-info"><div class="seg-name">Coinjock &#8594; Hampton VA &#8212; Bluewater</div><div class="seg-route">ICW &middot; North Landing River &#8594; Great Bridge Lock &#8594; Elizabeth River &#8594; Hampton Roads</div></div><span class="seg-dist">~40 nm</span><button class="vl-log-btn" id="vl-btn-seg8" onclick="vlOpenLog('seg8','Coinjock → Hampton VA','nb',40)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('sb8',this)">show bridge timing planner &#9662;</span>
       <div class="seg-body" id="sb8">
         <div class="note"><strong>Plan this leg the evening before at Coinjock.</strong> Great Bridge Lock opens northbound on the hour. Work backwards from the lock hour you want. From lock to Bluewater is all 6 kts no-wake through the Elizabeth River. <strong>Confirm bridge schedules with dock staff over dinner.</strong></div>
@@ -530,7 +611,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
     </div>
 
     <div class="segment" id="seg9">
-      <div class="seg-header"><div class="seg-dot dot-blue">&#9320;</div><div class="seg-info"><div class="seg-name">Hampton VA &#8594; Ocean City MD</div><div class="seg-route">Straight offshore &middot; Cape Henry &#8594; Chesapeake Light &#8594; Ocean City</div></div><span class="seg-dist">~125 nm</span></div>
+      <div class="seg-header"><div class="seg-dot dot-blue">&#9320;</div><div class="seg-info"><div class="seg-name">Hampton VA &#8594; Ocean City MD</div><div class="seg-route">Straight offshore &middot; Cape Henry &#8594; Chesapeake Light &#8594; Ocean City</div></div><span class="seg-dist">~125 nm</span><button class="vl-log-btn" id="vl-btn-seg9" onclick="vlOpenLog('seg9','Hampton VA → Ocean City MD','nb',125)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('sb9',this)">show notes + resources &#9662;</span>
       <div class="seg-body" id="sb9">
         <div class="note-blue"><strong>Outside preferred.</strong> Wants SW/W winds under 15 kts, seas under 4 ft, no NE for 24 hrs. Chincoteague Inlet VA is emergency option only.</div>
@@ -544,7 +625,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
     </div>
 
     <div class="segment" id="seg10">
-      <div class="seg-header"><div class="seg-dot dot-sky">&#9321;</div><div class="seg-info"><div class="seg-name">Ocean City MD &#8594; Cape May NJ (conditional) &#8594; Barnegat Light</div><div class="seg-route">Barnegat inlet timing dictates where you stage &middot; Cape May is your safety valve</div></div><span class="seg-dist">~75 nm direct</span></div>
+      <div class="seg-header"><div class="seg-dot dot-sky">&#9321;</div><div class="seg-info"><div class="seg-name">Ocean City MD &#8594; Cape May NJ (conditional) &#8594; Barnegat Light</div><div class="seg-route">Barnegat inlet timing dictates where you stage &middot; Cape May is your safety valve</div></div><span class="seg-dist">~75 nm direct</span><button class="vl-log-btn" id="vl-btn-seg10" onclick="vlOpenLog('seg10','Ocean City MD → Barnegat Light','nb',75)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('sb10',this)">show criteria + resources &#9662;</span>
       <div class="seg-body" id="sb10">
         <div class="note"><strong>Barnegat Inlet is the most critical inlet of this passage.</strong> Previous incident here. <strong>Never enter on ebb. Never in the afternoon. No NE swell.</strong> Favor north jetty.</div>
@@ -563,7 +644,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
     </div>
 
     <div class="segment" id="seg11">
-      <div class="seg-header"><div class="seg-dot dot-green">&#9322;</div><div class="seg-info"><div class="seg-name">Barnegat Light &#8212; 2+ nights &#127881;</div><div class="seg-route">Cousin visit &middot; rest &middot; use Passage Planner to find your ideal exit window</div></div></div>
+      <div class="seg-header"><div class="seg-dot dot-green">&#9322;</div><div class="seg-info"><div class="seg-name">Barnegat Light &#8212; 2+ nights &#127881;</div><div class="seg-route">Cousin visit &middot; rest &middot; use Passage Planner to find your ideal exit window</div></div><button class="vl-log-btn" id="vl-btn-seg11" onclick="vlOpenLog('seg11','Barnegat Light — Stay','nb',0)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('sb11',this)">show notes + resources &#9662;</span>
       <div class="seg-body" id="sb11">
         <div class="note-green"><strong>Stay as long as conditions and the visit warrant.</strong> Exit Barnegat: same rules as entry &#8212; flood tide, morning only, north jetty.</div>
@@ -575,7 +656,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
     </div>
 
     <div class="segment" id="seg12">
-      <div class="seg-header"><div class="seg-dot dot-sky">&#9323;</div><div class="seg-info"><div class="seg-name">Barnegat Light &#8594; Port Washington NY</div><div class="seg-route">Outside around Sandy Hook &middot; Ambrose Channel &middot; Long Island Sound</div></div><span class="seg-dist">~110 nm</span></div>
+      <div class="seg-header"><div class="seg-dot dot-sky">&#9323;</div><div class="seg-info"><div class="seg-name">Barnegat Light &#8594; Port Washington NY</div><div class="seg-route">Outside around Sandy Hook &middot; Ambrose Channel &middot; Long Island Sound</div></div><span class="seg-dist">~110 nm</span><button class="vl-log-btn" id="vl-btn-seg12" onclick="vlOpenLog('seg12','Barnegat Light → Port Washington','nb',110)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('sb12',this)">show notes + resources &#9662;</span>
       <div class="seg-body" id="sb12">
         <div class="note"><strong>Ambrose Channel:</strong> Heavy ship traffic &#8212; right of way. Monitor VHF 16. Time Sandy Hook for fair current. <strong>Exit Barnegat: flood tide, morning, north jetty.</strong></div>
@@ -588,7 +669,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
     </div>
 
     <div class="segment" id="seg13">
-      <div class="seg-header"><div class="seg-dot dot-green">&#9324;</div><div class="seg-info"><div class="seg-name">Port Washington &#8594; Falmouth MA &#127937;</div><div class="seg-route">Long Island Sound &middot; exit The Race &middot; Vineyard Sound &middot; ~5.5&#8211;7 hrs depending on speed</div></div><span class="seg-dist">~185 nm &#10003;</span></div>
+      <div class="seg-header"><div class="seg-dot dot-green">&#9324;</div><div class="seg-info"><div class="seg-name">Port Washington &#8594; Falmouth MA &#127937;</div><div class="seg-route">Long Island Sound &middot; exit The Race &middot; Vineyard Sound &middot; ~5.5&#8211;7 hrs depending on speed</div></div><span class="seg-dist">~185 nm &#10003;</span><button class="vl-log-btn" id="vl-btn-seg13" onclick="vlOpenLog('seg13','Port Washington → Falmouth MA','nb',185)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('sb13',this)">show notes + resources &#9662;</span>
       <div class="seg-body" id="sb13">
         <div class="note-green"><strong>Direct run within your 200 nm range with T4 props.</strong> Depart early &#8212; time The Race for fair current (adds 1&#8211;2 kts). <strong>Aim to arrive Falmouth before early afternoon.</strong></div>
@@ -606,7 +687,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
   <div class="sb-only">
 
     <div class="segment" id="sseg1">
-      <div class="seg-header"><div class="seg-dot dot-green">&#9312;</div><div class="seg-info"><div class="seg-name">Falmouth MA &#8594; Port Washington NY</div><div class="seg-route">Vineyard Sound &#8594; The Race &#8594; Long Island Sound &middot; time The Race for fair current</div></div><span class="seg-dist">~185 nm</span></div>
+      <div class="seg-header"><div class="seg-dot dot-green">&#9312;</div><div class="seg-info"><div class="seg-name">Falmouth MA &#8594; Port Washington NY</div><div class="seg-route">Vineyard Sound &#8594; The Race &#8594; Long Island Sound &middot; time The Race for fair current</div></div><span class="seg-dist">~185 nm</span><button class="vl-log-btn" id="vl-btn-sseg1" onclick="vlOpenLog('sseg1','Falmouth MA → Port Washington','sb',185)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('ssb1',this)">show notes + resources &#9662;</span>
       <div class="seg-body" id="ssb1">
         <div class="note"><strong>Depart early &#8212; time The Race for fair current westbound.</strong> Depart Falmouth before 8 am to clear the Sound before afternoon SW against ebb builds chop.</div>
@@ -621,7 +702,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
     </div>
 
     <div class="segment" id="sseg2">
-      <div class="seg-header"><div class="seg-dot dot-sky">&#9313;</div><div class="seg-info"><div class="seg-name">Port Washington &#8594; Barnegat Light NJ</div><div class="seg-route">Long Island Sound &middot; Ambrose Channel &middot; outside around Sandy Hook &middot; Barnegat Inlet</div></div><span class="seg-dist">~110 nm</span></div>
+      <div class="seg-header"><div class="seg-dot dot-sky">&#9313;</div><div class="seg-info"><div class="seg-name">Port Washington &#8594; Barnegat Light NJ</div><div class="seg-route">Long Island Sound &middot; Ambrose Channel &middot; outside around Sandy Hook &middot; Barnegat Inlet</div></div><span class="seg-dist">~110 nm</span><button class="vl-log-btn" id="vl-btn-sseg2" onclick="vlOpenLog('sseg2','Port Washington → Barnegat Light','sb',110)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('ssb2',this)">show notes + resources &#9662;</span>
       <div class="seg-body" id="ssb2">
         <div class="note"><strong>Barnegat Inlet: enter mid-flood only, morning, favor north jetty. Same rules as northbound passage &#8212; no exceptions.</strong></div>
@@ -638,7 +719,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
     </div>
 
     <div class="segment" id="sseg3">
-      <div class="seg-header"><div class="seg-dot dot-green">&#9314;</div><div class="seg-info"><div class="seg-name">Barnegat Light &#8212; overnight &#127881;</div><div class="seg-route">Rest &middot; use Passage Planner to find your exit window south</div></div></div>
+      <div class="seg-header"><div class="seg-dot dot-green">&#9314;</div><div class="seg-info"><div class="seg-name">Barnegat Light &#8212; overnight &#127881;</div><div class="seg-route">Rest &middot; use Passage Planner to find your exit window south</div></div><button class="vl-log-btn" id="vl-btn-sseg3" onclick="vlOpenLog('sseg3','Barnegat Light — Stay','sb',0)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('ssb3',this)">show notes + resources &#9662;</span>
       <div class="seg-body" id="ssb3">
         <div class="note-green"><strong>Same exit rules as entry &#8212; flood tide, morning only, north jetty.</strong> Use the Passage Planner above to compare exit windows.</div>
@@ -651,7 +732,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
     </div>
 
     <div class="segment" id="sseg4">
-      <div class="seg-header"><div class="seg-dot dot-sky">&#9315;</div><div class="seg-info"><div class="seg-name">Barnegat Light &#8594; Cape May NJ (conditional) &#8594; Ocean City MD</div><div class="seg-route">Outside &middot; Cape May is your staging option if conditions are not right</div></div><span class="seg-dist">~75 nm direct</span></div>
+      <div class="seg-header"><div class="seg-dot dot-sky">&#9315;</div><div class="seg-info"><div class="seg-name">Barnegat Light &#8594; Cape May NJ (conditional) &#8594; Ocean City MD</div><div class="seg-route">Outside &middot; Cape May is your staging option if conditions are not right</div></div><span class="seg-dist">~75 nm direct</span><button class="vl-log-btn" id="vl-btn-sseg4" onclick="vlOpenLog('sseg4','Barnegat Light → Cape May / Ocean City','sb',75)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('ssb4',this)">show notes + resources &#9662;</span>
       <div class="seg-body" id="ssb4">
         <div class="note"><strong>Exit Barnegat: same rules as entry &#8212; flood tide, morning, north jetty.</strong> Cape May (~35 nm) is a comfortable intermediate stop. Ocean City Inlet southbound is straightforward but check sea state at the inlet.</div>
@@ -665,7 +746,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
     </div>
 
     <div class="segment" id="sseg5">
-      <div class="seg-header"><div class="seg-dot dot-blue">&#9316;</div><div class="seg-info"><div class="seg-name">Ocean City MD &#8594; Hampton VA &#8212; Bluewater</div><div class="seg-route">Straight offshore &middot; Ocean City &#8594; Chesapeake Light Tower &#8594; Cape Henry &#8594; Hampton Roads</div></div><span class="seg-dist">~125 nm</span></div>
+      <div class="seg-header"><div class="seg-dot dot-blue">&#9316;</div><div class="seg-info"><div class="seg-name">Ocean City MD &#8594; Hampton VA &#8212; Bluewater</div><div class="seg-route">Straight offshore &middot; Ocean City &#8594; Chesapeake Light Tower &#8594; Cape Henry &#8594; Hampton Roads</div></div><span class="seg-dist">~125 nm</span><button class="vl-log-btn" id="vl-btn-sseg5" onclick="vlOpenLog('sseg5','Ocean City MD → Hampton VA','sb',125)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('ssb5',this)">show notes + resources &#9662;</span>
       <div class="seg-body" id="ssb5">
         <div class="note-blue"><strong>Outside preferred.</strong> SW/W winds under 15 kts, seas under 4 ft, no NE for 24 hrs. Hampton Roads: heavy Navy and commercial traffic &#8212; monitor VHF 16, they have right of way. Bluewater: (757) 723-6774.</div>
@@ -681,7 +762,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
 
     <!-- SB SEG 6 HAMPTON to COINJOCK with bridge planner -->
     <div class="segment" id="sseg6">
-      <div class="seg-header"><div class="seg-dot dot-purple">&#9317;</div><div class="seg-info"><div class="seg-name">Hampton VA &#8212; Bluewater &#8594; Coinjock</div><div class="seg-route">ICW &middot; Elizabeth River &#8594; Great Bridge Lock (southbound :30) &#8594; Virginia Cut &#8594; North Landing River</div></div><span class="seg-dist">~40 nm</span></div>
+      <div class="seg-header"><div class="seg-dot dot-purple">&#9317;</div><div class="seg-info"><div class="seg-name">Hampton VA &#8212; Bluewater &#8594; Coinjock</div><div class="seg-route">ICW &middot; Elizabeth River &#8594; Great Bridge Lock (southbound :30) &#8594; Virginia Cut &#8594; North Landing River</div></div><span class="seg-dist">~40 nm</span><button class="vl-log-btn" id="vl-btn-sseg6" onclick="vlOpenLog('sseg6','Hampton VA → Coinjock','sb',40)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('ssb6',this)">show bridge timing planner &#9662;</span>
       <div class="seg-body" id="ssb6">
         <div class="note"><strong>Plan this leg the evening before at Bluewater.</strong> Great Bridge Lock opens southbound at :30 past the hour. Work backwards from the lock half-hour you want. <strong>Call Coinjock and order the prime rib before you arrive: (252) 453-3271.</strong></div>
@@ -731,7 +812,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
     </div>
 
     <div class="segment" id="sseg7">
-      <div class="seg-header"><div class="seg-dot dot-red2">&#9318;</div><div class="seg-info"><div class="seg-name">Coinjock &#8212; Weather Hold if needed</div><div class="seg-route">Check Pamlico Sound window before committing to the next leg south</div></div></div>
+      <div class="seg-header"><div class="seg-dot dot-red2">&#9318;</div><div class="seg-info"><div class="seg-name">Coinjock &#8212; Weather Hold if needed</div><div class="seg-route">Check Pamlico Sound window before committing to the next leg south</div></div><button class="vl-log-btn" id="vl-btn-sseg7" onclick="vlOpenLog('sseg7','Coinjock — Weather Hold','sb',0)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('ssb7',this)">show criteria + resources &#9662;</span>
       <div class="seg-body" id="ssb7">
         <div class="note"><strong>Do not rush the Pamlico Sound decision.</strong> Southbound you cross Albemarle Sound then Pamlico Sound &#8212; same chop risk in NE or N winds. <strong>Depart early, cross before noon.</strong></div>
@@ -748,7 +829,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
     </div>
 
     <div class="segment" id="sseg8">
-      <div class="seg-header"><div class="seg-dot dot-purple">&#9319;</div><div class="seg-info"><div class="seg-name">Coinjock &#8594; Morehead City</div><div class="seg-route">Albemarle Sound &#8594; Alligator River &#8594; Pamlico Sound &#8594; Neuse River</div></div><span class="seg-dist">~110 nm</span></div>
+      <div class="seg-header"><div class="seg-dot dot-purple">&#9319;</div><div class="seg-info"><div class="seg-name">Coinjock &#8594; Morehead City</div><div class="seg-route">Albemarle Sound &#8594; Alligator River &#8594; Pamlico Sound &#8594; Neuse River</div></div><span class="seg-dist">~110 nm</span><button class="vl-log-btn" id="vl-btn-sseg8" onclick="vlOpenLog('sseg8','Coinjock → Morehead City','sb',110)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('ssb8',this)">show notes + resources &#9662;</span>
       <div class="seg-body" id="ssb8">
         <div class="note"><strong>Speed:</strong> Canal sections: 6&#8211;7 kts no wake. Rivers + Albemarle + Pamlico: on plane, cross before noon. <strong>Depart Coinjock early.</strong></div>
@@ -760,7 +841,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
     </div>
 
     <div class="segment" id="sseg9">
-      <div class="seg-header"><div class="seg-dot dot-amber">&#9320;</div><div class="seg-info"><div class="seg-name">Morehead City &#8594; Southport</div><div class="seg-route">Outside to Masonboro Inlet &#8594; ICW via Myrtle Grove &#8594; Snow's Cut &#8594; Cape Fear River</div></div><span class="seg-dist">~75 nm</span></div>
+      <div class="seg-header"><div class="seg-dot dot-amber">&#9320;</div><div class="seg-info"><div class="seg-name">Morehead City &#8594; Southport</div><div class="seg-route">Outside to Masonboro Inlet &#8594; ICW via Myrtle Grove &#8594; Snow's Cut &#8594; Cape Fear River</div></div><span class="seg-dist">~90 nm</span><button class="vl-log-btn" id="vl-btn-sseg9" onclick="vlOpenLog('sseg9','Morehead City → Southport','sb',90)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('ssb9',this)">show notes + resources &#9662;</span>
       <div class="seg-body" id="ssb9">
         <div class="note"><strong>Masonboro Inlet: enter at mid-to-high tide.</strong> Check Aqua Map for shoaling at MM 293.7.</div>
@@ -772,7 +853,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
     </div>
 
     <div class="segment" id="sseg10">
-      <div class="seg-header"><div class="seg-dot dot-amber">&#9321;</div><div class="seg-info"><div class="seg-name">Southport &#8594; Charleston</div><div class="seg-route">Day run &middot; outside &middot; Cape Fear River departure: strong tidal current</div></div><span class="seg-dist">~145 nm</span></div>
+      <div class="seg-header"><div class="seg-dot dot-amber">&#9321;</div><div class="seg-info"><div class="seg-name">Southport &#8594; Charleston</div><div class="seg-route">Day run &middot; outside &middot; Cape Fear River departure: strong tidal current</div></div><span class="seg-dist">~135 nm</span><button class="vl-log-btn" id="vl-btn-sseg10" onclick="vlOpenLog('sseg10','Southport → Charleston','sb',135)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('ssb10',this)">show resources &#9662;</span>
       <div class="seg-body" id="ssb10">
         <div class="resources">
@@ -784,7 +865,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
     </div>
 
     <div class="segment" id="sseg11">
-      <div class="seg-header"><div class="seg-dot dot-teal">&#9322;</div><div class="seg-info"><div class="seg-name">Charleston &#8594; St. Augustine or Fernandina Beach</div><div class="seg-route">Day run &middot; outside &middot; Brunswick / St. Simons GA is a solid mid-leg backup</div></div><span class="seg-dist">~165&#8211;175 nm</span></div>
+      <div class="seg-header"><div class="seg-dot dot-teal">&#9322;</div><div class="seg-info"><div class="seg-name">Charleston &#8594; St. Augustine or Fernandina Beach</div><div class="seg-route">Day run &middot; outside &middot; Brunswick / St. Simons GA is a solid mid-leg backup</div></div><span class="seg-dist">~200 nm</span><button class="vl-log-btn" id="vl-btn-sseg11" onclick="vlOpenLog('sseg11','Charleston → St. Augustine / Fernandina','sb',200)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('ssb11',this)">show notes + resources &#9662;</span>
       <div class="seg-body" id="ssb11">
         <div class="note"><strong>St. Augustine bar: cross at or near high tide only &#8212; same rule applies southbound.</strong> Fernandina Beach is the shorter option.</div>
@@ -798,7 +879,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
     </div>
 
     <div class="segment" id="sseg12">
-      <div class="seg-header"><div class="seg-dot dot-amber">&#9323;</div><div class="seg-info"><div class="seg-name">St. Augustine / Fernandina &#8594; Ft. Pierce</div><div class="seg-route">Staging leg &middot; straightforward outside run south</div></div><span class="seg-dist">~60&#8211;75 nm</span></div>
+      <div class="seg-header"><div class="seg-dot dot-amber">&#9323;</div><div class="seg-info"><div class="seg-name">St. Augustine / Fernandina &#8594; Ft. Pierce</div><div class="seg-route">Staging leg &middot; straightforward outside run south</div></div><span class="seg-dist">~160 nm</span><button class="vl-log-btn" id="vl-btn-sseg12" onclick="vlOpenLog('sseg12','St. Augustine / Fernandina → Ft. Pierce','sb',160)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('ssb12',this)">show resources &#9662;</span>
       <div class="seg-body" id="ssb12">
         <div class="resources">
@@ -810,7 +891,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
     </div>
 
     <div class="segment" id="sseg13">
-      <div class="seg-header"><div class="seg-dot dot-teal">&#9324;</div><div class="seg-info"><div class="seg-name">Ft. Pierce &#8594; Miami Beach &#127937;</div><div class="seg-route">Final leg &middot; ~110 nm &middot; Sunset Harbour, Miami Beach</div></div><span class="seg-dist">~110 nm</span></div>
+      <div class="seg-header"><div class="seg-dot dot-teal">&#9324;</div><div class="seg-info"><div class="seg-name">Ft. Pierce &#8594; Miami Beach &#127937;</div><div class="seg-route">Final leg &middot; ~110 nm &middot; Sunset Harbour, Miami Beach</div></div><span class="seg-dist">~110 nm</span><button class="vl-log-btn" id="vl-btn-sseg13" onclick="vlOpenLog('sseg13','Ft. Pierce → Miami Beach','sb',120)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('ssb13',this)">show notes + resources &#9662;</span>
       <div class="seg-body" id="ssb13">
         <div class="note-green"><strong>Home straight.</strong> Gulf Stream close to shore &#8212; time your departure accordingly. Sunset Harbour Yacht Club, Miami Beach. Done.</div>
@@ -835,6 +916,20 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
     <a class="res-link cg" href="https://captaingeorgia.com/7-day-tropical-outlook" target="_blank">&#8599; 7-Day Tropical Outlook</a>
     <a class="res-link" href="https://windy.com/?waves,25.8,-80.2,5" target="_blank">&#8599; Windy</a>
     <a class="res-link cg" href="https://captaingeorgia.com/nws-marine-forecast" target="_blank">&#8599; NWS Marine Forecast</a>
+  </div>
+
+
+  <!-- VOYAGE LOG VIEW -->
+  <div class="vl-log-section">
+    <div class="vl-log-hdr" onclick="vlToggleLogView()">
+      <span style="font-size:14px">&#x1F4D6;</span>
+      <span class="vl-log-hdr-title">Voyage Log</span>
+      <span class="vl-log-hdr-count" id="vl-log-count"></span>
+      <span style="font-size:10px;color:var(--text-dim)" id="vl-log-chev">&#9660;</span>
+    </div>
+    <div class="vl-log-body" id="vl-log-body">
+      <div class="vl-loading" id="vl-log-content">Loading entries...</div>
+    </div>
   </div>
 
   <div style="text-align:center;font-size:10px;color:var(--text-dim)" id="footer-txt">Formula 40PC &middot; IPS500/D6 &middot; T4 props &middot; ~200 nm range &middot; Depart June 1, 2026 &middot; Sunset Harbour Miami Beach &#8594; East Falmouth MA</div>
@@ -863,7 +958,7 @@ function setDirection(dir){
 
 var NB_STOPS=[
   {name:'Miami Beach',segIdx:1,legId:'mia-ftp',hasTide:false},
-  {name:'Ft. Pierce',segIdx:2,legId:'ftp-sta',hasTide:true,tideId:'8720218',tideName:'St. Augustine Inlet',tideNm:70,exitOnly:false},
+  {name:'Ft. Pierce',segIdx:2,legId:'ftp-sta',hasTide:true,tideId:'8720218',tideName:'St. Augustine Inlet',tideNm:160,exitOnly:false},
   {name:'St. Aug / Fernandina',segIdx:3,legId:'sta-chs',hasTide:false},
   {name:'Charleston',segIdx:4,legId:'chs-spt',hasTide:false},
   {name:'Southport',segIdx:5,legId:'spt-mhc',hasTide:false},
@@ -890,11 +985,11 @@ var SB_STOPS=[
   {name:'Ft. Pierce',segIdx:12,legId:'ftp-mia',hasTide:false}
 ];
 var NB_LEGS={
-  'mia-ftp':{name:'Miami Beach \u2192 Ft. Pierce',nm:110,buoys:['41122'],go:'Winds S\u2013SW under 15 kts; Seas under 3 ft; No fronts within 24 hrs',wait:'NE or E winds; Seas 4 ft+; Front within 12 hrs',nextLeg:'Ft. Pierce to St. Augustine \u2014 watch St. Augustine bar tide timing on arrival'},
-  'ftp-sta':{name:'Ft. Pierce \u2192 St. Augustine or Fernandina',nm:70,buoys:['41114'],go:'Winds SE\u2013SW under 15 kts; Seas under 3 ft; St. Augustine bar: enter near HIGH tide only',wait:'NE winds; Seas 4 ft+; Arriving at low tide',nextLeg:'St. Augustine / Fernandina to Charleston (~175 nm) \u2014 longest southern leg, depart with full fuel'},
-  'sta-chs':{name:'St. Augustine / Fernandina \u2192 Charleston',nm:175,buoys:['41112','41008'],go:'Winds SW\u2013W under 15 kts; Seas under 4 ft full leg; No fronts within 36 hrs',wait:'NE winds; Seas 5 ft+',nextLeg:'Charleston to Southport (~145 nm)'},
-  'chs-spt':{name:'Charleston \u2192 Southport',nm:145,buoys:['41008'],go:'Winds SW\u2013NW under 15 kts; Seas under 4 ft',wait:'NE or E winds building; Seas 5 ft+',nextLeg:'Southport to Morehead City via ICW and Masonboro Inlet \u2014 transit at mid-to-high tide'},
-  'spt-mhc':{name:'Southport \u2192 Morehead City',nm:75,buoys:[],go:'Winds under 15 kts; Masonboro Inlet calm; Mid-to-high tide for ICW',wait:'Strong NE at Masonboro exit; LNM advisory for shoaling',nextLeg:'Morehead City weather hold \u2014 wait for right Pamlico Sound window. Do not rush.'},
+  'mia-ftp':{name:'Miami Beach \u2192 Ft. Pierce',nm:120,buoys:['41122'],go:'Winds S\u2013SW under 15 kts; Seas under 3 ft; No fronts within 24 hrs',wait:'NE or E winds; Seas 4 ft+; Front within 12 hrs',nextLeg:'Ft. Pierce to St. Augustine \u2014 watch St. Augustine bar tide timing on arrival'},
+  'ftp-sta':{name:'Ft. Pierce \u2192 St. Augustine or Fernandina',nm:160,buoys:['41114'],go:'Winds SE\u2013SW under 15 kts; Seas under 3 ft; St. Augustine bar: enter near HIGH tide only',wait:'NE winds; Seas 4 ft+; Arriving at low tide',nextLeg:'St. Augustine / Fernandina to Charleston (~175 nm) \u2014 longest southern leg, depart with full fuel'},
+  'sta-chs':{name:'St. Augustine / Fernandina \u2192 Charleston',nm:200,buoys:['41112','41008'],go:'Winds SW\u2013W under 15 kts; Seas under 4 ft full leg; No fronts within 36 hrs',wait:'NE winds; Seas 5 ft+',nextLeg:'Charleston to Southport (~145 nm)'},
+  'chs-spt':{name:'Charleston \u2192 Southport',nm:135,buoys:['41008'],go:'Winds SW\u2013NW under 15 kts; Seas under 4 ft',wait:'NE or E winds building; Seas 5 ft+',nextLeg:'Southport to Morehead City via ICW and Masonboro Inlet \u2014 transit at mid-to-high tide'},
+  'spt-mhc':{name:'Southport \u2192 Morehead City',nm:90,buoys:[],go:'Winds under 15 kts; Masonboro Inlet calm; Mid-to-high tide for ICW',wait:'Strong NE at Masonboro exit; LNM advisory for shoaling',nextLeg:'Morehead City weather hold \u2014 wait for right Pamlico Sound window. Do not rush.'},
   'mhc-cjk':{name:'Morehead City \u2192 Coinjock (via Pamlico Sound)',nm:110,buoys:['41036'],go:'Winds SW\u2013NW under 15 kts; Pamlico Sound buoy (41036) seas under 2 ft; No NE in 24-hr forecast; Cross before noon',wait:'NE or N winds 15 kts+; Pamlico Sound showing 2 ft+; Front approaching from west',nextLeg:'Coinjock to Hampton VA (~40 nm) \u2014 plan bridge timing the night before. Great Bridge Lock northbound on the hour.'},
   'cjk-hva':{name:'Coinjock \u2192 Hampton VA (Bluewater)',nm:40,buoys:[],go:'Great Bridge lock: check schedule night before; Protected route; Elizabeth River: 6 kts from MM 8 to Bluewater',wait:'Great Bridge lock out of service; Severe weather only',nextLeg:'Hampton VA to Ocean City MD (~125 nm) \u2014 outside, wants SW/W under 15 kts, no NE for 24 hrs'},
   'hva-ocy':{name:'Hampton VA \u2192 Ocean City MD',nm:125,buoys:['44099','44009'],go:'Winds SW\u2013W under 15 kts; Seas under 4 ft; No NE in 36-hr forecast',wait:'NE winds building; Seas 5 ft+; Front timing uncertain',nextLeg:'Ocean City to Barnegat Light \u2014 Barnegat Inlet timing is critical. Check tide before committing.'},
@@ -910,11 +1005,11 @@ var SB_LEGS={
   'ocy-hva':{name:'Ocean City MD \u2192 Hampton VA (Bluewater)',nm:125,buoys:['44099','44009'],go:'Winds SW\u2013W under 15 kts; Seas under 4 ft; No NE for 24 hrs',wait:'NE winds building; Seas 5 ft+',nextLeg:'Hampton to Coinjock (~40 nm) \u2014 plan bridge timing the night before. Great Bridge Lock southbound at :30.'},
   'hva-cjk':{name:'Hampton VA (Bluewater) \u2192 Coinjock',nm:40,buoys:[],go:'Great Bridge lock: check schedule (southbound at :30); Elizabeth River: 6 kts from MM 0 to lock; Protected route',wait:'Great Bridge lock out of service; Severe weather only',nextLeg:'Coinjock to Morehead City (~110 nm) \u2014 check Pamlico Sound window first'},
   'cjk-mhc':{name:'Coinjock \u2192 Morehead City (via Pamlico Sound)',nm:110,buoys:['41036'],go:'Winds SW\u2013NW under 15 kts; Pamlico Sound buoy (41036) seas under 2 ft; No NE in 24-hr forecast; Cross before noon',wait:'NE or N winds 15 kts+; Pamlico showing 2 ft+; Front approaching from west',nextLeg:'Morehead City to Southport (~75 nm) \u2014 ICW via Masonboro Inlet'},
-  'mhc-spt':{name:'Morehead City \u2192 Southport',nm:75,buoys:[],go:'Winds under 15 kts; Masonboro Inlet calm; Mid-to-high tide for ICW entry',wait:'Strong NE at Masonboro; LNM advisory for shoaling',nextLeg:'Southport to Charleston (~145 nm)'},
-  'spt-chs':{name:'Southport \u2192 Charleston',nm:145,buoys:['41008'],go:'Winds SW\u2013NW under 15 kts; Seas under 4 ft',wait:'NE or E winds building; Seas 5 ft+',nextLeg:'Charleston to St. Augustine or Fernandina (~165\u2013175 nm) \u2014 St. Aug bar: high tide only'},
-  'chs-sta':{name:'Charleston \u2192 St. Augustine or Fernandina',nm:175,buoys:['41112','41008'],go:'Winds SW\u2013W under 15 kts; Seas under 4 ft; St. Aug bar: HIGH tide entry only',wait:'NE winds; Seas 5 ft+',nextLeg:'St. Augustine / Fernandina to Ft. Pierce (~70 nm)'},
-  'sta-ftp':{name:'St. Augustine / Fernandina \u2192 Ft. Pierce',nm:70,buoys:['41114'],go:'Winds SE\u2013SW under 15 kts; Seas under 3 ft',wait:'NE winds; Seas 4 ft+',nextLeg:'Ft. Pierce to Miami Beach (~110 nm) \u2014 final leg home'},
-  'ftp-mia':{name:'Ft. Pierce \u2192 Miami Beach',nm:110,buoys:['41122'],go:'Winds SW\u2013NW under 15 kts; Seas under 3 ft; Gulf Stream watch with any NE wind',wait:'NE winds \u2014 Stream stacks up fast; Seas 4 ft+',nextLeg:'Home \u2014 Sunset Harbour, Miami Beach \ud83c\udfc1'}
+  'mhc-spt':{name:'Morehead City \u2192 Southport',nm:90,buoys:[],go:'Winds under 15 kts; Masonboro Inlet calm; Mid-to-high tide for ICW entry',wait:'Strong NE at Masonboro; LNM advisory for shoaling',nextLeg:'Southport to Charleston (~145 nm)'},
+  'spt-chs':{name:'Southport \u2192 Charleston',nm:135,buoys:['41008'],go:'Winds SW\u2013NW under 15 kts; Seas under 4 ft',wait:'NE or E winds building; Seas 5 ft+',nextLeg:'Charleston to St. Augustine or Fernandina (~165\u2013175 nm) \u2014 St. Aug bar: high tide only'},
+  'chs-sta':{name:'Charleston \u2192 St. Augustine or Fernandina',nm:200,buoys:['41112','41008'],go:'Winds SW\u2013W under 15 kts; Seas under 4 ft; St. Aug bar: HIGH tide entry only',wait:'NE winds; Seas 5 ft+',nextLeg:'St. Augustine / Fernandina to Ft. Pierce (~70 nm)'},
+  'sta-ftp':{name:'St. Augustine / Fernandina \u2192 Ft. Pierce',nm:160,buoys:['41114'],go:'Winds SE\u2013SW under 15 kts; Seas under 3 ft',wait:'NE winds; Seas 4 ft+',nextLeg:'Ft. Pierce to Miami Beach (~110 nm) \u2014 final leg home'},
+  'ftp-mia':{name:'Ft. Pierce \u2192 Miami Beach',nm:120,buoys:['41122'],go:'Winds SW\u2013NW under 15 kts; Seas under 3 ft; Gulf Stream watch with any NE wind',wait:'NE winds \u2014 Stream stacks up fast; Seas 4 ft+',nextLeg:'Home \u2014 Sunset Harbour, Miami Beach \ud83c\udfc1'}
 };
 
 function setStop(idx){
@@ -1096,6 +1191,470 @@ function showClaudeButton(){var btn=document.getElementById('ask-claude-btn'),no
   window.sbCalc=sbCalc;
   if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){nbCalc();sbCalc();});}else{nbCalc();sbCalc();}
 })();
+
+/* ════════════════════════════════════════════
+   VOYAGE LOG
+════════════════════════════════════════════ */
+var VL_REPO = 'genius2go/Passage-dashboard';
+var VL_FILE = 'log.json';
+var VL_BRANCH = 'main';
+var vlCurrentLeg = null;
+var vlLogEntries = [];
+var vlLogSha = null;
+var vlLogOpen = false;
+
+/* ── token ── */
+function vlGetToken(){ return localStorage.getItem('vl_gh_token') || ''; }
+function vlSaveToken(){
+  var t = document.getElementById('vl-token-inp').value.trim();
+  if(!t){ alert('Please paste your GitHub token.'); return; }
+  localStorage.setItem('vl_gh_token', t);
+  vlCloseSettings();
+  vlLoadLog();
+}
+function vlOpenSettings(){
+  var t = vlGetToken();
+  var inp = document.getElementById('vl-token-inp');
+  if(inp) inp.value = t ? t.substring(0,8)+'...' : '';
+  var st = document.getElementById('vl-token-status');
+  if(st) st.innerHTML = t
+    ? '<span class="vl-token-ok">&#x2713; Token saved on this device</span>'
+    : '<span class="vl-token-none">&#x26A0; No token saved yet</span>';
+  var el = document.getElementById('vl-settings-overlay');
+  if(el) el.classList.add('open');
+}
+function vlCloseSettings(){
+  var el = document.getElementById('vl-settings-overlay');
+  if(el) el.classList.remove('open');
+}
+function vlSettingsOverlayClick(e){
+  if(e.target === document.getElementById('vl-settings-overlay')) vlCloseSettings();
+}
+
+/* ── GitHub API ── */
+async function vlFetchLog(){
+  var token = vlGetToken();
+  if(!token) return null;
+  try {
+    var resp = await fetch('https://api.github.com/repos/'+VL_REPO+'/contents/'+VL_FILE+'?ref='+VL_BRANCH, {
+      headers:{'Authorization':'token '+token,'Accept':'application/vnd.github.v3+json'}
+    });
+    if(resp.status === 404){
+      vlLogSha = null;
+      return {entries:[]};
+    }
+    if(!resp.ok) return null;
+    var data = await resp.json();
+    vlLogSha = data.sha;
+    var decoded = atob(data.content.replace(/\n/g,''));
+    return JSON.parse(decoded);
+  } catch(e){ return null; }
+}
+
+async function vlWriteLog(logData){
+  var token = vlGetToken();
+  if(!token) return false;
+  var content = btoa(unescape(encodeURIComponent(JSON.stringify(logData, null, 2))));
+  var body = {message:'Voyage log entry: '+new Date().toISOString().split('T')[0], content:content, branch:VL_BRANCH};
+  if(vlLogSha) body.sha = vlLogSha;
+  try {
+    var resp = await fetch('https://api.github.com/repos/'+VL_REPO+'/contents/'+VL_FILE, {
+      method:'PUT',
+      headers:{'Authorization':'token '+token,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},
+      body:JSON.stringify(body)
+    });
+    if(!resp.ok){ var err = await resp.json(); console.error('GitHub write error:', err); return false; }
+    var result = await resp.json();
+    vlLogSha = result.content.sha;
+    return true;
+  } catch(e){ console.error(e); return false; }
+}
+
+/* ── open/close modal ── */
+function vlOpenLog(legId, legName, direction, plannedNm){
+  if(!vlGetToken()){
+    if(confirm('No GitHub token saved yet. Open settings to add one?')) vlOpenSettings();
+    return;
+  }
+  vlCurrentLeg = {legId:legId, legName:legName, direction:direction, plannedNm:plannedNm};
+  document.getElementById('vl-modal-title').textContent = 'Log: '+legName;
+  document.getElementById('vl-modal-sub').textContent = (direction==='nb'?'\u2B06 Northbound':'\u2B07 Southbound')+' \u00B7 Planned '+plannedNm+' nm';
+  document.getElementById('vl-planned-nm').textContent = plannedNm>0?'(planned '+plannedNm+' nm)':'';
+  // default date to today
+  var today = new Date(); var y=today.getFullYear(); var m=String(today.getMonth()+1).padStart(2,'0'); var d=String(today.getDate()).padStart(2,'0');
+  document.getElementById('vl-date').value = y+'-'+m+'-'+d;
+  document.getElementById('vl-ec-ref').value = y+'-'+m+'-'+d;
+  // reset form
+  ['vl-depart','vl-arrive','vl-nm','vl-fuel-gal','vl-fuel-price','vl-hrs-p-start','vl-hrs-p-end','vl-hrs-s-start','vl-hrs-s-end','vl-fault-text','vl-notes'].forEach(function(id){ var el=document.getElementById(id); if(el) el.value=''; });
+  ['vl-wind-speed','vl-wind-dir','vl-seas','vl-sky','vl-vis'].forEach(function(id){ document.querySelectorAll('#'+id+' .vl-opt').forEach(function(b){ b.classList.remove('vl-sel','vl-sel-b','vl-sel-p'); }); });
+  // reset crew to Solo
+  document.querySelectorAll('#vl-crew .vl-opt').forEach(function(b){ b.classList.remove('vl-sel'); });
+  var solo = document.querySelector('#vl-crew .vl-opt'); if(solo) solo.classList.add('vl-sel');
+  // reset faults to None
+  document.querySelectorAll('#vl-faults .vl-opt').forEach(function(b){ b.classList.remove('vl-sel'); });
+  var noneBtn = document.querySelector('#vl-faults .vl-opt'); if(noneBtn) noneBtn.classList.add('vl-sel');
+  document.getElementById('vl-fault-detail').classList.remove('open');
+  document.getElementById('vl-duration').textContent='';
+  document.getElementById('vl-fuel-cost').textContent='';
+  document.getElementById('vl-avg-speed').textContent='\u2014';
+  document.getElementById('vl-status').textContent='';
+  document.getElementById('vl-submit-btn').disabled=false;
+  // check if already logged today
+  var existing = vlLogEntries.find(function(e){ return e.leg_id===legId && e.date===y+'-'+m+'-'+d; });
+  if(existing){
+    document.getElementById('vl-status').textContent = 'Note: you already have an entry for this leg today. Saving will add another.';
+  }
+  document.getElementById('vl-overlay').classList.add('open');
+}
+function vlClose(){ document.getElementById('vl-overlay').classList.remove('open'); }
+function vlOverlayClick(e){ if(e.target===document.getElementById('vl-overlay')) vlClose(); }
+
+/* ── form helpers ── */
+function vlSel(btn, groupId, selClass){
+  document.querySelectorAll('#'+groupId+' .vl-opt').forEach(function(b){ b.classList.remove('vl-sel','vl-sel-b','vl-sel-p'); });
+  btn.classList.add(selClass);
+}
+function vlFaultToggle(show){
+  document.getElementById('vl-fault-detail').classList.toggle('open', show);
+}
+function vlGetSel(groupId){
+  var sel = document.querySelector('#'+groupId+' .vl-opt.vl-sel, #'+groupId+' .vl-opt.vl-sel-b, #'+groupId+' .vl-opt.vl-sel-p');
+  return sel ? sel.textContent.trim() : '';
+}
+function vlCalc(){
+  var dep=document.getElementById('vl-depart').value, arr=document.getElementById('vl-arrive').value;
+  var durEl=document.getElementById('vl-duration'), speedEl=document.getElementById('vl-avg-speed'), costEl=document.getElementById('vl-fuel-cost');
+  var durationHrs = 0;
+  if(dep && arr){
+    var dm=dep.split(':').map(Number), am=arr.split(':').map(Number);
+    var depMins=dm[0]*60+dm[1], arrMins=am[0]*60+am[1];
+    if(arrMins<depMins) arrMins+=1440; // next day
+    durationHrs = (arrMins-depMins)/60;
+    var hrs=Math.floor(durationHrs), mins=Math.round((durationHrs-hrs)*60);
+    durEl.textContent = hrs+'h '+String(mins).padStart(2,'0')+'m';
+    var nm=parseFloat(document.getElementById('vl-nm').value)||0;
+    if(nm>0 && durationHrs>0) speedEl.textContent=(nm/durationHrs).toFixed(1)+' kts avg';
+    else speedEl.textContent='\u2014';
+  } else { durEl.textContent=''; speedEl.textContent='\u2014'; }
+  var gal=parseFloat(document.getElementById('vl-fuel-gal').value)||0;
+  var price=parseFloat(document.getElementById('vl-fuel-price').value)||0;
+  if(gal>0 && price>0) costEl.textContent='$'+(gal*price).toFixed(2);
+  else costEl.textContent='';
+}
+
+/* ── submit ── */
+async function vlSubmit(){
+  if(!vlCurrentLeg){ return; }
+  var btn=document.getElementById('vl-submit-btn'), statusEl=document.getElementById('vl-status');
+  btn.disabled=true; statusEl.textContent='Saving to GitHub...';
+  // gather form values
+  var dep=document.getElementById('vl-depart').value, arr=document.getElementById('vl-arrive').value;
+  var durationHrs=0;
+  if(dep&&arr){ var dm=dep.split(':').map(Number),am=arr.split(':').map(Number); var dm2=dm[0]*60+dm[1],am2=am[0]*60+am[1]; if(am2<dm2)am2+=1440; durationHrs=Math.round((am2-dm2))/60; }
+  var nm=parseFloat(document.getElementById('vl-nm').value)||null;
+  var fuelGal=parseFloat(document.getElementById('vl-fuel-gal').value)||null;
+  var fuelPrice=parseFloat(document.getElementById('vl-fuel-price').value)||null;
+  var faultsSel=vlGetSel('vl-faults');
+  var entry={
+    id: vlCurrentLeg.legId+'-'+document.getElementById('vl-date').value,
+    date: document.getElementById('vl-date').value,
+    leg: vlCurrentLeg.legName,
+    leg_id: vlCurrentLeg.legId,
+    direction: vlCurrentLeg.direction,
+    depart_time: dep||null,
+    arrive_time: arr||null,
+    duration_hrs: durationHrs||null,
+    planned_nm: vlCurrentLeg.plannedNm,
+    actual_nm: nm,
+    avg_speed_kts: (nm&&durationHrs)?Math.round((nm/durationHrs)*10)/10:null,
+    fuel_used_gal: fuelGal,
+    fuel_price_per_gal: fuelPrice,
+    fuel_cost: (fuelGal&&fuelPrice)?Math.round(fuelGal*fuelPrice*100)/100:null,
+    engine_hours_port_start: parseFloat(document.getElementById('vl-hrs-p-start').value)||null,
+    engine_hours_port_end: parseFloat(document.getElementById('vl-hrs-p-end').value)||null,
+    engine_hours_stbd_start: parseFloat(document.getElementById('vl-hrs-s-start').value)||null,
+    engine_hours_stbd_end: parseFloat(document.getElementById('vl-hrs-s-end').value)||null,
+    wind_speed: vlGetSel('vl-wind-speed')||null,
+    wind_dir: vlGetSel('vl-wind-dir')||null,
+    seas: vlGetSel('vl-seas')||null,
+    sky: vlGetSel('vl-sky')||null,
+    visibility: vlGetSel('vl-vis')||null,
+    crew: vlGetSel('vl-crew')||'Solo',
+    faults: faultsSel==='Yes',
+    fault_notes: faultsSel==='Yes'?(document.getElementById('vl-fault-text').value.trim()||null):null,
+    notes: document.getElementById('vl-notes').value.trim()||null,
+    ec_ref: document.getElementById('vl-ec-ref').value||null,
+    logged_at: new Date().toISOString()
+  };
+  // fetch latest log, append entry, write back
+  var logData = await vlFetchLog();
+  if(!logData) logData = {entries:[]};
+  logData.entries.push(entry);
+  var ok = await vlWriteLog(logData);
+  if(ok){
+    vlLogEntries = logData.entries;
+    statusEl.textContent = '\u2713 Saved! Entry logged for '+entry.date+'.';
+    // mark the segment button as logged
+    var logBtn = document.getElementById('vl-btn-'+entry.leg_id);
+    if(logBtn){
+      logBtn.outerHTML = '<span class="vl-logged" id="vl-btn-'+entry.leg_id+'">\u2713 '+entry.date+'</span>';
+    }
+    vlRenderLog();
+    setTimeout(function(){ vlClose(); }, 1800);
+  } else {
+    statusEl.textContent = '\u26A0 Save failed. Check your token in \u2699\uFE0F settings and try again.';
+    btn.disabled=false;
+  }
+}
+
+/* ── load + render log ── */
+async function vlLoadLog(){
+  var logData = await vlFetchLog();
+  if(logData && logData.entries){
+    vlLogEntries = logData.entries;
+    // mark already-logged segments
+    vlLogEntries.forEach(function(e){
+      var btn = document.getElementById('vl-btn-'+e.leg_id);
+      if(btn && btn.classList.contains('vl-log-btn')){
+        // show most recent date for this leg
+        var latest = vlLogEntries.filter(function(x){return x.leg_id===e.leg_id;}).sort(function(a,b){return b.date.localeCompare(a.date);})[0];
+        btn.outerHTML = '<span class="vl-logged" id="vl-btn-'+e.leg_id+'">\u2713 '+latest.date+'</span>';
+      }
+    });
+    vlRenderLog();
+  } else {
+    document.getElementById('vl-log-content').innerHTML = '<div class="vl-empty-log">No entries yet. Tap \uD83D\uDCCB Log on any leg to get started.</div>';
+    document.getElementById('vl-log-count').textContent='';
+  }
+}
+
+function vlRenderLog(){
+  var entries = vlLogEntries.slice().sort(function(a,b){ return b.date.localeCompare(a.date); });
+  var countEl = document.getElementById('vl-log-count');
+  if(countEl) countEl.textContent = entries.length+' entr'+(entries.length===1?'y':'ies');
+  var container = document.getElementById('vl-log-content');
+  if(!container) return;
+  if(entries.length===0){ container.innerHTML='<div class="vl-empty-log">No entries yet. Tap \uD83D\uDCCB Log on any leg to get started.</div>'; return; }
+  var html='';
+  entries.forEach(function(e, idx){
+    var meta=[];
+    if(e.depart_time && e.arrive_time) meta.push('\u23F1 '+e.depart_time+'\u2192'+e.arrive_time+(e.duration_hrs?' ('+e.duration_hrs.toFixed(1)+'h)':''));
+    if(e.avg_speed_kts) meta.push('\uD83D\uDEA4 '+e.avg_speed_kts+' kts avg');
+    if(e.wind_speed && e.wind_dir) meta.push('\uD83D\uDCA8 '+e.wind_speed+' kts '+e.wind_dir);
+    if(e.seas) meta.push('\uD83C\uDF0A '+e.seas);
+    if(e.fuel_used_gal) meta.push('\u26FD '+e.fuel_used_gal+'gal'+(e.fuel_cost?' ($'+e.fuel_cost+')':''));
+    var detailRows='';
+    if(e.engine_hours_port_start||e.engine_hours_port_end) detailRows+='<div class="vl-detail-item"><strong>Port hrs:</strong> '+(e.engine_hours_port_start||'?')+'\u2192'+(e.engine_hours_port_end||'?')+'</div>';
+    if(e.engine_hours_stbd_start||e.engine_hours_stbd_end) detailRows+='<div class="vl-detail-item"><strong>Stbd hrs:</strong> '+(e.engine_hours_stbd_start||'?')+'\u2192'+(e.engine_hours_stbd_end||'?')+'</div>';
+    if(e.sky) detailRows+='<div class="vl-detail-item"><strong>Sky:</strong> '+e.sky+'</div>';
+    if(e.visibility) detailRows+='<div class="vl-detail-item"><strong>Visibility:</strong> '+e.visibility+'</div>';
+    if(e.crew) detailRows+='<div class="vl-detail-item"><strong>Crew:</strong> '+e.crew+'</div>';
+    if(e.faults&&e.fault_notes) detailRows+='<div class="vl-detail-item" style="color:#fca5a5"><strong>Fault:</strong> '+e.fault_notes+'</div>';
+    if(e.ec_ref) detailRows+='<div class="vl-detail-item"><strong>Easy Connect:</strong> '+e.ec_ref+'</div>';
+    if(e.planned_nm) detailRows+='<div class="vl-detail-item"><strong>Planned:</strong> '+e.planned_nm+' nm</div>';
+    html+='<div class="vl-entry" onclick="vlToggleEntry('+idx+')">'
+      +'<div class="vl-entry-hdr"><span class="vl-entry-date">'+e.date+'</span><span class="vl-entry-leg">'+e.leg+'</span>'+(e.actual_nm?'<span class="vl-entry-nm">'+e.actual_nm+' nm</span>':'')+'</div>'
+      +(meta.length?'<div class="vl-entry-meta">'+meta.map(function(m){return '<span class="vl-entry-chip">'+m+'</span>';}).join('')+'</div>':'')
+      +(e.notes?'<div class="vl-entry-notes">'+e.notes+'</div>':'')
+      +(detailRows?'<div class="vl-entry-detail" id="vl-detail-'+idx+'"><div class="vl-detail-grid">'+detailRows+'</div></div>':'')
+      +'</div>';
+  });
+  container.innerHTML=html;
+}
+function vlToggleEntry(idx){ var el=document.getElementById('vl-detail-'+idx); if(el) el.classList.toggle('open'); }
+function vlToggleLogView(){
+  vlLogOpen=!vlLogOpen;
+  document.getElementById('vl-log-body').classList.toggle('open',vlLogOpen);
+  document.getElementById('vl-log-chev').textContent=vlLogOpen?'\u25B4':'\u25BE';
+}
+
+// Load log on page ready
+(function(){
+  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded',function(){ if(vlGetToken()) vlLoadLog(); else { document.getElementById('vl-log-content').innerHTML='<div class="vl-empty-log">\u2699\uFE0F Add your GitHub token in settings to enable the voyage log.</div>'; } }); }
+  else { if(vlGetToken()) vlLoadLog(); else { var el=document.getElementById('vl-log-content'); if(el) el.innerHTML='<div class="vl-empty-log">\u2699\uFE0F Add your GitHub token in settings to enable the voyage log.</div>'; } }
+})();
+
 </script>
+
+<!-- VOYAGE LOG MODAL -->
+<div class="vl-overlay" id="vl-overlay" onclick="vlOverlayClick(event)">
+  <div class="vl-modal" id="vl-modal">
+    <div class="vl-modal-hdr">
+      <div>
+        <div class="vl-modal-title" id="vl-modal-title">Log this leg</div>
+        <div class="vl-modal-sub" id="vl-modal-sub"></div>
+      </div>
+      <button class="vl-close" onclick="vlClose()">&times;</button>
+    </div>
+    <div class="vl-form">
+
+      <!-- DATE + TIMES -->
+      <div class="vl-section">
+        <div class="vl-section-title">Date &amp; Times</div>
+        <div class="vl-row">
+          <span class="vl-lbl">Date</span>
+          <input type="date" id="vl-date" class="vl-inp vl-inp-med">
+        </div>
+        <div class="vl-row">
+          <span class="vl-lbl">Departed</span>
+          <input type="time" id="vl-depart" class="vl-inp vl-inp-sm" oninput="vlCalc()">
+          <span class="vl-lbl" style="min-width:60px">Arrived</span>
+          <input type="time" id="vl-arrive" class="vl-inp vl-inp-sm" oninput="vlCalc()">
+          <span class="vl-calc" id="vl-duration"></span>
+        </div>
+      </div>
+
+      <!-- DISTANCE + FUEL -->
+      <div class="vl-section">
+        <div class="vl-section-title">Distance &amp; Fuel</div>
+        <div class="vl-row">
+          <span class="vl-lbl">Actual nm</span>
+          <input type="number" id="vl-nm" class="vl-inp vl-inp-sm" min="0" max="300" step="0.1" oninput="vlCalc()">
+          <span style="font-size:11px;color:var(--text-dim)" id="vl-planned-nm"></span>
+        </div>
+        <div class="vl-row">
+          <span class="vl-lbl">Fuel used (gal)</span>
+          <input type="number" id="vl-fuel-gal" class="vl-inp vl-inp-sm" min="0" max="500" step="0.1" oninput="vlCalc()">
+          <span class="vl-lbl" style="min-width:70px">&#x24;/gal</span>
+          <input type="number" id="vl-fuel-price" class="vl-inp vl-inp-sm" min="0" max="20" step="0.01" placeholder="4.89" oninput="vlCalc()">
+          <span class="vl-calc" id="vl-fuel-cost"></span>
+        </div>
+        <div class="vl-row">
+          <span class="vl-lbl">Avg speed</span>
+          <span class="vl-calc" id="vl-avg-speed" style="font-size:11px;color:var(--text-muted)">&#8212;</span>
+        </div>
+      </div>
+
+      <!-- ENGINE HOURS -->
+      <div class="vl-section">
+        <div class="vl-section-title">Engine Hours</div>
+        <div class="vl-row">
+          <span class="vl-lbl">Port &mdash; Start</span>
+          <input type="number" id="vl-hrs-p-start" class="vl-inp vl-inp-sm" min="0" max="9999" step="0.1">
+          <span class="vl-lbl" style="min-width:50px">End</span>
+          <input type="number" id="vl-hrs-p-end" class="vl-inp vl-inp-sm" min="0" max="9999" step="0.1">
+        </div>
+        <div class="vl-row">
+          <span class="vl-lbl">Stbd &mdash; Start</span>
+          <input type="number" id="vl-hrs-s-start" class="vl-inp vl-inp-sm" min="0" max="9999" step="0.1">
+          <span class="vl-lbl" style="min-width:50px">End</span>
+          <input type="number" id="vl-hrs-s-end" class="vl-inp vl-inp-sm" min="0" max="9999" step="0.1">
+        </div>
+      </div>
+
+      <!-- CONDITIONS -->
+      <div class="vl-section">
+        <div class="vl-section-title">Conditions</div>
+        <div class="vl-row">
+          <span class="vl-lbl">Wind speed</span>
+          <div class="vl-btn-group" id="vl-wind-speed">
+            <button class="vl-opt" onclick="vlSel(this,'vl-wind-speed','vl-sel-b')">Calm</button>
+            <button class="vl-opt" onclick="vlSel(this,'vl-wind-speed','vl-sel-b')">5&ndash;10</button>
+            <button class="vl-opt" onclick="vlSel(this,'vl-wind-speed','vl-sel-b')">10&ndash;15</button>
+            <button class="vl-opt" onclick="vlSel(this,'vl-wind-speed','vl-sel-b')">15&ndash;20</button>
+            <button class="vl-opt" onclick="vlSel(this,'vl-wind-speed','vl-sel-b')">20+</button>
+          </div>
+        </div>
+        <div class="vl-row" style="align-items:flex-start">
+          <span class="vl-lbl" style="margin-top:6px">Wind dir</span>
+          <div class="vl-compass" id="vl-wind-dir">
+            <button class="vl-opt" onclick="vlSel(this,'vl-wind-dir','vl-sel-b')">NW</button>
+            <button class="vl-opt" onclick="vlSel(this,'vl-wind-dir','vl-sel-b')">N</button>
+            <button class="vl-opt" onclick="vlSel(this,'vl-wind-dir','vl-sel-b')">NE</button>
+            <button class="vl-opt" onclick="vlSel(this,'vl-wind-dir','vl-sel-b')">W</button>
+            <button class="vl-opt" style="visibility:hidden"></button>
+            <button class="vl-opt" onclick="vlSel(this,'vl-wind-dir','vl-sel-b')">E</button>
+            <button class="vl-opt" onclick="vlSel(this,'vl-wind-dir','vl-sel-b')">SW</button>
+            <button class="vl-opt" onclick="vlSel(this,'vl-wind-dir','vl-sel-b')">S</button>
+            <button class="vl-opt" onclick="vlSel(this,'vl-wind-dir','vl-sel-b')">SE</button>
+          </div>
+        </div>
+        <div class="vl-row">
+          <span class="vl-lbl">Seas</span>
+          <div class="vl-btn-group" id="vl-seas">
+            <button class="vl-opt" onclick="vlSel(this,'vl-seas','vl-sel-p')">Flat</button>
+            <button class="vl-opt" onclick="vlSel(this,'vl-seas','vl-sel-p')">1&ndash;2 ft</button>
+            <button class="vl-opt" onclick="vlSel(this,'vl-seas','vl-sel-p')">2&ndash;3 ft</button>
+            <button class="vl-opt" onclick="vlSel(this,'vl-seas','vl-sel-p')">3&ndash;4 ft</button>
+            <button class="vl-opt" onclick="vlSel(this,'vl-seas','vl-sel-p')">4+ ft</button>
+          </div>
+        </div>
+        <div class="vl-row">
+          <span class="vl-lbl">Sky</span>
+          <div class="vl-btn-group" id="vl-sky">
+            <button class="vl-opt" onclick="vlSel(this,'vl-sky','vl-sel')">Sunny</button>
+            <button class="vl-opt" onclick="vlSel(this,'vl-sky','vl-sel')">Partly cloudy</button>
+            <button class="vl-opt" onclick="vlSel(this,'vl-sky','vl-sel')">Overcast</button>
+            <button class="vl-opt" onclick="vlSel(this,'vl-sky','vl-sel')">Rain</button>
+          </div>
+        </div>
+        <div class="vl-row">
+          <span class="vl-lbl">Visibility</span>
+          <div class="vl-btn-group" id="vl-vis">
+            <button class="vl-opt" onclick="vlSel(this,'vl-vis','vl-sel')">Clear</button>
+            <button class="vl-opt" onclick="vlSel(this,'vl-vis','vl-sel')">Haze</button>
+            <button class="vl-opt" onclick="vlSel(this,'vl-vis','vl-sel')">Fog</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CREW + FAULTS + NOTES -->
+      <div class="vl-section">
+        <div class="vl-section-title">Crew, Faults &amp; Notes</div>
+        <div class="vl-row">
+          <span class="vl-lbl">Crew</span>
+          <div class="vl-btn-group" id="vl-crew">
+            <button class="vl-opt vl-sel" onclick="vlSel(this,'vl-crew','vl-sel')">Solo</button>
+            <button class="vl-opt" onclick="vlSel(this,'vl-crew','vl-sel')">+1</button>
+            <button class="vl-opt" onclick="vlSel(this,'vl-crew','vl-sel')">+2</button>
+            <button class="vl-opt" onclick="vlSel(this,'vl-crew','vl-sel')">+3</button>
+          </div>
+        </div>
+        <div class="vl-row">
+          <span class="vl-lbl">Faults / issues</span>
+          <div class="vl-btn-group" id="vl-faults">
+            <button class="vl-opt vl-sel" onclick="vlSel(this,'vl-faults','vl-sel');vlFaultToggle(false)">None</button>
+            <button class="vl-opt" onclick="vlSel(this,'vl-faults','vl-sel');vlFaultToggle(true)">Yes</button>
+          </div>
+        </div>
+        <div class="vl-fault-detail" id="vl-fault-detail">
+          <input type="text" id="vl-fault-text" class="vl-inp vl-inp-wide" placeholder="Describe fault or issue...">
+        </div>
+        <div style="margin-top:8px">
+          <div class="vl-section-title">Notes</div>
+          <textarea id="vl-notes" class="vl-textarea" placeholder="Conditions, highlights, things to remember..."></textarea>
+        </div>
+        <div class="vl-row" style="margin-top:6px">
+          <span class="vl-lbl">Easy Connect ref</span>
+          <input type="date" id="vl-ec-ref" class="vl-inp vl-inp-med">
+          <span style="font-size:10px;color:var(--text-dim);margin-left:4px">EC entry date</span>
+        </div>
+      </div>
+
+      <div class="vl-submit-row">
+        <button class="vl-submit" id="vl-submit-btn" onclick="vlSubmit()">&#x1F4BE; Save to voyage log</button>
+        <div class="vl-status" id="vl-status"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SETTINGS PANEL -->
+<div class="vl-settings-overlay" id="vl-settings-overlay" onclick="vlSettingsOverlayClick(event)">
+  <div class="vl-settings-box">
+    <div class="vl-settings-title">&#x2699;&#xFE0F; Voyage Log Settings</div>
+    <div class="vl-settings-sub">
+      To save log entries to GitHub, paste your Personal Access Token below.<br>
+      Generate one at <strong>github.com &rarr; Settings &rarr; Developer settings &rarr; Personal access tokens</strong>.
+      Needs <strong>repo</strong> scope. Do this once per device &mdash; it stays saved.
+    </div>
+    <input type="password" id="vl-token-inp" class="vl-settings-inp" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+    <div class="vl-token-status" id="vl-token-status"></div>
+    <div class="vl-settings-btns" style="margin-top:12px">
+      <button class="vl-settings-save" onclick="vlSaveToken()">Save token</button>
+      <button class="vl-settings-cancel" onclick="vlCloseSettings()">Cancel</button>
+    </div>
+  </div>
+</div>
 </body>
 </html>
