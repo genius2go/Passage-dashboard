@@ -1031,7 +1031,14 @@ function showClaudeButton(){var btn=document.getElementById('ask-claude-btn'),no
     html+=bpRow('Arrive Bluewater \u2014 15 Marina Rd','\ud83c\udfc1','<strong>'+bpFmt(arrBW[0],arrBW[1])+'</strong>','slow',6);
     var resEl=document.getElementById('nb-resultBox');if(resEl)resEl.innerHTML=html;
     var sumCls=hasConflict?'warn':'go';
-    var sumMsg=hasConflict?'One or more bridges hit a rush-hour restriction. Try the '+(nbLock+1)+':00 lock instead.':'Leave Coinjock at <strong>'+bpFmt(dep[0],dep[1])+'</strong>. Arrive Bluewater ~<strong>'+bpFmt(arrBW[0],arrBW[1])+'</strong>.';
+    var earlyDep=bpSub(dep[0],dep[1],30);var lateDep=bpAdd(dep[0],dep[1],15);
+    var sumMsg=hasConflict
+      ?'One or more bridges hit a rush-hour restriction. Try the '+(nbLock+1)+':00 lock instead.'
+      :'<strong>Departure window \u2014 Coinjock</strong><br>'
+       +'&#x1F7E2; <strong>Earliest (arrive early, wait on DPS):</strong> '+bpFmt(earlyDep[0],earlyDep[1])+'<br>'
+       +'&#x1F7E1; <strong>Sweet spot:</strong> '+bpFmt(dep[0],dep[1])+'<br>'
+       +'&#x1F534; <strong>Latest (math only, no traffic margin):</strong> '+bpFmt(lateDep[0],lateDep[1])+'<br>'
+       +'<span style="font-size:10px;color:var(--text-dim);display:block;margin-top:4px;">ICW traffic will compress this window. Earlier is always better \u2014 DPS at bridges is free.</span>';
     var sumEl=document.getElementById('nb-summaryBox');if(sumEl)sumEl.innerHTML='<div class="bp-summary '+sumCls+'">'+sumMsg+'</div>';
     var missArr=bpAdd(arrBW[0],arrBW[1],60);var missEl=document.getElementById('nb-missBox');
     if(missEl)missEl.innerHTML='<div class="bp-miss"><strong>If you miss the '+bpFmt(LH,0)+' lock</strong> \u2014 DPS on in staging. Next lock at <strong>'+bpFmt(LH+1,0)+'</strong>. Arrive Bluewater ~<strong>'+bpFmt(missArr[0],missArr[1])+'</strong>. Still an easy morning \u2014 call Bluewater to confirm your slip.</div>';
@@ -1074,7 +1081,14 @@ function showClaudeButton(){var btn=document.getElementById('ask-claude-btn'),no
     html+=bpRow('Arrive Coinjock Marina \u2014 east side','\ud83e\udd69','<strong>'+bpFmt(arrCoinjock[0],arrCoinjock[1])+'</strong>','slow',6);
     var resEl=document.getElementById('sb-resultBox');if(resEl)resEl.innerHTML=html;
     var sumCls=hasConflict?'warn':'go';
-    var sumMsg=hasConflict?'One or more bridges hit a rush-hour restriction. Try the '+(sbLock+1)+':30 lock instead.':'Leave Bluewater at <strong>'+bpFmt(depBW[0],depBW[1])+'</strong>. Hit the :30 lock, clear all bridges. Arrive Coinjock ~<strong>'+bpFmt(arrCoinjock[0],arrCoinjock[1])+'</strong>.';
+    var earlyDepSB=bpSub(depBW[0],depBW[1],30);var lateDepSB=bpAdd(depBW[0],depBW[1],15);
+    var sumMsg=hasConflict
+      ?'One or more bridges hit a rush-hour restriction. Try the '+(sbLock+1)+':30 lock instead.'
+      :'<strong>Departure window \u2014 Bluewater</strong><br>'
+       +'&#x1F7E2; <strong>Earliest (arrive early, wait on DPS):</strong> '+bpFmt(earlyDepSB[0],earlyDepSB[1])+'<br>'
+       +'&#x1F7E1; <strong>Sweet spot:</strong> '+bpFmt(depBW[0],depBW[1])+'<br>'
+       +'&#x1F534; <strong>Latest (math only, no traffic margin):</strong> '+bpFmt(lateDepSB[0],lateDepSB[1])+'<br>'
+       +'<span style="font-size:10px;color:var(--text-dim);display:block;margin-top:4px;">ICW traffic will compress this window. Earlier is always better \u2014 DPS at bridges is free.</span>';
     var sumEl=document.getElementById('sb-summaryBox');if(sumEl)sumEl.innerHTML='<div class="bp-summary '+sumCls+'">'+sumMsg+'</div>';
     var missArr=bpAdd(arrCoinjock[0],arrCoinjock[1],60);var missEl=document.getElementById('sb-missBox');
     if(missEl)missEl.innerHTML='<div class="bp-miss"><strong>If you miss the '+bpFmt(LH,LM)+' lock</strong> \u2014 DPS on in staging. Next southbound lock at <strong>'+bpFmt(LH+1,LM)+'</strong>. Arrive Coinjock ~<strong>'+bpFmt(missArr[0],missArr[1])+'</strong>. Still in time for prime rib \u2014 call ahead to confirm.</div>';
