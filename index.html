@@ -1955,18 +1955,17 @@ function initMap(segId){
   var latlngs = coords.map(function(c){ return [c[0], c[1]]; });
   L.polyline(latlngs, {color:'#14b8a6', weight:3, opacity:0.85}).addTo(map);
 
-  // Draw markers
+  // Draw markers — only the start (green) and end (red); intermediate
+  // track points are shown by the line itself, not dotted.
   coords.forEach(function(c){
     var lat=c[0], lng=c[1], label=c[2], type=c[3];
-    var color = type==='start' ? '#22c55e' : type==='end' ? '#ef4444' : '#f59e0b';
-    var size = (type==='start'||type==='end') ? 10 : 7;
+    if(type !== 'start' && type !== 'end') return;
+    var color = type==='start' ? '#22c55e' : '#ef4444';
     var marker = L.circleMarker([lat,lng], {
-      radius:size, color:color, fillColor:color, fillOpacity:0.9, weight:2
+      radius:10, color:color, fillColor:color, fillOpacity:0.9, weight:2
     }).addTo(map);
     marker.bindPopup('<strong>'+label+'</strong>');
-    if(type==='start'||type==='end'){
-      marker.bindTooltip('<span style="font-size:10px;font-weight:700;color:'+color+'">'+label+'</span>', {permanent:true, direction:'top', offset:[0,-8], opacity:0.9});
-    }
+    marker.bindTooltip('<span style="font-size:10px;font-weight:700;color:'+color+'">'+label+'</span>', {permanent:true, direction:'top', offset:[0,-8], opacity:0.9});
   });
 
   mapInstances[segId] = map;
