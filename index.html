@@ -1886,9 +1886,29 @@ function switchLayer(frameId, url, btn, e){
 function toggleMap(segId, el){
   var wrap = document.getElementById(segId + '-map-wrap');
   if(!wrap) return;
+  // The map wrap lives inside the seg-body, which may be collapsed.
+  // Make sure that parent body is open (uses the same .open class as the notes toggle)
+  // so the map container is actually visible and can size itself.
+  var body = wrap.closest('.seg-body');
+  if(body && !body.classList.contains('open')){
+    body.classList.add('open');
+    // sync the "show notes/resources" toggle label to its open state
+    var segDiv = body.closest('.segment');
+    if(segDiv){
+      var notesTog = segDiv.querySelector('.seg-toggle');
+      if(notesTog && notesTog.textContent.indexOf('show') > -1){
+        notesTog.textContent = notesTog.textContent.replace('show','hide').replace('\u25be','\u25b4');
+      }
+    }
+  }
   var open = wrap.classList.toggle('open');
-  el.textContent = open ? '\uD83D\uDDFA map \u25B4' : '\uD83D\uDDFA map \u25BE';
-  if(open) initMap(segId);
+  el.innerHTML = open ? '\uD83D\uDDFA map \u25B4' : '\uD83D\uDDFA map \u25BE';
+  if(open){
+    // init after the browser has painted the now-visible container
+    requestAnimationFrame(function(){
+      setTimeout(function(){ initMap(segId); }, 0);
+    });
+  }
 }
 
 // Map definitions: segId -> {coords: [[lat,lng,label,type], ...], center, zoom}
@@ -1950,7 +1970,9 @@ function initMap(segId){
   });
 
   mapInstances[segId] = map;
-  setTimeout(function(){ map.invalidateSize(); }, 100);
+  // Container was just revealed; force Leaflet to recalc size once it has real dimensions.
+  setTimeout(function(){ map.invalidateSize(); map.setView(def.center, def.zoom); }, 60);
+  setTimeout(function(){ map.invalidateSize(); }, 350);
 }
 
 /* ════════════════════════════════════════════
