@@ -288,7 +288,55 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
 .vl-detail-item strong{color:var(--text);}
 .vl-empty-log{padding:20px;text-align:center;font-size:11px;color:var(--text-dim);}
 .vl-loading{padding:16px;text-align:center;font-size:11px;color:var(--text-dim);}
+
+/* ── LEAFLET MAPS ── */
+.leg-map{height:300px;width:100%;border-radius:var(--radius-sm);background:#0a1419;border:1px solid var(--border);}
+.leg-map .leaflet-control-attribution{font-size:9px;background:rgba(10,20,25,0.85);color:var(--text-dim);}
+.leg-map .leaflet-control-attribution a{color:var(--teal-light);}
+.leg-map .leaflet-popup-content-wrapper{background:#1a2a30;color:var(--text);font-family:inherit;border-radius:var(--radius-sm);}
+.leg-map .leaflet-popup-tip{background:#1a2a30;}
+.leg-map .leaflet-popup-content{font-size:12px;margin:8px 12px;}
+.map-caption{font-size:10px;color:var(--text-dim);font-style:italic;margin-top:5px;line-height:1.4;}
+.map-toggle{margin-left:10px;color:var(--text-dim);cursor:pointer;font-size:10px;text-decoration:underline;text-underline-offset:2px;}
+.map-toggle:hover{color:var(--text-muted);}
+.map-body-wrap{display:none;margin-top:8px;}
+.map-body-wrap.open{display:block;}
+/* ── PACE BOX ── */
+.pace-box{background:rgba(14,165,233,0.06);border:1px solid rgba(14,165,233,0.18);border-radius:var(--radius);padding:12px 14px;margin-bottom:16px;}
+.pace-box-title{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#7dd3fc;margin-bottom:10px;}
+.pace-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:6px;}
+.pace-day{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:var(--radius-sm);padding:8px 10px;}
+.pace-day-num{font-size:9px;font-weight:700;color:#7dd3fc;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:2px;}
+.pace-day-leg{font-size:11px;font-weight:600;color:var(--text);line-height:1.3;margin-bottom:2px;}
+.pace-day-dist{font-size:10px;color:var(--text-muted);}
+/* ── SUB-SECTIONS (contingency + things to do) ── */
+.sub-section{margin-top:10px;padding-top:8px;border-top:1px dashed rgba(255,255,255,0.07);}
+.sub-toggle{display:inline-block;font-size:11px;font-weight:600;color:var(--text-dim);cursor:pointer;user-select:none;-webkit-user-select:none;padding:2px 0;transition:color 0.15s;letter-spacing:0.01em;}
+.sub-toggle::before{content:"\25B8";display:inline-block;margin-right:5px;transition:transform 0.15s;font-size:9px;}
+.sub-toggle.open::before{transform:rotate(90deg);}
+.sub-toggle:hover{color:var(--text-muted);}
+.sub-toggle.open{color:var(--teal-light);}
+.sub-body{display:none;margin-top:8px;padding:10px 12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:var(--radius-sm);}
+.sub-body.open{display:block;}
+.cont-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:var(--radius-sm);padding:10px 12px;margin-bottom:8px;}
+.cont-card:last-child{margin-bottom:0;}
+.cont-marina{font-size:12px;font-weight:600;color:var(--text);margin-bottom:3px;}
+.cont-meta{font-size:11px;color:var(--text-muted);line-height:1.55;}
+.cont-meta strong{color:var(--text);}
+.cont-actions{margin-top:6px;display:flex;gap:6px;flex-wrap:wrap;align-items:center;}
+.town-block{margin-bottom:10px;}
+.town-block:last-child{margin-bottom:0;}
+.town-block-title{font-size:11px;font-weight:700;color:var(--text);margin-bottom:3px;letter-spacing:0.02em;}
+.town-block-body{font-size:11px;color:var(--text-muted);line-height:1.55;}
+.town-block-body strong{color:var(--text);}
+/* ── DOCKWA BUTTON ── */
+.dockwa-btn{display:inline-flex;align-items:center;gap:4px;background:rgba(13,148,136,0.15);border:1px solid rgba(13,148,136,0.4);color:var(--teal-light);font-size:10px;font-weight:700;padding:3px 9px;border-radius:12px;text-decoration:none;transition:all 0.15s;font-family:inherit;letter-spacing:0.02em;}
+.dockwa-btn:hover{background:rgba(13,148,136,0.28);border-color:var(--teal-light);}
+.tel-link{color:#7dd3fc;text-decoration:none;border-bottom:1px dotted rgba(125,211,252,0.35);}
+.tel-link:hover{border-bottom-color:#7dd3fc;}
 </style>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 </head>
 <body>
 
@@ -356,6 +404,47 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
   </div>
 
   <!-- northbound route line -->
+
+  <!-- PACE BOX NB -->
+  <div class="pace-box nb-only">
+    <div class="pace-box-title">&#x1F4C5; Passage pace &#8212; Northbound</div>
+    <div class="pace-grid">
+      <div class="pace-day"><div class="pace-day-num">Day 1 &middot; Jun 1</div><div class="pace-day-leg">Miami Beach &#8594; Ft. Pierce</div><div class="pace-day-dist">~120 nm</div></div>
+      <div class="pace-day"><div class="pace-day-num">Day 2</div><div class="pace-day-leg">Ft. Pierce &#8594; St. Augustine</div><div class="pace-day-dist">~160 nm</div></div>
+      <div class="pace-day"><div class="pace-day-num">Day 3</div><div class="pace-day-leg">St. Aug &#8594; Charleston</div><div class="pace-day-dist">~200 nm</div></div>
+      <div class="pace-day"><div class="pace-day-num">Day 4</div><div class="pace-day-leg">Charleston &#8594; Southport</div><div class="pace-day-dist">~135 nm</div></div>
+      <div class="pace-day"><div class="pace-day-num">Day 5</div><div class="pace-day-leg">Southport &#8594; Morehead City</div><div class="pace-day-dist">~90 nm</div></div>
+      <div class="pace-day"><div class="pace-day-num">Day 6+</div><div class="pace-day-leg">Morehead City &#8212; Weather Hold</div><div class="pace-day-dist">wait for window</div></div>
+      <div class="pace-day"><div class="pace-day-num">Day ?</div><div class="pace-day-leg">Morehead City &#8594; Coinjock</div><div class="pace-day-dist">~110 nm</div></div>
+      <div class="pace-day"><div class="pace-day-num">Day ?+1</div><div class="pace-day-leg">Coinjock &#8594; Hampton VA</div><div class="pace-day-dist">~40 nm</div></div>
+      <div class="pace-day"><div class="pace-day-num">Day ?+2</div><div class="pace-day-leg">Hampton VA &#8594; Ocean City MD</div><div class="pace-day-dist">~125 nm</div></div>
+      <div class="pace-day"><div class="pace-day-num">Day ?+3</div><div class="pace-day-leg">Ocean City &#8594; Barnegat Light</div><div class="pace-day-dist">~75 nm</div></div>
+      <div class="pace-day"><div class="pace-day-num">2+ nights</div><div class="pace-day-leg">Barnegat Light &#127881;</div><div class="pace-day-dist">cousin visit</div></div>
+      <div class="pace-day"><div class="pace-day-num">Day ?+5</div><div class="pace-day-leg">Barnegat &#8594; Port Washington</div><div class="pace-day-dist">~110 nm</div></div>
+      <div class="pace-day"><div class="pace-day-num">Final day</div><div class="pace-day-leg">Port Washington &#8594; Falmouth &#127937;</div><div class="pace-day-dist">~185 nm</div></div>
+    </div>
+  </div>
+
+  <!-- PACE BOX SB -->
+  <div class="pace-box sb-only">
+    <div class="pace-box-title">&#x1F4C5; Passage pace &#8212; Southbound (Fall 2026 TBD)</div>
+    <div class="pace-grid">
+      <div class="pace-day"><div class="pace-day-num">Day 1</div><div class="pace-day-leg">Falmouth MA &#8594; Port Washington</div><div class="pace-day-dist">~185 nm</div></div>
+      <div class="pace-day"><div class="pace-day-num">Day 2</div><div class="pace-day-leg">Port Washington &#8594; Barnegat Light</div><div class="pace-day-dist">~110 nm</div></div>
+      <div class="pace-day"><div class="pace-day-num">1+ night</div><div class="pace-day-leg">Barnegat Light &#127881;</div><div class="pace-day-dist">rest stop</div></div>
+      <div class="pace-day"><div class="pace-day-num">Day 4</div><div class="pace-day-leg">Barnegat &#8594; Ocean City MD</div><div class="pace-day-dist">~75 nm</div></div>
+      <div class="pace-day"><div class="pace-day-num">Day 5</div><div class="pace-day-leg">Ocean City &#8594; Hampton VA</div><div class="pace-day-dist">~125 nm</div></div>
+      <div class="pace-day"><div class="pace-day-num">Day 6</div><div class="pace-day-leg">Hampton VA &#8594; Coinjock</div><div class="pace-day-dist">~40 nm</div></div>
+      <div class="pace-day"><div class="pace-day-num">Day 7+</div><div class="pace-day-leg">Coinjock &#8212; Weather Hold</div><div class="pace-day-dist">wait for window</div></div>
+      <div class="pace-day"><div class="pace-day-num">Day ?</div><div class="pace-day-leg">Coinjock &#8594; Morehead City</div><div class="pace-day-dist">~110 nm</div></div>
+      <div class="pace-day"><div class="pace-day-num">Day ?+1</div><div class="pace-day-leg">Morehead &#8594; Southport</div><div class="pace-day-dist">~90 nm</div></div>
+      <div class="pace-day"><div class="pace-day-num">Day ?+2</div><div class="pace-day-leg">Southport &#8594; Charleston</div><div class="pace-day-dist">~135 nm</div></div>
+      <div class="pace-day"><div class="pace-day-num">Day ?+3</div><div class="pace-day-leg">Charleston &#8594; St. Augustine</div><div class="pace-day-dist">~200 nm</div></div>
+      <div class="pace-day"><div class="pace-day-num">Day ?+4</div><div class="pace-day-leg">St. Aug &#8594; Ft. Pierce</div><div class="pace-day-dist">~160 nm</div></div>
+      <div class="pace-day"><div class="pace-day-num">Final day</div><div class="pace-day-leg">Ft. Pierce &#8594; Miami Beach &#127937;</div><div class="pace-day-dist">~120 nm</div></div>
+    </div>
+  </div>
+
   <div class="route-wrap nb-only">
     <div class="route-label">Route</div>
     <div class="route-line">
@@ -466,7 +555,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
 
     <div class="segment" id="seg1">
       <div class="seg-header"><div class="seg-dot dot-teal">&#9312;</div><div class="seg-info"><div class="seg-name">Miami Beach &#8594; Ft. Pierce</div><div class="seg-route">Day 1 &middot; June 1 &middot; All outside &middot; straightforward first leg</div></div><span class="seg-dist">~120 nm</span><button class="vl-log-btn" id="vl-btn-seg1" onclick="vlOpenLog('seg1','Miami Beach → Ft. Pierce','nb',120)">&#x1F4CB; Log</button></div>
-      <span class="seg-toggle" onclick="toggleSeg('sb1',this)">show resources &#9662;</span>
+      <span class="seg-toggle" onclick="toggleSeg('sb1',this)">show resources &#9662;</span> <span class="map-toggle" onclick="toggleMap('seg1',this)">&#x1F5FA; map &#9662;</span>
       <div class="seg-body" id="sb1">
         <div class="resources">
           <a class="res-link cg" href="https://captaingeorgia.com/fl-port-weather" target="_blank">&#8599; FL Port Weather</a>
@@ -474,12 +563,20 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
           <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8722670" target="_blank">&#8599; Ft. Pierce Inlet Tides</a>
           <a class="res-link" href="https://windy.com/?waves,25.8,-80.2,7" target="_blank">&#8599; Windy &#8212; Miami</a>
         </div>
+      
+        <div class="sub-section"><span class="sub-toggle" onclick="toggleSub('cont-seg1',this)">Marinas at Ft. Pierce</span><div class="sub-body" id="cont-seg1"><div class="cont-card"><div class="cont-marina">Fort Pierce City Marina</div><div class="cont-meta">Downtown &middot; walkable &middot; best all-weather inlet on East Coast &middot; <a class="tel-link" href="tel:+17724641245">(772) 464-1245</a></div>
+              <div class="cont-actions"><a class="dockwa-btn" href="https://dockwa.com/explore/destination/qpcwql-fort-pierce-city-marina" target="_blank">&#x1F4C5; Book on Dockwa</a></div></div><div class="cont-card"><div class="cont-marina">Safe Harbor Harbortown</div><div class="cont-meta">Full service &middot; pool &middot; restaurant &middot; floating docks</div>
+              <div class="cont-actions"><a class="dockwa-btn" href="https://dockwa.com/explore/destination/lwcwjg-safe-harbor-harbortown" target="_blank">&#x1F4C5; Book on Dockwa</a></div></div></div></div>
+        <div class="map-body-wrap" id="seg1-map-wrap">
+      <div id="seg1-map" class="leg-map"></div>
+      <div class="map-caption">Leg 1: Miami Beach &rarr; Ft. Pierce &middot; ~120 nm offshore &middot; all outside</div>
+    </div>
       </div>
     </div>
 
     <div class="segment" id="seg2">
       <div class="seg-header"><div class="seg-dot dot-amber">&#9313;</div><div class="seg-info"><div class="seg-name">Ft. Pierce &#8594; St. Augustine or Fernandina Beach</div><div class="seg-route">Day 2 &middot; St. Aug bar: enter near high tide</div></div><span class="seg-dist">~160 nm</span><button class="vl-log-btn" id="vl-btn-seg2" onclick="vlOpenLog('seg2','Ft. Pierce → St. Augustine / Fernandina','nb',160)">&#x1F4CB; Log</button></div>
-      <span class="seg-toggle" onclick="toggleSeg('sb2',this)">show notes + resources &#9662;</span>
+      <span class="seg-toggle" onclick="toggleSeg('sb2',this)">show notes + resources &#9662;</span> <span class="map-toggle" onclick="toggleMap('seg2',this)">&#x1F5FA; map &#9662;</span>
       <div class="seg-body" id="sb2">
         <div class="note"><strong>St. Augustine bar: cross at or near high tide only.</strong> Fernandina (~60 nm) shorter, St. Aug (~75 nm) closer to Charleston. Your call leaving Ft. Pierce.</div>
         <div class="resources">
@@ -487,12 +584,19 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
           <a class="res-link tide key" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8720218" target="_blank">&#8599; St. Augustine Inlet Tides &#9888;</a>
           <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8720219" target="_blank">&#8599; Fernandina Beach Tides</a>
         </div>
+      
+        <div class="resources" style="margin-top:8px"><a class="dockwa-btn" href="https://dockwa.com/explore/destination/7ec7q5-st-augustine-municipal-marina" target="_blank">&#x1F4C5; St. Augustine City Marina</a> <a class="dockwa-btn" href="https://dockwa.com/explore/destination/lwcz33-rivers-edge-marina" target="_blank">&#x1F4C5; Rivers Edge Marina</a></div>
+        <div class="sub-section"><span class="sub-toggle" onclick="toggleSub('things-seg2',this)">Around St. Augustine &mdash; things to do</span><div class="sub-body" id="things-seg2"><div class="town-block"><div class="town-block-title">&#x1F37D; Restaurants &mdash; walking from City Docks</div><div class="town-block-body">O.C. White's across the street. Harry's a block north (Creole/Cajun). The Floridian for Southern. Columbia Restaurant on St. George St. &mdash; oldest restaurant in Florida.</div></div><div class="town-block"><div class="town-block-title">&#x1F327;&#xFE0F; Weather hold &mdash; what to do</div><div class="town-block-body">Castillo de San Marcos is a 5-minute walk &mdash; Spanish stone fort from 1672, oldest masonry fort in the U.S. Pedestrian St. George Street. Flagler College tour. Lightner Museum. Ghost tours after dark.</div></div></div></div>
+        <div class="map-body-wrap" id="seg2-map-wrap">
+      <div id="seg2-map" class="leg-map"></div>
+      <div class="map-caption">Leg 2: Ft. Pierce &rarr; St. Augustine &middot; ~160 nm offshore &middot; St. Aug bar: near high tide</div>
+    </div>
       </div>
     </div>
 
     <div class="segment" id="seg3">
       <div class="seg-header"><div class="seg-dot dot-teal">&#9314;</div><div class="seg-info"><div class="seg-name">St. Augustine / Fernandina &#8594; Charleston</div><div class="seg-route">Day 3 &middot; full range day &middot; comfortable with T4 props</div></div><span class="seg-dist">~200 nm</span><button class="vl-log-btn" id="vl-btn-seg3" onclick="vlOpenLog('seg3','St. Augustine / Fernandina → Charleston','nb',200)">&#x1F4CB; Log</button></div>
-      <span class="seg-toggle" onclick="toggleSeg('sb3',this)">show notes + resources &#9662;</span>
+      <span class="seg-toggle" onclick="toggleSeg('sb3',this)">show notes + resources &#9662;</span> <span class="map-toggle" onclick="toggleMap('seg3',this)">&#x1F5FA; map &#9662;</span>
       <div class="seg-body" id="sb3">
         <div class="note-green"><strong>200 nm range comfortable with T4 props.</strong> Brunswick / St. Simons Island GA (~130 nm) is a solid backup if conditions deteriorate mid-run.</div>
         <div class="resources">
@@ -501,30 +605,52 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
           <a class="res-link cg" href="https://captaingeorgia.com/south-east-port-weather" target="_blank">&#8599; SE Port Weather</a>
           <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8665530" target="_blank">&#8599; Charleston Tides</a>
         </div>
+      
+        <div class="resources" style="margin-top:8px"><a class="dockwa-btn" href="https://dockwa.com/explore/destination/pwc4ml-safe-harbor-charleston-city" target="_blank">&#x1F4C5; Safe Harbor Charleston City</a> <a class="dockwa-btn" href="https://dockwa.com/explore/destination/mnc3m9-the-ashley-marina" target="_blank">&#x1F4C5; The Ashley Marina</a></div>
+        <div class="sub-section"><span class="sub-toggle" onclick="toggleSub('cont-seg3',this)">Contingency &mdash; Brunswick / St. Simons Island GA</span><div class="sub-body" id="cont-seg3"><div class="cont-card"><div class="cont-marina">Golden Isles Marina</div><div class="cont-meta">~130 nm from St. Aug &middot; solid mid-leg bailout &middot; Brunswick/St. Simons area</div></div></div></div>
+        <div class="sub-section"><span class="sub-toggle" onclick="toggleSub('things-seg3',this)">Around Charleston &mdash; things to do</span><div class="sub-body" id="things-seg3"><div class="town-block"><div class="town-block-title">&#x1F37D; Restaurants</div><div class="town-block-body">Husk &mdash; Southern American, excellent. 167 Raw for oysters. The Ordinary for seafood. FIG for farm-to-table. All walkable from City Marina.</div></div><div class="town-block"><div class="town-block-title">&#x1F327;&#xFE0F; Weather hold</div><div class="town-block-body">Rainbow Row (Georgian houses, East Bay St). Magnolia Plantation. Fort Sumter boat trip from the marina. The Battery waterfront walk. City Market.</div></div></div></div>
+        <div class="map-body-wrap" id="seg3-map-wrap">
+      <div id="seg3-map" class="leg-map"></div>
+      <div class="map-caption">Leg 3: St. Augustine &rarr; Charleston &middot; ~200 nm offshore &middot; longest FL/GA/SC leg</div>
+    </div>
       </div>
     </div>
 
     <div class="segment" id="seg4">
       <div class="seg-header"><div class="seg-dot dot-amber">&#9315;</div><div class="seg-info"><div class="seg-name">Charleston &#8594; Southport</div><div class="seg-route">Day 4 &middot; outside &middot; Cape Fear River: strong tidal current on arrival</div></div><span class="seg-dist">~135 nm</span><button class="vl-log-btn" id="vl-btn-seg4" onclick="vlOpenLog('seg4','Charleston → Southport','nb',135)">&#x1F4CB; Log</button></div>
-      <span class="seg-toggle" onclick="toggleSeg('sb4',this)">show resources &#9662;</span>
+      <span class="seg-toggle" onclick="toggleSeg('sb4',this)">show resources &#9662;</span> <span class="map-toggle" onclick="toggleMap('seg4',this)">&#x1F5FA; map &#9662;</span>
       <div class="seg-body" id="sb4">
         <div class="resources">
           <a class="res-link cg" href="https://captaingeorgia.com/south-east-port-weather" target="_blank">&#8599; SE Port Weather SC/NC</a>
           <a class="res-link" href="https://www.ndbc.noaa.gov/station_page.php?station=41008" target="_blank">&#8599; Buoy 41008 Grays Reef</a>
           <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8658163" target="_blank">&#8599; Cape Fear River Tides</a>
         </div>
+      
+        <div class="resources" style="margin-top:8px"><a class="dockwa-btn" href="https://dockwa.com/explore/destination/d9cpmq-morningstar-marinas-southport" target="_blank">&#x1F4C5; Morningstar Marinas Southport</a></div>
+        <div class="sub-section"><span class="sub-toggle" onclick="toggleSub('things-seg4',this)">Around Southport &mdash; things to do</span><div class="sub-body" id="things-seg4"><div class="town-block"><div class="town-block-title">&#x1F37D; Restaurants</div><div class="town-block-body">Fishy Fishy Cafe right on the waterfront. Moore Street Market for provisions. Old American Fish Company. Short walk to historic downtown.</div></div><div class="town-block"><div class="town-block-title">&#x1F4CD; About this place</div><div class="town-block-body">Named America's Happiest Seaside Town by Coastal Living. Film location for Safe Haven, A Walk to Remember. Cape Fear River history going back to the 1700s.</div></div></div></div>
+        <div class="map-body-wrap" id="seg4-map-wrap">
+      <div id="seg4-map" class="leg-map"></div>
+      <div class="map-caption">Leg 4: Charleston &rarr; Southport &middot; ~135 nm offshore &middot; Cape Fear River entry</div>
+    </div>
       </div>
     </div>
 
     <div class="segment" id="seg5">
       <div class="seg-header"><div class="seg-dot dot-amber">&#9316;</div><div class="seg-info"><div class="seg-name">Southport &#8594; Morehead City</div><div class="seg-route">Day 5 &middot; ICW via Snow's Cut &#8594; Myrtle Grove &#8594; Masonboro Inlet &#8594; outside to Morehead</div></div><span class="seg-dist">~90 nm</span><button class="vl-log-btn" id="vl-btn-seg5" onclick="vlOpenLog('seg5','Southport → Morehead City','nb',90)">&#x1F4CB; Log</button></div>
-      <span class="seg-toggle" onclick="toggleSeg('sb5',this)">show notes + resources &#9662;</span>
+      <span class="seg-toggle" onclick="toggleSeg('sb5',this)">show notes + resources &#9662;</span> <span class="map-toggle" onclick="toggleMap('seg5',this)">&#x1F5FA; map &#9662;</span>
       <div class="seg-body" id="sb5">
         <div class="note"><strong>ICW routing:</strong> Cape Fear River &#8594; Snow's Cut (MM 295) &#8594; Myrtle Grove &#8594; exit Masonboro Inlet &#8594; outside to Morehead City. <strong>Transit at mid-to-high tide.</strong> Check Aqua Map for shoaling at MM 293.7.</div>
         <div class="resources">
           <a class="res-link key" href="https://www.navcen.uscg.gov/?pageName=lnmDistrict&region=05" target="_blank">&#8599; USCG D5 LNMs &#9888;</a>
           <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8656483" target="_blank">&#8599; Wrightsville / Masonboro Tides</a>
         </div>
+      
+        <div class="resources" style="margin-top:8px"><a class="dockwa-btn" href="https://dockwa.com/explore/destination/16cwdr-morehead-city-yacht-basin" target="_blank">&#x1F4C5; Morehead City Yacht Basin</a></div>
+        <div class="sub-section"><span class="sub-toggle" onclick="toggleSub('things-seg5',this)">Around Morehead City &mdash; things to do</span><div class="sub-body" id="things-seg5"><div class="town-block"><div class="town-block-title">&#x1F37D; Restaurants</div><div class="town-block-body">Ruddy Duck Tavern right by the waterfront. El's Drive-In &mdash; local institution. Circa 81 for upscale. Short bridge to Beaufort for more options &mdash; Front Street is worth the walk.</div></div><div class="town-block"><div class="town-block-title">&#x1F327;&#xFE0F; Weather hold</div><div class="town-block-body">North Carolina Maritime Museum in Beaufort (free, excellent). Fort Macon State Park. Island Express Ferry to Cape Lookout lighthouse. Kayaking through the Rachel Carson Reserve.</div></div></div></div>
+        <div class="map-body-wrap" id="seg5-map-wrap">
+      <div id="seg5-map" class="leg-map"></div>
+      <div class="map-caption">Leg 5: Southport &rarr; Morehead City &middot; ~90 nm &middot; ICW via Snow's Cut + Masonboro, then outside</div>
+    </div>
       </div>
     </div>
 
@@ -547,7 +673,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
 
     <div class="segment" id="seg7">
       <div class="seg-header"><div class="seg-dot dot-purple">&#9318;</div><div class="seg-info"><div class="seg-name">Morehead City &#8594; Coinjock</div><div class="seg-route">Neuse River &#8594; Pamlico Sound &#8594; Alligator River &#8594; Albemarle Sound</div></div><span class="seg-dist">~110 nm</span><button class="vl-log-btn" id="vl-btn-seg7" onclick="vlOpenLog('seg7','Morehead City → Coinjock','nb',110)">&#x1F4CB; Log</button></div>
-      <span class="seg-toggle" onclick="toggleSeg('sb7',this)">show notes + resources &#9662;</span>
+      <span class="seg-toggle" onclick="toggleSeg('sb7',this)">show notes + resources &#9662;</span> <span class="map-toggle" onclick="toggleMap('seg7',this)">&#x1F5FA; map &#9662;</span>
       <div class="seg-body" id="sb7">
         <div class="note"><strong>Speed:</strong> Rivers + open water: on plane. <strong>Pamlico + Albemarle: on plane, cross before noon.</strong> Canal sections: 6&#8211;7 kts no wake. Coinjock Marina: easy approach, great prime rib.</div>
         <div class="resources">
@@ -555,6 +681,13 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
           <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8651370" target="_blank">&#8599; Duck / Currituck Tides</a>
           <a class="res-link" href="https://www.navcen.uscg.gov/?pageName=lnmDistrict&region=05" target="_blank">&#8599; USCG D5 LNMs</a>
         </div>
+      
+        <div class="resources" style="margin-top:8px"><a class="dockwa-btn" href="https://dockwa.com/explore/destination/pwc4xj-coinjock-marina" target="_blank">&#x1F4C5; Coinjock Marina</a></div>
+        <div class="sub-section"><span class="sub-toggle" onclick="toggleSub('things-seg7',this)">Around Coinjock &mdash; the one and only</span><div class="sub-body" id="things-seg7"><div class="town-block"><div class="town-block-title">&#x1F969; The prime rib</div><div class="town-block-body">Coinjock Marina Restaurant &mdash; home of the 32 oz prime rib. Call ahead to reserve yours: (252) 453-3271. Open to locals and transients. Waterfront deck. They do run out &mdash; call before you arrive.</div></div><div class="town-block"><div class="town-block-title">&#x1F4CD; About this place</div><div class="town-block-body">Mile Marker 50 on the ICW. The halfway point between New England and Florida on the inside route. More liveaboards and loopers than you can count. Everyone ends up here.</div></div></div></div>
+        <div class="map-body-wrap" id="seg7-map-wrap">
+      <div id="seg7-map" class="leg-map"></div>
+      <div class="map-caption">Leg 7: Morehead City &rarr; Coinjock &middot; ~110 nm &middot; Neuse River, Pamlico Sound, Alligator River, Albemarle Sound</div>
+    </div>
       </div>
     </div>
     <!-- NB SEG 8 COINJOCK to HAMPTON -->
@@ -612,7 +745,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
 
     <div class="segment" id="seg9">
       <div class="seg-header"><div class="seg-dot dot-blue">&#9320;</div><div class="seg-info"><div class="seg-name">Hampton VA &#8594; Ocean City MD</div><div class="seg-route">Straight offshore &middot; Cape Henry &#8594; Chesapeake Light &#8594; Ocean City</div></div><span class="seg-dist">~125 nm</span><button class="vl-log-btn" id="vl-btn-seg9" onclick="vlOpenLog('seg9','Hampton VA → Ocean City MD','nb',125)">&#x1F4CB; Log</button></div>
-      <span class="seg-toggle" onclick="toggleSeg('sb9',this)">show notes + resources &#9662;</span>
+      <span class="seg-toggle" onclick="toggleSeg('sb9',this)">show notes + resources &#9662;</span> <span class="map-toggle" onclick="toggleMap('seg9',this)">&#x1F5FA; map &#9662;</span>
       <div class="seg-body" id="sb9">
         <div class="note-blue"><strong>Outside preferred.</strong> Wants SW/W winds under 15 kts, seas under 4 ft, no NE for 24 hrs. Chincoteague Inlet VA is emergency option only.</div>
         <div class="resources">
@@ -621,12 +754,18 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
           <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8570283" target="_blank">&#8599; Ocean City Inlet Tides</a>
           <a class="res-link" href="https://windy.com/?waves,38.0,-74.5,7" target="_blank">&#8599; Windy &#8212; Mid-Atlantic Offshore</a>
         </div>
+      
+        <div class="resources" style="margin-top:8px"><a class="dockwa-btn" href="https://dockwa.com/explore/destination/4qc1q19-safe-harbor-bluewater" target="_blank">&#x1F4C5; Safe Harbor Bluewater Hampton</a> <a class="dockwa-btn" href="https://dockwa.com/explore/destination/rnc1xy7-ocean-city-fishermans-marina" target="_blank">&#x1F4C5; O.C. Fisherman's Marina</a></div>
+        <div class="map-body-wrap" id="seg9-map-wrap">
+      <div id="seg9-map" class="leg-map"></div>
+      <div class="map-caption">Leg 9: Hampton VA &rarr; Ocean City MD &middot; ~125 nm offshore &middot; Cape Henry, Chesapeake Light Tower, OC Inlet</div>
+    </div>
       </div>
     </div>
 
     <div class="segment" id="seg10">
       <div class="seg-header"><div class="seg-dot dot-sky">&#9321;</div><div class="seg-info"><div class="seg-name">Ocean City MD &#8594; Cape May NJ (conditional) &#8594; Barnegat Light</div><div class="seg-route">Barnegat inlet timing dictates where you stage &middot; Cape May is your safety valve</div></div><span class="seg-dist">~75 nm direct</span><button class="vl-log-btn" id="vl-btn-seg10" onclick="vlOpenLog('seg10','Ocean City MD → Barnegat Light','nb',75)">&#x1F4CB; Log</button></div>
-      <span class="seg-toggle" onclick="toggleSeg('sb10',this)">show criteria + resources &#9662;</span>
+      <span class="seg-toggle" onclick="toggleSeg('sb10',this)">show criteria + resources &#9662;</span> <span class="map-toggle" onclick="toggleMap('seg10',this)">&#x1F5FA; map &#9662;</span>
       <div class="seg-body" id="sb10">
         <div class="note"><strong>Barnegat Inlet is the most critical inlet of this passage.</strong> Previous incident here. <strong>Never enter on ebb. Never in the afternoon. No NE swell.</strong> Favor north jetty.</div>
         <div class="crit-grid">
@@ -640,6 +779,15 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
           <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8536110" target="_blank">&#8599; Cape May Inlet Tides</a>
           <a class="res-link" href="https://windy.com/?waves,39.7,-74.1,8" target="_blank">&#8599; Windy &#8212; NJ Shore</a>
         </div>
+      
+        <div class="resources" style="margin-top:8px"><a class="dockwa-btn" href="https://dockwa.com/explore/destination/mncle5-bayview-harbor" target="_blank">&#x1F4C5; Bayview Harbor Barnegat Light</a></div>
+        <div class="sub-section"><span class="sub-toggle" onclick="toggleSub('cont-seg10',this)">Cape May &mdash; staging option</span><div class="sub-body" id="cont-seg10"><div class="cont-card"><div class="cont-marina">South Jersey Marina</div><div class="cont-meta">Cape May harbor &middot; sheltered &middot; walkable to downtown</div>
+              <div class="cont-actions"><a class="dockwa-btn" href="https://dockwa.com/explore/destination/wgce4d-south-jersey-marina" target="_blank">&#x1F4C5; Book on Dockwa</a></div></div><div class="cont-card"><div class="cont-marina">Cape May Marina</div><div class="cont-meta">Off Delaware Canal &middot; fuel &middot; restaurants within walking distance</div>
+              <div class="cont-actions"><a class="dockwa-btn" href="https://dockwa.com/explore/destination/ywczv8-cape-may-marina" target="_blank">&#x1F4C5; Book on Dockwa</a></div></div></div></div>
+        <div class="map-body-wrap" id="seg10-map-wrap">
+      <div id="seg10-map" class="leg-map"></div>
+      <div class="map-caption">Leg 10: Ocean City MD &rarr; Barnegat Light NJ &middot; ~75 nm offshore &middot; Cape May is your safety valve</div>
+    </div>
       </div>
     </div>
 
@@ -657,7 +805,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
 
     <div class="segment" id="seg12">
       <div class="seg-header"><div class="seg-dot dot-sky">&#9323;</div><div class="seg-info"><div class="seg-name">Barnegat Light &#8594; Port Washington NY</div><div class="seg-route">Outside around Sandy Hook &middot; Ambrose Channel &middot; Long Island Sound</div></div><span class="seg-dist">~110 nm</span><button class="vl-log-btn" id="vl-btn-seg12" onclick="vlOpenLog('seg12','Barnegat Light → Port Washington','nb',110)">&#x1F4CB; Log</button></div>
-      <span class="seg-toggle" onclick="toggleSeg('sb12',this)">show notes + resources &#9662;</span>
+      <span class="seg-toggle" onclick="toggleSeg('sb12',this)">show notes + resources &#9662;</span> <span class="map-toggle" onclick="toggleMap('seg12',this)">&#x1F5FA; map &#9662;</span>
       <div class="seg-body" id="sb12">
         <div class="note"><strong>Ambrose Channel:</strong> Heavy ship traffic &#8212; right of way. Monitor VHF 16. Time Sandy Hook for fair current. <strong>Exit Barnegat: flood tide, morning, north jetty.</strong></div>
         <div class="resources">
@@ -665,12 +813,19 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
           <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8531680" target="_blank">&#8599; Sandy Hook Tides</a>
           <a class="res-link cg" href="https://captaingeorgia.com/north-east-port-weather" target="_blank">&#8599; NE Port Weather</a>
         </div>
+      
+        <div class="resources" style="margin-top:8px"><a class="dockwa-btn" href="https://dockwa.com/explore/destination/jncnrx-port-washington-municipal-marina" target="_blank">&#x1F4C5; Port Washington Municipal</a> <a class="dockwa-btn" href="https://dockwa.com/explore/destination/z4c1r6-safe-harbor-capri" target="_blank">&#x1F4C5; Safe Harbor Capri</a></div>
+        <div class="sub-section"><span class="sub-toggle" onclick="toggleSub('things-seg12',this)">Around Port Washington &mdash; things to do</span><div class="sub-body" id="things-seg12"><div class="town-block"><div class="town-block-title">&#x1F37D; Restaurants</div><div class="town-block-body">Louie's Oyster Bar & Grille on the waterfront &mdash; been there forever. Sound View on the water. Bar Frites for French. Easy LIRR into Manhattan if you want a city night (35 min to Penn Station).</div></div><div class="town-block"><div class="town-block-title">&#x1F327;&#xFE0F; Weather hold</div><div class="town-block-body">Great town to be stuck in. Manhasset Bay is beautiful and protected. Walk the waterfront. Sands Point Preserve is nearby &mdash; Gold Coast mansion with grounds on the Sound.</div></div></div></div>
+        <div class="map-body-wrap" id="seg12-map-wrap">
+      <div id="seg12-map" class="leg-map"></div>
+      <div class="map-caption">Leg 12: Barnegat Light &rarr; Port Washington NY &middot; ~110 nm &middot; outside around Sandy Hook, Ambrose Channel, LI Sound</div>
+    </div>
       </div>
     </div>
 
     <div class="segment" id="seg13">
       <div class="seg-header"><div class="seg-dot dot-green">&#9324;</div><div class="seg-info"><div class="seg-name">Port Washington &#8594; Falmouth MA &#127937;</div><div class="seg-route">Long Island Sound &middot; exit The Race &middot; Vineyard Sound &middot; ~5.5&#8211;7 hrs depending on speed</div></div><span class="seg-dist">~185 nm &#10003;</span><button class="vl-log-btn" id="vl-btn-seg13" onclick="vlOpenLog('seg13','Port Washington → Falmouth MA','nb',185)">&#x1F4CB; Log</button></div>
-      <span class="seg-toggle" onclick="toggleSeg('sb13',this)">show notes + resources &#9662;</span>
+      <span class="seg-toggle" onclick="toggleSeg('sb13',this)">show notes + resources &#9662;</span> <span class="map-toggle" onclick="toggleMap('seg13',this)">&#x1F5FA; map &#9662;</span>
       <div class="seg-body" id="sb13">
         <div class="note-green"><strong>Direct run within your 200 nm range with T4 props.</strong> Depart early &#8212; time The Race for fair current (adds 1&#8211;2 kts). <strong>Aim to arrive Falmouth before early afternoon.</strong></div>
         <div class="resources">
@@ -679,6 +834,13 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
           <a class="res-link" href="https://www.ndbc.noaa.gov/station_page.php?station=44020" target="_blank">&#8599; Buoy 44020 Nantucket Sound</a>
           <a class="res-link" href="https://windy.com/?waves,41.2,-72.0,7" target="_blank">&#8599; Windy &#8212; LI Sound + Vineyard</a>
         </div>
+      
+        <div class="resources" style="margin-top:8px"><a class="dockwa-btn" href="https://dockwa.com/explore/destination/ywc94l-falmouth-marine" target="_blank">&#x1F4C5; Falmouth Marine</a> <a class="dockwa-btn" href="https://dockwa.com/explore/destination/16cxrx-macdougalls-cape-cod-marine-service" target="_blank">&#x1F4C5; MacDougalls Cape Cod Marine</a></div>
+        <div class="sub-section"><span class="sub-toggle" onclick="toggleSub('things-seg13',this)">Around Falmouth &mdash; home base</span><div class="sub-body" id="things-seg13"><div class="town-block"><div class="town-block-title">&#x1F3E0; You're home</div><div class="town-block-body">Green Pond Marina, East Falmouth. Lincoln Road comparison: Falmouth has Shuckers for seafood on the water, Flying Bridge at Falmouth Marina, and Quarterdeck right in Falmouth village. Walkable to everything.</div></div><div class="town-block"><div class="town-block-title">&#x1F6E5; Fuel note</div><div class="town-block-body">Falmouth Inner Harbor fuel dock if needed before heading to Green Pond. Falmouth Marine and MacDougalls both on Dockwa for any service needs.</div></div></div></div>
+        <div class="map-body-wrap" id="seg13-map-wrap">
+      <div id="seg13-map" class="leg-map"></div>
+      <div class="map-caption">Leg 13: Port Washington &rarr; Falmouth MA &middot; ~185 nm &middot; LI Sound, The Race, Vineyard Sound, East Falmouth</div>
+    </div>
       </div>
     </div>
 
@@ -688,7 +850,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
 
     <div class="segment" id="sseg1">
       <div class="seg-header"><div class="seg-dot dot-green">&#9312;</div><div class="seg-info"><div class="seg-name">Falmouth MA &#8594; Port Washington NY</div><div class="seg-route">Vineyard Sound &#8594; The Race &#8594; Long Island Sound &middot; time The Race for fair current</div></div><span class="seg-dist">~185 nm</span><button class="vl-log-btn" id="vl-btn-sseg1" onclick="vlOpenLog('sseg1','Falmouth MA → Port Washington','sb',185)">&#x1F4CB; Log</button></div>
-      <span class="seg-toggle" onclick="toggleSeg('ssb1',this)">show notes + resources &#9662;</span>
+      <span class="seg-toggle" onclick="toggleSeg('ssb1',this)">show notes + resources &#9662;</span> <span class="map-toggle" onclick="toggleMap('sseg1',this)">&#x1F5FA; map &#9662;</span>
       <div class="seg-body" id="ssb1">
         <div class="note"><strong>Depart early &#8212; time The Race for fair current westbound.</strong> Depart Falmouth before 8 am to clear the Sound before afternoon SW against ebb builds chop.</div>
         <div class="resources">
@@ -698,12 +860,19 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
           <a class="res-link cg" href="https://captaingeorgia.com/north-east-port-weather" target="_blank">&#8599; NE Port Weather</a>
           <a class="res-link" href="https://windy.com/?waves,41.2,-72.0,7" target="_blank">&#8599; Windy &#8212; LI Sound + Vineyard</a>
         </div>
+      
+        <div class="resources" style="margin-top:8px"><a class="dockwa-btn" href="https://dockwa.com/explore/destination/jncnrx-port-washington-municipal-marina" target="_blank">&#x1F4C5; Port Washington Municipal</a> <a class="dockwa-btn" href="https://dockwa.com/explore/destination/z4c1r6-safe-harbor-capri" target="_blank">&#x1F4C5; Safe Harbor Capri</a></div>
+        <div class="sub-section"><span class="sub-toggle" onclick="toggleSub('things-sseg1',this)">Around Port Washington &mdash; things to do</span><div class="sub-body" id="things-sseg1"><div class="town-block"><div class="town-block-title">&#x1F37D; Restaurants</div><div class="town-block-body">Louie's Oyster Bar on the waterfront. Sound View. Bar Frites for French. Easy LIRR to Manhattan (35 min).</div></div><div class="town-block"><div class="town-block-title">&#x1F327;&#xFE0F; Weather hold</div><div class="town-block-body">Sands Point Preserve nearby &mdash; Gold Coast mansion and grounds on the Sound. Manhasset Bay is beautiful and very protected.</div></div></div></div>
+        <div class="map-body-wrap" id="sseg1-map-wrap">
+      <div id="sseg1-map" class="leg-map"></div>
+      <div class="map-caption">SB Leg 1: Falmouth MA &rarr; Port Washington &middot; ~185 nm &middot; Vineyard Sound, The Race, LI Sound</div>
+    </div>
       </div>
     </div>
 
     <div class="segment" id="sseg2">
       <div class="seg-header"><div class="seg-dot dot-sky">&#9313;</div><div class="seg-info"><div class="seg-name">Port Washington &#8594; Barnegat Light NJ</div><div class="seg-route">Long Island Sound &middot; Ambrose Channel &middot; outside around Sandy Hook &middot; Barnegat Inlet</div></div><span class="seg-dist">~110 nm</span><button class="vl-log-btn" id="vl-btn-sseg2" onclick="vlOpenLog('sseg2','Port Washington → Barnegat Light','sb',110)">&#x1F4CB; Log</button></div>
-      <span class="seg-toggle" onclick="toggleSeg('ssb2',this)">show notes + resources &#9662;</span>
+      <span class="seg-toggle" onclick="toggleSeg('ssb2',this)">show notes + resources &#9662;</span> <span class="map-toggle" onclick="toggleMap('sseg2',this)">&#x1F5FA; map &#9662;</span>
       <div class="seg-body" id="ssb2">
         <div class="note"><strong>Barnegat Inlet: enter mid-flood only, morning, favor north jetty. Same rules as northbound passage &#8212; no exceptions.</strong></div>
         <div class="crit-grid">
@@ -715,6 +884,13 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
           <a class="res-link tide key" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8534720" target="_blank">&#8599; Barnegat Inlet Tides &#9888;</a>
           <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8531680" target="_blank">&#8599; Sandy Hook Tides</a>
         </div>
+      
+        <div class="resources" style="margin-top:8px"><a class="dockwa-btn" href="https://dockwa.com/explore/destination/mncle5-bayview-harbor" target="_blank">&#x1F4C5; Bayview Harbor Barnegat Light</a></div>
+        <div class="sub-section"><span class="sub-toggle" onclick="toggleSub('cont-sseg2',this)">Cape May &mdash; alternate if Barnegat timing is off</span><div class="sub-body" id="cont-sseg2"><div class="cont-card"><div class="cont-marina">South Jersey Marina</div><div class="cont-meta">Cape May harbor &middot; sheltered &middot; walk to downtown</div><div class="cont-actions"><a class="dockwa-btn" href="https://dockwa.com/explore/destination/wgce4d-south-jersey-marina" target="_blank">&#x1F4C5; Book on Dockwa</a></div></div></div></div>
+        <div class="map-body-wrap" id="sseg2-map-wrap">
+      <div id="sseg2-map" class="leg-map"></div>
+      <div class="map-caption">SB Leg 2: Port Washington &rarr; Barnegat Light NJ &middot; ~110 nm &middot; Ambrose Channel, outside around Sandy Hook</div>
+    </div>
       </div>
     </div>
 
@@ -733,7 +909,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
 
     <div class="segment" id="sseg4">
       <div class="seg-header"><div class="seg-dot dot-sky">&#9315;</div><div class="seg-info"><div class="seg-name">Barnegat Light &#8594; Cape May NJ (conditional) &#8594; Ocean City MD</div><div class="seg-route">Outside &middot; Cape May is your staging option if conditions are not right</div></div><span class="seg-dist">~75 nm direct</span><button class="vl-log-btn" id="vl-btn-sseg4" onclick="vlOpenLog('sseg4','Barnegat Light → Cape May / Ocean City','sb',75)">&#x1F4CB; Log</button></div>
-      <span class="seg-toggle" onclick="toggleSeg('ssb4',this)">show notes + resources &#9662;</span>
+      <span class="seg-toggle" onclick="toggleSeg('ssb4',this)">show notes + resources &#9662;</span> <span class="map-toggle" onclick="toggleMap('sseg4',this)">&#x1F5FA; map &#9662;</span>
       <div class="seg-body" id="ssb4">
         <div class="note"><strong>Exit Barnegat: same rules as entry &#8212; flood tide, morning, north jetty.</strong> Cape May (~35 nm) is a comfortable intermediate stop. Ocean City Inlet southbound is straightforward but check sea state at the inlet.</div>
         <div class="resources">
@@ -742,12 +918,18 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
           <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8570283" target="_blank">&#8599; Ocean City Inlet Tides</a>
           <a class="res-link" href="https://windy.com/?waves,39.7,-74.1,8" target="_blank">&#8599; Windy &#8212; NJ/DE Shore</a>
         </div>
+      
+        <div class="resources" style="margin-top:8px"><a class="dockwa-btn" href="https://dockwa.com/explore/destination/rnc1xy7-ocean-city-fishermans-marina" target="_blank">&#x1F4C5; O.C. Fisherman's Marina</a> <a class="dockwa-btn" href="https://dockwa.com/explore/destination/wgce4d-south-jersey-marina" target="_blank">&#x1F4C5; South Jersey Marina Cape May</a></div>
+        <div class="map-body-wrap" id="sseg4-map-wrap">
+      <div id="sseg4-map" class="leg-map"></div>
+      <div class="map-caption">SB Leg 4: Barnegat Light &rarr; Ocean City MD &middot; ~75 nm offshore &middot; Cape May optional staging</div>
+    </div>
       </div>
     </div>
 
     <div class="segment" id="sseg5">
       <div class="seg-header"><div class="seg-dot dot-blue">&#9316;</div><div class="seg-info"><div class="seg-name">Ocean City MD &#8594; Hampton VA &#8212; Bluewater</div><div class="seg-route">Straight offshore &middot; Ocean City &#8594; Chesapeake Light Tower &#8594; Cape Henry &#8594; Hampton Roads</div></div><span class="seg-dist">~125 nm</span><button class="vl-log-btn" id="vl-btn-sseg5" onclick="vlOpenLog('sseg5','Ocean City MD → Hampton VA','sb',125)">&#x1F4CB; Log</button></div>
-      <span class="seg-toggle" onclick="toggleSeg('ssb5',this)">show notes + resources &#9662;</span>
+      <span class="seg-toggle" onclick="toggleSeg('ssb5',this)">show notes + resources &#9662;</span> <span class="map-toggle" onclick="toggleMap('sseg5',this)">&#x1F5FA; map &#9662;</span>
       <div class="seg-body" id="ssb5">
         <div class="note-blue"><strong>Outside preferred.</strong> SW/W winds under 15 kts, seas under 4 ft, no NE for 24 hrs. Hampton Roads: heavy Navy and commercial traffic &#8212; monitor VHF 16, they have right of way. Bluewater: (757) 723-6774.</div>
         <div class="resources">
@@ -757,6 +939,13 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
           <a class="res-link" href="https://windy.com/?waves,38.0,-74.5,7" target="_blank">&#8599; Windy &#8212; Mid-Atlantic Offshore</a>
           <a class="res-link" href="https://www.bluewateryachtcenter.com/" target="_blank">&#8599; Bluewater &#8212; (757) 723-6774</a>
         </div>
+      
+        <div class="resources" style="margin-top:8px"><a class="dockwa-btn" href="https://dockwa.com/explore/destination/4qc1q19-safe-harbor-bluewater" target="_blank">&#x1F4C5; Safe Harbor Bluewater Hampton</a></div>
+        <div class="sub-section"><span class="sub-toggle" onclick="toggleSub('things-sseg5',this)">Around Hampton VA &mdash; things to do</span><div class="sub-body" id="things-sseg5"><div class="town-block"><div class="town-block-title">&#x1F37D; Restaurants</div><div class="town-block-body">Bluewater has a restaurant on site. Riverwalk Landing in Yorktown is a short drive &mdash; great waterfront dining. Downtown Hampton has grown significantly.</div></div><div class="town-block"><div class="town-block-title">&#x1F327;&#xFE0F; Weather hold</div><div class="town-block-body">Virginia Air and Space Science Center in Hampton (free). Nauticus Museum in Norfolk (naval history, USS Wisconsin battleship). Fort Monroe &mdash; interesting Civil War history right on the water.</div></div></div></div>
+        <div class="map-body-wrap" id="sseg5-map-wrap">
+      <div id="sseg5-map" class="leg-map"></div>
+      <div class="map-caption">SB Leg 5: Ocean City MD &rarr; Hampton VA &middot; ~125 nm offshore &middot; Chesapeake Light Tower, Cape Henry, Hampton Roads</div>
+    </div>
       </div>
     </div>
 
@@ -830,43 +1019,61 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
 
     <div class="segment" id="sseg8">
       <div class="seg-header"><div class="seg-dot dot-purple">&#9319;</div><div class="seg-info"><div class="seg-name">Coinjock &#8594; Morehead City</div><div class="seg-route">Albemarle Sound &#8594; Alligator River &#8594; Pamlico Sound &#8594; Neuse River</div></div><span class="seg-dist">~110 nm</span><button class="vl-log-btn" id="vl-btn-sseg8" onclick="vlOpenLog('sseg8','Coinjock → Morehead City','sb',110)">&#x1F4CB; Log</button></div>
-      <span class="seg-toggle" onclick="toggleSeg('ssb8',this)">show notes + resources &#9662;</span>
+      <span class="seg-toggle" onclick="toggleSeg('ssb8',this)">show notes + resources &#9662;</span> <span class="map-toggle" onclick="toggleMap('sseg8',this)">&#x1F5FA; map &#9662;</span>
       <div class="seg-body" id="ssb8">
         <div class="note"><strong>Speed:</strong> Canal sections: 6&#8211;7 kts no wake. Rivers + Albemarle + Pamlico: on plane, cross before noon. <strong>Depart Coinjock early.</strong></div>
         <div class="resources">
           <a class="res-link" href="https://www.ndbc.noaa.gov/station_page.php?station=41036" target="_blank">&#8599; Buoy 41036 Pamlico Sound</a>
           <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8651370" target="_blank">&#8599; Duck / Currituck Tides</a>
         </div>
+      
+        <div class="resources" style="margin-top:8px"><a class="dockwa-btn" href="https://dockwa.com/explore/destination/16cwdr-morehead-city-yacht-basin" target="_blank">&#x1F4C5; Morehead City Yacht Basin</a></div>
+        <div class="map-body-wrap" id="sseg8-map-wrap">
+      <div id="sseg8-map" class="leg-map"></div>
+      <div class="map-caption">SB Leg 8: Coinjock &rarr; Morehead City &middot; ~110 nm &middot; Albemarle Sound, Alligator River, Pamlico Sound, Neuse River</div>
+    </div>
       </div>
     </div>
 
     <div class="segment" id="sseg9">
       <div class="seg-header"><div class="seg-dot dot-amber">&#9320;</div><div class="seg-info"><div class="seg-name">Morehead City &#8594; Southport</div><div class="seg-route">Outside to Masonboro Inlet &#8594; ICW via Myrtle Grove &#8594; Snow's Cut &#8594; Cape Fear River</div></div><span class="seg-dist">~90 nm</span><button class="vl-log-btn" id="vl-btn-sseg9" onclick="vlOpenLog('sseg9','Morehead City → Southport','sb',90)">&#x1F4CB; Log</button></div>
-      <span class="seg-toggle" onclick="toggleSeg('ssb9',this)">show notes + resources &#9662;</span>
+      <span class="seg-toggle" onclick="toggleSeg('ssb9',this)">show notes + resources &#9662;</span> <span class="map-toggle" onclick="toggleMap('sseg9',this)">&#x1F5FA; map &#9662;</span>
       <div class="seg-body" id="ssb9">
         <div class="note"><strong>Masonboro Inlet: enter at mid-to-high tide.</strong> Check Aqua Map for shoaling at MM 293.7.</div>
         <div class="resources">
           <a class="res-link key" href="https://www.navcen.uscg.gov/?pageName=lnmDistrict&region=05" target="_blank">&#8599; USCG D5 LNMs &#9888;</a>
           <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8656483" target="_blank">&#8599; Wrightsville / Masonboro Tides</a>
         </div>
+      
+        <div class="resources" style="margin-top:8px"><a class="dockwa-btn" href="https://dockwa.com/explore/destination/d9cpmq-morningstar-marinas-southport" target="_blank">&#x1F4C5; Morningstar Marinas Southport</a></div>
+        <div class="map-body-wrap" id="sseg9-map-wrap">
+      <div id="sseg9-map" class="leg-map"></div>
+      <div class="map-caption">SB Leg 9: Morehead City &rarr; Southport &middot; ~90 nm &middot; outside to Masonboro Inlet, ICW via Snow's Cut, Cape Fear River</div>
+    </div>
       </div>
     </div>
 
     <div class="segment" id="sseg10">
       <div class="seg-header"><div class="seg-dot dot-amber">&#9321;</div><div class="seg-info"><div class="seg-name">Southport &#8594; Charleston</div><div class="seg-route">Day run &middot; outside &middot; Cape Fear River departure: strong tidal current</div></div><span class="seg-dist">~135 nm</span><button class="vl-log-btn" id="vl-btn-sseg10" onclick="vlOpenLog('sseg10','Southport → Charleston','sb',135)">&#x1F4CB; Log</button></div>
-      <span class="seg-toggle" onclick="toggleSeg('ssb10',this)">show resources &#9662;</span>
+      <span class="seg-toggle" onclick="toggleSeg('ssb10',this)">show resources &#9662;</span> <span class="map-toggle" onclick="toggleMap('sseg10',this)">&#x1F5FA; map &#9662;</span>
       <div class="seg-body" id="ssb10">
         <div class="resources">
           <a class="res-link cg" href="https://captaingeorgia.com/south-east-port-weather" target="_blank">&#8599; SE Port Weather SC/NC</a>
           <a class="res-link" href="https://www.ndbc.noaa.gov/station_page.php?station=41008" target="_blank">&#8599; Buoy 41008 Grays Reef</a>
           <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8658163" target="_blank">&#8599; Cape Fear River Tides</a>
         </div>
+      
+        <div class="resources" style="margin-top:8px"><a class="dockwa-btn" href="https://dockwa.com/explore/destination/pwc4ml-safe-harbor-charleston-city" target="_blank">&#x1F4C5; Safe Harbor Charleston City</a> <a class="dockwa-btn" href="https://dockwa.com/explore/destination/mnc3m9-the-ashley-marina" target="_blank">&#x1F4C5; The Ashley Marina</a></div>
+        <div class="map-body-wrap" id="sseg10-map-wrap">
+      <div id="sseg10-map" class="leg-map"></div>
+      <div class="map-caption">SB Leg 10: Southport &rarr; Charleston &middot; ~135 nm offshore &middot; Cape Fear River departure</div>
+    </div>
       </div>
     </div>
 
     <div class="segment" id="sseg11">
       <div class="seg-header"><div class="seg-dot dot-teal">&#9322;</div><div class="seg-info"><div class="seg-name">Charleston &#8594; St. Augustine or Fernandina Beach</div><div class="seg-route">Day run &middot; outside &middot; Brunswick / St. Simons GA is a solid mid-leg backup</div></div><span class="seg-dist">~200 nm</span><button class="vl-log-btn" id="vl-btn-sseg11" onclick="vlOpenLog('sseg11','Charleston → St. Augustine / Fernandina','sb',200)">&#x1F4CB; Log</button></div>
-      <span class="seg-toggle" onclick="toggleSeg('ssb11',this)">show notes + resources &#9662;</span>
+      <span class="seg-toggle" onclick="toggleSeg('ssb11',this)">show notes + resources &#9662;</span> <span class="map-toggle" onclick="toggleMap('sseg11',this)">&#x1F5FA; map &#9662;</span>
       <div class="seg-body" id="ssb11">
         <div class="note"><strong>St. Augustine bar: cross at or near high tide only &#8212; same rule applies southbound.</strong> Fernandina Beach is the shorter option.</div>
         <div class="resources">
@@ -875,24 +1082,37 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
           <a class="res-link cg" href="https://captaingeorgia.com/south-east-port-weather" target="_blank">&#8599; SE Port Weather</a>
           <a class="res-link tide key" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8720218" target="_blank">&#8599; St. Augustine Inlet Tides &#9888;</a>
         </div>
+      
+        <div class="resources" style="margin-top:8px"><a class="dockwa-btn" href="https://dockwa.com/explore/destination/7ec7q5-st-augustine-municipal-marina" target="_blank">&#x1F4C5; St. Augustine City Marina</a> <a class="dockwa-btn" href="https://dockwa.com/explore/destination/lwcz33-rivers-edge-marina" target="_blank">&#x1F4C5; Rivers Edge Marina</a></div>
+        <div class="sub-section"><span class="sub-toggle" onclick="toggleSub('cont-sseg11',this)">Contingency &mdash; Brunswick / St. Simons Island GA</span><div class="sub-body" id="cont-sseg11"><div class="cont-card"><div class="cont-marina">Golden Isles Marina</div><div class="cont-meta">~130 nm from Charleston &middot; solid mid-leg bailout if conditions deteriorate</div></div></div></div>
+        <div class="map-body-wrap" id="sseg11-map-wrap">
+      <div id="sseg11-map" class="leg-map"></div>
+      <div class="map-caption">SB Leg 11: Charleston &rarr; St. Augustine / Fernandina &middot; ~200 nm offshore &middot; Brunswick GA backup at ~130 nm</div>
+    </div>
       </div>
     </div>
 
     <div class="segment" id="sseg12">
       <div class="seg-header"><div class="seg-dot dot-amber">&#9323;</div><div class="seg-info"><div class="seg-name">St. Augustine / Fernandina &#8594; Ft. Pierce</div><div class="seg-route">Staging leg &middot; straightforward outside run south</div></div><span class="seg-dist">~160 nm</span><button class="vl-log-btn" id="vl-btn-sseg12" onclick="vlOpenLog('sseg12','St. Augustine / Fernandina → Ft. Pierce','sb',160)">&#x1F4CB; Log</button></div>
-      <span class="seg-toggle" onclick="toggleSeg('ssb12',this)">show resources &#9662;</span>
+      <span class="seg-toggle" onclick="toggleSeg('ssb12',this)">show resources &#9662;</span> <span class="map-toggle" onclick="toggleMap('sseg12',this)">&#x1F5FA; map &#9662;</span>
       <div class="seg-body" id="ssb12">
         <div class="resources">
           <a class="res-link" href="https://www.ndbc.noaa.gov/station_page.php?station=41114" target="_blank">&#8599; Buoy 41114 Fort Pierce FL</a>
           <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8722670" target="_blank">&#8599; Ft. Pierce Inlet Tides</a>
           <a class="res-link cg" href="https://captaingeorgia.com/fl-port-weather" target="_blank">&#8599; FL Port Weather</a>
         </div>
+      
+        <div class="resources" style="margin-top:8px"><a class="dockwa-btn" href="https://dockwa.com/explore/destination/qpcwql-fort-pierce-city-marina" target="_blank">&#x1F4C5; Fort Pierce City Marina</a> <a class="dockwa-btn" href="https://dockwa.com/explore/destination/lwcwjg-safe-harbor-harbortown" target="_blank">&#x1F4C5; Safe Harbor Harbortown</a></div>
+        <div class="map-body-wrap" id="sseg12-map-wrap">
+      <div id="sseg12-map" class="leg-map"></div>
+      <div class="map-caption">SB Leg 12: St. Augustine / Fernandina &rarr; Ft. Pierce &middot; ~160 nm offshore</div>
+    </div>
       </div>
     </div>
 
     <div class="segment" id="sseg13">
       <div class="seg-header"><div class="seg-dot dot-teal">&#9324;</div><div class="seg-info"><div class="seg-name">Ft. Pierce &#8594; Miami Beach &#127937;</div><div class="seg-route">Final leg &middot; ~110 nm &middot; Sunset Harbour, Miami Beach</div></div><span class="seg-dist">~110 nm</span><button class="vl-log-btn" id="vl-btn-sseg13" onclick="vlOpenLog('sseg13','Ft. Pierce → Miami Beach','sb',120)">&#x1F4CB; Log</button></div>
-      <span class="seg-toggle" onclick="toggleSeg('ssb13',this)">show notes + resources &#9662;</span>
+      <span class="seg-toggle" onclick="toggleSeg('ssb13',this)">show notes + resources &#9662;</span> <span class="map-toggle" onclick="toggleMap('sseg13',this)">&#x1F5FA; map &#9662;</span>
       <div class="seg-body" id="ssb13">
         <div class="note-green"><strong>Home straight.</strong> Gulf Stream close to shore &#8212; time your departure accordingly. Sunset Harbour Yacht Club, Miami Beach. Done.</div>
         <div class="resources">
@@ -900,6 +1120,12 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
           <a class="res-link" href="https://www.ndbc.noaa.gov/station_page.php?station=41122" target="_blank">&#8599; Buoy 41122 Hollywood Beach FL</a>
           <a class="res-link" href="https://windy.com/?waves,25.8,-80.2,7" target="_blank">&#8599; Windy &#8212; Miami</a>
         </div>
+      
+        <div class="sub-section"><span class="sub-toggle" onclick="toggleSub('things-sseg13',this)">Home &mdash; Sunset Harbour, Miami Beach</span><div class="sub-body" id="things-sseg13"><div class="town-block"><div class="town-block-title">&#x1F3E0; Back at the dock</div><div class="town-block-body">Sunset Harbour Yacht Club, 1928 Sunset Harbour Drive. Lincoln Road 5-minute walk. All the usual suspects &mdash; you know this better than anyone.</div></div></div></div>
+        <div class="map-body-wrap" id="sseg13-map-wrap">
+      <div id="sseg13-map" class="leg-map"></div>
+      <div class="map-caption">SB Leg 13: Ft. Pierce &rarr; Miami Beach &middot; ~120 nm offshore &middot; home straight</div>
+    </div>
       </div>
     </div>
 
@@ -1474,6 +1700,88 @@ function vlToggleLogView(){
   else { if(vlGetToken()) vlLoadLog(); else { var el=document.getElementById('vl-log-content'); if(el) el.innerHTML='<div class="vl-empty-log">\u2699\uFE0F Add your GitHub token in settings to enable the voyage log.</div>'; } }
 })();
 
+
+/* ════════════════════════════════════════════
+   MAPS, SUB-SECTIONS, PACE
+════════════════════════════════════════════ */
+function toggleSub(bodyId, el){
+  var body = document.getElementById(bodyId);
+  if(!body) return;
+  var open = body.classList.toggle('open');
+  el.classList.toggle('open', open);
+}
+
+function toggleMap(segId, el){
+  var wrap = document.getElementById(segId + '-map-wrap');
+  if(!wrap) return;
+  var open = wrap.classList.toggle('open');
+  el.textContent = open ? '\uD83D\uDDFA map \u25B4' : '\uD83D\uDDFA map \u25BE';
+  if(open) initMap(segId);
+}
+
+// Map definitions: segId -> {coords: [[lat,lng,label,type], ...], center, zoom}
+var MAP_DEFS = {
+  'seg1':  {coords:[[25.79,-80.15,'Sunset Harbour','start'],[27.49,-80.28,'Ft. Pierce Inlet','end']], center:[26.6,-80.2], zoom:7},
+  'seg2':  {coords:[[27.49,-80.28,'Ft. Pierce','start'],[29.90,-81.26,'St. Augustine Inlet','end']], center:[28.7,-80.8], zoom:7},
+  'seg3':  {coords:[[29.90,-81.26,'St. Augustine','start'],[32.03,-80.90,'Savannah area','waypoint'],[32.77,-79.93,'Charleston','end']], center:[31.3,-80.6], zoom:6},
+  'seg4':  {coords:[[32.77,-79.93,'Charleston','start'],[33.92,-78.00,'Southport / Cape Fear','end']], center:[33.3,-79.0], zoom:7},
+  'seg5':  {coords:[[33.92,-78.00,'Southport','start'],[34.19,-77.80,'Masonboro Inlet','waypoint'],[34.72,-76.69,'Morehead City','end']], center:[34.3,-77.5], zoom:8},
+  'seg7':  {coords:[[34.72,-76.69,'Morehead City','start'],[35.10,-76.43,'Neuse River','waypoint'],[35.90,-75.90,'Pamlico Sound','waypoint'],[36.05,-75.85,'Alligator River','waypoint'],[36.35,-75.99,'Coinjock','end']], center:[35.5,-76.3], zoom:7},
+  'seg9':  {coords:[[37.02,-76.34,'Hampton VA','start'],[36.97,-75.72,'Cape Henry','waypoint'],[37.01,-74.74,'Chesapeake Light','waypoint'],[38.33,-75.09,'Ocean City MD','end']], center:[37.7,-75.5], zoom:7},
+  'seg10': {coords:[[38.33,-75.09,'Ocean City MD','start'],[38.97,-74.96,'Cape May (opt)','waypoint'],[39.76,-74.11,'Barnegat Light','end']], center:[39.0,-74.7], zoom:7},
+  'seg12': {coords:[[39.76,-74.11,'Barnegat Light','start'],[40.45,-73.85,'Sandy Hook','waypoint'],[40.83,-73.70,'Port Washington','end']], center:[40.3,-74.0], zoom:8},
+  'seg13': {coords:[[40.83,-73.70,'Port Washington','start'],[41.23,-72.05,'The Race','waypoint'],[41.62,-70.60,'Falmouth MA','end']], center:[41.2,-71.7], zoom:7},
+  'sseg1': {coords:[[41.62,-70.60,'Falmouth MA','start'],[41.23,-72.05,'The Race','waypoint'],[40.83,-73.70,'Port Washington','end']], center:[41.2,-71.7], zoom:7},
+  'sseg2': {coords:[[40.83,-73.70,'Port Washington','start'],[40.45,-73.85,'Sandy Hook','waypoint'],[39.76,-74.11,'Barnegat Light','end']], center:[40.3,-74.0], zoom:8},
+  'sseg4': {coords:[[39.76,-74.11,'Barnegat Light','start'],[38.97,-74.96,'Cape May (opt)','waypoint'],[38.33,-75.09,'Ocean City MD','end']], center:[39.0,-74.7], zoom:7},
+  'sseg5': {coords:[[38.33,-75.09,'Ocean City MD','start'],[37.01,-74.74,'Chesapeake Light','waypoint'],[36.97,-75.72,'Cape Henry','waypoint'],[37.02,-76.34,'Hampton VA','end']], center:[37.7,-75.5], zoom:7},
+  'sseg8': {coords:[[36.35,-75.99,'Coinjock','start'],[35.90,-75.90,'Albemarle Sound','waypoint'],[35.10,-76.43,'Pamlico Sound','waypoint'],[34.72,-76.69,'Morehead City','end']], center:[35.5,-76.3], zoom:7},
+  'sseg9': {coords:[[34.72,-76.69,'Morehead City','start'],[34.19,-77.80,'Masonboro Inlet','waypoint'],[33.92,-78.00,'Southport','end']], center:[34.3,-77.5], zoom:8},
+  'sseg10':{coords:[[33.92,-78.00,'Southport','start'],[32.77,-79.93,'Charleston','end']], center:[33.3,-79.0], zoom:7},
+  'sseg11':{coords:[[32.77,-79.93,'Charleston','start'],[32.03,-80.90,'Savannah / Brunswick','waypoint'],[29.90,-81.26,'St. Augustine','end']], center:[31.3,-80.6], zoom:6},
+  'sseg12':{coords:[[29.90,-81.26,'St. Augustine','start'],[27.49,-80.28,'Ft. Pierce','end']], center:[28.7,-80.8], zoom:7},
+  'sseg13':{coords:[[27.49,-80.28,'Ft. Pierce','start'],[25.79,-80.15,'Miami Beach','end']], center:[26.6,-80.2], zoom:7},
+};
+
+var mapInstances = {};
+
+function initMap(segId){
+  if(mapInstances[segId]) return; // already initialized
+  var def = MAP_DEFS[segId];
+  if(!def || typeof L === 'undefined') return;
+  var mapEl = document.getElementById(segId + '-map');
+  if(!mapEl) return;
+
+  var map = L.map(mapEl, {zoomControl:true, attributionControl:true}).setView(def.center, def.zoom);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
+    subdomains:'abcd', maxZoom:19
+  }).addTo(map);
+
+  var coords = def.coords;
+  // Draw route line
+  var latlngs = coords.map(function(c){ return [c[0], c[1]]; });
+  L.polyline(latlngs, {color:'#14b8a6', weight:2.5, opacity:0.8, dashArray:'6,4'}).addTo(map);
+
+  // Draw markers
+  coords.forEach(function(c){
+    var lat=c[0], lng=c[1], label=c[2], type=c[3];
+    var color = type==='start' ? '#22c55e' : type==='end' ? '#ef4444' : '#f59e0b';
+    var size = (type==='start'||type==='end') ? 10 : 7;
+    var marker = L.circleMarker([lat,lng], {
+      radius:size, color:color, fillColor:color, fillOpacity:0.9, weight:2
+    }).addTo(map);
+    marker.bindPopup('<strong>'+label+'</strong>');
+    if(type==='start'||type==='end'){
+      L.tooltip({permanent:true, direction:'top', offset:[0,-8], className:'',
+        opacity:0.9}).setContent('<span style="font-size:10px;font-weight:700;color:'+color+'">'+label+'</span>').addTo(map).setLatLng([lat,lng]);
+    }
+  });
+
+  mapInstances[segId] = map;
+  setTimeout(function(){ map.invalidateSize(); }, 100);
+}
+
 </script>
 
 <!-- VOYAGE LOG MODAL -->
@@ -1656,5 +1964,6 @@ function vlToggleLogView(){
     </div>
   </div>
 </div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 </body>
 </html>
