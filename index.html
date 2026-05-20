@@ -334,6 +334,26 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
 .dockwa-btn:hover{background:rgba(13,148,136,0.28);border-color:var(--teal-light);}
 .tel-link{color:#7dd3fc;text-decoration:none;border-bottom:1px dotted rgba(125,211,252,0.35);}
 .tel-link:hover{border-bottom-color:#7dd3fc;}
+
+/* ── ANALYTICS ── */
+.vl-analytics{border-top:1px solid var(--border);padding:14px;}
+.vl-analytics-hdr{display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none;-webkit-user-select:none;margin-bottom:0;}
+.vl-analytics-hdr:hover .vl-analytics-title{color:var(--text);}
+.vl-analytics-title{font-size:11px;font-weight:700;color:var(--text-muted);flex:1;transition:color 0.15s;}
+.vl-analytics-body{display:none;margin-top:12px;}
+.vl-analytics-body.open{display:block;}
+.vl-chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:600px){.vl-chart-grid{grid-template-columns:1fr;}}
+.vl-chart-card{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:var(--radius-sm);padding:10px 12px;}
+.vl-chart-title{font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-dim);margin-bottom:10px;}
+.vl-chart-wrap{position:relative;height:180px;}
+.vl-chart-full{grid-column:1/-1;}
+.vl-chart-full .vl-chart-wrap{height:160px;}
+.vl-stat-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;}
+.vl-stat{background:rgba(13,148,136,0.08);border:1px solid rgba(13,148,136,0.2);border-radius:var(--radius-sm);padding:8px 12px;flex:1;min-width:100px;}
+.vl-stat-val{font-size:16px;font-weight:700;color:var(--teal-light);line-height:1.2;}
+.vl-stat-lbl{font-size:10px;color:var(--text-dim);margin-top:2px;}
+.vl-no-data{font-size:11px;color:var(--text-dim);text-align:center;padding:20px;font-style:italic;}
 </style>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
@@ -416,8 +436,8 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
       <div class="pace-day"><div class="pace-day-num">Day 5</div><div class="pace-day-leg">Southport &#8594; Morehead City</div><div class="pace-day-dist">~90 nm</div></div>
       <div class="pace-day"><div class="pace-day-num">Day 6+</div><div class="pace-day-leg">Morehead City &#8212; Weather Hold</div><div class="pace-day-dist">wait for window</div></div>
       <div class="pace-day"><div class="pace-day-num">Day ?</div><div class="pace-day-leg">Morehead City &#8594; Coinjock</div><div class="pace-day-dist">~110 nm</div></div>
-      <div class="pace-day"><div class="pace-day-num">Day ?+1</div><div class="pace-day-leg">Coinjock &#8594; Hampton VA</div><div class="pace-day-dist">~40 nm</div></div>
-      <div class="pace-day"><div class="pace-day-num">Day ?+2</div><div class="pace-day-leg">Hampton VA &#8594; Ocean City MD</div><div class="pace-day-dist">~125 nm</div></div>
+      <div class="pace-day"><div class="pace-day-num">Day ?+1</div><div class="pace-day-leg">Coinjock &#8594; Norfolk / Waterside</div><div class="pace-day-dist">~40 nm</div></div>
+      <div class="pace-day"><div class="pace-day-num">Day ?+2</div><div class="pace-day-leg">Norfolk / Waterside &#8594; Ocean City MD</div><div class="pace-day-dist">~125 nm</div></div>
       <div class="pace-day"><div class="pace-day-num">Day ?+3</div><div class="pace-day-leg">Ocean City &#8594; Barnegat Light</div><div class="pace-day-dist">~75 nm</div></div>
       <div class="pace-day"><div class="pace-day-num">2+ nights</div><div class="pace-day-leg">Barnegat Light &#127881;</div><div class="pace-day-dist">cousin visit</div></div>
       <div class="pace-day"><div class="pace-day-num">Day ?+5</div><div class="pace-day-leg">Barnegat &#8594; Port Washington</div><div class="pace-day-dist">~110 nm</div></div>
@@ -434,7 +454,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
       <div class="pace-day"><div class="pace-day-num">1+ night</div><div class="pace-day-leg">Barnegat Light &#127881;</div><div class="pace-day-dist">rest stop</div></div>
       <div class="pace-day"><div class="pace-day-num">Day 4</div><div class="pace-day-leg">Barnegat &#8594; Ocean City MD</div><div class="pace-day-dist">~75 nm</div></div>
       <div class="pace-day"><div class="pace-day-num">Day 5</div><div class="pace-day-leg">Ocean City &#8594; Hampton VA</div><div class="pace-day-dist">~125 nm</div></div>
-      <div class="pace-day"><div class="pace-day-num">Day 6</div><div class="pace-day-leg">Hampton VA &#8594; Coinjock</div><div class="pace-day-dist">~40 nm</div></div>
+      <div class="pace-day"><div class="pace-day-num">Day 6</div><div class="pace-day-leg">Norfolk / Waterside &#8594; Coinjock</div><div class="pace-day-dist">~40 nm</div></div>
       <div class="pace-day"><div class="pace-day-num">Day 7+</div><div class="pace-day-leg">Coinjock &#8212; Weather Hold</div><div class="pace-day-dist">wait for window</div></div>
       <div class="pace-day"><div class="pace-day-num">Day ?</div><div class="pace-day-leg">Coinjock &#8594; Morehead City</div><div class="pace-day-dist">~110 nm</div></div>
       <div class="pace-day"><div class="pace-day-num">Day ?+1</div><div class="pace-day-leg">Morehead &#8594; Southport</div><div class="pace-day-dist">~90 nm</div></div>
@@ -692,7 +712,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
     </div>
     <!-- NB SEG 8 COINJOCK to HAMPTON -->
     <div class="segment" id="seg8">
-      <div class="seg-header"><div class="seg-dot dot-purple">&#9319;</div><div class="seg-info"><div class="seg-name">Coinjock &#8594; Hampton VA &#8212; Bluewater</div><div class="seg-route">ICW &middot; North Landing River &#8594; Great Bridge Lock &#8594; Elizabeth River &#8594; Hampton Roads</div></div><span class="seg-dist">~40 nm</span><button class="vl-log-btn" id="vl-btn-seg8" onclick="vlOpenLog('seg8','Coinjock → Hampton VA','nb',40)">&#x1F4CB; Log</button></div>
+      <div class="seg-header"><div class="seg-dot dot-purple">&#9319;</div><div class="seg-info"><div class="seg-name">Coinjock &#8594; Norfolk &#8212; Waterside Marina</div><div class="seg-route">ICW &middot; North Landing River &#8594; Great Bridge Lock &#8594; Elizabeth River &#8594; Downtown Norfolk</div></div><span class="seg-dist">~40 nm</span><button class="vl-log-btn" id="vl-btn-seg8" onclick="vlOpenLog('seg8','Coinjock → Hampton VA','nb',40)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('sb8',this)">show bridge timing planner &#9662;</span>
       <div class="seg-body" id="sb8">
         <div class="note"><strong>Plan this leg the evening before at Coinjock.</strong> Great Bridge Lock opens northbound on the hour. Work backwards from the lock hour you want. From lock to Bluewater is all 6 kts no-wake through the Elizabeth River. <strong>Confirm bridge schedules with dock staff over dinner.</strong></div>
@@ -721,7 +741,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
             <div class="bp-row s-slow"><div class="bp-mm">MM 3.6&#8211;2.6</div><div class="bp-body"><div class="bp-name">N&amp;W + Belt Line Railroad Bridges <span class="bp-spd bp-spd-slow">&#9679; 6 kts &middot; Ch 13</span></div><div class="bp-desc">Both normally open. Announce closures on Ch 13 at 30 min, 15 min, and immediately before.</div></div></div>
             <div class="bp-row s-slow"><div class="bp-mm">MM ~1</div><div class="bp-body"><div class="bp-name">Steel Highway Bridge (VA-104) <span class="bp-spd bp-spd-slow">&#9679; 6 kts &middot; DPS if waiting</span></div><div class="bp-sched">Opens on the hour &middot; No opens weekdays 7&#8211;9 am &amp; 4&#8211;6 pm</div></div></div>
             <div class="bp-row s-go"><div class="bp-mm">MM 0</div><div class="bp-body"><div class="bp-name">Exit Elizabeth River &#8594; Hampton Roads <span class="bp-spd bp-spd-go">&#9679; On plane once clear</span></div><div class="bp-desc">Heavy Navy and commercial traffic &#8212; they have right of way. Monitor VHF 16.</div></div></div>
-            <div class="bp-row s-slow"><div class="bp-mm mm-dest">&#127937; BW</div><div class="bp-body"><div class="bp-name" style="color:#86efac">Bluewater &#8212; 15 Marina Rd, Hampton VA <span class="bp-spd bp-spd-slow">&#9679; Ease into Hampton River</span></div><div class="bp-desc">1 mile from the ICW at mouth of Hampton River. Call ahead: (757) 723-6774.</div></div></div>
+            <div class="bp-row s-slow"><div class="bp-mm mm-dest">&#127937; WS</div><div class="bp-body"><div class="bp-name" style="color:#86efac">Waterside Marina &#8212; Downtown Norfolk <span class="bp-spd bp-spd-slow">&#9679; Continue up Elizabeth River ~3 nm</span></div><div class="bp-desc">Stay on 6 kts up the Elizabeth River past Hampton Roads exit. Waterside is on your port side in downtown Norfolk. Call ahead: Dockwa. Bluewater (Hampton River, 757-723-6774) is your backup if full.</div></div></div>
           </div>
           <div class="bp-calc">
             <div class="bp-calc-title">Pick the Great Bridge Lock hour you want to make &#8212; planner works backwards to give your Coinjock departure time.</div>
@@ -731,20 +751,21 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
             <div class="bp-result" id="nb-resultBox"></div>
             <div id="nb-summaryBox"></div>
             <div id="nb-missBox"></div>
-            <div class="bp-note">Distances verified against GPS track: Coinjock (MM 50) &#8594; North Landing (MM 20) ~30 nm &middot; North Landing &#8594; Centerville (MM 7) ~13 nm &middot; Lock (MM 6) &#8594; MM 0 ~6 nm at 6 kts &middot; MM 0 &#8594; Bluewater ~3 nm. Confirm schedules with Coinjock staff the evening before.</div>
+            <div class="bp-note">Coinjock (MM 50) &#8594; North Landing (MM 20) ~30 nm &middot; North Landing &#8594; Centerville (MM 7) ~13 nm &middot; Lock (MM 6) &#8594; MM 0 ~6 nm at 6 kts &middot; MM 0 &#8594; Waterside Norfolk ~3 nm. Bluewater Hampton is ~5 nm from MM 0 via Hampton River. Confirm schedules with Coinjock staff the evening before.</div>
           </div>
         </div>
         <div class="resources" style="margin-top:12px">
           <a class="res-link key" href="https://coinjockmarina.com/coinjock-nc-icw-dockage/" target="_blank">&#8599; Coinjock bridge schedule &#9888;</a>
           <a class="res-link key" href="https://www.navcen.uscg.gov/?pageName=lnmDistrict&region=05" target="_blank">&#8599; USCG D5 LNMs &#9888;</a>
           <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8638901" target="_blank">&#8599; Hampton Roads Tides</a>
-          <a class="res-link" href="https://www.bluewateryachtcenter.com/" target="_blank">&#8599; Bluewater &#8212; (757) 723-6774</a>
+          <a class="res-link cg" href="https://dockwa.com/explore/destination/x1cw3-waterside-marina" target="_blank">&#8599; Waterside Marina Norfolk &#8212; Dockwa</a>
+          <a class="res-link" href="https://www.bluewateryachtcenter.com/" target="_blank">&#8599; Bluewater Hampton (backup) &#8212; (757) 723-6774</a>
         </div>
       </div>
     </div>
 
     <div class="segment" id="seg9">
-      <div class="seg-header"><div class="seg-dot dot-blue">&#9320;</div><div class="seg-info"><div class="seg-name">Hampton VA &#8594; Ocean City MD</div><div class="seg-route">Straight offshore &middot; Cape Henry &#8594; Chesapeake Light &#8594; Ocean City</div></div><span class="seg-dist">~125 nm</span><button class="vl-log-btn" id="vl-btn-seg9" onclick="vlOpenLog('seg9','Hampton VA → Ocean City MD','nb',125)">&#x1F4CB; Log</button></div>
+      <div class="seg-header"><div class="seg-dot dot-blue">&#9320;</div><div class="seg-info"><div class="seg-name">Hampton VA &#8594; Ocean City MD</div><div class="seg-route">Norfolk / Hampton Roads &middot; Cape Henry &#8594; Chesapeake Light &#8594; Ocean City</div></div><span class="seg-dist">~125 nm</span><button class="vl-log-btn" id="vl-btn-seg9" onclick="vlOpenLog('seg9','Hampton VA → Ocean City MD','nb',125)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('sb9',this)">show notes + resources &#9662;</span> <span class="map-toggle" onclick="toggleMap('seg9',this)">&#x1F5FA; map &#9662;</span>
       <div class="seg-body" id="sb9">
         <div class="note-blue"><strong>Outside preferred.</strong> Wants SW/W winds under 15 kts, seas under 4 ft, no NE for 24 hrs. Chincoteague Inlet VA is emergency option only.</div>
@@ -928,10 +949,10 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
     </div>
 
     <div class="segment" id="sseg5">
-      <div class="seg-header"><div class="seg-dot dot-blue">&#9316;</div><div class="seg-info"><div class="seg-name">Ocean City MD &#8594; Hampton VA &#8212; Bluewater</div><div class="seg-route">Straight offshore &middot; Ocean City &#8594; Chesapeake Light Tower &#8594; Cape Henry &#8594; Hampton Roads</div></div><span class="seg-dist">~125 nm</span><button class="vl-log-btn" id="vl-btn-sseg5" onclick="vlOpenLog('sseg5','Ocean City MD → Hampton VA','sb',125)">&#x1F4CB; Log</button></div>
+      <div class="seg-header"><div class="seg-dot dot-blue">&#9316;</div><div class="seg-info"><div class="seg-name">Ocean City MD &#8594; Norfolk &#8212; Waterside Marina</div><div class="seg-route">Straight offshore &middot; Ocean City &#8594; Chesapeake Light Tower &#8594; Cape Henry &#8594; Norfolk / Elizabeth River</div></div><span class="seg-dist">~125 nm</span><button class="vl-log-btn" id="vl-btn-sseg5" onclick="vlOpenLog('sseg5','Ocean City MD → Hampton VA','sb',125)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('ssb5',this)">show notes + resources &#9662;</span> <span class="map-toggle" onclick="toggleMap('sseg5',this)">&#x1F5FA; map &#9662;</span>
       <div class="seg-body" id="ssb5">
-        <div class="note-blue"><strong>Outside preferred.</strong> SW/W winds under 15 kts, seas under 4 ft, no NE for 24 hrs. Hampton Roads: heavy Navy and commercial traffic &#8212; monitor VHF 16, they have right of way. Bluewater: (757) 723-6774.</div>
+        <div class="note-blue"><strong>Outside preferred.</strong> SW/W winds under 15 kts, seas under 4 ft, no NE for 24 hrs. Hampton Roads: heavy Navy and commercial traffic &#8212; monitor VHF 16, right of way theirs. Continue up Elizabeth River ~3 nm to Waterside in downtown Norfolk. If Waterside is full: Bluewater Hampton (757) 723-6774.</div>
         <div class="resources">
           <a class="res-link key" href="https://www.ndbc.noaa.gov/station_page.php?station=44099" target="_blank">&#8599; Buoy 44099 Cape Henry VA &#9888;</a>
           <a class="res-link" href="https://www.ndbc.noaa.gov/station_page.php?station=44009" target="_blank">&#8599; Buoy 44009 Delaware Bay</a>
@@ -941,7 +962,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
         </div>
       
         <div class="resources" style="margin-top:8px"><a class="dockwa-btn" href="https://dockwa.com/explore/destination/4qc1q19-safe-harbor-bluewater" target="_blank">&#x1F4C5; Safe Harbor Bluewater Hampton</a></div>
-        <div class="sub-section"><span class="sub-toggle" onclick="toggleSub('things-sseg5',this)">Around Hampton VA &mdash; things to do</span><div class="sub-body" id="things-sseg5"><div class="town-block"><div class="town-block-title">&#x1F37D; Restaurants</div><div class="town-block-body">Bluewater has a restaurant on site. Riverwalk Landing in Yorktown is a short drive &mdash; great waterfront dining. Downtown Hampton has grown significantly.</div></div><div class="town-block"><div class="town-block-title">&#x1F327;&#xFE0F; Weather hold</div><div class="town-block-body">Virginia Air and Space Science Center in Hampton (free). Nauticus Museum in Norfolk (naval history, USS Wisconsin battleship). Fort Monroe &mdash; interesting Civil War history right on the water.</div></div></div></div>
+        <div class="sub-section"><span class="sub-toggle" onclick="toggleSub('things-sseg5',this)">Around Norfolk &mdash; things to do</span><div class="sub-body" id="things-sseg5"><div class="town-block"><div class="town-block-title">&#x1F37D; Restaurants</div><div class="town-block-body">Bluewater has a restaurant on site. Riverwalk Landing in Yorktown is a short drive &mdash; great waterfront dining. Downtown Hampton has grown significantly.</div></div><div class="town-block"><div class="town-block-title">&#x1F327;&#xFE0F; Weather hold</div><div class="town-block-body">Virginia Air and Space Science Center in Hampton (free). Nauticus Museum in Norfolk (naval history, USS Wisconsin battleship). Fort Monroe &mdash; interesting Civil War history right on the water.</div></div></div></div>
         <div class="map-body-wrap" id="sseg5-map-wrap">
       <div id="sseg5-map" class="leg-map"></div>
       <div class="map-caption">SB Leg 5: Ocean City MD &rarr; Hampton VA &middot; ~125 nm offshore &middot; Chesapeake Light Tower, Cape Henry, Hampton Roads</div>
@@ -951,10 +972,10 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
 
     <!-- SB SEG 6 HAMPTON to COINJOCK with bridge planner -->
     <div class="segment" id="sseg6">
-      <div class="seg-header"><div class="seg-dot dot-purple">&#9317;</div><div class="seg-info"><div class="seg-name">Hampton VA &#8212; Bluewater &#8594; Coinjock</div><div class="seg-route">ICW &middot; Elizabeth River &#8594; Great Bridge Lock (southbound :30) &#8594; Virginia Cut &#8594; North Landing River</div></div><span class="seg-dist">~40 nm</span><button class="vl-log-btn" id="vl-btn-sseg6" onclick="vlOpenLog('sseg6','Hampton VA → Coinjock','sb',40)">&#x1F4CB; Log</button></div>
+      <div class="seg-header"><div class="seg-dot dot-purple">&#9317;</div><div class="seg-info"><div class="seg-name">Norfolk &#8212; Waterside Marina &#8594; Coinjock</div><div class="seg-route">Elizabeth River &#8594; Great Bridge Lock (southbound :30) &#8594; Virginia Cut &#8594; North Landing River</div></div><span class="seg-dist">~40 nm</span><button class="vl-log-btn" id="vl-btn-sseg6" onclick="vlOpenLog('sseg6','Hampton VA → Coinjock','sb',40)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('ssb6',this)">show bridge timing planner &#9662;</span>
       <div class="seg-body" id="ssb6">
-        <div class="note"><strong>Plan this leg the evening before at Bluewater.</strong> Great Bridge Lock opens southbound at :30 past the hour. Work backwards from the lock half-hour you want. <strong>Call Coinjock and order the prime rib before you arrive: (252) 453-3271.</strong></div>
+        <div class="note"><strong>Plan this leg the evening before at Waterside.</strong> Depart Norfolk, head south down Elizabeth River toward the lock. Great Bridge Lock opens southbound at :30 past the hour. Work backwards from the lock half-hour you want. <strong>Call Coinjock and order the prime rib before you arrive: (252) 453-3271.</strong></div>
         <div class="bridge-planner">
           <div class="bp-legend">
             <div class="bp-leg"><div class="bp-dot bp-dot-go"></div> On plane</div>
@@ -964,8 +985,8 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
           </div>
           <div class="bp-gps-note">&#128205; Bridge locations confirmed against GPS track from southbound passage. Southbound you pass Gilmerton / NS#7 BEFORE the lock (not after). Same 6 kts rule &#8212; this is the stretch where you got called out on the radio.</div>
           <div class="bp-strip">
-            <div class="bp-row s-slow"><div class="bp-mm">Bluewater</div><div class="bp-body"><div class="bp-name">Depart Bluewater &#8212; Hampton River <span class="bp-spd bp-spd-slow">&#9679; 6 kts leaving Hampton River</span></div><div class="bp-desc">Head south from Hampton River into Hampton Roads. Cross the Roads at cruise speed (~2 nm), then enter the Elizabeth River at MM 0. 6 kts from MM 0 onward &#8212; no exceptions.</div></div></div>
-            <div class="bp-row s-go"><div class="bp-mm">Hampton Roads</div><div class="bp-body"><div class="bp-name">Cross Hampton Roads <span class="bp-spd bp-spd-go">&#9679; On plane</span></div><div class="bp-desc">~2 nm open water. Heavy Navy and commercial traffic &#8212; they have right of way. Monitor VHF 16.</div></div></div>
+            <div class="bp-row s-slow"><div class="bp-mm">Waterside</div><div class="bp-body"><div class="bp-name">Depart Waterside Marina &#8212; Downtown Norfolk <span class="bp-spd bp-spd-slow">&#9679; 6 kts down Elizabeth River</span></div><div class="bp-desc">Head south down the Elizabeth River from Waterside. Already inside the river &#8212; 6 kts the whole way. No need to cross Hampton Roads. Continue south through all bridges to the lock.</div></div></div>
+            
             <div class="bp-divider"><div class="bp-div-line"></div><div class="bp-div-lbl">Elizabeth River &#8212; 6 kts only, southbound &#8212; Ch 13 on continuously from MM 0</div><div class="bp-div-line"></div></div>
             <div class="bp-row s-slow"><div class="bp-mm">MM ~1</div><div class="bp-body"><div class="bp-name">Steel Highway Bridge (VA-104) <span class="bp-spd bp-spd-slow">&#9679; 6 kts &middot; DPS if waiting</span></div><div class="bp-sched">Opens on the hour &middot; No opens weekdays 7&#8211;9 am &amp; 4&#8211;6 pm</div></div></div>
             <div class="bp-row s-slow"><div class="bp-mm">MM 2.6&#8211;3.6</div><div class="bp-body"><div class="bp-name">Belt Line + N&amp;W Railroad Bridges <span class="bp-spd bp-spd-slow">&#9679; 6 kts &middot; Ch 13</span></div><div class="bp-desc">Both normally open. Announce closures on Ch 13 at 30 min, 15 min, and immediately before closing.</div></div></div>
@@ -988,14 +1009,15 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
             <div class="bp-result" id="sb-resultBox"></div>
             <div id="sb-summaryBox"></div>
             <div id="sb-missBox"></div>
-            <div class="bp-note">Southbound: Bluewater &#8594; Hampton Roads (~3 nm) &middot; Hampton Roads cross (~2 nm at cruise) &middot; MM 0 &#8594; NS#7/Gilmerton (MM 5.8) ~5 nm at 6 kts &middot; Gilmerton &#8594; Great Bridge Lock (MM 6) ~0.2 nm &middot; Lock &#8594; Centerville (MM 7) ~1 nm &middot; Centerville &#8594; North Landing (MM 20) ~13 nm &middot; North Landing &#8594; Coinjock (MM 50) ~30 nm. Confirm bridge schedules with Bluewater dock staff. Check USCG D5 LNMs the morning of.</div>
+            <div class="bp-note">Southbound: Waterside Norfolk &#8594; NS#7/Gilmerton (MM 5.8) ~3 nm at 6 kts down Elizabeth River &middot; Gilmerton &#8594; Great Bridge Lock (MM 6) ~0.2 nm &middot; Lock &#8594; Centerville (MM 7) ~1 nm &middot; Centerville &#8594; North Landing (MM 20) ~13 nm &middot; North Landing &#8594; Coinjock (MM 50) ~30 nm. Confirm bridge schedules with Bluewater dock staff. Check USCG D5 LNMs the morning of.</div>
           </div>
         </div>
         <div class="resources" style="margin-top:12px">
           <a class="res-link key" href="https://coinjockmarina.com/coinjock-nc-icw-dockage/" target="_blank">&#8599; Coinjock bridge schedule &#9888;</a>
           <a class="res-link key" href="https://www.navcen.uscg.gov/?pageName=lnmDistrict&region=05" target="_blank">&#8599; USCG D5 LNMs &#9888;</a>
           <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8638901" target="_blank">&#8599; Hampton Roads Tides</a>
-          <a class="res-link" href="https://www.bluewateryachtcenter.com/" target="_blank">&#8599; Bluewater &#8212; (757) 723-6774</a>
+          <a class="res-link cg" href="https://dockwa.com/explore/destination/x1cw3-waterside-marina" target="_blank">&#8599; Waterside Marina Norfolk &#8212; Dockwa</a>
+          <a class="res-link" href="https://www.bluewateryachtcenter.com/" target="_blank">&#8599; Bluewater Hampton (backup) &#8212; (757) 723-6774</a>
         </div>
       </div>
     </div>
@@ -1151,15 +1173,56 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
       <span style="font-size:14px">&#x1F4D6;</span>
       <span class="vl-log-hdr-title">Voyage Log</span>
       <span class="vl-log-hdr-count" id="vl-log-count"></span>
+      <button class="vl-log-btn" style="margin-left:auto;margin-right:8px;font-size:10px;padding:3px 10px;" onclick="event.stopPropagation();vlOpenManual()">&#x270F;&#xFE0F; Add entry</button>
       <span style="font-size:10px;color:var(--text-dim)" id="vl-log-chev">&#9660;</span>
     </div>
     <div class="vl-log-body" id="vl-log-body">
       <div class="vl-loading" id="vl-log-content">Loading entries...</div>
+      <!-- ANALYTICS -->
+      <div class="vl-analytics">
+        <div class="vl-analytics-hdr" onclick="vlToggleAnalytics()">
+          <span style="font-size:13px">&#x1F4CA;</span>
+          <span class="vl-analytics-title">Analytics</span>
+          <span style="font-size:10px;color:var(--text-dim)" id="vl-analytics-chev">&#9660;</span>
+        </div>
+        <div class="vl-analytics-body" id="vl-analytics-body">
+          <!-- Summary stats -->
+          <div class="vl-stat-row" id="vl-stat-row"></div>
+          <!-- Charts -->
+          <div class="vl-chart-grid" id="vl-chart-grid">
+            <div class="vl-chart-card vl-chart-full">
+              <div class="vl-chart-title">Fuel cost per leg ($)</div>
+              <div class="vl-chart-wrap"><canvas id="chart-fuel-cost"></canvas></div>
+            </div>
+            <div class="vl-chart-card">
+              <div class="vl-chart-title">Price per gallon over time</div>
+              <div class="vl-chart-wrap"><canvas id="chart-price-gal"></canvas></div>
+            </div>
+            <div class="vl-chart-card">
+              <div class="vl-chart-title">Fuel burn (gal / nm)</div>
+              <div class="vl-chart-wrap"><canvas id="chart-burn-rate"></canvas></div>
+            </div>
+            <div class="vl-chart-card">
+              <div class="vl-chart-title">Actual vs. planned nm</div>
+              <div class="vl-chart-wrap"><canvas id="chart-nm"></canvas></div>
+            </div>
+            <div class="vl-chart-card">
+              <div class="vl-chart-title">Engine hours per leg (port)</div>
+              <div class="vl-chart-wrap"><canvas id="chart-eng-hrs"></canvas></div>
+            </div>
+          </div>
+          <div class="vl-no-data" id="vl-no-data" style="display:none">
+            Not enough data yet &#8212; keep logging. Analytics will appear once you have entries with fuel and engine hour data.
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
   <div style="text-align:center;font-size:10px;color:var(--text-dim)" id="footer-txt">Formula 40PC &middot; IPS500/D6 &middot; T4 props &middot; ~200 nm range &middot; Depart June 1, 2026 &middot; Sunset Harbour Miami Beach &#8594; East Falmouth MA</div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script>
 'use strict';
 var currentDir='nb',currentStop=-1,sbCurrentStop=-1,selectedOpt=0,plannerOpen=false;
@@ -1498,6 +1561,9 @@ async function vlWriteLog(logData){
 
 /* ── open/close modal ── */
 function vlOpenLog(legId, legName, direction, plannedNm){
+  // Hide manual leg field (only shown in manual mode)
+  var mls = document.getElementById('vl-manual-leg-section');
+  if(mls) mls.style.display = 'none';
   if(!vlGetToken()){
     if(confirm('No GitHub token saved yet. Open settings to add one?')) vlOpenSettings();
     return;
@@ -1534,6 +1600,42 @@ function vlOpenLog(legId, legName, direction, plannedNm){
 }
 function vlClose(){ document.getElementById('vl-overlay').classList.remove('open'); }
 function vlOverlayClick(e){ if(e.target===document.getElementById('vl-overlay')) vlClose(); }
+
+function vlOpenManual(){
+  if(!vlGetToken()){
+    if(confirm('No GitHub token saved yet. Open settings to add one?')) vlOpenSettings();
+    return;
+  }
+  // Manual mode: show leg name field, clear pre-fills
+  vlCurrentLeg = {legId:'manual-'+Date.now(), legName:'', direction:'other', plannedNm:0, manual:true};
+  document.getElementById('vl-modal-title').textContent = 'Add log entry';
+  document.getElementById('vl-modal-sub').textContent = 'Backfill a past leg or any trip — set the date to when it actually happened';
+  document.getElementById('vl-manual-leg-section').style.display = 'block';
+  document.getElementById('vl-planned-nm').textContent = '';
+  // Reset form
+  ['vl-manual-leg','vl-depart','vl-arrive','vl-nm','vl-fuel-gal','vl-fuel-price',
+   'vl-hrs-p-start','vl-hrs-p-end','vl-hrs-s-start','vl-hrs-s-end','vl-fault-text','vl-notes'].forEach(function(id){
+    var el=document.getElementById(id); if(el) el.value='';
+  });
+  ['vl-wind-speed','vl-wind-dir','vl-seas','vl-sky','vl-vis','vl-manual-dir'].forEach(function(id){
+    document.querySelectorAll('#'+id+' .vl-opt').forEach(function(b){ b.classList.remove('vl-sel','vl-sel-b','vl-sel-p'); });
+  });
+  // Default crew to Solo, faults to None, direction to Northbound
+  var solo=document.querySelector('#vl-crew .vl-opt'); if(solo) solo.classList.add('vl-sel');
+  var none=document.querySelector('#vl-faults .vl-opt'); if(none) none.classList.add('vl-sel');
+  var nb=document.querySelector('#vl-manual-dir .vl-opt'); if(nb) nb.classList.add('vl-sel');
+  document.getElementById('vl-fault-detail').classList.remove('open');
+  // Default date to today
+  var today=new Date(); var y=today.getFullYear(); var m=String(today.getMonth()+1).padStart(2,'0'); var d=String(today.getDate()).padStart(2,'0');
+  document.getElementById('vl-date').value = y+'-'+m+'-'+d;
+  document.getElementById('vl-ec-ref').value = y+'-'+m+'-'+d;
+  document.getElementById('vl-duration').textContent='';
+  document.getElementById('vl-fuel-cost').textContent='';
+  document.getElementById('vl-avg-speed').textContent='—';
+  document.getElementById('vl-status').textContent='';
+  document.getElementById('vl-submit-btn').disabled=false;
+  document.getElementById('vl-overlay').classList.add('open');
+}
 
 /* ── form helpers ── */
 function vlSel(btn, groupId, selClass){
@@ -1581,8 +1683,21 @@ async function vlSubmit(){
   var fuelGal=parseFloat(document.getElementById('vl-fuel-gal').value)||null;
   var fuelPrice=parseFloat(document.getElementById('vl-fuel-price').value)||null;
   var faultsSel=vlGetSel('vl-faults');
+  // In manual mode, use the typed leg name
+  var manualLegEl = document.getElementById('vl-manual-leg');
+  var manualDirSel = vlGetSel('vl-manual-dir');
+  if(vlCurrentLeg.manual && manualLegEl && manualLegEl.value.trim()){
+    vlCurrentLeg.legName = manualLegEl.value.trim();
+    vlCurrentLeg.direction = manualDirSel ? manualDirSel.toLowerCase().replace('northbound','nb').replace('southbound','sb').replace('other','other') : 'other';
+    vlCurrentLeg.legId = 'manual';
+  }
+  if(vlCurrentLeg.manual && !vlCurrentLeg.legName){
+    document.getElementById('vl-status').textContent = 'Please enter a leg name above.';
+    document.getElementById('vl-submit-btn').disabled=false;
+    return;
+  }
   var entry={
-    id: vlCurrentLeg.legId+'-'+document.getElementById('vl-date').value,
+    id: vlCurrentLeg.legId+'-'+document.getElementById('vl-date').value+'-'+Date.now().toString().slice(-4),
     date: document.getElementById('vl-date').value,
     leg: vlCurrentLeg.legName,
     leg_id: vlCurrentLeg.legId,
@@ -1620,8 +1735,8 @@ async function vlSubmit(){
   if(ok){
     vlLogEntries = logData.entries;
     statusEl.textContent = '\u2713 Saved! Entry logged for '+entry.date+'.';
-    // mark the segment button as logged
-    var logBtn = document.getElementById('vl-btn-'+entry.leg_id);
+    // mark the segment button as logged (skip for manual entries)
+    var logBtn = entry.leg_id !== 'manual' ? document.getElementById('vl-btn-'+entry.leg_id) : null;
     if(logBtn){
       logBtn.outerHTML = '<span class="vl-logged" id="vl-btn-'+entry.leg_id+'">\u2713 '+entry.date+'</span>';
     }
@@ -1727,14 +1842,14 @@ var MAP_DEFS = {
   'seg4':  {coords:[[32.77,-79.93,'Charleston','start'],[33.92,-78.00,'Southport / Cape Fear','end']], center:[33.3,-79.0], zoom:7},
   'seg5':  {coords:[[33.92,-78.00,'Southport','start'],[34.19,-77.80,'Masonboro Inlet','waypoint'],[34.72,-76.69,'Morehead City','end']], center:[34.3,-77.5], zoom:8},
   'seg7':  {coords:[[34.72,-76.69,'Morehead City','start'],[35.10,-76.43,'Neuse River','waypoint'],[35.90,-75.90,'Pamlico Sound','waypoint'],[36.05,-75.85,'Alligator River','waypoint'],[36.35,-75.99,'Coinjock','end']], center:[35.5,-76.3], zoom:7},
-  'seg9':  {coords:[[37.02,-76.34,'Hampton VA','start'],[36.97,-75.72,'Cape Henry','waypoint'],[37.01,-74.74,'Chesapeake Light','waypoint'],[38.33,-75.09,'Ocean City MD','end']], center:[37.7,-75.5], zoom:7},
+  'seg9':  {coords:[[36.85,-76.30,'Waterside Norfolk','start'],[36.97,-75.72,'Cape Henry','waypoint'],[37.01,-74.74,'Chesapeake Light','waypoint'],[38.33,-75.09,'Ocean City MD','end']], center:[37.7,-75.5], zoom:7},
   'seg10': {coords:[[38.33,-75.09,'Ocean City MD','start'],[38.97,-74.96,'Cape May (opt)','waypoint'],[39.76,-74.11,'Barnegat Light','end']], center:[39.0,-74.7], zoom:7},
   'seg12': {coords:[[39.76,-74.11,'Barnegat Light','start'],[40.45,-73.85,'Sandy Hook','waypoint'],[40.83,-73.70,'Port Washington','end']], center:[40.3,-74.0], zoom:8},
   'seg13': {coords:[[40.83,-73.70,'Port Washington','start'],[41.23,-72.05,'The Race','waypoint'],[41.62,-70.60,'Falmouth MA','end']], center:[41.2,-71.7], zoom:7},
   'sseg1': {coords:[[41.62,-70.60,'Falmouth MA','start'],[41.23,-72.05,'The Race','waypoint'],[40.83,-73.70,'Port Washington','end']], center:[41.2,-71.7], zoom:7},
   'sseg2': {coords:[[40.83,-73.70,'Port Washington','start'],[40.45,-73.85,'Sandy Hook','waypoint'],[39.76,-74.11,'Barnegat Light','end']], center:[40.3,-74.0], zoom:8},
   'sseg4': {coords:[[39.76,-74.11,'Barnegat Light','start'],[38.97,-74.96,'Cape May (opt)','waypoint'],[38.33,-75.09,'Ocean City MD','end']], center:[39.0,-74.7], zoom:7},
-  'sseg5': {coords:[[38.33,-75.09,'Ocean City MD','start'],[37.01,-74.74,'Chesapeake Light','waypoint'],[36.97,-75.72,'Cape Henry','waypoint'],[37.02,-76.34,'Hampton VA','end']], center:[37.7,-75.5], zoom:7},
+  'sseg5': {coords:[[38.33,-75.09,'Ocean City MD','start'],[37.01,-74.74,'Chesapeake Light','waypoint'],[36.97,-75.72,'Cape Henry','waypoint'],[36.85,-76.30,'Waterside Norfolk','end']], center:[37.7,-75.5], zoom:7},
   'sseg8': {coords:[[36.35,-75.99,'Coinjock','start'],[35.90,-75.90,'Albemarle Sound','waypoint'],[35.10,-76.43,'Pamlico Sound','waypoint'],[34.72,-76.69,'Morehead City','end']], center:[35.5,-76.3], zoom:7},
   'sseg9': {coords:[[34.72,-76.69,'Morehead City','start'],[34.19,-77.80,'Masonboro Inlet','waypoint'],[33.92,-78.00,'Southport','end']], center:[34.3,-77.5], zoom:8},
   'sseg10':{coords:[[33.92,-78.00,'Southport','start'],[32.77,-79.93,'Charleston','end']], center:[33.3,-79.0], zoom:7},
@@ -1782,6 +1897,79 @@ function initMap(segId){
   setTimeout(function(){ map.invalidateSize(); }, 100);
 }
 
+/* ════════════════════════════════════════════
+   ANALYTICS
+════════════════════════════════════════════ */
+var vlAnalyticsOpen = false;
+var vlChartInstances = {};
+
+function vlToggleAnalytics(){
+  vlAnalyticsOpen = !vlAnalyticsOpen;
+  document.getElementById('vl-analytics-body').classList.toggle('open', vlAnalyticsOpen);
+  document.getElementById('vl-analytics-chev').textContent = vlAnalyticsOpen ? '\u25B4' : '\u25BE';
+  if(vlAnalyticsOpen) vlRenderAnalytics();
+}
+
+function vlRenderAnalytics(){
+  var entries = vlLogEntries;
+  var statRow = document.getElementById('vl-stat-row');
+  var noData = document.getElementById('vl-no-data');
+  var chartGrid = document.getElementById('vl-chart-grid');
+  var hasFuelCost = entries.some(function(e){ return e.fuel_cost > 0; });
+  var hasNm = entries.some(function(e){ return e.actual_nm > 0; });
+  var hasEngHrs = entries.some(function(e){ return e.engine_hours_port_end && e.engine_hours_port_start; });
+  if(!entries || entries.length === 0 || (!hasFuelCost && !hasNm && !hasEngHrs)){
+    if(statRow) statRow.innerHTML = '';
+    if(noData) noData.style.display = 'block';
+    if(chartGrid) chartGrid.style.display = 'none';
+    return;
+  }
+  if(noData) noData.style.display = 'none';
+  if(chartGrid) chartGrid.style.display = 'grid';
+  var sorted = entries.slice().sort(function(a,b){ return a.date.localeCompare(b.date); });
+  // Summary stats
+  var totalFuel = entries.reduce(function(s,e){ return s+(e.fuel_cost||0); },0);
+  var totalNm = entries.reduce(function(s,e){ return s+(e.actual_nm||0); },0);
+  var totalGal = entries.reduce(function(s,e){ return s+(e.fuel_used_gal||0); },0);
+  var engE = entries.filter(function(e){ return e.engine_hours_port_end&&e.engine_hours_port_start; });
+  var totalEngHrs = engE.reduce(function(s,e){ return s+(e.engine_hours_port_end-e.engine_hours_port_start); },0);
+  var priceE = entries.filter(function(e){ return e.fuel_price_per_gal>0; });
+  var avgPrice = priceE.length ? priceE.reduce(function(s,e){ return s+(e.fuel_price_per_gal||0); },0)/priceE.length : 0;
+  var stats = [];
+  if(totalFuel>0) stats.push({val:'$'+totalFuel.toFixed(0),lbl:'Total fuel cost'});
+  if(totalNm>0) stats.push({val:totalNm.toFixed(0)+' nm',lbl:'Total nm logged'});
+  if(totalGal>0) stats.push({val:totalGal.toFixed(0)+' gal',lbl:'Total fuel used'});
+  if(totalEngHrs>0) stats.push({val:totalEngHrs.toFixed(1)+' hrs',lbl:'Engine hours'});
+  if(avgPrice>0) stats.push({val:'$'+avgPrice.toFixed(2),lbl:'Avg $/gal'});
+  stats.push({val:entries.length.toString(),lbl:'Legs logged'});
+  if(statRow) statRow.innerHTML=stats.map(function(s){ return '<div class="vl-stat"><div class="vl-stat-val">'+s.val+'</div><div class="vl-stat-lbl">'+s.lbl+'</div></div>'; }).join('');
+  // Chart helpers
+  var TA='rgba(13,148,136,0.8)',TB='rgba(13,148,136,0.2)',AA='rgba(245,158,11,0.8)',AB='rgba(245,158,11,0.2)',GA='rgba(34,197,94,0.8)',BA='rgba(59,130,246,0.8)',TX='#94a3b8',GR='rgba(255,255,255,0.06)';
+  var bOpts={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'rgba(17,34,64,0.95)',titleColor:'#e2e8f0',bodyColor:'#94a3b8',borderColor:'rgba(255,255,255,0.1)',borderWidth:1}},scales:{x:{ticks:{color:TX,font:{size:9},maxRotation:35},grid:{color:GR}},y:{ticks:{color:TX,font:{size:9}},grid:{color:GR}}}};
+  function dc(id){if(vlChartInstances[id]){vlChartInstances[id].destroy();delete vlChartInstances[id];}}
+  function sl(leg){return leg.replace('Miami Beach','MIA').replace('Ft. Pierce','FTP').replace('Fort Pierce','FTP').replace('St. Augustine','StAug').replace('Fernandina','Fern').replace('Charleston','CHS').replace('Southport','SPT').replace('Morehead City','MHC').replace('Coinjock','CJK').replace('Hampton VA','HVA').replace('Norfolk','NFK').replace('Waterside','NFK').replace('Ocean City MD','OCI').replace('Cape May','CPM').replace('Barnegat Light','BNL').replace('Barnegat','BNL').replace('Port Washington','PWY').replace('Falmouth MA','FAL').replace('Falmouth','FAL').replace(' \u2192 ','\u2192').replace(' -> ','\u2192').replace('Weather Hold','Hold');}
+  // 1. Fuel cost per leg
+  var fc=sorted.filter(function(e){return e.fuel_cost>0;});
+  dc('fuel-cost');
+  if(fc.length){var ctx=document.getElementById('chart-fuel-cost');if(ctx){vlChartInstances['fuel-cost']=new Chart(ctx,{type:'bar',data:{labels:fc.map(function(e){return sl(e.leg)+' '+e.date.slice(0,7);}),datasets:[{data:fc.map(function(e){return e.fuel_cost;}),backgroundColor:TA,borderRadius:3}]},options:Object.assign({},bOpts,{plugins:Object.assign({},bOpts.plugins,{tooltip:{callbacks:{label:function(c){return '$'+c.parsed.y.toFixed(2);}}}})})});}}
+  // 2. Price per gallon over time
+  var pg=sorted.filter(function(e){return e.fuel_price_per_gal>0;});
+  dc('price-gal');
+  if(pg.length){var ctx=document.getElementById('chart-price-gal');if(ctx){vlChartInstances['price-gal']=new Chart(ctx,{type:'line',data:{labels:pg.map(function(e){return e.date.slice(0,7)+' '+sl(e.leg).split('\u2192')[0];}),datasets:[{data:pg.map(function(e){return e.fuel_price_per_gal;}),borderColor:AA,backgroundColor:AB,pointBackgroundColor:AA,pointRadius:4,tension:0.3,fill:true}]},options:Object.assign({},bOpts,{plugins:Object.assign({},bOpts.plugins,{tooltip:{callbacks:{label:function(c){return '$'+c.parsed.y.toFixed(2)+'/gal';}}}})})});}}
+  // 3. Burn rate gal/nm
+  var br=sorted.filter(function(e){return e.fuel_used_gal>0&&e.actual_nm>0;});
+  dc('burn-rate');
+  if(br.length){var ctx=document.getElementById('chart-burn-rate');if(ctx){vlChartInstances['burn-rate']=new Chart(ctx,{type:'bar',data:{labels:br.map(function(e){return sl(e.leg);}),datasets:[{data:br.map(function(e){return Math.round((e.fuel_used_gal/e.actual_nm)*100)/100;}),backgroundColor:GA,borderRadius:3}]},options:Object.assign({},bOpts,{plugins:Object.assign({},bOpts.plugins,{tooltip:{callbacks:{label:function(c){return c.parsed.y.toFixed(2)+' gal/nm';}}}})})});}}
+  // 4. Actual vs planned nm
+  var nm=sorted.filter(function(e){return e.actual_nm>0&&e.planned_nm>0;});
+  dc('nm');
+  if(nm.length){var ctx=document.getElementById('chart-nm');if(ctx){vlChartInstances['nm']=new Chart(ctx,{type:'bar',data:{labels:nm.map(function(e){return sl(e.leg);}),datasets:[{label:'Actual',data:nm.map(function(e){return e.actual_nm;}),backgroundColor:TA,borderRadius:3},{label:'Planned',data:nm.map(function(e){return e.planned_nm;}),backgroundColor:'rgba(255,255,255,0.12)',borderRadius:3}]},options:Object.assign({},bOpts,{plugins:Object.assign({},bOpts.plugins,{legend:{display:true,labels:{color:TX,font:{size:9}}}})})});}}
+  // 5. Engine hours per leg
+  var eh=sorted.filter(function(e){return e.engine_hours_port_end&&e.engine_hours_port_start;});
+  dc('eng-hrs');
+  if(eh.length){var ctx=document.getElementById('chart-eng-hrs');if(ctx){vlChartInstances['eng-hrs']=new Chart(ctx,{type:'bar',data:{labels:eh.map(function(e){return sl(e.leg);}),datasets:[{data:eh.map(function(e){return Math.round((e.engine_hours_port_end-e.engine_hours_port_start)*10)/10;}),backgroundColor:BA,borderRadius:3}]},options:Object.assign({},bOpts,{plugins:Object.assign({},bOpts.plugins,{tooltip:{callbacks:{label:function(c){return c.parsed.y.toFixed(1)+' hrs';}}}})})});}}
+}
+
 </script>
 
 <!-- VOYAGE LOG MODAL -->
@@ -1795,6 +1983,22 @@ function initMap(segId){
       <button class="vl-close" onclick="vlClose()">&times;</button>
     </div>
     <div class="vl-form">
+
+      <!-- MANUAL LEG NAME (shown only in manual entry mode) -->
+      <div class="vl-section" id="vl-manual-leg-section" style="display:none">
+        <div class="vl-section-title">Leg / Trip name</div>
+        <div class="vl-row">
+          <input type="text" id="vl-manual-leg" class="vl-inp vl-inp-wide" placeholder="e.g. Miami Beach &rarr; Ft. Pierce &middot; Jun 1 2024  or  Bahamas run &middot; May 2023">
+        </div>
+        <div class="vl-row" style="margin-top:-4px">
+          <span class="vl-lbl">Direction</span>
+          <div class="vl-btn-group" id="vl-manual-dir">
+            <button class="vl-opt vl-sel" onclick="vlSel(this,'vl-manual-dir','vl-sel')">Northbound</button>
+            <button class="vl-opt" onclick="vlSel(this,'vl-manual-dir','vl-sel')">Southbound</button>
+            <button class="vl-opt" onclick="vlSel(this,'vl-manual-dir','vl-sel')">Other</button>
+          </div>
+        </div>
+      </div>
 
       <!-- DATE + TIMES -->
       <div class="vl-section">
@@ -1964,6 +2168,5 @@ function initMap(segId){
     </div>
   </div>
 </div>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 </body>
 </html>
