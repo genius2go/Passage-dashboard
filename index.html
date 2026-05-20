@@ -1945,9 +1945,13 @@ function initMap(segId){
   if(!mapEl) return;
 
   var map = L.map(mapEl, {zoomControl:true, attributionControl:true}).setView(def.center, def.zoom);
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-    attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
-    subdomains:'abcd', maxZoom:19
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    maxZoom:18
+  }).addTo(map);
+  L.tileLayer('https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png', {
+    attribution:'&copy; <a href="https://www.openseamap.org">OpenSeaMap</a>',
+    maxZoom:18
   }).addTo(map);
 
   var coords = def.coords;
