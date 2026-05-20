@@ -1945,8 +1945,7 @@ function initMap(segId){
     }).addTo(map);
     marker.bindPopup('<strong>'+label+'</strong>');
     if(type==='start'||type==='end'){
-      L.tooltip({permanent:true, direction:'top', offset:[0,-8], className:'',
-        opacity:0.9}).setContent('<span style="font-size:10px;font-weight:700;color:'+color+'">'+label+'</span>').addTo(map).setLatLng([lat,lng]);
+      marker.bindTooltip('<span style="font-size:10px;font-weight:700;color:'+color+'">'+label+'</span>', {permanent:true, direction:'top', offset:[0,-8], opacity:0.9});
     }
   });
 
