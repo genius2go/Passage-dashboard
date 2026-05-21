@@ -1573,7 +1573,10 @@ async function vlFetchLog(){
     if(!resp.ok) return null;
     var data = await resp.json();
     vlLogSha = data.sha;
-    var decoded = decodeURIComponent(escape(atob(data.content.replace(/\n/g,''))));
+    var bin = atob(data.content.replace(/\n/g,''));
+    var bytes = new Uint8Array(bin.length);
+    for(var i=0;i<bin.length;i++){ bytes[i]=bin.charCodeAt(i); }
+    var decoded = new TextDecoder('utf-8').decode(bytes);
     return JSON.parse(decoded);
   } catch(e){ return null; }
 }
@@ -1581,7 +1584,10 @@ async function vlFetchLog(){
 async function vlWriteLog(logData){
   var token = vlGetToken();
   if(!token) return false;
-  var content = btoa(unescape(encodeURIComponent(JSON.stringify(logData, null, 2))));
+  var utf8 = new TextEncoder().encode(JSON.stringify(logData, null, 2));
+  var binStr = '';
+  for(var bi=0;bi<utf8.length;bi++){ binStr += String.fromCharCode(utf8[bi]); }
+  var content = btoa(binStr);
   var body = {message:'Voyage log entry: '+new Date().toISOString().split('T')[0], content:content, branch:VL_BRANCH};
   if(vlLogSha) body.sha = vlLogSha;
   try {
@@ -2117,9 +2123,9 @@ function vlRenderAnalytics(){
           <span class="vl-lbl">Wind speed</span>
           <div class="vl-btn-group" id="vl-wind-speed">
             <button class="vl-opt" onclick="vlSel(this,'vl-wind-speed','vl-sel-b')">Calm</button>
-            <button class="vl-opt" onclick="vlSel(this,'vl-wind-speed','vl-sel-b')">5&ndash;10</button>
-            <button class="vl-opt" onclick="vlSel(this,'vl-wind-speed','vl-sel-b')">10&ndash;15</button>
-            <button class="vl-opt" onclick="vlSel(this,'vl-wind-speed','vl-sel-b')">15&ndash;20</button>
+            <button class="vl-opt" onclick="vlSel(this,'vl-wind-speed','vl-sel-b')">5-10</button>
+            <button class="vl-opt" onclick="vlSel(this,'vl-wind-speed','vl-sel-b')">10-15</button>
+            <button class="vl-opt" onclick="vlSel(this,'vl-wind-speed','vl-sel-b')">15-20</button>
             <button class="vl-opt" onclick="vlSel(this,'vl-wind-speed','vl-sel-b')">20+</button>
           </div>
         </div>
@@ -2141,9 +2147,9 @@ function vlRenderAnalytics(){
           <span class="vl-lbl">Seas</span>
           <div class="vl-btn-group" id="vl-seas">
             <button class="vl-opt" onclick="vlSel(this,'vl-seas','vl-sel-p')">Flat</button>
-            <button class="vl-opt" onclick="vlSel(this,'vl-seas','vl-sel-p')">1&ndash;2 ft</button>
-            <button class="vl-opt" onclick="vlSel(this,'vl-seas','vl-sel-p')">2&ndash;3 ft</button>
-            <button class="vl-opt" onclick="vlSel(this,'vl-seas','vl-sel-p')">3&ndash;4 ft</button>
+            <button class="vl-opt" onclick="vlSel(this,'vl-seas','vl-sel-p')">1-2 ft</button>
+            <button class="vl-opt" onclick="vlSel(this,'vl-seas','vl-sel-p')">2-3 ft</button>
+            <button class="vl-opt" onclick="vlSel(this,'vl-seas','vl-sel-p')">3-4 ft</button>
             <button class="vl-opt" onclick="vlSel(this,'vl-seas','vl-sel-p')">4+ ft</button>
           </div>
         </div>
