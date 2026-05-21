@@ -1,0 +1,35 @@
+{
+  "entries": [
+    {
+      "id": "manual-2025-05-28-3257",
+      "date": "2025-05-28",
+      "leg": "Atlantic City, NJ to Barnegat Light, NJ May 28, 2025",
+      "leg_id": "manual",
+      "direction": "nb",
+      "depart_time": "08:06",
+      "arrive_time": "10:25",
+      "duration_hrs": 2.316666666666667,
+      "planned_nm": 0,
+      "actual_nm": 39.5,
+      "avg_speed_kts": 17.1,
+      "fuel_used_gal": 48.9,
+      "fuel_price_per_gal": null,
+      "fuel_cost": null,
+      "engine_hours_port_start": 845,
+      "engine_hours_port_end": null,
+      "engine_hours_stbd_start": 845,
+      "engine_hours_stbd_end": null,
+      "wind_speed": "10–15",
+      "wind_dir": "E",
+      "seas": "1–2 ft",
+      "sky": "Rain",
+      "visibility": "Haze",
+      "crew": "Solo",
+      "faults": false,
+      "fault_notes": null,
+      "notes": "Gloomy/rainy day as documented by a video in my Photos.app. I also have a crude video from Marine Traffic.",
+      "ec_ref": "2025-05-28",
+      "logged_at": "2026-05-21T20:02:43.258Z"
+    }
+  ]
+}
