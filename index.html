@@ -278,6 +278,10 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
 .vl-entry-date{font-size:10px;font-weight:700;color:var(--teal-light);flex-shrink:0;}
 .vl-entry-leg{font-size:12px;font-weight:600;color:var(--text);flex:1;}
 .vl-entry-nm{font-size:10px;font-weight:700;color:var(--green);background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);padding:1px 6px;border-radius:4px;flex-shrink:0;}
+.vl-entry-actions{margin-left:auto;display:flex;gap:4px;flex-shrink:0;}
+.vl-entry-act{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:4px;padding:2px 7px;font-size:11px;cursor:pointer;line-height:1.4;transition:all 0.15s;}
+.vl-entry-act:hover{background:rgba(255,255,255,0.12);}
+.vl-entry-del:hover{background:rgba(239,68,68,0.18);border-color:rgba(239,68,68,0.4);}
 .vl-entry-meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:2px;}
 .vl-entry-chip{font-size:10px;color:var(--text-muted);}
 .vl-entry-notes{font-size:11px;color:var(--text-muted);font-style:italic;margin-top:3px;}
@@ -1527,6 +1531,7 @@ var VL_FILE = 'log.json';
 var VL_BRANCH = 'main';
 var vlCurrentLeg = null;
 var vlLogEntries = [];
+var vlEditId = null;
 var vlLogSha = null;
 var vlLogOpen = false;
 
@@ -1640,6 +1645,8 @@ function vlOpenLog(legId, legName, direction, plannedNm){
   if(existing){
     document.getElementById('vl-status').textContent = 'Note: you already have an entry for this leg today. Saving will add another.';
   }
+  vlEditId = null;
+  document.getElementById('vl-submit-btn').textContent='\uD83D\uDCBE Save to voyage log';
   document.getElementById('vl-overlay').classList.add('open');
 }
 function vlClose(){ document.getElementById('vl-overlay').classList.remove('open'); }
@@ -1677,7 +1684,9 @@ function vlOpenManual(){
   document.getElementById('vl-fuel-cost').textContent='';
   document.getElementById('vl-avg-speed').textContent='—';
   document.getElementById('vl-status').textContent='';
+  document.getElementById('vl-submit-btn').textContent='\uD83D\uDCBE Save to voyage log';
   document.getElementById('vl-submit-btn').disabled=false;
+  vlEditId = null;
   document.getElementById('vl-overlay').classList.add('open');
 }
 
@@ -1774,11 +1783,23 @@ async function vlSubmit(){
   // fetch latest log, append entry, write back
   var logData = await vlFetchLog();
   if(!logData) logData = {entries:[]};
-  logData.entries.push(entry);
+  var editing = false;
+  if(vlEditId){
+    var ix = logData.entries.findIndex(function(x){ return x.id === vlEditId; });
+    if(ix > -1){
+      entry.id = logData.entries[ix].id;
+      entry.logged_at = logData.entries[ix].logged_at;
+      entry.edited_at = new Date().toISOString();
+      logData.entries[ix] = entry;
+      editing = true;
+    }
+  }
+  if(!editing){ logData.entries.push(entry); }
   var ok = await vlWriteLog(logData);
   if(ok){
     vlLogEntries = logData.entries;
-    statusEl.textContent = '\u2713 Saved! Entry logged for '+entry.date+'.';
+    vlEditId = null;
+    statusEl.textContent = editing ? ('\u2713 Updated! Entry for '+entry.date+'.') : ('\u2713 Saved! Entry logged for '+entry.date+'.');
     // mark the segment button as logged (skip for manual entries)
     var logBtn = entry.leg_id !== 'manual' ? document.getElementById('vl-btn-'+entry.leg_id) : null;
     if(logBtn){
@@ -1838,7 +1859,9 @@ function vlRenderLog(){
     if(e.ec_ref) detailRows+='<div class="vl-detail-item"><strong>Easy Connect:</strong> '+e.ec_ref+'</div>';
     if(e.planned_nm) detailRows+='<div class="vl-detail-item"><strong>Planned:</strong> '+e.planned_nm+' nm</div>';
     html+='<div class="vl-entry" onclick="vlToggleEntry('+idx+')">'
-      +'<div class="vl-entry-hdr"><span class="vl-entry-date">'+e.date+'</span><span class="vl-entry-leg">'+e.leg+'</span>'+(e.actual_nm?'<span class="vl-entry-nm">'+e.actual_nm+' nm</span>':'')+'</div>'
+      +'<div class="vl-entry-hdr"><span class="vl-entry-date">'+e.date+'</span><span class="vl-entry-leg">'+e.leg+'</span>'+(e.actual_nm?'<span class="vl-entry-nm">'+e.actual_nm+' nm</span>':'')
+      +'<span class="vl-entry-actions"><button class="vl-entry-act" title="Edit" onclick="event.stopPropagation();vlEditEntry('+idx+')">\u270F\uFE0F</button><button class="vl-entry-act vl-entry-del" title="Delete" onclick="event.stopPropagation();vlDeleteEntry('+idx+')">\uD83D\uDDD1</button></span>'
+      +'</div>'
       +(meta.length?'<div class="vl-entry-meta">'+meta.map(function(m){return '<span class="vl-entry-chip">'+m+'</span>';}).join('')+'</div>':'')
       +(e.notes?'<div class="vl-entry-notes">'+e.notes+'</div>':'')
       +(detailRows?'<div class="vl-entry-detail" id="vl-detail-'+idx+'"><div class="vl-detail-grid">'+detailRows+'</div></div>':'')
@@ -1847,6 +1870,90 @@ function vlRenderLog(){
   container.innerHTML=html;
 }
 function vlToggleEntry(idx){ var el=document.getElementById('vl-detail-'+idx); if(el) el.classList.toggle('open'); }
+
+/* ── edit an existing entry: open the form pre-filled ── */
+function vlSetSelByText(groupId, value){
+  var found=false;
+  document.querySelectorAll('#'+groupId+' .vl-opt').forEach(function(b){
+    b.classList.remove('vl-sel','vl-sel-b','vl-sel-p');
+    if(value!=null && b.textContent.trim()===String(value).trim()){
+      // pick the selection style this group uses (mirror vlSel callers)
+      var cls = groupId==='vl-sky'||groupId==='vl-vis'||groupId==='vl-crew'||groupId==='vl-faults' ? 'vl-sel'
+              : (groupId==='vl-seas' ? 'vl-sel-p' : 'vl-sel-b');
+      b.classList.add(cls);
+      found=true;
+    }
+  });
+  return found;
+}
+function vlEditEntry(idx){
+  if(!vlGetToken()){
+    if(confirm('No GitHub token saved yet. Open settings to add one?')) vlOpenSettings();
+    return;
+  }
+  var sorted = vlLogEntries.slice().sort(function(a,b){ return b.date.localeCompare(a.date); });
+  var e = sorted[idx];
+  if(!e) return;
+  vlEditId = e.id;
+  vlCurrentLeg = {legId: e.leg_id||'manual', legName: e.leg||'', direction: e.direction||'other', plannedNm: e.planned_nm||0, manual:true};
+  document.getElementById('vl-modal-title').textContent = 'Edit log entry';
+  document.getElementById('vl-modal-sub').textContent = 'Editing the entry for '+e.date+' — change anything and save';
+  document.getElementById('vl-manual-leg-section').style.display = 'block';
+  document.getElementById('vl-planned-nm').textContent = e.planned_nm>0?'(planned '+e.planned_nm+' nm)':'';
+  // text/number fields
+  var setVal=function(id,v){ var el=document.getElementById(id); if(el) el.value=(v==null?'':v); };
+  setVal('vl-manual-leg', e.leg);
+  setVal('vl-date', e.date);
+  setVal('vl-depart', e.depart_time);
+  setVal('vl-arrive', e.arrive_time);
+  setVal('vl-nm', e.actual_nm);
+  setVal('vl-fuel-gal', e.fuel_used_gal);
+  setVal('vl-fuel-price', e.fuel_price_per_gal);
+  setVal('vl-hrs-p-start', e.engine_hours_port_start);
+  setVal('vl-hrs-p-end', e.engine_hours_port_end);
+  setVal('vl-hrs-s-start', e.engine_hours_stbd_start);
+  setVal('vl-hrs-s-end', e.engine_hours_stbd_end);
+  setVal('vl-fault-text', e.fault_notes);
+  setVal('vl-notes', e.notes);
+  setVal('vl-ec-ref', e.ec_ref);
+  // button groups
+  vlSetSelByText('vl-wind-speed', e.wind_speed);
+  vlSetSelByText('vl-wind-dir', e.wind_dir);
+  vlSetSelByText('vl-seas', e.seas);
+  vlSetSelByText('vl-sky', e.sky);
+  vlSetSelByText('vl-vis', e.visibility);
+  vlSetSelByText('vl-crew', e.crew||'Solo');
+  vlSetSelByText('vl-faults', e.faults?'Yes':'None');
+  document.getElementById('vl-fault-detail').classList.toggle('open', !!e.faults);
+  // direction button (nb/sb/other -> Northbound/Southbound/Other)
+  var dirLabel = e.direction==='nb'?'Northbound':(e.direction==='sb'?'Southbound':'Other');
+  vlSetSelByText('vl-manual-dir', dirLabel);
+  document.getElementById('vl-status').textContent='';
+  document.getElementById('vl-submit-btn').textContent='\uD83D\uDCBE Update entry';
+  document.getElementById('vl-submit-btn').disabled=false;
+  if(typeof vlCalc==='function') vlCalc();
+  document.getElementById('vl-overlay').classList.add('open');
+}
+
+/* ── delete an entry with confirmation ── */
+async function vlDeleteEntry(idx){
+  var sorted = vlLogEntries.slice().sort(function(a,b){ return b.date.localeCompare(a.date); });
+  var e = sorted[idx];
+  if(!e) return;
+  if(!confirm('Delete this log entry?\n\n'+e.date+' — '+(e.leg||'(no leg name)')+'\n\nThis cannot be undone from the app. (A backup remains in your GitHub history.)')) return;
+  var logData = await vlFetchLog();
+  if(!logData || !logData.entries){ alert('Could not load the log to delete from. Try again.'); return; }
+  var before = logData.entries.length;
+  logData.entries = logData.entries.filter(function(x){ return x.id !== e.id; });
+  if(logData.entries.length===before){ alert('Entry not found in the saved log — nothing deleted.'); return; }
+  var ok = await vlWriteLog(logData);
+  if(ok){
+    vlLogEntries = logData.entries;
+    vlRenderLog();
+  } else {
+    alert('Delete failed — check your token in settings and try again.');
+  }
+}
 function vlToggleLogView(){
   vlLogOpen=!vlLogOpen;
   document.getElementById('vl-log-body').classList.toggle('open',vlLogOpen);
