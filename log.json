@@ -218,8 +218,10 @@
       "fault_notes": null
     },
     {
+      "id": "manual-2025-10-25-4610",
       "date": "2025-10-25",
       "leg": "Jarrett Bay, NC to Southport, NC",
+      "leg_id": "manual",
       "direction": "sb",
       "depart_time": "08:08",
       "arrive_time": "14:15",
@@ -228,8 +230,12 @@
       "actual_nm": 114.2,
       "avg_speed_kts": 18.7,
       "fuel_used_gal": 121.8,
+      "fuel_price_per_gal": 4.15,
+      "fuel_cost": 505.47,
       "engine_hours_port_start": 965,
+      "engine_hours_port_end": null,
       "engine_hours_stbd_start": 965,
+      "engine_hours_stbd_end": null,
       "wind_speed": "Calm",
       "wind_dir": null,
       "seas": "2-3 ft",
@@ -237,16 +243,11 @@
       "visibility": "Clear",
       "crew": "Solo",
       "faults": false,
+      "fault_notes": null,
       "notes": "A video in my Photos.app shows the rolling waves in Onslow Bay",
       "ec_ref": "2025-10-25",
-      "id": "manual-2025-10-25-4610",
-      "leg_id": "manual",
       "logged_at": "2026-05-21T20:52:04.611Z",
-      "fuel_price_per_gal": null,
-      "fuel_cost": null,
-      "engine_hours_port_end": null,
-      "engine_hours_stbd_end": null,
-      "fault_notes": null
+      "edited_at": "2026-05-22T01:56:59.251Z"
     },
     {
       "date": "2025-10-27",
