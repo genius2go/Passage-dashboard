@@ -279,6 +279,37 @@
       "engine_hours_port_end": null,
       "engine_hours_stbd_end": null,
       "fault_notes": null
+    },
+    {
+      "id": "seg1-2026-06-01-7074",
+      "date": "2026-06-01",
+      "leg": "Miami Beach → Ft. Pierce",
+      "leg_id": "seg1",
+      "direction": "nb",
+      "depart_time": "08:45",
+      "arrive_time": null,
+      "duration_hrs": null,
+      "planned_nm": 120,
+      "actual_nm": 129,
+      "avg_speed_kts": null,
+      "fuel_used_gal": 135,
+      "fuel_price_per_gal": 4.83,
+      "fuel_cost": 652.05,
+      "engine_hours_port_start": 1069,
+      "engine_hours_port_end": null,
+      "engine_hours_stbd_start": 1069,
+      "engine_hours_stbd_end": null,
+      "wind_speed": "5-10",
+      "wind_dir": "N",
+      "seas": "1-2 ft",
+      "sky": "Overcast",
+      "visibility": "Clear",
+      "crew": "Solo",
+      "faults": false,
+      "fault_notes": null,
+      "notes": "Tested engine rpms at a few different speeds, 3,000 felt the best/smoothest.",
+      "ec_ref": "2026-06-01",
+      "logged_at": "2026-06-01T21:22:37.075Z"
     }
   ]
 }
