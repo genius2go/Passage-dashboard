@@ -311,6 +311,37 @@
       "ec_ref": "2026-06-01",
       "logged_at": "2026-06-01T21:22:37.075Z",
       "edited_at": "2026-06-01T21:30:59.051Z"
+    },
+    {
+      "id": "seg2-2026-06-02-4369",
+      "date": "2026-06-02",
+      "leg": "Ft. Pierce → St. Augustine / Fernandina",
+      "leg_id": "seg2",
+      "direction": "nb",
+      "depart_time": "07:00",
+      "arrive_time": "16:00",
+      "duration_hrs": 9,
+      "planned_nm": 160,
+      "actual_nm": 207,
+      "avg_speed_kts": 23,
+      "fuel_used_gal": 224,
+      "fuel_price_per_gal": null,
+      "fuel_cost": null,
+      "engine_hours_port_start": null,
+      "engine_hours_port_end": null,
+      "engine_hours_stbd_start": null,
+      "engine_hours_stbd_end": null,
+      "wind_speed": "5-10",
+      "wind_dir": "NE",
+      "seas": "2-3 ft",
+      "sky": "Sunny",
+      "visibility": null,
+      "crew": "Solo",
+      "faults": false,
+      "fault_notes": null,
+      "notes": "Stopped in Port Canaveral for 79 gallons and also pulled into Ponce de Leon inlet but decided it would take too long to get to marina",
+      "ec_ref": "2026-06-02",
+      "logged_at": "2026-06-04T02:10:44.369Z"
     }
   ]
 }
