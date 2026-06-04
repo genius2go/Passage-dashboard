@@ -413,12 +413,14 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
       <button class="stop-btn" onclick="setSbStop(2)">Barnegat Light</button>
       <button class="stop-btn" onclick="setSbStop(3)">Cape May NJ</button>
       <button class="stop-btn" onclick="setSbStop(4)">Ocean City MD</button>
-      <button class="stop-btn" onclick="setSbStop(5)">Hampton VA</button>
+      <button class="stop-btn" onclick="setSbStop(5)">Norfolk</button>
       <button class="stop-btn" onclick="setSbStop(6)">Coinjock</button>
       <button class="stop-btn" onclick="setSbStop(7)">Morehead City</button>
       <button class="stop-btn" onclick="setSbStop(8)">Southport</button>
       <button class="stop-btn" onclick="setSbStop(9)">Charleston</button>
-      <button class="stop-btn" onclick="setSbStop(10)">St. Aug / Fernandina</button>
+      <button class="stop-btn" onclick="setSbStop(10)">Hilton Head</button>
+      <button class="stop-btn" onclick="setSbStop(11)">St. Aug / Fernandina</button>
+      <button class="stop-btn" onclick="setSbStop(12)">Ft. Pierce</button>
       <button class="stop-btn" onclick="setSbStop(11)">Ft. Pierce</button>
     </div>
   </div>
@@ -482,7 +484,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
       <div class="route-conn conn-inside" id="rc5"></div>
       <div class="route-stop"><div class="route-dot dot-purple" id="rd6"></div><div class="route-lbl" id="rl6">Coinjock</div></div>
       <div class="route-conn" id="rc6"></div>
-      <div class="route-stop"><div class="route-dot dot-red" id="rd7"></div><div class="route-lbl" id="rl7">Hampton VA</div></div>
+      <div class="route-stop"><div class="route-dot dot-red" id="rd7"></div><div class="route-lbl" id="rl7">Norfolk</div></div>
       <div class="route-conn" id="rc7"></div>
       <div class="route-stop"><div class="route-dot" id="rd8"></div><div class="route-lbl" id="rl8">Ocean City MD</div></div>
       <div class="route-conn" id="rc8"></div>
@@ -508,7 +510,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
       <div class="route-conn" id="src3"></div>
       <div class="route-stop"><div class="route-dot" id="srd4"></div><div class="route-lbl" id="srl4">Ocean City MD</div></div>
       <div class="route-conn" id="src4"></div>
-      <div class="route-stop"><div class="route-dot dot-red" id="srd5"></div><div class="route-lbl" id="srl5">Hampton VA</div></div>
+      <div class="route-stop"><div class="route-dot dot-red" id="srd5"></div><div class="route-lbl" id="srl5">Norfolk</div></div>
       <div class="route-conn" id="src5"></div>
       <div class="route-stop"><div class="route-dot dot-purple" id="srd6"></div><div class="route-lbl" id="srl6">Coinjock</div></div>
       <div class="route-conn conn-inside" id="src6"></div>
@@ -1292,11 +1294,12 @@ var NB_STOPS=[
   {name:'Miami Beach',segIdx:1,legId:'mia-ftp',hasTide:false},
   {name:'Ft. Pierce',segIdx:2,legId:'ftp-sta',hasTide:true,tideId:'8720218',tideName:'St. Augustine Inlet',tideNm:160,exitOnly:false},
   {name:'St. Aug / Fernandina',segIdx:3,legId:'sta-chs',hasTide:false},
+  {name:'Hilton Head',segIdx:3,legId:'sta-chs',hasTide:false},
   {name:'Charleston',segIdx:4,legId:'chs-spt',hasTide:false},
   {name:'Southport',segIdx:5,legId:'spt-mhc',hasTide:false},
   {name:'Morehead City',segIdx:6,legId:'mhc-cjk',hasTide:false},
   {name:'Coinjock',segIdx:8,legId:'cjk-hva',hasTide:false},
-  {name:'Hampton VA',segIdx:9,legId:'hva-ocy',hasTide:false},
+  {name:'Norfolk',segIdx:9,legId:'hva-ocy',hasTide:false},
   {name:'Ocean City MD',segIdx:10,legId:'ocy-bnl',hasTide:true,tideId:'8534720',tideName:'Barnegat Inlet',tideNm:75,exitOnly:false},
   {name:'Cape May NJ',segIdx:10,legId:'ocy-bnl',hasTide:true,tideId:'8534720',tideName:'Barnegat Inlet',tideNm:40,exitOnly:false},
   {name:'Barnegat Light',segIdx:12,legId:'bnl-pwy',hasTide:true,tideId:'8534720',tideName:'Barnegat Inlet (exit)',tideNm:0,exitOnly:true},
