@@ -404,6 +404,37 @@
       "notes": null,
       "ec_ref": "2026-06-01",
       "logged_at": "2026-06-06T00:14:03.518Z"
+    },
+    {
+      "id": "seg3b-2026-06-06-8779",
+      "date": "2026-06-06",
+      "leg": "Hilton Head to Charleston",
+      "leg_id": "seg3b",
+      "direction": "nb",
+      "depart_time": "09:15",
+      "arrive_time": "13:45",
+      "duration_hrs": 4.5,
+      "planned_nm": 63,
+      "actual_nm": 90,
+      "avg_speed_kts": 20,
+      "fuel_used_gal": 109,
+      "fuel_price_per_gal": 6.68,
+      "fuel_cost": 728.12,
+      "engine_hours_port_start": 1093,
+      "engine_hours_port_end": 1098,
+      "engine_hours_stbd_start": 1093,
+      "engine_hours_stbd_end": 1098,
+      "wind_speed": "5–10",
+      "wind_dir": "SW",
+      "seas": "1–2 ft",
+      "sky": "Sunny",
+      "visibility": "Clear",
+      "crew": "Solo",
+      "faults": false,
+      "fault_notes": null,
+      "notes": "Long channel out of Hilton Head, ask Rick about cutting through",
+      "ec_ref": "2026-06-06",
+      "logged_at": "2026-06-06T20:58:18.780Z"
     }
   ]
 }
