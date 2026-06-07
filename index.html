@@ -403,14 +403,14 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
       <button class="stop-btn" onclick="setStop(9)">Ocean City MD</button>
       <button class="stop-btn" onclick="setStop(10)">Cape May NJ</button>
       <button class="stop-btn" onclick="setStop(11)">Barnegat Light</button>
-      <button class="stop-btn" onclick="setStop(12)">Chelsea Piers NYC</button>
+      <button class="stop-btn" onclick="setStop(12)">New York City</button>
     </div>
   </div>
   <div class="stop-picker sb-only">
     <div class="stop-picker-label">&#128205; Where am I now? &#8212; tap to update</div>
     <div class="stop-btns" id="sb-stop-btns">
       <button class="stop-btn" onclick="setSbStop(0)">Falmouth MA</button>
-      <button class="stop-btn" onclick="setSbStop(1)">Chelsea Piers NYC</button>
+      <button class="stop-btn" onclick="setSbStop(1)">New York City</button>
       <button class="stop-btn" onclick="setSbStop(2)">Barnegat Light</button>
       <button class="stop-btn" onclick="setSbStop(3)">Cape May NJ</button>
       <button class="stop-btn" onclick="setSbStop(4)">Ocean City MD</button>
@@ -433,18 +433,18 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
     <div class="pace-box-title">&#x1F4C5; Passage pace &#8212; Northbound</div>
     <div class="pace-grid">
       <div class="pace-day"><div class="pace-day-num">Day 1 &middot; Jun 1</div><div class="pace-day-leg">Miami Beach &#8594; Ft. Pierce</div><div class="pace-day-dist">~120 nm</div></div>
-      <div class="pace-day"><div class="pace-day-num">Day 2</div><div class="pace-day-leg">Ft. Pierce &#8594; St. Augustine</div><div class="pace-day-dist">~160 nm</div></div>
-      <div class="pace-day"><div class="pace-day-num">Day 3</div><div class="pace-day-leg">St. Aug &#8594; Hilton Head</div><div class="pace-day-dist">~147 nm</div></div><div class="pace-day"><div class="pace-day-num">Day 4</div><div class="pace-day-leg">Hilton Head &#8594; Charleston</div><div class="pace-day-dist">~63 nm</div></div>
-      <div class="pace-day"><div class="pace-day-num">Day 5</div><div class="pace-day-leg">Charleston &#8594; Southport</div><div class="pace-day-dist">~135 nm</div></div>
-      <div class="pace-day"><div class="pace-day-num">Day 6</div><div class="pace-day-leg">Southport &#8594; Jarrett Bay</div><div class="pace-day-dist">~90 nm</div></div>
+      <div class="pace-day"><div class="pace-day-num">Day 2</div><div class="pace-day-leg">Ft. Pierce &#8594; St. Augustine or Fernandina</div><div class="pace-day-dist">~60&ndash;75 nm</div></div>
+      <div class="pace-day"><div class="pace-day-num">Day 3</div><div class="pace-day-leg">St. Aug &#8594; Charleston</div><div class="pace-day-dist">~165&ndash;175 nm</div></div>
+      <div class="pace-day"><div class="pace-day-num">Day 4</div><div class="pace-day-leg">Charleston &#8594; Southport</div><div class="pace-day-dist">~135 nm</div></div>
+      <div class="pace-day"><div class="pace-day-num">Day 5</div><div class="pace-day-leg">Southport &#8594; Jarrett Bay</div><div class="pace-day-dist">~90 nm</div></div>
       
       <div class="pace-day"><div class="pace-day-num">Day ?</div><div class="pace-day-leg">Jarrett Bay &#8594; Coinjock</div><div class="pace-day-dist">~110 nm</div></div>
       <div class="pace-day"><div class="pace-day-num">Day ?+1</div><div class="pace-day-leg">Coinjock &#8594; Norfolk / Waterside</div><div class="pace-day-dist">~40 nm</div></div>
       <div class="pace-day"><div class="pace-day-num">Day ?+2</div><div class="pace-day-leg">Norfolk / Waterside &#8594; Ocean City MD</div><div class="pace-day-dist">~125 nm</div></div>
       <div class="pace-day"><div class="pace-day-num">Day ?+3</div><div class="pace-day-leg">Ocean City &#8594; Barnegat Light</div><div class="pace-day-dist">~75 nm</div></div>
       <div class="pace-day"><div class="pace-day-num">2+ nights</div><div class="pace-day-leg">Barnegat Light &#127881;</div><div class="pace-day-dist">cousin visit</div></div>
-      <div class="pace-day"><div class="pace-day-num">Day ?+5</div><div class="pace-day-leg">Barnegat &#8594; Chelsea Piers NYC</div><div class="pace-day-dist">~64 nm</div></div>
-      <div class="pace-day"><div class="pace-day-num">Final day</div><div class="pace-day-leg">Chelsea Piers &#8594; Falmouth &#127937;</div><div class="pace-day-dist">~174 nm (Westbrook fuel stop)</div></div>
+      <div class="pace-day"><div class="pace-day-num">Day ?+5</div><div class="pace-day-leg">Barnegat &#8594; New York City</div><div class="pace-day-dist">~110 nm</div></div>
+      <div class="pace-day"><div class="pace-day-num">Final day</div><div class="pace-day-leg">New York City &#8594; Falmouth &#127937;</div><div class="pace-day-dist">~185 nm direct</div></div>
     </div>
   </div>
 
@@ -452,15 +452,15 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
   <div class="pace-box sb-only">
     <div class="pace-box-title">&#x1F4C5; Passage pace &#8212; Southbound (Fall 2026 TBD)</div>
     <div class="pace-grid">
-      <div class="pace-day"><div class="pace-day-num">Day 1</div><div class="pace-day-leg">Falmouth MA &#8594; Chelsea Piers NYC</div><div class="pace-day-dist">~185 nm</div></div>
-      <div class="pace-day"><div class="pace-day-num">Day 2</div><div class="pace-day-leg">Chelsea Piers NYC &#8594; Barnegat Light</div><div class="pace-day-dist">~110 nm</div></div>
+      <div class="pace-day"><div class="pace-day-num">Day 1</div><div class="pace-day-leg">Falmouth MA &#8594; New York City</div><div class="pace-day-dist">~185 nm direct</div></div>
+      <div class="pace-day"><div class="pace-day-num">Day 2</div><div class="pace-day-leg">New York City &#8594; Barnegat Light</div><div class="pace-day-dist">~110 nm</div></div>
       <div class="pace-day"><div class="pace-day-num">1+ night</div><div class="pace-day-leg">Barnegat Light &#127881;</div><div class="pace-day-dist">rest stop</div></div>
       <div class="pace-day"><div class="pace-day-num">Day 4</div><div class="pace-day-leg">Barnegat &#8594; Ocean City MD</div><div class="pace-day-dist">~75 nm</div></div>
       <div class="pace-day"><div class="pace-day-num">Day 5</div><div class="pace-day-leg">Ocean City &#8594; Hampton VA</div><div class="pace-day-dist">~125 nm</div></div>
       <div class="pace-day"><div class="pace-day-num">Day 6</div><div class="pace-day-leg">Norfolk / Waterside &#8594; Coinjock</div><div class="pace-day-dist">~40 nm</div></div>
       <div class="pace-day"><div class="pace-day-num">Day 7+</div><div class="pace-day-leg">Coinjock &#8212; Weather Hold</div><div class="pace-day-dist">wait for window</div></div>
       <div class="pace-day"><div class="pace-day-num">Day ?</div><div class="pace-day-leg">Coinjock &#8594; Jarrett Bay</div><div class="pace-day-dist">~110 nm</div></div>
-      <div class="pace-day"><div class="pace-day-num">Day ?+1</div><div class="pace-day-leg">Morehead &#8594; Southport</div><div class="pace-day-dist">~90 nm</div></div>
+      <div class="pace-day"><div class="pace-day-num">Day ?+1</div><div class="pace-day-leg">Jarrett Bay &#8594; Southport</div><div class="pace-day-dist">~90 nm</div></div>
       <div class="pace-day"><div class="pace-day-num">Day ?+2</div><div class="pace-day-leg">Southport &#8594; Charleston</div><div class="pace-day-dist">~135 nm</div></div>
       <div class="pace-day"><div class="pace-day-num">Day ?+3</div><div class="pace-day-leg">Charleston &#8594; St. Augustine</div><div class="pace-day-dist">~200 nm</div></div>
       <div class="pace-day"><div class="pace-day-num">Day ?+4</div><div class="pace-day-leg">St. Aug &#8594; Ft. Pierce</div><div class="pace-day-dist">~160 nm</div></div>
@@ -495,7 +495,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
       <div class="route-conn" id="rc9"></div>
       <div class="route-stop"><div class="route-dot dot-green" id="rd10"></div><div class="route-lbl" id="rl10">Barnegat &#127881;</div></div>
       <div class="route-conn" id="rc10"></div>
-      <div class="route-stop"><div class="route-dot" id="rd11"></div><div class="route-lbl" id="rl11">Chelsea Piers NYC</div></div>
+      <div class="route-stop"><div class="route-dot" id="rd11"></div><div class="route-lbl" id="rl11">New York City</div></div>
       <div class="route-conn" id="rc11"></div>
       <div class="route-stop"><div class="route-dot dot-green" id="rd12"></div><div class="route-lbl" id="rl12">Falmouth &#127937;</div></div>
     </div>
@@ -505,7 +505,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
     <div class="route-line">
       <div class="route-stop"><div class="route-dot dot-green" id="srd0"></div><div class="route-lbl" id="srl0">Falmouth MA</div></div>
       <div class="route-conn" id="src0"></div>
-      <div class="route-stop"><div class="route-dot" id="srd1"></div><div class="route-lbl" id="srl1">Chelsea Piers NYC</div></div>
+      <div class="route-stop"><div class="route-dot" id="srd1"></div><div class="route-lbl" id="srl1">New York City</div></div>
       <div class="route-conn" id="src1"></div>
       <div class="route-stop"><div class="route-dot dot-green" id="srd2"></div><div class="route-lbl" id="srl2">Barnegat &#127881;</div></div>
       <div class="route-conn" id="src2"></div>
@@ -895,7 +895,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
     </div>
 
     <div class="segment" id="seg12">
-      <div class="seg-header"><div class="seg-dot dot-sky">&#9323;</div><div class="seg-info"><div class="seg-name">Barnegat Light &#8594; Chelsea Piers NYC</div><div class="seg-route">Outside around Sandy Hook &middot; Ambrose Channel &middot; Long Island Sound</div></div><span class="seg-dist">~110 nm</span><button class="vl-log-btn" id="vl-btn-seg12" onclick="vlOpenLog('seg12','Barnegat Light to Port Washington','nb',110)">&#x1F4CB; Log</button></div>
+      <div class="seg-header"><div class="seg-dot dot-sky">&#9323;</div><div class="seg-info"><div class="seg-name">Barnegat Light &#8594; New York City</div><div class="seg-route">Outside around Sandy Hook &middot; Ambrose Channel &middot; Long Island Sound</div></div><span class="seg-dist">~110 nm</span><button class="vl-log-btn" id="vl-btn-seg12" onclick="vlOpenLog('seg12','Barnegat Light to Port Washington','nb',110)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('sb12',this)">show notes + resources &#9662;</span> <span class="map-toggle" onclick="toggleMap('seg12',this)">&#x1F5FA; map &#9662;</span>
       <div class="seg-body" id="sb12">
         <div class="note"><strong>Ambrose Channel:</strong> Heavy ship traffic &#8212; right of way. Monitor VHF 16. Time Sandy Hook for fair current. <strong>Exit Barnegat: flood tide, morning, north jetty.</strong></div>
@@ -905,7 +905,17 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
           <a class="res-link cg" href="https://captaingeorgia.com/north-east-port-weather" target="_blank">&#8599; NE Port Weather</a>
         </div>
       
-        <div class="resources" style="margin-top:8px"><a class="dockwa-btn" href="https://dockwa.com/explore/destination/jncnrx-port-washington-municipal-marina" target="_blank">&#x1F4C5; Port Washington Municipal</a> <a class="dockwa-btn" href="https://dockwa.com/explore/destination/z4c1r6-safe-harbor-capri" target="_blank">&#x1F4C5; Safe Harbor Capri</a></div>
+        <div style="font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-dim);margin:8px 0 4px">Port Washington NY &mdash; quieter, Long Island Sound</div>
+        <div class="resources" style="margin-top:0">
+          <a class="dockwa-btn" href="https://dockwa.com/explore/destination/z4c1r6-safe-harbor-capri" target="_blank">&#x1F4C5; Safe Harbor Capri &middot; Port Washington &middot; VHF 16</a>
+          <a class="dockwa-btn" href="https://dockwa.com/explore/destination/jncnrx-port-washington-municipal-marina" target="_blank">&#x1F4C5; Port Washington Municipal Marina &middot; VHF 16</a>
+        </div>
+        <div style="font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-dim);margin:8px 0 4px">Manhattan / Jersey City options &mdash; city access</div>
+        <div class="resources" style="margin-top:0">
+          <a class="dockwa-btn" href="https://dockwa.com/explore/destination/63c24-liberty-landing-marina" target="_blank">&#x1F4C5; Liberty Landing Marina &middot; Jersey City &middot; ferry to Manhattan &middot; VHF 16</a>
+          <a class="dockwa-btn" href="https://dockwa.com/explore/destination/jncm9-chelsea-piers-marina" target="_blank">&#x1F4C5; Chelsea Piers Marina &middot; Manhattan &middot; very rocky from ferry traffic &middot; VHF 16</a>
+          <a class="dockwa-btn" href="https://dockwa.com/explore/destination/8qcdedy-pier-25-marina" target="_blank">&#x1F4C5; Pier 25 Marina &middot; Tribeca / Downtown Manhattan &middot; VHF 16</a>
+        </div>
         <div class="sub-section"><span class="sub-toggle" onclick="toggleSub('things-seg12',this)">Around Port Washington &mdash; things to do</span><div class="sub-body" id="things-seg12"><div class="town-block"><div class="town-block-title">&#x1F37D; Restaurants</div><div class="town-block-body">Louie's Oyster Bar & Grille on the waterfront &mdash; been there forever. Sound View on the water. Bar Frites for French. Easy LIRR into Manhattan if you want a city night (35 min to Penn Station).</div></div><div class="town-block"><div class="town-block-title">&#x1F327;&#xFE0F; Weather hold</div><div class="town-block-body">Great town to be stuck in. Manhasset Bay is beautiful and protected. Walk the waterfront. Sands Point Preserve is nearby &mdash; Gold Coast mansion with grounds on the Sound.</div></div></div></div>
         <div class="map-body-wrap" id="seg12-map-wrap">
       <div id="seg12-map" class="leg-map"></div>
@@ -915,10 +925,15 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
     </div>
 
     <div class="segment" id="seg13">
-      <div class="seg-header"><div class="seg-dot dot-green">&#9324;</div><div class="seg-info"><div class="seg-name">Port Washington &#8594; Falmouth MA &#127937;</div><div class="seg-route">Hudson River &middot; East River &middot; Hell Gate &middot; LI Sound &middot; The Race &middot; Vineyard Sound</div></div><span class="seg-dist">~185 nm &#10003;</span><button class="vl-log-btn" id="vl-btn-seg13" onclick="vlOpenLog('seg13','Port Washington to Falmouth MA','nb',185)">&#x1F4CB; Log</button></div>
+      <div class="seg-header"><div class="seg-dot dot-green">&#9324;</div><div class="seg-info"><div class="seg-name">New York City &#8594; Falmouth MA &#127937;</div><div class="seg-route">New York City &middot; LI Sound &middot; The Race &middot; Vineyard Sound</div></div><span class="seg-dist">~185 nm</span><button class="vl-log-btn" id="vl-btn-seg13" onclick="vlOpenLog('seg13','Port Washington to Falmouth MA','nb',185)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('sb13',this)">show notes + resources &#9662;</span> <span class="map-toggle" onclick="toggleMap('seg13',this)">&#x1F5FA; map &#9662;</span>
       <div class="seg-body" id="sb13">
-        <div class="note-green"><strong>174 nm direct &mdash; within your 175 nm limit on a calm day with full tanks.</strong> Depart early &#8212; time The Race for fair current (+1&ndash;2 kts). <strong>Best plan: fuel stop at Westbrook CT</strong> (~84 nm from Chelsea Piers, then 92 nm to Falmouth). Newport RI also works (~129 nm, then 33 nm). Arrive Falmouth before early afternoon &mdash; Vineyard Sound builds chop with SW against ebb.</div>
+        <div class="note-green"><strong>185 nm total &mdash; fuel stop required.</strong> Your real-world range is 150&ndash;160 nm. Do not attempt this non-stop. Depart early &mdash; time The Race for fair current (+1&ndash;2 kts). Two good fuel stop options:</div>
+        <div class="resources" style="margin-top:8px">
+          <a class="dockwa-btn" href="https://dockwa.com/explore/destination/95cgd9-safe-harbor-pilots-point" target="_blank">&#x26FD; Safe Harbor Pilots Point &middot; Westbrook CT &middot; ~110 nm from NYC &middot; then ~75 nm to Falmouth &middot; VHF 9</a>
+          <a class="dockwa-btn" href="https://dockwa.com/explore/destination/qpcdpm-bowens-wharf" target="_blank">&#x26FD; Bowen's Wharf &middot; Newport RI &middot; ~129 nm from NYC &middot; then ~33 nm to Falmouth &middot; VHF 16</a>
+        </div>
+        <div class="note-green" style="margin-top:8px">Arrive Falmouth before early afternoon &mdash; Vineyard Sound builds chop with SW wind against ebb.</div>
         <div class="resources">
           <a class="res-link" href="https://www.ndbc.noaa.gov/station_page.php?station=44017" target="_blank">&#8599; Buoy 44017 Montauk Pt</a>
           <a class="res-link tide key" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8461490" target="_blank">&#8599; The Race / New London Tides &#9888;</a>
@@ -940,7 +955,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
   <div class="sb-only">
 
     <div class="segment" id="sseg1">
-      <div class="seg-header"><div class="seg-dot dot-green">&#9312;</div><div class="seg-info"><div class="seg-name">Falmouth MA &#8594; Chelsea Piers NYC</div><div class="seg-route">Vineyard Sound &#8594; The Race &#8594; Long Island Sound &middot; time The Race for fair current</div></div><span class="seg-dist">~185 nm</span><button class="vl-log-btn" id="vl-btn-sseg1" onclick="vlOpenLog('sseg1','Falmouth MA  to  Port Washington','sb',185)">&#x1F4CB; Log</button></div>
+      <div class="seg-header"><div class="seg-dot dot-green">&#9312;</div><div class="seg-info"><div class="seg-name">Falmouth MA &#8594; New York City</div><div class="seg-route">Vineyard Sound &#8594; The Race &#8594; Long Island Sound &middot; time The Race for fair current</div></div><span class="seg-dist">~185 nm</span><button class="vl-log-btn" id="vl-btn-sseg1" onclick="vlOpenLog('sseg1','Falmouth MA  to  Port Washington','sb',185)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('ssb1',this)">show notes + resources &#9662;</span> <span class="map-toggle" onclick="toggleMap('sseg1',this)">&#x1F5FA; map &#9662;</span>
       <div class="seg-body" id="ssb1">
         <div class="note"><strong>Depart early &#8212; time The Race for fair current westbound.</strong> Depart Falmouth before 8 am to clear the Sound before afternoon SW against ebb builds chop.</div>
@@ -952,7 +967,17 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
           <a class="res-link" href="https://windy.com/?waves,41.2,-72.0,7" target="_blank">&#8599; Windy &#8212; LI Sound + Vineyard</a>
         </div>
       
-        <div class="resources" style="margin-top:8px"><a class="dockwa-btn" href="https://dockwa.com/explore/destination/jncnrx-port-washington-municipal-marina" target="_blank">&#x1F4C5; Port Washington Municipal</a> <a class="dockwa-btn" href="https://dockwa.com/explore/destination/z4c1r6-safe-harbor-capri" target="_blank">&#x1F4C5; Safe Harbor Capri</a></div>
+        <div style="font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-dim);margin:8px 0 4px">Port Washington NY</div>
+        <div class="resources" style="margin-top:0">
+          <a class="dockwa-btn" href="https://dockwa.com/explore/destination/z4c1r6-safe-harbor-capri" target="_blank">&#x1F4C5; Safe Harbor Capri &middot; Port Washington &middot; VHF 16</a>
+          <a class="dockwa-btn" href="https://dockwa.com/explore/destination/jncnrx-port-washington-municipal-marina" target="_blank">&#x1F4C5; Port Washington Municipal Marina &middot; VHF 16</a>
+        </div>
+        <div style="font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-dim);margin:8px 0 4px">Manhattan / Jersey City options</div>
+        <div class="resources" style="margin-top:0">
+          <a class="dockwa-btn" href="https://dockwa.com/explore/destination/63c24-liberty-landing-marina" target="_blank">&#x1F4C5; Liberty Landing Marina &middot; Jersey City &middot; ferry to Manhattan &middot; VHF 16</a>
+          <a class="dockwa-btn" href="https://dockwa.com/explore/destination/jncm9-chelsea-piers-marina" target="_blank">&#x1F4C5; Chelsea Piers Marina &middot; Manhattan &middot; rocky from ferry traffic &middot; VHF 16</a>
+          <a class="dockwa-btn" href="https://dockwa.com/explore/destination/8qcdedy-pier-25-marina" target="_blank">&#x1F4C5; Pier 25 Marina &middot; Tribeca / Downtown Manhattan &middot; VHF 16</a>
+        </div>
         <div class="sub-section"><span class="sub-toggle" onclick="toggleSub('things-sseg1',this)">Around Port Washington &mdash; things to do</span><div class="sub-body" id="things-sseg1"><div class="town-block"><div class="town-block-title">&#x1F37D; Restaurants</div><div class="town-block-body">Louie's Oyster Bar on the waterfront. Sound View. Bar Frites for French. Easy LIRR to Manhattan (35 min).</div></div><div class="town-block"><div class="town-block-title">&#x1F327;&#xFE0F; Weather hold</div><div class="town-block-body">Sands Point Preserve nearby &mdash; Gold Coast mansion and grounds on the Sound. Manhasset Bay is beautiful and very protected.</div></div></div></div>
         <div class="map-body-wrap" id="sseg1-map-wrap">
       <div id="sseg1-map" class="leg-map"></div>
@@ -962,7 +987,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
     </div>
 
     <div class="segment" id="sseg2">
-      <div class="seg-header"><div class="seg-dot dot-sky">&#9313;</div><div class="seg-info"><div class="seg-name">Port Washington &#8594; Barnegat Light NJ</div><div class="seg-route">Long Island Sound &middot; Ambrose Channel &middot; outside around Sandy Hook &middot; Barnegat Inlet</div></div><span class="seg-dist">~110 nm</span><button class="vl-log-btn" id="vl-btn-sseg2" onclick="vlOpenLog('sseg2','Port Washington  to  Barnegat Light','sb',110)">&#x1F4CB; Log</button></div>
+      <div class="seg-header"><div class="seg-dot dot-sky">&#9313;</div><div class="seg-info"><div class="seg-name">New York City &#8594; Barnegat Light NJ</div><div class="seg-route">Long Island Sound &middot; Ambrose Channel &middot; outside around Sandy Hook &middot; Barnegat Inlet</div></div><span class="seg-dist">~110 nm</span><button class="vl-log-btn" id="vl-btn-sseg2" onclick="vlOpenLog('sseg2','Port Washington  to  Barnegat Light','sb',110)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('ssb2',this)">show notes + resources &#9662;</span> <span class="map-toggle" onclick="toggleMap('sseg2',this)">&#x1F5FA; map &#9662;</span>
       <div class="seg-body" id="ssb2">
         <div class="note"><strong>Barnegat Inlet: enter mid-flood only, morning, favor north jetty. Same rules as northbound passage &#8212; no exceptions.</strong></div>
@@ -1139,7 +1164,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
     </div>
 
     <div class="segment" id="sseg9">
-      <div class="seg-header"><div class="seg-dot dot-amber">&#9320;</div><div class="seg-info"><div class="seg-name">Morehead City &#8594; Southport</div><div class="seg-route">Outside to Masonboro Inlet &#8594; ICW via Myrtle Grove &#8594; Snow's Cut &#8594; Cape Fear River</div></div><span class="seg-dist">~90 nm</span><button class="vl-log-btn" id="vl-btn-sseg9" onclick="vlOpenLog('sseg9','Morehead City  to  Southport','sb',90)">&#x1F4CB; Log</button></div>
+      <div class="seg-header"><div class="seg-dot dot-amber">&#9320;</div><div class="seg-info"><div class="seg-name">Jarrett Bay &#8594; Southport</div><div class="seg-route">Outside to Masonboro Inlet &#8594; ICW via Myrtle Grove &#8594; Snow's Cut &#8594; Cape Fear River</div></div><span class="seg-dist">~90 nm</span><button class="vl-log-btn" id="vl-btn-sseg9" onclick="vlOpenLog('sseg9','Morehead City  to  Southport','sb',90)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('ssb9',this)">show notes + resources &#9662;</span> <span class="map-toggle" onclick="toggleMap('sseg9',this)">&#x1F5FA; map &#9662;</span>
       <div class="seg-body" id="ssb9">
         <div class="note"><strong>Masonboro Inlet: enter at mid-to-high tide.</strong> Check Aqua Map for shoaling at MM 293.7.</div>
@@ -1341,11 +1366,11 @@ var NB_STOPS=[
   {name:'Ocean City MD',segIdx:10,legId:'ocy-bnl',hasTide:true,tideId:'8534720',tideName:'Barnegat Inlet',tideNm:75,exitOnly:false},
   {name:'Cape May NJ',segIdx:10,legId:'ocy-bnl',hasTide:true,tideId:'8534720',tideName:'Barnegat Inlet',tideNm:40,exitOnly:false},
   {name:'Barnegat Light',segIdx:12,legId:'bnl-pwy',hasTide:true,tideId:'8534720',tideName:'Barnegat Inlet (exit)',tideNm:0,exitOnly:true},
-  {name:'Chelsea Piers NYC',segIdx:13,legId:'pwy-fal',hasTide:true,tideId:'8461490',tideName:'The Race',tideNm:95,exitOnly:false}
+  {name:'New York City',segIdx:13,legId:'pwy-fal',hasTide:true,tideId:'8461490',tideName:'The Race',tideNm:95,exitOnly:false}
 ];
 var SB_STOPS=[
   {name:'Falmouth MA',segIdx:1,legId:'fal-pwy',hasTide:true,tideId:'8461490',tideName:'The Race',tideNm:0,exitOnly:false},
-  {name:'Chelsea Piers NYC',segIdx:2,legId:'pwy-bnl',hasTide:true,tideId:'8534720',tideName:'Barnegat Inlet',tideNm:110,exitOnly:false},
+  {name:'New York City',segIdx:2,legId:'pwy-bnl',hasTide:true,tideId:'8534720',tideName:'Barnegat Inlet',tideNm:110,exitOnly:false},
   {name:'Barnegat Light',segIdx:3,legId:'bnl-cpm',hasTide:true,tideId:'8534720',tideName:'Barnegat Inlet (exit)',tideNm:0,exitOnly:true},
   {name:'Cape May NJ',segIdx:4,legId:'cpm-ocy',hasTide:false},
   {name:'Ocean City MD',segIdx:5,legId:'ocy-hva',hasTide:false},
@@ -1364,18 +1389,18 @@ var NB_LEGS={
     'sta-hh':{name:'St. Augustine / Fernandina \u2192 Hilton Head',nm:147,buoys:['41112','41008'],go:'Winds SW\u2013W under 15 kts; Seas under 3 ft; No fronts within 24 hrs',wait:'NE winds; Seas 4 ft+',nextLeg:'Hilton Head to Charleston (~63 nm) \u2014 easy morning run, depart 8-9am'},
   'hh-chs':{name:'Hilton Head \u2192 Charleston',nm:63,buoys:['41008'],go:'Winds under 15 kts; Seas under 3 ft',wait:'NE winds 20+ kts; Seas 5 ft+',nextLeg:'Charleston to Southport (~130 nm) \u2014 Cape Fear River tidal current on arrival'},
   'sta-chs':{name:'St. Augustine / Fernandina \u2192 Charleston',nm:200,buoys:['41112','41008'],go:'Winds SW\u2013W under 15 kts; Seas under 4 ft full leg; No fronts within 36 hrs',wait:'NE winds; Seas 5 ft+',nextLeg:'Charleston to Southport (~145 nm)'},
-  'chs-spt':{name:'Charleston \u2192 Southport',nm:135,buoys:['41008'],go:'Winds SW\u2013NW under 15 kts; Seas under 4 ft',wait:'NE or E winds building; Seas 5 ft+',nextLeg:'Southport to Morehead City via ICW and Masonboro Inlet \u2014 transit at mid-to-high tide'},
-  'spt-mhc':{name:'Southport \u2192 Morehead City',nm:90,buoys:[],go:'Winds under 15 kts; Masonboro Inlet calm; Mid-to-high tide for ICW',wait:'Strong NE at Masonboro exit; LNM advisory for shoaling',nextLeg:'Morehead City weather hold \u2014 wait for right Pamlico Sound window. Do not rush.'},
-  'mhc-cjk':{name:'Morehead City \u2192 Coinjock (via Pamlico Sound)',nm:110,buoys:['41036'],go:'Winds SW\u2013NW under 15 kts; Pamlico Sound buoy (41036) seas under 2 ft; No NE in 24-hr forecast; Cross before noon',wait:'NE or N winds 15 kts+; Pamlico Sound showing 2 ft+; Front approaching from west',nextLeg:'Coinjock to Hampton VA (~40 nm) \u2014 plan bridge timing the night before. Great Bridge Lock northbound on the hour.'},
+  'chs-spt':{name:'Charleston \u2192 Southport',nm:135,buoys:['41008'],go:'Winds SW\u2013NW under 15 kts; Seas under 4 ft',wait:'NE or E winds building; Seas 5 ft+',nextLeg:'Southport to Jarrett Bay \u2014 Masonboro Inlet + outside run. Pamlico Sound planning begins after you arrive at Jarrett Bay.'},
+  'spt-mhc':{name:'Southport \u2192 Jarrett Bay',nm:90,buoys:[],go:'Winds under 15 kts; Masonboro Inlet calm; Mid-to-high tide for ICW',wait:'Strong NE at Masonboro exit; LNM advisory for shoaling',nextLeg:'Jarrett Bay \u2014 settle in and rest. Pamlico Sound planning begins here once you arrive and check the forecast.'},
+  'mhc-cjk':{name:'Jarrett Bay \u2192 Coinjock (via Pamlico Sound)',nm:110,buoys:['41036'],go:'Winds SW\u2013NW under 15 kts; Pamlico Sound buoy (41036) seas under 2 ft; No NE in 24-hr forecast; Cross before noon',wait:'NE or N winds 15 kts+; Pamlico Sound showing 2 ft+; Front approaching from west',nextLeg:'Coinjock to Hampton VA (~40 nm) \u2014 plan bridge timing the night before. Great Bridge Lock northbound on the hour.'},
   'cjk-hva':{name:'Coinjock \u2192 Hampton VA (Bluewater)',nm:40,buoys:[],go:'Great Bridge lock: check schedule night before; Protected route; Elizabeth River: 6 kts from MM 8 to Bluewater',wait:'Great Bridge lock out of service; Severe weather only',nextLeg:'Hampton VA to Ocean City MD (~125 nm) \u2014 outside, wants SW/W under 15 kts, no NE for 24 hrs'},
   'hva-ocy':{name:'Hampton VA \u2192 Ocean City MD',nm:125,buoys:['44099','44009'],go:'Winds SW\u2013W under 15 kts; Seas under 4 ft; No NE in 36-hr forecast',wait:'NE winds building; Seas 5 ft+; Front timing uncertain',nextLeg:'Ocean City to Barnegat Light \u2014 Barnegat Inlet timing is critical. Check tide before committing.'},
   'ocy-bnl':{name:'Ocean City MD \u2192 Barnegat Light NJ',nm:75,buoys:['44091','44025'],go:'Barnegat: FLOOD tide mid-flood only; Morning entry only; Winds W or SW under 10 kts; No NE swell whatsoever; North jetty',wait:'ANY NE wind or swell; Ebb tide \u2014 never; Afternoon \u2014 dangerous; Any doubt: Cape May instead',nextLeg:'Barnegat Light stay \u2014 cousin visit, rest, compare exit windows'},
-  'bnl-pwy':{name:'Barnegat Light \u2192 Chelsea Piers NYC',nm:110,buoys:['44025'],go:'Winds SW\u2013W under 15 kts; Seas under 3 ft; Barnegat exit: flood tide morning only north jetty',wait:'NE or E winds; Seas 4 ft+',nextLeg:'Port Washington to Falmouth (~185 nm) \u2014 time The Race for fair current, arrive before early afternoon'},
-  'pwy-fal':{name:'Chelsea Piers NYC \u2192 Falmouth MA',nm:174,buoys:['44017','44020'],go:'Winds SW\u2013W under 15 kts; The Race: timed for fair current; Vineyard Sound seas under 3 ft; Arrive Falmouth before 2pm',wait:'NE winds anywhere along route; Vineyard Sound NE building against ebb',nextLeg:'You are home \u2014 East Falmouth, MA \ud83c\udfc1'}
+  'bnl-pwy':{name:'Barnegat Light \u2192 New York City',nm:110,buoys:['44025'],go:'Winds SW\u2013W under 15 kts; Seas under 3 ft; Barnegat exit: flood tide morning only north jetty',wait:'NE or E winds; Seas 4 ft+',nextLeg:'Port Washington to Falmouth (~185 nm) \u2014 time The Race for fair current, arrive before early afternoon'},
+  'pwy-fal':{name:'New York City \u2192 Falmouth MA',nm:174,buoys:['44017','44020'],go:'Winds SW\u2013W under 15 kts; The Race: timed for fair current; Vineyard Sound seas under 3 ft; Arrive Falmouth before 2pm',wait:'NE winds anywhere along route; Vineyard Sound NE building against ebb',nextLeg:'You are home \u2014 East Falmouth, MA \ud83c\udfc1'}
 };
 var SB_LEGS={
-  'fal-pwy':{name:'Falmouth MA \u2192 Chelsea Piers NYC',nm:185,buoys:['44020','44017'],go:'Depart before 8 am; The Race: timed for fair current westbound; Winds SW\u2013W under 15 kts; Vineyard Sound clear in the morning',wait:'NE winds; Afternoon SW against ebb in Vineyard Sound',nextLeg:'Port Washington to Barnegat Light \u2014 Barnegat Inlet: flood tide, morning only, north jetty'},
-  'pwy-bnl':{name:'Chelsea Piers NYC \u2192 Barnegat Light NJ',nm:64,buoys:['44025'],go:'Winds SW\u2013W under 15 kts; Barnegat: FLOOD tide mid-flood only; Morning entry; North jetty',wait:'ANY NE wind or swell; Ebb tide \u2014 never; Afternoon \u2014 dangerous',nextLeg:'Barnegat stay \u2014 exit same rules: flood tide, morning, north jetty'},
+  'fal-pwy':{name:'Falmouth MA \u2192 New York City',nm:185,buoys:['44020','44017'],go:'Depart before 8 am; The Race: timed for fair current westbound; Winds SW\u2013W under 15 kts; Vineyard Sound clear in the morning',wait:'NE winds; Afternoon SW against ebb in Vineyard Sound',nextLeg:'Port Washington to Barnegat Light \u2014 Barnegat Inlet: flood tide, morning only, north jetty'},
+  'pwy-bnl':{name:'New York City \u2192 Barnegat Light NJ',nm:64,buoys:['44025'],go:'Winds SW\u2013W under 15 kts; Barnegat: FLOOD tide mid-flood only; Morning entry; North jetty',wait:'ANY NE wind or swell; Ebb tide \u2014 never; Afternoon \u2014 dangerous',nextLeg:'Barnegat stay \u2014 exit same rules: flood tide, morning, north jetty'},
   'bnl-cpm':{name:'Barnegat Light (exit) \u2192 Cape May / Ocean City',nm:75,buoys:['44091','44025'],go:'Flood tide exit morning only; No NE swell; North jetty; Winds SW or W',wait:'NE wind or swell; Ebb tide; Afternoon; Any doubt',nextLeg:'Ocean City to Hampton VA (~125 nm) \u2014 outside, wants SW/W winds, no NE'},
   'cpm-ocy':{name:'Cape May \u2192 Ocean City MD',nm:40,buoys:['44009'],go:'Winds under 15 kts; Seas under 3 ft; Ocean City Inlet conditions acceptable',wait:'NE building; Seas 4 ft+',nextLeg:'Ocean City to Hampton VA (~125 nm) \u2014 outside, check Cape Henry approach conditions'},
   'ocy-hva':{name:'Ocean City MD \u2192 Hampton VA (Bluewater)',nm:125,buoys:['44099','44009'],go:'Winds SW\u2013W under 15 kts; Seas under 4 ft; No NE for 24 hrs',wait:'NE winds building; Seas 5 ft+',nextLeg:'Hampton to Coinjock (~40 nm) \u2014 plan bridge timing the night before. Great Bridge Lock southbound at :30.'},
@@ -1937,7 +1962,7 @@ var MAP_DEFS = {
   'seg3':  {coords:[[29.90,-81.26,'St. Augustine','start'],[30.67,-81.46,'Fernandina Beach','waypoint'],[31.13,-81.39,'St. Simons Island (cont)','waypoint'],[32.13,-80.68,'Hilton Head — Harbour Town','end']], center:[30.9,-81.0], zoom:7},
   'seg3b': {coords:[[32.13,-80.68,'Hilton Head — Harbour Town','start'],[32.46,-80.46,'Calibogue Sound exit','waypoint'],[32.77,-79.93,'Charleston','end']], center:[32.45,-80.30], zoom:9},
   'seg4':  {coords:[[32.77,-79.93,'Charleston','start'],[33.92,-78.00,'Southport / Cape Fear','end']], center:[33.3,-79.0], zoom:7},
-  'seg5':  {coords:[[33.92,-78.00,'Southport','start'],[34.19,-77.80,'Masonboro Inlet','waypoint'],[34.72,-76.69,'Morehead City','end']], center:[34.3,-77.5], zoom:8},
+  'seg5':  {coords:[[33.92,-78.00,'Southport','start'],[34.19,-77.80,'Masonboro Inlet','waypoint'],[34.86,-76.64,'Jarrett Bay','end']], center:[34.3,-77.5], zoom:8},
   'seg7':  {coords:[[34.72,-76.69,'Morehead City','start'],[35.10,-76.43,'Neuse River','waypoint'],[35.90,-75.90,'Pamlico Sound','waypoint'],[36.05,-75.85,'Alligator River','waypoint'],[36.35,-75.99,'Coinjock','end']], center:[35.5,-76.3], zoom:7},
   'seg9':  {coords:[[36.85,-76.30,'Waterside Norfolk','start'],[36.97,-75.72,'Cape Henry','waypoint'],[37.01,-74.74,'Chesapeake Light','waypoint'],[38.33,-75.09,'Ocean City MD','end']], center:[37.7,-75.5], zoom:7},
   'seg10': {coords:[[38.33,-75.09,'Ocean City MD','start'],[38.97,-74.96,'Cape May (opt)','waypoint'],[39.76,-74.11,'Barnegat Light','end']], center:[39.0,-74.7], zoom:7},
