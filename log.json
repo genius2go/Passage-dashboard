@@ -435,6 +435,37 @@
       "notes": "Long channel out of Hilton Head, ask Rick about cutting through",
       "ec_ref": "2026-06-06",
       "logged_at": "2026-06-06T20:58:18.780Z"
+    },
+    {
+      "id": "seg4-2026-06-07-1176",
+      "date": "2026-06-07",
+      "leg": "Charleston to Southport",
+      "leg_id": "seg4",
+      "direction": "nb",
+      "depart_time": "07:00",
+      "arrive_time": "13:00",
+      "duration_hrs": 6,
+      "planned_nm": 135,
+      "actual_nm": 129,
+      "avg_speed_kts": 21.5,
+      "fuel_used_gal": 156,
+      "fuel_price_per_gal": 6.5,
+      "fuel_cost": 1014,
+      "engine_hours_port_start": 1098,
+      "engine_hours_port_end": 1104,
+      "engine_hours_stbd_start": 1098,
+      "engine_hours_stbd_end": 1104,
+      "wind_speed": "5–10",
+      "wind_dir": "SW",
+      "seas": "1–2 ft",
+      "sky": "Partly cloudy",
+      "visibility": "Clear",
+      "crew": "Solo",
+      "faults": false,
+      "fault_notes": null,
+      "notes": "This is close to my comfortable limit for range.",
+      "ec_ref": "2026-06-07",
+      "logged_at": "2026-06-07T18:55:31.177Z"
     }
   ]
 }
