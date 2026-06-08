@@ -466,6 +466,37 @@
       "notes": "This is close to my comfortable limit for range.",
       "ec_ref": "2026-06-07",
       "logged_at": "2026-06-07T18:55:31.177Z"
+    },
+    {
+      "id": "seg5-2026-06-08-2104",
+      "date": "2026-06-08",
+      "leg": "Southport to Jarrett Bay",
+      "leg_id": "seg5",
+      "direction": "nb",
+      "depart_time": "07:00",
+      "arrive_time": "13:00",
+      "duration_hrs": 6,
+      "planned_nm": 90,
+      "actual_nm": 100,
+      "avg_speed_kts": 16.7,
+      "fuel_used_gal": 113,
+      "fuel_price_per_gal": 5.37,
+      "fuel_cost": 606.81,
+      "engine_hours_port_start": 1104,
+      "engine_hours_port_end": 1110,
+      "engine_hours_stbd_start": 1104,
+      "engine_hours_stbd_end": 1110,
+      "wind_speed": "5–10",
+      "wind_dir": "SE",
+      "seas": "2–3 ft",
+      "sky": "Partly cloudy",
+      "visibility": "Clear",
+      "crew": "Solo",
+      "faults": false,
+      "fault_notes": null,
+      "notes": "The Carlolina Beach inlet shoaling issue was solved by their dredging the inlet last month",
+      "ec_ref": "2026-06-08",
+      "logged_at": "2026-06-08T21:41:12.104Z"
     }
   ]
 }
