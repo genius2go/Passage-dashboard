@@ -1389,35 +1389,35 @@ var SB_STOPS=[
   {name:'Ft. Pierce',segIdx:12,legId:'ftp-mia',hasTide:false}
 ];
 var NB_LEGS={
-  'mia-ftp':{name:'Miami Beach \u2192 Ft. Pierce',nm:120,buoys:['41122'],go:'Winds S\u2013SW under 15 kts; Seas under 3 ft; No fronts within 24 hrs',wait:'NE or E winds; Seas 4 ft+; Front within 12 hrs',nextLeg:'Ft. Pierce to St. Augustine \u2014 watch St. Augustine bar tide timing on arrival',nwsZones:['AMZ651', 'AMZ650'],nwsLabel:'SE FL Coast'},
-  'ftp-sta':{name:'Ft. Pierce \u2192 St. Augustine or Fernandina',nm:160,buoys:['41114'],go:'Winds SE\u2013SW under 15 kts; Seas under 3 ft; St. Augustine bar: higher tide is better but passable at any stage \u2014 check sea state',wait:'NE winds; Seas 4 ft+; Arriving at low tide',nextLeg:'St. Augustine / Fernandina to Charleston (~175 nm) \u2014 longest southern leg, depart with full fuel',nwsZones:['AMZ552', 'AMZ452'],nwsLabel:'NE FL Coast'},
-    'sta-hh':{name:'St. Augustine / Fernandina \u2192 Hilton Head',nm:147,buoys:['41112','41008'],go:'Winds SW\u2013W under 15 kts; Seas under 3 ft; No fronts within 24 hrs',wait:'NE winds; Seas 4 ft+',nextLeg:'Hilton Head to Charleston (~63 nm) \u2014 easy morning run, depart 8-9am',nwsZones:['AMZ452', 'AMZ450', 'AMZ354'],nwsLabel:'NE FL / GA Coast'},
-  'hh-chs':{name:'Hilton Head \u2192 Charleston',nm:63,buoys:['41008'],go:'Winds under 15 kts; Seas under 3 ft',wait:'NE winds 20+ kts; Seas 5 ft+',nextLeg:'Charleston to Southport (~130 nm) \u2014 Cape Fear River tidal current on arrival',nwsZones:['AMZ354', 'AMZ352'],nwsLabel:'GA / SC Coast'},
-  'sta-chs':{name:'St. Augustine / Fernandina \u2192 Charleston',nm:200,buoys:['41112','41008'],go:'Winds SW\u2013W under 15 kts; Seas under 4 ft full leg; No fronts within 36 hrs',wait:'NE winds; Seas 5 ft+',nextLeg:'Charleston to Southport (~145 nm)',nwsZones:['AMZ452', 'AMZ450', 'AMZ354', 'AMZ352'],nwsLabel:'NE FL / GA / SC Coast'},
-  'chs-spt':{name:'Charleston \u2192 Southport',nm:135,buoys:['41008'],go:'Winds SW\u2013NW under 15 kts; Seas under 4 ft',wait:'NE or E winds building; Seas 5 ft+',nextLeg:'Southport to Jarrett Bay \u2014 Masonboro Inlet + outside run. Pamlico Sound planning begins after you arrive at Jarrett Bay.',nwsZones:['AMZ350', 'AMZ352', 'AMZ252', 'AMZ250'],nwsLabel:'SC / NC Coast'},
-  'spt-mhc':{name:'Southport \u2192 Jarrett Bay',nm:90,buoys:[],go:'Winds under 15 kts; Masonboro Inlet calm; Mid-to-high tide for ICW',wait:'Strong NE at Masonboro exit; LNM advisory for shoaling',nextLeg:'Jarrett Bay \u2014 settle in and rest. Pamlico Sound planning begins here once you arrive and check the forecast.',nwsZones:['AMZ250', 'AMZ158', 'AMZ156'],nwsLabel:'NC Coast / Cape Lookout'},
-  'mhc-cjk':{name:'Jarrett Bay \u2192 Coinjock (via Pamlico Sound)',nm:110,buoys:['41036'],go:'Winds SW\u2013NW under 15 kts; Pamlico Sound buoy (41036) seas under 2 ft; No NE in 24-hr forecast; Cross before noon',wait:'NE or N winds 15 kts+; Pamlico Sound showing 2 ft+; Front approaching from west',nextLeg:'Coinjock to Hampton VA (~40 nm) \u2014 plan bridge timing the night before. Great Bridge Lock northbound on the hour.',nwsZones:['AMZ135', 'AMZ137', 'AMZ136', 'AMZ230'],nwsLabel:'Pamlico / Albemarle Sound'},
-  'cjk-hva':{name:'Coinjock \u2192 Hampton VA (Bluewater)',nm:40,buoys:[],go:'Great Bridge lock: check schedule night before; Protected route; Elizabeth River: 6 kts from MM 8 to Bluewater',wait:'Great Bridge lock out of service; Severe weather only',nextLeg:'Hampton VA to Ocean City MD (~125 nm) \u2014 outside, wants SW/W under 15 kts, no NE for 24 hrs',nwsZones:['ANZ633', 'ANZ634'],nwsLabel:'Currituck Sound / Hampton Roads'},
-  'hva-ocy':{name:'Hampton VA \u2192 Ocean City MD',nm:125,buoys:['44099','44009'],go:'Winds SW\u2013W under 15 kts; Seas under 4 ft; No NE in 36-hr forecast',wait:'NE winds building; Seas 5 ft+; Front timing uncertain',nextLeg:'Ocean City to Barnegat Light \u2014 Barnegat Inlet timing is critical. Check tide before committing.',nwsZones:['ANZ650', 'ANZ652', 'ANZ654'],nwsLabel:'VA / MD Offshore'},
-  'ocy-bnl':{name:'Ocean City MD \u2192 Barnegat Light NJ',nm:75,buoys:['44091','44025'],go:'Barnegat: FLOOD tide mid-flood only; Morning entry only; Winds W or SW under 10 kts; No NE swell whatsoever; North jetty',wait:'ANY NE wind or swell; Ebb tide \u2014 never; Afternoon \u2014 dangerous; Any doubt: Cape May instead',nextLeg:'Barnegat Light stay \u2014 cousin visit, rest, compare exit windows',nwsZones:['ANZ455', 'ANZ454', 'ANZ453', 'ANZ451'],nwsLabel:'DE / NJ Offshore'},
-  'bnl-pwy':{name:'Barnegat Light \u2192 New York City',nm:110,buoys:['44025'],go:'Winds SW\u2013W under 15 kts; Seas under 3 ft; Barnegat exit: flood tide morning only north jetty',wait:'NE or E winds; Seas 4 ft+',nextLeg:'Port Washington to Falmouth (~185 nm) \u2014 time The Race for fair current, arrive before early afternoon',nwsZones:['ANZ451', 'ANZ450', 'ANZ355', 'ANZ338'],nwsLabel:'NJ Coast / NY Harbor'},
-  'pwy-fal':{name:'New York City \u2192 Falmouth MA',nm:174,buoys:['44017','44020'],go:'Winds SW\u2013W under 15 kts; The Race: timed for fair current; Vineyard Sound seas under 3 ft; Arrive Falmouth before 2pm',wait:'NE winds anywhere along route; Vineyard Sound NE building against ebb',nextLeg:'You are home \u2014 East Falmouth, MA \ud83c\udfc1',nwsZones:['ANZ335', 'ANZ331', 'ANZ332'],nwsLabel:'Long Island Sound'}
+  'mia-ftp':{name:'Miami Beach \u2192 Ft. Pierce',nm:120,buoys:['41122'],go:'Winds S\u2013SW under 15 kts; Seas under 3 ft; No fronts within 24 hrs',wait:'NE or E winds; Seas 4 ft+; Front within 12 hrs',nextLeg:'Ft. Pierce to St. Augustine \u2014 watch St. Augustine bar tide timing on arrival',nwsZones:['AMZ651', 'AMZ650'],nwsLabel:'SE FL Coast',centerLat:26.6,centerLon:-80.1},
+  'ftp-sta':{name:'Ft. Pierce \u2192 St. Augustine or Fernandina',nm:160,buoys:['41114'],go:'Winds SE\u2013SW under 15 kts; Seas under 3 ft; St. Augustine bar: higher tide is better but passable at any stage \u2014 check sea state',wait:'NE winds; Seas 4 ft+; Arriving at low tide',nextLeg:'St. Augustine / Fernandina to Charleston (~175 nm) \u2014 longest southern leg, depart with full fuel',nwsZones:['AMZ552', 'AMZ452'],nwsLabel:'NE FL Coast',centerLat:28.6,centerLon:-80.6},
+    'sta-hh':{name:'St. Augustine / Fernandina \u2192 Hilton Head',nm:147,buoys:['41112','41008'],go:'Winds SW\u2013W under 15 kts; Seas under 3 ft; No fronts within 24 hrs',wait:'NE winds; Seas 4 ft+',nextLeg:'Hilton Head to Charleston (~63 nm) \u2014 easy morning run, depart 8-9am',nwsZones:['AMZ452', 'AMZ450', 'AMZ354'],nwsLabel:'NE FL / GA Coast',centerLat:31.0,centerLon:-81.0},
+  'hh-chs':{name:'Hilton Head \u2192 Charleston',nm:63,buoys:['41008'],go:'Winds under 15 kts; Seas under 3 ft',wait:'NE winds 20+ kts; Seas 5 ft+',nextLeg:'Charleston to Southport (~130 nm) \u2014 Cape Fear River tidal current on arrival',nwsZones:['AMZ354', 'AMZ352'],nwsLabel:'GA / SC Coast',centerLat:32.4,centerLon:-80.3},
+  'sta-chs':{name:'St. Augustine / Fernandina \u2192 Charleston',nm:200,buoys:['41112','41008'],go:'Winds SW\u2013W under 15 kts; Seas under 4 ft full leg; No fronts within 36 hrs',wait:'NE winds; Seas 5 ft+',nextLeg:'Charleston to Southport (~145 nm)',nwsZones:['AMZ452', 'AMZ450', 'AMZ354', 'AMZ352'],nwsLabel:'NE FL / GA / SC Coast',centerLat:31.3,centerLon:-80.7},
+  'chs-spt':{name:'Charleston \u2192 Southport',nm:135,buoys:['41008'],go:'Winds SW\u2013NW under 15 kts; Seas under 4 ft',wait:'NE or E winds building; Seas 5 ft+',nextLeg:'Southport to Jarrett Bay \u2014 Masonboro Inlet + outside run. Pamlico Sound planning begins after you arrive at Jarrett Bay.',nwsZones:['AMZ350', 'AMZ352', 'AMZ252', 'AMZ250'],nwsLabel:'SC / NC Coast',centerLat:33.4,centerLon:-78.9},
+  'spt-mhc':{name:'Southport \u2192 Jarrett Bay',nm:90,buoys:[],go:'Winds under 15 kts; Masonboro Inlet calm; Mid-to-high tide for ICW',wait:'Strong NE at Masonboro exit; LNM advisory for shoaling',nextLeg:'Jarrett Bay \u2014 settle in and rest. Pamlico Sound planning begins here once you arrive and check the forecast.',nwsZones:['AMZ250', 'AMZ158', 'AMZ156'],nwsLabel:'NC Coast / Cape Lookout',centerLat:34.3,centerLon:-77.5},
+  'mhc-cjk':{name:'Jarrett Bay \u2192 Coinjock (via Pamlico Sound)',nm:110,buoys:['41036'],go:'Winds SW\u2013NW under 15 kts; Pamlico Sound buoy (41036) seas under 2 ft; No NE in 24-hr forecast; Cross before noon',wait:'NE or N winds 15 kts+; Pamlico Sound showing 2 ft+; Front approaching from west',nextLeg:'Coinjock to Hampton VA (~40 nm) \u2014 plan bridge timing the night before. Great Bridge Lock northbound on the hour.',nwsZones:['AMZ135', 'AMZ137', 'AMZ136', 'AMZ230'],nwsLabel:'Pamlico / Albemarle Sound',centerLat:35.3,centerLon:-76.5},
+  'cjk-hva':{name:'Coinjock \u2192 Hampton VA (Bluewater)',nm:40,buoys:[],go:'Great Bridge lock: check schedule night before; Protected route; Elizabeth River: 6 kts from MM 8 to Bluewater',wait:'Great Bridge lock out of service; Severe weather only',nextLeg:'Hampton VA to Ocean City MD (~125 nm) \u2014 outside, wants SW/W under 15 kts, no NE for 24 hrs',nwsZones:['ANZ633', 'ANZ634'],nwsLabel:'Currituck Sound / Hampton Roads',centerLat:36.7,centerLon:-76.2},
+  'hva-ocy':{name:'Hampton VA \u2192 Ocean City MD',nm:125,buoys:['44099','44009'],go:'Winds SW\u2013W under 15 kts; Seas under 4 ft; No NE in 36-hr forecast',wait:'NE winds building; Seas 5 ft+; Front timing uncertain',nextLeg:'Ocean City to Barnegat Light \u2014 Barnegat Inlet timing is critical. Check tide before committing.',nwsZones:['ANZ650', 'ANZ652', 'ANZ654'],nwsLabel:'VA / MD Offshore',centerLat:37.8,centerLon:-75.6},
+  'ocy-bnl':{name:'Ocean City MD \u2192 Barnegat Light NJ',nm:75,buoys:['44091','44025'],go:'Barnegat: FLOOD tide mid-flood only; Morning entry only; Winds W or SW under 10 kts; No NE swell whatsoever; North jetty',wait:'ANY NE wind or swell; Ebb tide \u2014 never; Afternoon \u2014 dangerous; Any doubt: Cape May instead',nextLeg:'Barnegat Light stay \u2014 cousin visit, rest, compare exit windows',nwsZones:['ANZ455', 'ANZ454', 'ANZ453', 'ANZ451'],nwsLabel:'DE / NJ Offshore',centerLat:39.2,centerLon:-74.5},
+  'bnl-pwy':{name:'Barnegat Light \u2192 New York City',nm:110,buoys:['44025'],go:'Winds SW\u2013W under 15 kts; Seas under 3 ft; Barnegat exit: flood tide morning only north jetty',wait:'NE or E winds; Seas 4 ft+',nextLeg:'Port Washington to Falmouth (~185 nm) \u2014 time The Race for fair current, arrive before early afternoon',nwsZones:['ANZ451', 'ANZ450', 'ANZ355', 'ANZ338'],nwsLabel:'NJ Coast / NY Harbor',centerLat:40.3,centerLon:-74.0},
+  'pwy-fal':{name:'New York City \u2192 Falmouth MA',nm:174,buoys:['44017','44020'],go:'Winds SW\u2013W under 15 kts; The Race: timed for fair current; Vineyard Sound seas under 3 ft; Arrive Falmouth before 2pm',wait:'NE winds anywhere along route; Vineyard Sound NE building against ebb',nextLeg:'You are home \u2014 East Falmouth, MA \ud83c\udfc1',nwsZones:['ANZ335', 'ANZ331', 'ANZ332'],nwsLabel:'Long Island Sound',centerLat:41.2,centerLon:-71.8}
 };
 var SB_LEGS={
-  'fal-pwy':{name:'Falmouth MA \u2192 New York City',nm:185,buoys:['44020','44017'],go:'Depart before 8 am; The Race: timed for fair current westbound; Winds SW\u2013W under 15 kts; Vineyard Sound clear in the morning',wait:'NE winds; Afternoon SW against ebb in Vineyard Sound',nextLeg:'Port Washington to Barnegat Light \u2014 Barnegat Inlet: flood tide, morning only, north jetty',nwsZones:['ANZ335', 'ANZ331', 'ANZ332'],nwsLabel:'Long Island Sound'},
-  'pwy-bnl':{name:'New York City \u2192 Barnegat Light NJ',nm:64,buoys:['44025'],go:'Winds SW\u2013W under 15 kts; Barnegat: FLOOD tide mid-flood only; Morning entry; North jetty',wait:'ANY NE wind or swell; Ebb tide \u2014 never; Afternoon \u2014 dangerous',nextLeg:'Barnegat stay \u2014 exit same rules: flood tide, morning, north jetty',nwsZones:['ANZ355', 'ANZ338', 'ANZ451'],nwsLabel:'NY Harbor / NJ Coast'},
-  'bnl-cpm':{name:'Barnegat Light (exit) \u2192 Cape May / Ocean City',nm:75,buoys:['44091','44025'],go:'Flood tide exit morning only; No NE swell; North jetty; Winds SW or W',wait:'NE wind or swell; Ebb tide; Afternoon; Any doubt',nextLeg:'Ocean City to Hampton VA (~125 nm) \u2014 outside, wants SW/W winds, no NE',nwsZones:['ANZ451', 'ANZ453', 'ANZ455'],nwsLabel:'NJ / DE Offshore'},
-  'cpm-ocy':{name:'Cape May \u2192 Ocean City MD',nm:40,buoys:['44009'],go:'Winds under 15 kts; Seas under 3 ft; Ocean City Inlet conditions acceptable',wait:'NE building; Seas 4 ft+',nextLeg:'Ocean City to Hampton VA (~125 nm) \u2014 outside, check Cape Henry approach conditions',nwsZones:['ANZ455', 'ANZ650'],nwsLabel:'DE / MD Offshore'},
-  'ocy-hva':{name:'Ocean City MD \u2192 Hampton VA (Bluewater)',nm:125,buoys:['44099','44009'],go:'Winds SW\u2013W under 15 kts; Seas under 4 ft; No NE for 24 hrs',wait:'NE winds building; Seas 5 ft+',nextLeg:'Hampton to Coinjock (~40 nm) \u2014 plan bridge timing the night before. Great Bridge Lock southbound at :30.',nwsZones:['ANZ654', 'ANZ652', 'ANZ650'],nwsLabel:'MD / VA Offshore'},
-  'hva-cjk':{name:'Hampton VA (Bluewater) \u2192 Coinjock',nm:40,buoys:[],go:'Great Bridge lock: check schedule (southbound at :30); Elizabeth River: 6 kts from MM 0 to lock; Protected route',wait:'Great Bridge lock out of service; Severe weather only',nextLeg:'Coinjock to Morehead City (~110 nm) \u2014 check Pamlico Sound window first',nwsZones:['ANZ634', 'ANZ633'],nwsLabel:'Hampton Roads / Currituck'},
-  'cjk-mhc':{name:'Coinjock \u2192 Morehead City (via Pamlico Sound)',nm:110,buoys:['41036'],go:'Winds SW\u2013NW under 15 kts; Pamlico Sound buoy (41036) seas under 2 ft; No NE in 24-hr forecast; Cross before noon',wait:'NE or N winds 15 kts+; Pamlico showing 2 ft+; Front approaching from west',nextLeg:'Morehead City to Southport (~75 nm) \u2014 ICW via Masonboro Inlet',nwsZones:['AMZ230', 'AMZ131', 'AMZ135', 'AMZ137'],nwsLabel:'Albemarle / Pamlico Sound'},
-  'mhc-spt':{name:'Morehead City \u2192 Southport',nm:90,buoys:[],go:'Winds under 15 kts; Masonboro Inlet calm; Mid-to-high tide for ICW entry',wait:'Strong NE at Masonboro; LNM advisory for shoaling',nextLeg:'Southport to Charleston (~145 nm)',nwsZones:['AMZ156', 'AMZ158', 'AMZ250'],nwsLabel:'NC Coast / Cape Lookout'},
-  'spt-chs':{name:'Southport \u2192 Charleston',nm:135,buoys:['41008'],go:'Winds SW\u2013NW under 15 kts; Seas under 4 ft',wait:'NE or E winds building; Seas 5 ft+',nextLeg:'Charleston to St. Augustine or Fernandina (~165\u2013175 nm) \u2014 St. Aug bar: high tide only',nwsZones:['AMZ250', 'AMZ252', 'AMZ352', 'AMZ350'],nwsLabel:'NC / SC Coast'},
-    'chs-hh':{name:'Charleston \u2192 Hilton Head',nm:63,buoys:['41008'],go:'Winds under 15 kts; Seas under 3 ft',wait:'NE winds 20+ kts; Seas 5 ft+',nextLeg:'Hilton Head to St. Augustine (~147 nm)',nwsZones:['AMZ352', 'AMZ354'],nwsLabel:'SC / GA Coast'},
-  'hh-sta':{name:'Hilton Head \u2192 St. Augustine / Fernandina',nm:147,buoys:['41112','41008'],go:'Winds SW\u2013W under 15 kts; Seas under 3 ft; St. Aug bar: higher tide smoother but passable at any stage',wait:'NE winds; Seas 4 ft+',nextLeg:'St. Augustine to Ft. Pierce (~160 nm)',nwsZones:['AMZ354', 'AMZ450', 'AMZ452'],nwsLabel:'GA / NE FL Coast'},
-  'chs-sta':{name:'Charleston \u2192 St. Augustine or Fernandina',nm:200,buoys:['41112','41008'],go:'Winds SW\u2013W under 15 kts; Seas under 4 ft; St. Aug bar: HIGH tide entry only',wait:'NE winds; Seas 5 ft+',nextLeg:'St. Augustine / Fernandina to Ft. Pierce (~70 nm)',nwsZones:['AMZ352', 'AMZ450', 'AMZ452'],nwsLabel:'SC / GA / NE FL Coast'},
-  'sta-ftp':{name:'St. Augustine / Fernandina \u2192 Ft. Pierce',nm:160,buoys:['41114'],go:'Winds SE\u2013SW under 15 kts; Seas under 3 ft',wait:'NE winds; Seas 4 ft+',nextLeg:'Ft. Pierce to Miami Beach (~110 nm) \u2014 final leg home',nwsZones:['AMZ452', 'AMZ552'],nwsLabel:'NE FL Coast'},
-  'ftp-mia':{name:'Ft. Pierce \u2192 Miami Beach',nm:120,buoys:['41122'],go:'Winds SW\u2013NW under 15 kts; Seas under 3 ft; Gulf Stream watch with any NE wind',wait:'NE winds \u2014 Stream stacks up fast; Seas 4 ft+',nextLeg:'Home \u2014 Sunset Harbour, Miami Beach \ud83c\udfc1',nwsZones:['AMZ552', 'AMZ651'],nwsLabel:'E FL Coast'}
+  'fal-pwy':{name:'Falmouth MA \u2192 New York City',nm:185,buoys:['44020','44017'],go:'Depart before 8 am; The Race: timed for fair current westbound; Winds SW\u2013W under 15 kts; Vineyard Sound clear in the morning',wait:'NE winds; Afternoon SW against ebb in Vineyard Sound',nextLeg:'Port Washington to Barnegat Light \u2014 Barnegat Inlet: flood tide, morning only, north jetty',nwsZones:['ANZ335', 'ANZ331', 'ANZ332'],nwsLabel:'Long Island Sound',centerLat:41.2,centerLon:-71.8},
+  'pwy-bnl':{name:'New York City \u2192 Barnegat Light NJ',nm:64,buoys:['44025'],go:'Winds SW\u2013W under 15 kts; Barnegat: FLOOD tide mid-flood only; Morning entry; North jetty',wait:'ANY NE wind or swell; Ebb tide \u2014 never; Afternoon \u2014 dangerous',nextLeg:'Barnegat stay \u2014 exit same rules: flood tide, morning, north jetty',nwsZones:['ANZ355', 'ANZ338', 'ANZ451'],nwsLabel:'NY Harbor / NJ Coast',centerLat:40.3,centerLon:-74.0},
+  'bnl-cpm':{name:'Barnegat Light (exit) \u2192 Cape May / Ocean City',nm:75,buoys:['44091','44025'],go:'Flood tide exit morning only; No NE swell; North jetty; Winds SW or W',wait:'NE wind or swell; Ebb tide; Afternoon; Any doubt',nextLeg:'Ocean City to Hampton VA (~125 nm) \u2014 outside, wants SW/W winds, no NE',nwsZones:['ANZ451', 'ANZ453', 'ANZ455'],nwsLabel:'NJ / DE Offshore',centerLat:39.4,centerLon:-74.3},
+  'cpm-ocy':{name:'Cape May \u2192 Ocean City MD',nm:40,buoys:['44009'],go:'Winds under 15 kts; Seas under 3 ft; Ocean City Inlet conditions acceptable',wait:'NE building; Seas 4 ft+',nextLeg:'Ocean City to Hampton VA (~125 nm) \u2014 outside, check Cape Henry approach conditions',nwsZones:['ANZ455', 'ANZ650'],nwsLabel:'DE / MD Offshore',centerLat:38.7,centerLon:-74.8},
+  'ocy-hva':{name:'Ocean City MD \u2192 Hampton VA (Bluewater)',nm:125,buoys:['44099','44009'],go:'Winds SW\u2013W under 15 kts; Seas under 4 ft; No NE for 24 hrs',wait:'NE winds building; Seas 5 ft+',nextLeg:'Hampton to Coinjock (~40 nm) \u2014 plan bridge timing the night before. Great Bridge Lock southbound at :30.',nwsZones:['ANZ654', 'ANZ652', 'ANZ650'],nwsLabel:'MD / VA Offshore',centerLat:37.8,centerLon:-75.6},
+  'hva-cjk':{name:'Hampton VA (Bluewater) \u2192 Coinjock',nm:40,buoys:[],go:'Great Bridge lock: check schedule (southbound at :30); Elizabeth River: 6 kts from MM 0 to lock; Protected route',wait:'Great Bridge lock out of service; Severe weather only',nextLeg:'Coinjock to Morehead City (~110 nm) \u2014 check Pamlico Sound window first',nwsZones:['ANZ634', 'ANZ633'],nwsLabel:'Hampton Roads / Currituck',centerLat:36.7,centerLon:-76.2},
+  'cjk-mhc':{name:'Coinjock \u2192 Morehead City (via Pamlico Sound)',nm:110,buoys:['41036'],go:'Winds SW\u2013NW under 15 kts; Pamlico Sound buoy (41036) seas under 2 ft; No NE in 24-hr forecast; Cross before noon',wait:'NE or N winds 15 kts+; Pamlico showing 2 ft+; Front approaching from west',nextLeg:'Morehead City to Southport (~75 nm) \u2014 ICW via Masonboro Inlet',nwsZones:['AMZ230', 'AMZ131', 'AMZ135', 'AMZ137'],nwsLabel:'Albemarle / Pamlico Sound',centerLat:35.3,centerLon:-76.5},
+  'mhc-spt':{name:'Morehead City \u2192 Southport',nm:90,buoys:[],go:'Winds under 15 kts; Masonboro Inlet calm; Mid-to-high tide for ICW entry',wait:'Strong NE at Masonboro; LNM advisory for shoaling',nextLeg:'Southport to Charleston (~145 nm)',nwsZones:['AMZ156', 'AMZ158', 'AMZ250'],nwsLabel:'NC Coast / Cape Lookout',centerLat:34.3,centerLon:-77.5},
+  'spt-chs':{name:'Southport \u2192 Charleston',nm:135,buoys:['41008'],go:'Winds SW\u2013NW under 15 kts; Seas under 4 ft',wait:'NE or E winds building; Seas 5 ft+',nextLeg:'Charleston to St. Augustine or Fernandina (~165\u2013175 nm) \u2014 St. Aug bar: high tide only',nwsZones:['AMZ250', 'AMZ252', 'AMZ352', 'AMZ350'],nwsLabel:'NC / SC Coast',centerLat:33.4,centerLon:-78.9},
+    'chs-hh':{name:'Charleston \u2192 Hilton Head',nm:63,buoys:['41008'],go:'Winds under 15 kts; Seas under 3 ft',wait:'NE winds 20+ kts; Seas 5 ft+',nextLeg:'Hilton Head to St. Augustine (~147 nm)',nwsZones:['AMZ352', 'AMZ354'],nwsLabel:'SC / GA Coast',centerLat:32.4,centerLon:-80.3},
+  'hh-sta':{name:'Hilton Head \u2192 St. Augustine / Fernandina',nm:147,buoys:['41112','41008'],go:'Winds SW\u2013W under 15 kts; Seas under 3 ft; St. Aug bar: higher tide smoother but passable at any stage',wait:'NE winds; Seas 4 ft+',nextLeg:'St. Augustine to Ft. Pierce (~160 nm)',nwsZones:['AMZ354', 'AMZ450', 'AMZ452'],nwsLabel:'GA / NE FL Coast',centerLat:31.0,centerLon:-81.0},
+  'chs-sta':{name:'Charleston \u2192 St. Augustine or Fernandina',nm:200,buoys:['41112','41008'],go:'Winds SW\u2013W under 15 kts; Seas under 4 ft; St. Aug bar: HIGH tide entry only',wait:'NE winds; Seas 5 ft+',nextLeg:'St. Augustine / Fernandina to Ft. Pierce (~70 nm)',nwsZones:['AMZ352', 'AMZ450', 'AMZ452'],nwsLabel:'SC / GA / NE FL Coast',centerLat:31.3,centerLon:-80.7},
+  'sta-ftp':{name:'St. Augustine / Fernandina \u2192 Ft. Pierce',nm:160,buoys:['41114'],go:'Winds SE\u2013SW under 15 kts; Seas under 3 ft',wait:'NE winds; Seas 4 ft+',nextLeg:'Ft. Pierce to Miami Beach (~110 nm) \u2014 final leg home',nwsZones:['AMZ452', 'AMZ552'],nwsLabel:'NE FL Coast',centerLat:28.6,centerLon:-80.6},
+  'ftp-mia':{name:'Ft. Pierce \u2192 Miami Beach',nm:120,buoys:['41122'],go:'Winds SW\u2013NW under 15 kts; Seas under 3 ft; Gulf Stream watch with any NE wind',wait:'NE winds \u2014 Stream stacks up fast; Seas 4 ft+',nextLeg:'Home \u2014 Sunset Harbour, Miami Beach \ud83c\udfc1',nwsZones:['AMZ552', 'AMZ651'],nwsLabel:'E FL Coast',centerLat:26.6,centerLon:-80.1}
 };
 
 function setStop(idx){
@@ -1488,33 +1488,88 @@ async function fetchBuoy(id){
   return null;
 }
 
-async function fetchNWSForecast(zones){
-  // Try each zone until we get a valid forecast
-  var proxies=[
-    function(z){return 'https://api.allorigins.win/raw?url='+encodeURIComponent('https://forecast.weather.gov/shmrn.php?mz='+z.toLowerCase());},
-    function(z){return 'https://corsproxy.io/?'+encodeURIComponent('https://forecast.weather.gov/shmrn.php?mz='+z.toLowerCase());}
-  ];
-  for(var zi=0;zi<zones.length;zi++){
-    for(var pi=0;pi<proxies.length;pi++){
-      try{
-        var resp=await fetchWithTimeout(proxies[pi](zones[zi]),8000);
-        if(!resp.ok) continue;
-        var text=await resp.text();
-        if(!text||text.length<200) continue;
-        // Extract forecast text — look for wind/seas content
-        var clean=text.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
-        // Find the forecast section
-        var idx=clean.search(/TONIGHT|TODAY|REST OF TODAY|THIS AFTERNOON/i);
-        if(idx===-1) idx=clean.search(/WINDS|SEAS|WAVE/i);
-        if(idx>0){
-          var forecast=clean.substring(Math.max(0,idx-50),idx+800).trim();
-          if(forecast.length>100) return {zone:zones[zi],text:forecast};
-        }
-      }catch(e){continue;}
+
+async function fetchOpenMeteo(lat, lon) {
+  // Fetch both marine waves and wind forecast from Open-Meteo
+  // CORS-friendly, no API key, works directly from browser
+  var now = new Date();
+  var hourNow = now.getHours();
+  
+  try {
+    var marineUrl = 'https://marine-api.open-meteo.com/v1/marine?latitude=' + lat + '&longitude=' + lon +
+      '&hourly=wave_height,wave_period,wave_direction,wind_wave_height&length_unit=imperial&wind_speed_unit=kn&timezone=America%2FNew_York&forecast_days=3';
+    var windUrl = 'https://api.open-meteo.com/v1/forecast?latitude=' + lat + '&longitude=' + lon +
+      '&hourly=windspeed_10m,winddirection_10m,windgusts_10m&wind_speed_unit=kn&timezone=America%2FNew_York&forecast_days=3';
+    
+    var [marineResp, windResp] = await Promise.all([
+      fetchWithTimeout(marineUrl, 8000),
+      fetchWithTimeout(windUrl, 8000)
+    ]);
+    
+    if (!marineResp.ok || !windResp.ok) return null;
+    
+    var [marine, wind] = await Promise.all([marineResp.json(), windResp.json()]);
+    
+    if (!marine.hourly || !wind.hourly) return null;
+    
+    // Get current + next 12 hours summary
+    var times = wind.hourly.time;
+    var results = [];
+    
+    for (var i = 0; i < times.length && i < 48; i++) {
+      var t = new Date(times[i]);
+      var h = t.getHours();
+      // Focus on morning hours (5am-2pm) for next 3 days
+      if (h >= 5 && h <= 14) {
+        results.push({
+          time: times[i],
+          windSpd: Math.round(wind.hourly.windspeed_10m[i]),
+          windDir: Math.round(wind.hourly.winddirection_10m[i]),
+          windGust: Math.round(wind.hourly.windgusts_10m[i]),
+          waveHt: marine.hourly.wave_height ? (marine.hourly.wave_height[i] || 0).toFixed(1) : 'N/A',
+          wavePer: marine.hourly.wave_period ? Math.round(marine.hourly.wave_period[i] || 0) : 'N/A',
+          waveDir: marine.hourly.wave_direction ? Math.round(marine.hourly.wave_direction[i] || 0) : 'N/A'
+        });
+      }
     }
+    
+    if (results.length === 0) return null;
+    
+    // Format summary by day
+    var days = {};
+    results.forEach(function(r) {
+      var day = r.time.split('T')[0];
+      if (!days[day]) days[day] = [];
+      days[day].push(r);
+    });
+    
+    var summary = 'OPEN-METEO FORECAST (model data, ' + lat + '\u00b0N ' + Math.abs(lon) + '\u00b0W):\n';
+    Object.keys(days).forEach(function(day) {
+      var pts = days[day];
+      var maxWind = Math.max.apply(null, pts.map(function(p){return p.windSpd;}));
+      var maxGust = Math.max.apply(null, pts.map(function(p){return p.windGust;}));
+      var maxWave = Math.max.apply(null, pts.map(function(p){return parseFloat(p.waveHt)||0;}));
+      var dirs = pts.map(function(p){return p.windDir;});
+      var avgDir = Math.round(dirs.reduce(function(a,b){return a+b;},0)/dirs.length);
+      // Convert degrees to compass
+      var compass = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
+      var compassDir = compass[Math.round(avgDir/22.5)%16];
+      summary += day + ': Wind max ' + maxWind + 'kts ' + compassDir + ', gusts to ' + maxGust + 'kts; Waves max ' + maxWave.toFixed(1) + 'ft\n';
+      // Add hourly detail for today
+      if (day === Object.keys(days)[0]) {
+        pts.forEach(function(p) {
+          var hr = p.time.split('T')[1].substring(0,5);
+          summary += '  ' + hr + ': ' + p.windSpd + 'kts ' + compass[Math.round(p.windDir/22.5)%16] + ' (gust ' + p.windGust + ') waves ' + p.waveHt + 'ft\n';
+        });
+      }
+    });
+    
+    return summary;
+  } catch(e) {
+    return null;
   }
-  return null;
 }
+
 
 async function fetchTides(stationId,daysAhead){var base=new Date();base.setDate(base.getDate()+daysAhead);var end=new Date(base);end.setDate(end.getDate()+1);function fmt(d){return d.getFullYear()+''+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0');}var url='https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?begin_date='+fmt(base)+'&end_date='+fmt(end)+'&station='+stationId+'&product=predictions&datum=MLLW&time_zone=lst_ldt&interval=hilo&units=english&application=passage_dashboard&format=json';try{var resp=await fetch(url);var data=await resp.json();return data.predictions||[];}catch(e){return[];}}
 function fmtTime(h,m){var h12=h>12?h-12:(h===0?12:h);return h12+':'+String(m).padStart(2,'0')+(h>=12?' PM':' AM');}
@@ -1533,7 +1588,7 @@ async function runPlanner(){
     var buoySuccess=false;
     if(leg.buoys&&leg.buoys.length>0){setStatus('<span class="sp"></span> Fetching live buoy data...');
       for(var bi=0;bi<leg.buoys.length;bi++){var d=await fetchBuoy(leg.buoys[bi]);if(d&&d['WSPD']&&d['WSPD']!=='MM'){var wspd=(parseFloat(d['WSPD'])*1.944).toFixed(1);var wvht=d['WVHT']&&d['WVHT']!=='MM'?d['WVHT']+'m/'+(parseFloat(d['WVHT'])*3.28).toFixed(1)+'ft':'N/A';var wdir=d['WDIR']&&d['WDIR']!=='MM'?'from '+d['WDIR']+'°':'';chipsEl.style.display='flex';chipsEl.innerHTML+='<span class="chip">Buoy '+leg.buoys[bi]+': '+wspd+'kts '+wdir+' · Waves '+wvht+'</span>';context+='\nBuoy '+leg.buoys[bi]+' (live): Wind '+wspd+' kts '+wdir+', Waves '+wvht+'\n';buoySuccess=true;}}}
-    if(!buoySuccess&&leg.nwsZones&&leg.nwsZones.length>0){setStatus('<span class="sp"></span> Buoys offline — fetching NWS marine forecast...');var nwsForecast=await fetchNWSForecast(leg.nwsZones);if(nwsForecast){chipsEl.style.display='flex';chipsEl.innerHTML+='<span class="chip chip-tide">NWS Zone '+nwsForecast.zone+' forecast loaded ✓</span>';context+='\nNWS MARINE FORECAST (Zone '+nwsForecast.zone+' — '+(leg.nwsLabel||'')+'):\n'+nwsForecast.text+'\nNote: live buoys offline, using NWS text product.\n';}else{context+='\nNo buoy or NWS data. Advise on seasonal norms and recommend Windy.\n';chipsEl.style.display='flex';chipsEl.innerHTML+='<span class="chip" style="border-color:rgba(239,68,68,0.3);color:#fca5a5">Buoys offline — NWS also unavailable — use Windy or paste data below</span>';}}
+    if(!buoySuccess&&leg.centerLat&&leg.centerLon){setStatus('<span class="sp"></span> Buoys offline — fetching Open-Meteo forecast...');var omForecast=await fetchOpenMeteo(leg.centerLat,leg.centerLon);if(omForecast){chipsEl.style.display='flex';chipsEl.innerHTML+='<span class="chip chip-tide">Open-Meteo forecast loaded ✓</span>';context+='\n'+omForecast+'\n';}else{context+='\nNo buoy or model data available. Use Windy or paste conditions manually.\n';chipsEl.style.display='flex';chipsEl.innerHTML+='<span class="chip" style="border-color:rgba(239,68,68,0.3);color:#fca5a5">All sources unavailable — paste Windy data below</span>';}}
     if(activeStop.hasTide){setStatus('<span class="sp"></span> Fetching tide predictions...');
       var depTime=document.getElementById('plan-deptime').value||'07:00';var speedKt=parseFloat(document.getElementById('plan-speed').value)||28;
       var dayLabels=['Tomorrow','+1 day','+2 days'];
