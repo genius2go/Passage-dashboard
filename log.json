@@ -497,6 +497,37 @@
       "notes": "The Carlolina Beach inlet shoaling issue was solved by their dredging the inlet last month",
       "ec_ref": "2026-06-08",
       "logged_at": "2026-06-08T21:41:12.104Z"
+    },
+    {
+      "id": "seg7-2026-06-09-2114",
+      "date": "2026-06-09",
+      "leg": "Jarrett Bay to Coinjock",
+      "leg_id": "seg7",
+      "direction": "nb",
+      "depart_time": "06:45",
+      "arrive_time": "13:15",
+      "duration_hrs": 6.5,
+      "planned_nm": 110,
+      "actual_nm": 127,
+      "avg_speed_kts": 19.5,
+      "fuel_used_gal": 155,
+      "fuel_price_per_gal": 5.5,
+      "fuel_cost": 852.5,
+      "engine_hours_port_start": 1110,
+      "engine_hours_port_end": 1117,
+      "engine_hours_stbd_start": 1110,
+      "engine_hours_stbd_end": 1117,
+      "wind_speed": "5–10",
+      "wind_dir": "NE",
+      "seas": "2–3 ft",
+      "sky": "Partly cloudy",
+      "visibility": "Clear",
+      "crew": "Solo",
+      "faults": false,
+      "fault_notes": null,
+      "notes": "Slow down in the North River, it's so circuitous that it’s easy to veer outside of the narrow channel (I ended up in 1 foot of muck)",
+      "ec_ref": "2026-06-09",
+      "logged_at": "2026-06-09T18:25:52.115Z"
     }
   ]
 }
