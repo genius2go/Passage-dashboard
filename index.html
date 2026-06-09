@@ -1601,9 +1601,14 @@ async function runPlanner(){
   if(isManual){var txt=document.getElementById('manual-input').value.trim();if(!txt){btn.disabled=false;return;}context='MANUALLY PROVIDED CONDITIONS:\n'+txt;setStatus('\u2713 Using your provided data');}
   else{
     var buoySuccess=false;
-    if(leg.buoys&&leg.buoys.length>0){setStatus('<span class="sp"></span> Fetching live buoy data...');
-      for(var bi=0;bi<leg.buoys.length;bi++){var d=await fetchBuoy(leg.buoys[bi]);if(d&&d['WSPD']&&d['WSPD']!=='MM'){var wspd=(parseFloat(d['WSPD'])*1.944).toFixed(1);var wvht=d['WVHT']&&d['WVHT']!=='MM'?d['WVHT']+'m/'+(parseFloat(d['WVHT'])*3.28).toFixed(1)+'ft':'N/A';var wdir=d['WDIR']&&d['WDIR']!=='MM'?'from '+d['WDIR']+'°':'';chipsEl.style.display='flex';chipsEl.innerHTML+='<span class="chip">Buoy '+leg.buoys[bi]+': '+wspd+'kts '+wdir+' · Waves '+wvht+'</span>';context+='\nBuoy '+leg.buoys[bi]+' (live): Wind '+wspd+' kts '+wdir+', Waves '+wvht+'\n';buoySuccess=true;}}}
-    if(!buoySuccess&&leg.centerLat&&leg.centerLon){setStatus('<span class="sp"></span> Buoys offline — fetching Open-Meteo forecast...');var omForecast=await fetchOpenMeteo(leg.centerLat,leg.centerLon);if(omForecast){chipsEl.style.display='flex';chipsEl.innerHTML+='<span class="chip chip-tide">Open-Meteo forecast loaded ✓</span>';context+='\n'+omForecast+'\n';}else{context+='\nNo buoy or model data available. Use Windy or paste conditions manually.\n';chipsEl.style.display='flex';chipsEl.innerHTML+='<span class="chip" style="border-color:rgba(239,68,68,0.3);color:#fca5a5">All sources unavailable — paste Windy data below</span>';}}
+    // Always fetch Open-Meteo in parallel — supplements buoys even when partially available
+    var omPromise = (leg.centerLat&&leg.centerLon) ? fetchOpenMeteo(leg.centerLat,leg.centerLon) : Promise.resolve(null);
+    if(leg.buoys&&leg.buoys.length>0){setStatus('<span class="sp"></span> Fetching live buoy data + model forecast...');
+      for(var bi=0;bi<leg.buoys.length;bi++){var d=await fetchBuoy(leg.buoys[bi]);if(d&&d['WSPD']&&d['WSPD']!=='MM'){var wspd=(parseFloat(d['WSPD'])*1.944).toFixed(1);var wvht=d['WVHT']&&d['WVHT']!=='MM'?d['WVHT']+'m/'+(parseFloat(d['WVHT'])*3.28).toFixed(1)+'ft':'N/A (wave sensor offline)';var wdir=d['WDIR']&&d['WDIR']!=='MM'?'from '+d['WDIR']+'°':'';chipsEl.style.display='flex';chipsEl.innerHTML+='<span class="chip">Buoy '+leg.buoys[bi]+': '+wspd+'kts '+wdir+' · Waves '+wvht+'</span>';context+='\nBuoy '+leg.buoys[bi]+' (live): Wind '+wspd+' kts '+wdir+', Waves '+wvht+'\n';buoySuccess=true;}}}
+    // Always add Open-Meteo as forecast supplement
+    setStatus('<span class="sp"></span> Loading forecast model data...');
+    var omForecast=await omPromise;
+    if(omForecast){chipsEl.style.display='flex';chipsEl.innerHTML+='<span class="chip chip-tide">Open-Meteo 3-day forecast loaded ✓</span>';context+='\n'+omForecast+'\n';}else if(!buoySuccess){context+='\nNo buoy or model data available. Use Windy or paste conditions manually.\n';chipsEl.style.display='flex';chipsEl.innerHTML+='<span class="chip" style="border-color:rgba(239,68,68,0.3);color:#fca5a5">All sources unavailable — paste Windy data below</span>';}
     if(activeStop.hasTide){setStatus('<span class="sp"></span> Fetching tide predictions...');
       var depTime=document.getElementById('plan-deptime').value||'07:00';var speedKt=parseFloat(document.getElementById('plan-speed').value)||28;
       var dayLabels=['Tomorrow','+1 day','+2 days'];
