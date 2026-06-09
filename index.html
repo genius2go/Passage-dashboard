@@ -347,6 +347,10 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
 .vl-analytics-title{font-size:11px;font-weight:700;color:var(--text-muted);flex:1;transition:color 0.15s;}
 .vl-analytics-body{display:none;margin-top:12px;}
 .vl-analytics-body.open{display:block;}
+.vl-period-tabs{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px;}
+.vl-period-tab{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:4px 12px;font-size:10px;font-weight:600;color:var(--text-muted);cursor:pointer;font-family:inherit;transition:all 0.15s;white-space:nowrap;}
+.vl-period-tab:hover{border-color:rgba(13,148,136,0.4);color:var(--text);}
+.vl-period-tab.active{background:rgba(13,148,136,0.15);border-color:var(--teal);color:var(--teal-light);}
 .vl-chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 @media(max-width:600px){.vl-chart-grid{grid-template-columns:1fr;}}
 .vl-chart-card{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:var(--radius-sm);padding:10px 12px;}
@@ -1314,6 +1318,14 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
           <span style="font-size:10px;color:var(--text-dim)" id="vl-analytics-chev">&#9660;</span>
         </div>
         <div class="vl-analytics-body" id="vl-analytics-body">
+          <!-- Year selector (auto-populated from log data) -->
+          <div class="vl-period-tabs" id="vl-year-tabs"></div>
+          <!-- Half-year tabs (hidden when All Years selected) -->
+          <div class="vl-period-tabs" id="vl-half-tabs" style="display:none">
+            <button class="vl-period-tab active" id="vl-tab-full" onclick="vlSetHalf('full',this)">Full year</button>
+            <button class="vl-period-tab" id="vl-tab-h1" onclick="vlSetHalf('h1',this)">Jan &ndash; Jun</button>
+            <button class="vl-period-tab" id="vl-tab-h2" onclick="vlSetHalf('h2',this)">Jul &ndash; Dec</button>
+          </div>
           <!-- Summary stats -->
           <div class="vl-stat-row" id="vl-stat-row"></div>
           <!-- Charts -->
@@ -2234,6 +2246,8 @@ function initMap(segId){
 ════════════════════════════════════════════ */
 var vlAnalyticsOpen = false;
 var vlChartInstances = {};
+var vlAnalyticsYear = 'all';  // 'all' | '2024' | '2025' | ...
+var vlAnalyticsHalf = 'full'; // 'full' | 'h1' | 'h2'
 
 function vlToggleAnalytics(){
   vlAnalyticsOpen = !vlAnalyticsOpen;
@@ -2242,8 +2256,49 @@ function vlToggleAnalytics(){
   if(vlAnalyticsOpen) vlRenderAnalytics();
 }
 
+function vlBuildYearTabs(){
+  var yearSet = {};
+  vlLogEntries.forEach(function(e){ if(e.date) yearSet[e.date.slice(0,4)] = true; });
+  var years = Object.keys(yearSet).sort();
+  var container = document.getElementById('vl-year-tabs');
+  if(!container) return;
+  var html = '<button class="vl-period-tab'+(vlAnalyticsYear==='all'?' active':'')+'" onclick="vlSetYear(\'all\',this)">All years</button>';
+  years.forEach(function(y){
+    html += '<button class="vl-period-tab'+(vlAnalyticsYear===y?' active':'')+'" onclick="vlSetYear(\''+y+'\',this)">'+y+'</button>';
+  });
+  container.innerHTML = html;
+  var halfRow = document.getElementById('vl-half-tabs');
+  if(halfRow) halfRow.style.display = vlAnalyticsYear === 'all' ? 'none' : 'flex';
+}
+
+function vlSetYear(year, btn){
+  vlAnalyticsYear = year;
+  vlAnalyticsHalf = 'full';
+  document.querySelectorAll('#vl-half-tabs .vl-period-tab').forEach(function(b){ b.classList.remove('active'); });
+  var fullBtn = document.getElementById('vl-tab-full');
+  if(fullBtn) fullBtn.classList.add('active');
+  vlBuildYearTabs();
+  vlRenderAnalytics();
+}
+
+function vlSetHalf(half, btn){
+  vlAnalyticsHalf = half;
+  document.querySelectorAll('#vl-half-tabs .vl-period-tab').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  vlRenderAnalytics();
+}
+
 function vlRenderAnalytics(){
+  vlBuildYearTabs();
   var entries = vlLogEntries;
+  if(vlAnalyticsYear !== 'all'){
+    entries = entries.filter(function(e){ return (e.date||'').slice(0,4) === vlAnalyticsYear; });
+    if(vlAnalyticsHalf === 'h1'){
+      entries = entries.filter(function(e){ var m=parseInt((e.date||'').slice(5,7),10); return m>=1&&m<=6; });
+    } else if(vlAnalyticsHalf === 'h2'){
+      entries = entries.filter(function(e){ var m=parseInt((e.date||'').slice(5,7),10); return m>=7&&m<=12; });
+    }
+  }
   var statRow = document.getElementById('vl-stat-row');
   var noData = document.getElementById('vl-no-data');
   var chartGrid = document.getElementById('vl-chart-grid');
@@ -2280,26 +2335,28 @@ function vlRenderAnalytics(){
   var bOpts={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'rgba(17,34,64,0.95)',titleColor:'#e2e8f0',bodyColor:'#94a3b8',borderColor:'rgba(255,255,255,0.1)',borderWidth:1}},scales:{x:{ticks:{color:TX,font:{size:9},maxRotation:35},grid:{color:GR}},y:{ticks:{color:TX,font:{size:9}},grid:{color:GR}}}};
   function dc(id){if(vlChartInstances[id]){vlChartInstances[id].destroy();delete vlChartInstances[id];}}
   function sl(leg){return leg.replace('Miami Beach','MIA').replace('Ft. Pierce','FTP').replace('Fort Pierce','FTP').replace('St. Augustine','StAug').replace('Fernandina','Fern').replace('Charleston','CHS').replace('Southport','SPT').replace('Morehead City','MHC').replace('Coinjock','CJK').replace('Hampton VA','HVA').replace('Norfolk','NFK').replace('Waterside','NFK').replace('Ocean City MD','OCI').replace('Cape May','CPM').replace('Barnegat Light','BNL').replace('Barnegat','BNL').replace('Port Washington','PWY').replace('Falmouth MA','FAL').replace('Falmouth','FAL').replace(' \u2192 ','\u2192').replace(' -> ','\u2192').replace('Weather Hold','Hold');}
+  // When showing all years, prefix chart labels with year to disambiguate same legs across seasons
+  function ll(e){ return vlAnalyticsYear==='all' ? e.date.slice(0,4)+' '+sl(e.leg) : sl(e.leg); }
   // 1. Fuel cost per leg
   var fc=sorted.filter(function(e){return e.fuel_cost>0;});
   dc('fuel-cost');
-  if(fc.length){var ctx=document.getElementById('chart-fuel-cost');if(ctx){vlChartInstances['fuel-cost']=new Chart(ctx,{type:'bar',data:{labels:fc.map(function(e){return sl(e.leg)+' '+e.date.slice(0,7);}),datasets:[{data:fc.map(function(e){return e.fuel_cost;}),backgroundColor:TA,borderRadius:3}]},options:Object.assign({},bOpts,{plugins:Object.assign({},bOpts.plugins,{tooltip:{callbacks:{label:function(c){return '$'+c.parsed.y.toFixed(2);}}}})})});}}
+  if(fc.length){var ctx=document.getElementById('chart-fuel-cost');if(ctx){vlChartInstances['fuel-cost']=new Chart(ctx,{type:'bar',data:{labels:fc.map(function(e){return ll(e);}),datasets:[{data:fc.map(function(e){return e.fuel_cost;}),backgroundColor:TA,borderRadius:3}]},options:Object.assign({},bOpts,{plugins:Object.assign({},bOpts.plugins,{tooltip:{callbacks:{label:function(c){return '$'+c.parsed.y.toFixed(2);}}}})})});}}
   // 2. Price per gallon over time
   var pg=sorted.filter(function(e){return e.fuel_price_per_gal>0;});
   dc('price-gal');
-  if(pg.length){var ctx=document.getElementById('chart-price-gal');if(ctx){vlChartInstances['price-gal']=new Chart(ctx,{type:'line',data:{labels:pg.map(function(e){return e.date.slice(0,7)+' '+sl(e.leg).split('\u2192')[0];}),datasets:[{data:pg.map(function(e){return e.fuel_price_per_gal;}),borderColor:AA,backgroundColor:AB,pointBackgroundColor:AA,pointRadius:4,tension:0.3,fill:true}]},options:Object.assign({},bOpts,{plugins:Object.assign({},bOpts.plugins,{tooltip:{callbacks:{label:function(c){return '$'+c.parsed.y.toFixed(2)+'/gal';}}}})})});}}
+  if(pg.length){var ctx=document.getElementById('chart-price-gal');if(ctx){vlChartInstances['price-gal']=new Chart(ctx,{type:'line',data:{labels:pg.map(function(e){return ll(e);}),datasets:[{data:pg.map(function(e){return e.fuel_price_per_gal;}),borderColor:AA,backgroundColor:AB,pointBackgroundColor:AA,pointRadius:4,tension:0.3,fill:true}]},options:Object.assign({},bOpts,{plugins:Object.assign({},bOpts.plugins,{tooltip:{callbacks:{label:function(c){return '$'+c.parsed.y.toFixed(2)+'/gal';}}}})})});}}
   // 3. Burn rate gal/nm
   var br=sorted.filter(function(e){return e.fuel_used_gal>0&&e.actual_nm>0;});
   dc('burn-rate');
-  if(br.length){var ctx=document.getElementById('chart-burn-rate');if(ctx){vlChartInstances['burn-rate']=new Chart(ctx,{type:'bar',data:{labels:br.map(function(e){return sl(e.leg);}),datasets:[{data:br.map(function(e){return Math.round((e.fuel_used_gal/e.actual_nm)*100)/100;}),backgroundColor:GA,borderRadius:3}]},options:Object.assign({},bOpts,{plugins:Object.assign({},bOpts.plugins,{tooltip:{callbacks:{label:function(c){return c.parsed.y.toFixed(2)+' gal/nm';}}}})})});}}
+  if(br.length){var ctx=document.getElementById('chart-burn-rate');if(ctx){vlChartInstances['burn-rate']=new Chart(ctx,{type:'bar',data:{labels:br.map(function(e){return ll(e);}),datasets:[{data:br.map(function(e){return Math.round((e.fuel_used_gal/e.actual_nm)*100)/100;}),backgroundColor:GA,borderRadius:3}]},options:Object.assign({},bOpts,{plugins:Object.assign({},bOpts.plugins,{tooltip:{callbacks:{label:function(c){return c.parsed.y.toFixed(2)+' gal/nm';}}}})})});}}
   // 4. Actual vs planned nm
   var nm=sorted.filter(function(e){return e.actual_nm>0&&e.planned_nm>0;});
   dc('nm');
-  if(nm.length){var ctx=document.getElementById('chart-nm');if(ctx){vlChartInstances['nm']=new Chart(ctx,{type:'bar',data:{labels:nm.map(function(e){return sl(e.leg);}),datasets:[{label:'Actual',data:nm.map(function(e){return e.actual_nm;}),backgroundColor:TA,borderRadius:3},{label:'Planned',data:nm.map(function(e){return e.planned_nm;}),backgroundColor:'rgba(255,255,255,0.12)',borderRadius:3}]},options:Object.assign({},bOpts,{plugins:Object.assign({},bOpts.plugins,{legend:{display:true,labels:{color:TX,font:{size:9}}}})})});}}
+  if(nm.length){var ctx=document.getElementById('chart-nm');if(ctx){vlChartInstances['nm']=new Chart(ctx,{type:'bar',data:{labels:nm.map(function(e){return ll(e);}),datasets:[{label:'Actual',data:nm.map(function(e){return e.actual_nm;}),backgroundColor:TA,borderRadius:3},{label:'Planned',data:nm.map(function(e){return e.planned_nm;}),backgroundColor:'rgba(255,255,255,0.12)',borderRadius:3}]},options:Object.assign({},bOpts,{plugins:Object.assign({},bOpts.plugins,{legend:{display:true,labels:{color:TX,font:{size:9}}}})})});}}
   // 5. Engine hours per leg
   var eh=sorted.filter(function(e){return e.engine_hours_port_end&&e.engine_hours_port_start;});
   dc('eng-hrs');
-  if(eh.length){var ctx=document.getElementById('chart-eng-hrs');if(ctx){vlChartInstances['eng-hrs']=new Chart(ctx,{type:'bar',data:{labels:eh.map(function(e){return sl(e.leg);}),datasets:[{data:eh.map(function(e){return Math.round((e.engine_hours_port_end-e.engine_hours_port_start)*10)/10;}),backgroundColor:BA,borderRadius:3}]},options:Object.assign({},bOpts,{plugins:Object.assign({},bOpts.plugins,{tooltip:{callbacks:{label:function(c){return c.parsed.y.toFixed(1)+' hrs';}}}})})});}}
+  if(eh.length){var ctx=document.getElementById('chart-eng-hrs');if(ctx){vlChartInstances['eng-hrs']=new Chart(ctx,{type:'bar',data:{labels:eh.map(function(e){return ll(e);}),datasets:[{data:eh.map(function(e){return Math.round((e.engine_hours_port_end-e.engine_hours_port_start)*10)/10;}),backgroundColor:BA,borderRadius:3}]},options:Object.assign({},bOpts,{plugins:Object.assign({},bOpts.plugins,{tooltip:{callbacks:{label:function(c){return c.parsed.y.toFixed(1)+' hrs';}}}})})});}}
 }
 
 </script>
