@@ -229,6 +229,15 @@ body{background:var(--navy);color:var(--text);font-family:-apple-system,BlinkMac
 .ac-inject.is-overnight .ac-inject-badge{background:rgba(168,85,247,0.15);color:#d8b4fe;}
 .ac-inject.is-overnight .ac-inject-overnight{display:block;}
 
+
+/* ── PP FROM/TO SELECTORS ── */
+.pp-row{display:flex;align-items:flex-end;gap:8px;margin-bottom:4px;}
+.pp-field{flex:1;min-width:0;}
+.pp-label{font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px;}
+.pp-select{width:100%;background:var(--navy);border:1px solid rgba(59,130,246,0.35);border-radius:var(--radius-sm);padding:9px 10px;font-family:inherit;font-size:13px;color:var(--text);outline:none;-webkit-appearance:none;appearance:none;color-scheme:dark;}
+.pp-select:focus{border-color:rgba(59,130,246,0.65);}
+.pp-arrow{color:var(--text-dim);font-size:16px;padding-bottom:9px;flex-shrink:0;}
+
 /* ── MY TRIP FLEXIBLE PANEL ───────────────────────────────────────────── */
 .mytrip-panel{background:var(--card-bg);border:1.5px solid rgba(99,102,241,0.35);border-radius:var(--radius);margin:0 0 18px;overflow:hidden;}
 .mytrip-hdr{padding:12px 16px;display:flex;align-items:center;gap:10px;background:rgba(99,102,241,0.06);}
@@ -684,43 +693,121 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
       <span class="planner-icon">&#127754;</span>
       <div style="flex:1">
         <div class="planner-title">Passage Planner</div>
-        <div class="planner-sub" id="planner-sub">Tap your current stop above, then open this to analyze your options</div>
+        <div class="planner-sub" id="planner-sub">Pick a leg, pick a day, get a GO / WAIT / CAUTION</div>
       </div>
       <span class="planner-chev" id="planner-chev">&#9660;</span>
     </div>
     <div class="planner-body" id="planner-body">
       <div class="planner-pad">
-        <div class="section-label" style="margin-bottom:8px">When are you planning to leave?</div>
+
+        <!-- FROM / TO selectors -->
+        <div class="pp-row">
+          <div class="pp-field">
+            <div class="pp-label">I am in</div>
+            <select class="pp-select" id="pp-from">
+              <option value="">— select —</option>
+              <optgroup label="Northbound stops">
+                <option>Miami Beach</option>
+                <option>Ft. Pierce</option>
+                <option>St. Augustine / Fernandina</option>
+                <option>Hilton Head</option>
+                <option>Charleston</option>
+                <option>Southport</option>
+                <option>Oriental, NC (River Dunes)</option>
+                <option>Coinjock</option>
+                <option>Hampton VA</option>
+                <option>Ocean City MD</option>
+                <option>Atlantic City NJ</option>
+                <option>Barnegat Light</option>
+                <option>New York City</option>
+                <option>Westbrook CT</option>
+              </optgroup>
+              <optgroup label="Southbound stops">
+                <option>East Falmouth MA</option>
+                <option>Cape May NJ</option>
+                <option>Norfolk VA</option>
+              </optgroup>
+            </select>
+          </div>
+          <div class="pp-arrow">&#8594;</div>
+          <div class="pp-field">
+            <div class="pp-label">I want to go to</div>
+            <select class="pp-select" id="pp-to">
+              <option value="">— select —</option>
+              <optgroup label="Northbound">
+                <option>Ft. Pierce</option>
+                <option>St. Augustine / Fernandina</option>
+                <option>Hilton Head</option>
+                <option>Charleston</option>
+                <option>Southport</option>
+                <option>Oriental, NC (River Dunes)</option>
+                <option>Coinjock</option>
+                <option>Hampton VA</option>
+                <option>Ocean City MD</option>
+                <option>Atlantic City NJ (fuel)</option>
+                <option>Barnegat Light</option>
+                <option>New York City</option>
+                <option>Westbrook CT (fuel)</option>
+                <option>East Falmouth MA</option>
+              </optgroup>
+              <optgroup label="Southbound">
+                <option>New York City</option>
+                <option>Barnegat Light</option>
+                <option>Cape May NJ</option>
+                <option>Ocean City MD</option>
+                <option>Norfolk VA</option>
+                <option>Hampton VA</option>
+                <option>Coinjock</option>
+                <option>Oriental, NC (River Dunes)</option>
+                <option>Miami Beach</option>
+              </optgroup>
+            </select>
+          </div>
+        </div>
+
+        <!-- Departure day -->
+        <div class="section-label" style="margin:12px 0 8px">When?</div>
         <div class="option-row">
           <button class="option-card selected" id="opt0" onclick="selectOpt(0)"><div class="option-title">Tomorrow</div><div class="option-sub" id="opt0-sub">earliest</div></button>
           <button class="option-card" id="opt1" onclick="selectOpt(1)"><div class="option-title">+1 day</div><div class="option-sub" id="opt1-sub">one extra night</div></button>
           <button class="option-card" id="opt2" onclick="selectOpt(2)"><div class="option-title">+2 days</div><div class="option-sub" id="opt2-sub">two extra nights</div></button>
         </div>
-        <div id="tide-inputs" style="display:none">
-          <div class="tide-row">
-            <span class="tide-lbl">&#127754; Planned departure:</span>
-            <input class="tide-inp" type="time" id="plan-deptime" value="07:00">
-            <span class="tide-lbl">Speed:</span>
-            <input class="tide-inp" type="number" id="plan-speed" value="28" min="10" max="45">
-            <span class="tide-lbl">kts</span>
-          </div>
+
+        <!-- Departure time row (always visible, simple) -->
+        <div class="tide-row" style="margin-top:10px">
+          <span class="tide-lbl">Planned departure:</span>
+          <input class="tide-inp" type="time" id="plan-deptime" value="07:00">
+          <span class="tide-lbl">Speed:</span>
+          <input class="tide-inp" type="number" id="plan-speed" value="28" min="10" max="45">
+          <span class="tide-lbl">kts</span>
         </div>
+
         <div class="p-status" id="p-status"></div>
         <div class="chips" id="p-chips" style="display:none"></div>
-        <button class="analyze-btn" id="analyze-btn" onclick="runPlanner()">&#9889; Analyze conditions + get recommendation</button>
+
+        <button class="analyze-btn" id="analyze-btn" onclick="runPlanner()">&#9889; Get forecast &amp; recommendation</button>
+
         <span class="manual-toggle" onclick="toggleManual()">or paste your own forecast data instead</span>
         <div class="manual-area" id="manual-area">
-          <div class="manual-lbl">Paste any forecast, buoy readings, or describe what you are seeing in Windy:</div>
+          <div class="manual-lbl">Paste any forecast, buoy readings, or describe what you see in Windy:</div>
           <textarea id="manual-input" placeholder="e.g. NE 15-20 kts, seas 3-4 ft, front passing tomorrow afternoon..."></textarea>
         </div>
+
         <div id="p-result"></div>
-        <a class="ask-claude-btn" id="ask-claude-btn" href="#" target="_blank" onclick="return openClaude()" style="display:none">&#129302; Ask Claude for a recommendation</a>
+        <a class="ask-claude-btn" id="ask-claude-btn" href="#" target="_blank" onclick="return openClaude()" style="display:none">&#129302; Ask Claude directly</a>
         <div class="ask-claude-note" id="ask-claude-note" style="display:none">Opens Claude.ai pre-filled with your conditions &middot; requires Claude account</div>
+
+        <!-- Trip Brief -->
+        <button class="tb-btn" id="trip-brief-btn" onclick="runTripBrief()">
+          &#128506;&#65039; Full Trip Brief &#8212; all remaining legs
+        </button>
+        <div class="tb-result" id="tb-result"></div>
+
       </div>
     </div>
   </div>
 
-  <hr class="divider">
+    <hr class="divider">
   <div class="section-label" id="route-section-label">Route notes &#8212; tap any leg to expand</div>
 
   <!-- NORTHBOUND SEGMENTS -->
@@ -2686,6 +2773,35 @@ function vlRenderAnalytics(){
   var eh=sorted.filter(function(e){return e.engine_hours_port_end&&e.engine_hours_port_start;});
   dc('eng-hrs');
   if(eh.length){var ctx=document.getElementById('chart-eng-hrs');if(ctx){vlChartInstances['eng-hrs']=new Chart(ctx,{type:'bar',data:{labels:eh.map(function(e){return ll(e);}),datasets:[{data:eh.map(function(e){return Math.round((e.engine_hours_port_end-e.engine_hours_port_start)*10)/10;}),backgroundColor:BA,borderRadius:3}]},options:Object.assign({},bOpts,{plugins:Object.assign({},bOpts.plugins,{tooltip:{callbacks:{label:function(c){return c.parsed.y.toFixed(1)+' hrs';}}}})})});}}
+}
+
+// Map from/to stop names to a NB_LEGS or SB_LEGS key
+function ppResolveLeg(from,to){
+  var f=from.toLowerCase(), t=to.toLowerCase().replace(' (fuel)','');
+  if(f.includes('hampton')&&t.includes('ocean city')) return 'hva-ocy';
+  if(f.includes('ocean city')&&(t.includes('barnegat')||t.includes('barnegat light'))) return 'ocy-bnl';
+  if(f.includes('ocean city')&&(t.includes('atlantic city')||t.includes('new york')||t.includes('nyc'))) return 'ocy-nyc';
+  if(f.includes('atlantic city')&&t.includes('new york')) return 'ocy-nyc';
+  if((f.includes('barnegat'))&&t.includes('new york')) return 'bnl-pwy';
+  if(f.includes('new york')&&(t.includes('falmouth')||t.includes('westbrook'))) return 'pwy-fal';
+  if(f.includes('westbrook')&&t.includes('falmouth')) return 'pwy-fal';
+  if(f.includes('coinjock')&&t.includes('hampton')) return 'cjk-hva';
+  if(f.includes('coinjock')&&t.includes('norfolk')) return 'cjk-hva';
+  if(f.includes('southport')&&t.includes('oriental')) return 'spt-mhc';
+  if(f.includes('oriental')&&t.includes('coinjock')) return 'mhc-cjk';
+  if(f.includes('charleston')&&t.includes('southport')) return 'chs-spt';
+  if(f.includes('hilton head')&&t.includes('charleston')) return 'hh-chs';
+  if(f.includes('st. aug')&&t.includes('hilton')) return 'sta-hh';
+  if(f.includes('ft. pierce')&&t.includes('st. aug')) return 'ftp-sta';
+  if(f.includes('miami')&&t.includes('ft. pierce')) return 'mia-ftp';
+  // Southbound
+  if(f.includes('falmouth')&&(t.includes('new york')||t.includes('westbrook'))) return 'fal-pwy';
+  if(f.includes('new york')&&t.includes('barnegat')) return 'pwy-bnl';
+  if(f.includes('barnegat')&&(t.includes('cape may')||t.includes('ocean city'))) return 'bnl-cpm';
+  if(f.includes('cape may')&&t.includes('ocean city')) return 'bnl-cpm';
+  if((f.includes('ocean city')||f.includes('cape may'))&&t.includes('hampton')) return 'hva-ocy';
+  if(f.includes('hampton')&&t.includes('coinjock')) return 'cjk-hva';
+  return null;
 }
 
 // ── BARNEGAT WINDOW WIDGET ──────────────────────────────────────────────────
