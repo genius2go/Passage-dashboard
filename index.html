@@ -203,6 +203,77 @@ body{background:var(--navy);color:var(--text);font-family:-apple-system,BlinkMac
 .bp-miss{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:6px;padding:8px 10px;margin-top:8px;font-size:11px;color:var(--text-muted);line-height:1.5;}
 .bp-miss strong{color:var(--text);font-weight:600;}
 .bp-note{font-size:10px;color:var(--text-dim);margin-top:8px;padding:6px 8px;border-left:2px solid rgba(255,255,255,0.08);line-height:1.5;}
+/* ── SEGMENT TRIP STATE SYNC ── */
+.segment.trip-active{border:1.5px solid rgba(99,102,241,0.5);border-radius:var(--radius);background:rgba(99,102,241,0.04);}
+.segment.trip-active .seg-dot{box-shadow:0 0 0 3px rgba(99,102,241,0.3);}
+.segment.trip-done{opacity:0.55;}
+.segment.trip-done .seg-name{text-decoration:line-through;color:var(--text-dim);}
+.segment.trip-done .seg-dot{background:rgba(34,197,94,0.2) !important;}
+.segment.trip-skip .seg-header{opacity:0.4;}
+.segment.trip-skip .seg-name{text-decoration:line-through;}
+.segment-skip-bar{display:none;font-size:10px;color:var(--text-dim);padding:4px 14px 8px;cursor:pointer;}
+.segment-skip-bar:hover{color:var(--text-muted);}
+.segment.trip-skip .segment-skip-bar{display:block;}
+.segment.trip-skip .seg-toggle,.segment.trip-skip .map-toggle{display:none;}
+.segment.trip-skip .seg-body{display:none !important;}
+.segment.trip-skip .seg-body.force-show{display:block !important;}
+/* Injected AC card */
+.ac-inject{background:var(--card-bg);border:1px solid rgba(251,191,36,0.25);border-radius:var(--radius);margin:0 0 8px;overflow:hidden;}
+.ac-inject-hdr{padding:10px 14px;display:flex;align-items:center;gap:10px;background:rgba(251,191,36,0.04);}
+.ac-inject-icon{font-size:16px;}
+.ac-inject-title{font-size:13px;font-weight:700;color:#fcd34d;flex:1;}
+.ac-inject-badge{font-size:9px;font-weight:700;padding:2px 7px;border-radius:3px;background:rgba(251,191,36,0.15);color:#fcd34d;text-transform:uppercase;letter-spacing:.05em;}
+.ac-inject-body{padding:10px 14px;border-top:1px solid rgba(251,191,36,0.12);}
+.ac-inject-note{font-size:11px;color:var(--text-muted);margin-bottom:8px;line-height:1.5;}
+.ac-inject-overnight{display:none;}
+.ac-inject.is-overnight .ac-inject-badge{background:rgba(168,85,247,0.15);color:#d8b4fe;}
+.ac-inject.is-overnight .ac-inject-overnight{display:block;}
+
+/* ── MY TRIP FLEXIBLE PANEL ───────────────────────────────────────────── */
+.mytrip-panel{background:var(--card-bg);border:1.5px solid rgba(99,102,241,0.35);border-radius:var(--radius);margin:0 0 18px;overflow:hidden;}
+.mytrip-hdr{padding:12px 16px;display:flex;align-items:center;gap:10px;background:rgba(99,102,241,0.06);}
+.mytrip-hdr-icon{font-size:18px;}
+.mytrip-hdr-text{flex:1;}
+.mytrip-hdr-title{font-size:13px;font-weight:700;color:#a5b4fc;}
+.mytrip-hdr-sub{font-size:10px;color:var(--text-dim);margin-top:1px;}
+.mytrip-reset{font-size:10px;color:var(--text-dim);background:none;border:1px solid var(--border);border-radius:4px;padding:3px 8px;cursor:pointer;font-family:inherit;}
+.mytrip-reset:hover{color:var(--text-muted);border-color:rgba(255,255,255,0.15);}
+.mytrip-body{padding:12px 14px;}
+.mytrip-stops{display:flex;flex-direction:column;gap:4px;margin-bottom:12px;}
+.mytrip-stop{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:var(--radius-sm);border:1px solid var(--border);background:rgba(255,255,255,0.02);cursor:pointer;transition:background 0.15s,border-color 0.15s;user-select:none;-webkit-user-select:none;}
+.mytrip-stop:hover{background:rgba(255,255,255,0.04);}
+.mytrip-stop.ms-done{background:rgba(34,197,94,0.05);border-color:rgba(34,197,94,0.2);}
+.mytrip-stop.ms-here{background:rgba(99,102,241,0.10);border-color:rgba(99,102,241,0.5);}
+.mytrip-stop.ms-next{background:rgba(14,165,233,0.06);border-color:rgba(14,165,233,0.25);}
+.mytrip-stop.ms-fuel{background:rgba(251,191,36,0.05);border-color:rgba(251,191,36,0.2);}
+.mytrip-stop.ms-skip{opacity:0.35;}
+.mytrip-stop.ms-overnight{background:rgba(168,85,247,0.08);border-color:rgba(168,85,247,0.3);}
+.mytrip-stop-icon{font-size:14px;width:18px;text-align:center;flex-shrink:0;}
+.mytrip-stop-name{flex:1;font-size:12px;font-weight:600;color:var(--text);}
+.mytrip-stop.ms-skip .mytrip-stop-name{text-decoration:line-through;color:var(--text-dim);}
+.mytrip-stop-dist{font-size:10px;color:var(--text-dim);margin-right:4px;}
+.mytrip-stop-badge{font-size:9px;font-weight:700;padding:2px 6px;border-radius:3px;text-transform:uppercase;letter-spacing:0.05em;}
+.badge-done{background:rgba(34,197,94,0.15);color:#86efac;}
+.badge-here{background:rgba(99,102,241,0.25);color:#c7d2fe;}
+.badge-next{background:rgba(14,165,233,0.15);color:#7dd3fc;}
+.badge-fuel{background:rgba(251,191,36,0.15);color:#fcd34d;}
+.badge-skip{background:rgba(255,255,255,0.06);color:var(--text-dim);}
+.badge-overnight{background:rgba(168,85,247,0.15);color:#d8b4fe;}
+.mytrip-stop-menu{display:none;position:absolute;z-index:200;background:#1e2d3d;border:1px solid rgba(99,102,241,0.4);border-radius:var(--radius-sm);box-shadow:0 8px 24px rgba(0,0,0,0.5);min-width:160px;}
+.mytrip-stop-menu.open{display:block;}
+.mytrip-menu-item{padding:9px 14px;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:8px;color:var(--text-muted);}
+.mytrip-menu-item:hover{background:rgba(255,255,255,0.05);color:var(--text);}
+.mytrip-summary{background:rgba(14,165,233,0.05);border:1px solid rgba(14,165,233,0.15);border-radius:var(--radius-sm);padding:10px 12px;margin-top:8px;}
+.mytrip-summary-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:#7dd3fc;margin-bottom:6px;}
+.mytrip-summary-legs{display:flex;flex-direction:column;gap:3px;}
+.mytrip-summary-leg{display:flex;justify-content:space-between;font-size:11px;padding:2px 0;}
+.mytrip-summary-leg-name{color:var(--text-muted);}
+.mytrip-summary-leg-nm{color:var(--text);font-family:monospace;}
+.mytrip-summary-total{display:flex;justify-content:space-between;font-size:12px;font-weight:700;border-top:1px solid rgba(14,165,233,0.15);margin-top:6px;padding-top:6px;}
+.mytrip-summary-total-lbl{color:#7dd3fc;}
+.mytrip-summary-total-nm{color:#f1f5f9;font-family:monospace;}
+.mytrip-fuel-note{font-size:10px;color:var(--text-dim);margin-top:6px;padding-top:6px;border-top:1px solid var(--border);}
+
 /* ── BARNEGAT WINDOW WIDGET ── */
 .bnl-widget{margin-top:14px;background:rgba(59,130,246,0.04);border:1px solid rgba(59,130,246,0.18);border-radius:var(--radius);overflow:hidden;}
 .bnl-widget-hdr{padding:10px 14px;cursor:pointer;display:flex;align-items:center;gap:8px;user-select:none;-webkit-user-select:none;}
@@ -473,7 +544,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
       <button class="stop-btn" onclick="setStop(5)">Southport</button>
       <button class="stop-btn" onclick="setStop(6)">Oriental, NC (River Dunes)</button>
       <button class="stop-btn" onclick="setStop(7)">Coinjock</button>
-      <button class="stop-btn" onclick="setStop(8)">Norfolk</button>
+      <button class="stop-btn" onclick="setStop(8)">Hampton VA</button>
       <button class="stop-btn" onclick="setStop(9)">Ocean City MD</button>
       <button class="stop-btn" onclick="setStop(10)">Cape May NJ</button>
       <button class="stop-btn" onclick="setStop(11)">Barnegat Light</button>
@@ -511,13 +582,10 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
       <div class="pace-day"><div class="pace-day-num">Day 3</div><div class="pace-day-leg">St. Aug &#8594; Charleston</div><div class="pace-day-dist">~165&ndash;175 nm</div></div>
       <div class="pace-day"><div class="pace-day-num">Day 4</div><div class="pace-day-leg">Charleston &#8594; Southport</div><div class="pace-day-dist">~135 nm</div></div>
       <div class="pace-day"><div class="pace-day-num">Day 5</div><div class="pace-day-leg">Southport &#8594; Oriental, NC (River Dunes)</div><div class="pace-day-dist">~90 nm</div></div>
-      
       <div class="pace-day"><div class="pace-day-num">Day ?</div><div class="pace-day-leg">Oriental, NC (River Dunes) &#8594; Coinjock</div><div class="pace-day-dist">~110 nm</div></div>
-      <div class="pace-day"><div class="pace-day-num">Day ?+1</div><div class="pace-day-leg">Coinjock &#8594; Norfolk / Waterside</div><div class="pace-day-dist">~40 nm</div></div>
-      <div class="pace-day"><div class="pace-day-num">Day ?+2</div><div class="pace-day-leg">Norfolk / Waterside &#8594; Ocean City MD</div><div class="pace-day-dist">~125 nm</div></div>
-      <div class="pace-day"><div class="pace-day-num">Day ?+3</div><div class="pace-day-leg">Ocean City &#8594; Barnegat Light</div><div class="pace-day-dist">~75 nm</div></div>
-      <div class="pace-day"><div class="pace-day-num">2+ nights</div><div class="pace-day-leg">Barnegat Light &#127881;</div><div class="pace-day-dist">cousin visit</div></div>
-      <div class="pace-day"><div class="pace-day-num">Day ?+5</div><div class="pace-day-leg">Barnegat &#8594; New York City</div><div class="pace-day-dist">~110 nm</div></div>
+      <div class="pace-day"><div class="pace-day-num">Day ?+1</div><div class="pace-day-leg">Coinjock &#8594; Hampton VA</div><div class="pace-day-dist">~40 nm</div></div>
+      <div class="pace-day"><div class="pace-day-num">Day ?+2</div><div class="pace-day-leg">Hampton VA &#8594; Ocean City MD</div><div class="pace-day-dist">~125 nm</div></div>
+      <div class="pace-day"><div class="pace-day-num">Day ?+3</div><div class="pace-day-leg">Ocean City &#8594; Atlantic City &#9981; &#8594; NYC</div><div class="pace-day-dist">~170 nm</div></div>
       <div class="pace-day"><div class="pace-day-num">Final day</div><div class="pace-day-leg">New York City &#8594; Falmouth &#127937;</div><div class="pace-day-dist">~185 nm direct</div></div>
     </div>
   </div>
@@ -531,7 +599,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
       <div class="pace-day"><div class="pace-day-num">1+ night</div><div class="pace-day-leg">Barnegat Light &#127881;</div><div class="pace-day-dist">rest stop</div></div>
       <div class="pace-day"><div class="pace-day-num">Day 4</div><div class="pace-day-leg">Barnegat &#8594; Ocean City MD</div><div class="pace-day-dist">~75 nm</div></div>
       <div class="pace-day"><div class="pace-day-num">Day 5</div><div class="pace-day-leg">Ocean City &#8594; Hampton VA</div><div class="pace-day-dist">~125 nm</div></div>
-      <div class="pace-day"><div class="pace-day-num">Day 6</div><div class="pace-day-leg">Norfolk / Waterside &#8594; Coinjock</div><div class="pace-day-dist">~40 nm</div></div>
+      <div class="pace-day"><div class="pace-day-num">Day 6</div><div class="pace-day-leg">Hampton VA &#8594; Coinjock</div><div class="pace-day-dist">~40 nm</div></div>
       <div class="pace-day"><div class="pace-day-num">Day 7+</div><div class="pace-day-leg">Coinjock &#8212; Weather Hold</div><div class="pace-day-dist">wait for window</div></div>
       <div class="pace-day"><div class="pace-day-num">Day ?</div><div class="pace-day-leg">Coinjock &#8594; Oriental, NC (River Dunes)</div><div class="pace-day-dist">~110 nm</div></div>
       <div class="pace-day"><div class="pace-day-num">Day ?+1</div><div class="pace-day-leg">Oriental, NC (River Dunes) &#8594; Southport</div><div class="pace-day-dist">~90 nm</div></div>
@@ -856,9 +924,26 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
     </div>
       </div>
     </div>
+    <!-- MY TRIP FLEXIBLE PANEL (NB) -->
+    <div class="mytrip-panel nb-only" id="mytrip-panel-nb">
+      <div class="mytrip-hdr">
+        <span class="mytrip-hdr-icon">🗺️</span>
+        <div class="mytrip-hdr-text">
+          <div class="mytrip-hdr-title">My Trip — Flexible Stop Planner</div>
+          <div class="mytrip-hdr-sub">Tap any stop to change its status · persists across sessions · updates weather advisor</div>
+        </div>
+        <button class="mytrip-reset" onclick="mtReset()">Reset</button>
+      </div>
+      <div class="mytrip-body">
+        <div class="mytrip-stops" id="mytrip-stops"></div>
+        <div id="mytrip-summary"></div>
+      </div>
+    </div>
+
     <!-- NB SEG 8 COINJOCK to HAMPTON -->
     <div class="segment" id="seg8">
       <div class="seg-header"><div class="seg-dot dot-purple">&#9319;</div><div class="seg-info"><div class="seg-name">Coinjock &#8594; Norfolk &#8212; Waterside Marina</div><div class="seg-route">ICW &middot; North Landing River &#8594; Great Bridge Lock &#8594; Elizabeth River &#8594; Downtown Norfolk</div></div><span class="seg-dist">~40 nm</span><button class="vl-log-btn" id="vl-btn-seg8" onclick="vlOpenLog('seg8','Coinjock to Hampton VA','nb',40)">&#x1F4CB; Log</button></div>
+      <span class="segment-skip-bar" onclick="mtSegForceShow('seg8',this)">▸ skipped this trip — tap to show resources anyway</span>
       <span class="seg-toggle" onclick="toggleSeg('sb8',this)">show bridge timing planner &#9662;</span>
       <div class="seg-body" id="sb8">
         <div class="note"><strong>Plan this leg the evening before at Coinjock.</strong> Great Bridge Lock opens northbound on the hour. Work backwards from the lock hour you want. From lock to Waterside is all 6 kts no-wake through the Elizabeth River. <strong>Confirm bridge schedules with dock staff over dinner.</strong></div>
@@ -918,6 +1003,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
 
     <div class="segment" id="seg9">
       <div class="seg-header"><div class="seg-dot dot-blue">&#9320;</div><div class="seg-info"><div class="seg-name">Norfolk &#8594; Ocean City MD</div><div class="seg-route">Norfolk / Hampton Roads &middot; Cape Henry &#8594; Chesapeake Light &#8594; Ocean City</div></div><span class="seg-dist">~125 nm</span><button class="vl-log-btn" id="vl-btn-seg9" onclick="vlOpenLog('seg9','Hampton VA to Ocean City MD','nb',125)">&#x1F4CB; Log</button></div>
+      <span class="segment-skip-bar" onclick="mtSegForceShow('seg9',this)">▸ skipped this trip — tap to show resources anyway</span>
       <span class="seg-toggle" onclick="toggleSeg('sb9',this)">show notes + resources &#9662;</span> <span class="map-toggle" onclick="toggleMap('seg9',this)">&#x1F5FA; map &#9662;</span>
       <div class="seg-body" id="sb9">
         <div class="note-blue"><strong>Outside preferred.</strong> Wants SW/W winds under 15 kts, seas under 4 ft, no NE for 24 hrs. Chincoteague Inlet VA is emergency option only.</div>
@@ -928,7 +1014,10 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
           <a class="res-link" href="https://windy.com/?waves,38.0,-74.5,7" target="_blank">&#8599; Windy &#8212; Mid-Atlantic Offshore</a>
         </div>
       
-        <div class="resources" style="margin-top:8px"><a class="dockwa-btn" href="https://dockwa.com/explore/destination/rnc1xy7-ocean-city-fishermans-marina" target="_blank">&#x1F4C5; O.C. Fisherman's Marina &middot; VHF 16</a></div>
+        <div class="resources" style="margin-top:8px">
+          <a class="dockwa-btn" href="https://dockwa.com/explore/destination/g9c8ey-white-marlin-marina" target="_blank">&#x1F4C5; White Marlin Marina &middot; Ocean City MD &middot; fuel in-slip &middot; 12 ft MLW &middot; VHF 16 &#11088;</a>
+          <a class="dockwa-btn" href="https://dockwa.com/explore/destination/rnc1xy7-ocean-city-fishermans-marina" target="_blank">&#x1F4C5; O.C. Fisherman's Marina &middot; VHF 16 (alt)</a>
+        </div>
         <div class="map-body-wrap" id="seg9-map-wrap">
       <div id="seg9-map" class="leg-map"></div>
       <div class="map-caption">Leg 9: Hampton VA &rarr; Ocean City MD &middot; ~125 nm offshore &middot; Cape Henry, Chesapeake Light Tower, OC Inlet</div>
@@ -938,6 +1027,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
 
     <div class="segment" id="seg10">
       <div class="seg-header"><div class="seg-dot dot-sky">&#9321;</div><div class="seg-info"><div class="seg-name">Ocean City MD &#8594; Cape May NJ (conditional) &#8594; Barnegat Light</div><div class="seg-route">Barnegat inlet timing dictates where you stage &middot; Cape May is your safety valve</div></div><span class="seg-dist">~75 nm direct</span><button class="vl-log-btn" id="vl-btn-seg10" onclick="vlOpenLog('seg10','Ocean City MD to Barnegat Light','nb',75)">&#x1F4CB; Log</button></div>
+      <span class="segment-skip-bar" onclick="mtSegForceShow('seg10',this)">▸ skipped this trip — tap to show resources anyway</span>
       <span class="seg-toggle" onclick="toggleSeg('sb10',this)">show criteria + resources &#9662;</span> <span class="map-toggle" onclick="toggleMap('seg10',this)">&#x1F5FA; map &#9662;</span>
       <div class="seg-body" id="sb10">
         <div class="note"><strong>Barnegat Inlet is the most critical inlet of this passage.</strong> Previous incident here. <strong>Never enter on ebb. Never in the afternoon. No NE swell.</strong> Favor north jetty.</div>
@@ -1002,8 +1092,35 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
       </div>
     </div>
 
+
+    <!-- ATLANTIC CITY INJECT (dynamic) -->
+    <div id="ac-inject-card" style="display:none" class="ac-inject">
+      <div class="ac-inject-hdr">
+        <span class="ac-inject-icon">⛽</span>
+        <div class="ac-inject-title">Atlantic City NJ</div>
+        <span class="ac-inject-badge" id="ac-inject-badge">Fuel Stop</span>
+      </div>
+      <div class="ac-inject-body">
+        <div class="ac-inject-note">~55 nm from Ocean City · ~115 nm to New York City · Enter Absecon Inlet, look for GR buoy marking Clam Creek turn · keep R2 &amp; R3 to starboard · Kammerman's on your port side · 9 ft MLW</div>
+        <div class="resources" style="margin-top:0">
+          <a class="dockwa-btn" href="https://dockwa.com/explore/destination/8qcelj-kammermans-atlantic-city-marina" target="_blank">📅 Kammerman's Marina · Clam Creek · ValvTect diesel &amp; gas · (609) 348-8418</a>
+          <a class="res-link" href="https://www.kammermansmarina.com/" target="_blank">↗ kammermansmarina.com</a>
+          <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8534720" target="_blank">↗ Atlantic City Inlet Tides</a>
+          <a class="res-link" href="https://windy.com/?waves,39.4,-74.4,8" target="_blank">↗ Windy — NJ Shore</a>
+        </div>
+        <div class="ac-inject-overnight">
+          <div style="margin-top:10px;font-size:11px;font-weight:700;color:#d8b4fe;">🏨 Overnight — Kammerman's</div>
+          <div class="ac-inject-note" style="margin-top:4px">Family-owned since 1961 · Sirens Bar &amp; Grill dockside · showers, laundry, ship's store · fuel to your slip · ~1 mile to Boardwalk (Uber recommended after dark) · owner Chris Kammerman typically on-site</div>
+          <div class="resources" style="margin-top:4px">
+            <a class="res-link cg" href="https://captaingeorgia.com/north-east-port-weather" target="_blank">↗ NE Port Weather</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="segment" id="seg11">
       <div class="seg-header"><div class="seg-dot dot-green">&#9322;</div><div class="seg-info"><div class="seg-name">Barnegat Light &#8212; 2+ nights &#127881;</div><div class="seg-route">Cousin visit &middot; rest &middot; use Passage Planner to find your ideal exit window</div></div><button class="vl-log-btn" id="vl-btn-seg11" onclick="vlOpenLog('seg11','Barnegat Light — Stay','nb',0)">&#x1F4CB; Log</button></div>
+      <span class="segment-skip-bar" onclick="mtSegForceShow('seg11',this)">▸ skipped this trip — tap to show resources anyway</span>
       <span class="seg-toggle" onclick="toggleSeg('sb11',this)">show notes + resources &#9662;</span>
       <div class="seg-body" id="sb11">
         <div class="note-green"><strong>Stay as long as conditions and the visit warrant.</strong> Exit Barnegat: same rules as entry &mdash; flood tide, morning only, north jetty.</div>
@@ -1032,7 +1149,8 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
     </div>
 
     <div class="segment" id="seg12">
-      <div class="seg-header"><div class="seg-dot dot-sky">&#9323;</div><div class="seg-info"><div class="seg-name">Barnegat Light &#8594; New York City</div><div class="seg-route">Outside around Sandy Hook &middot; Ambrose Channel &middot; Long Island Sound</div></div><span class="seg-dist">~110 nm</span><button class="vl-log-btn" id="vl-btn-seg12" onclick="vlOpenLog('seg12','Barnegat Light to Port Washington','nb',110)">&#x1F4CB; Log</button></div>
+      <div class="seg-header"><div class="seg-dot dot-sky">&#9323;</div><div class="seg-info"><div class="seg-name">Barnegat Light &#8594; New York City</div><div class="seg-route">Outside around Sandy Hook &middot; Ambrose Channel &middot; Long Island Sound</div></div><span class="seg-dist">~110 nm</span><button class="vl-log-btn" id="vl-btn-seg12" onclick="vlOpenLog('seg12','Barnegat Light to New York City','nb',110)">&#x1F4CB; Log</button></div>
+      <span class="segment-skip-bar" onclick="mtSegForceShow('seg12',this)">▸ skipped this trip — tap to show resources anyway</span>
       <span class="seg-toggle" onclick="toggleSeg('sb12',this)">show notes + resources &#9662;</span> <span class="map-toggle" onclick="toggleMap('seg12',this)">&#x1F5FA; map &#9662;</span>
       <div class="seg-body" id="sb12">
         <div class="note"><strong>Ambrose Channel:</strong> Heavy ship traffic &#8212; right of way. Monitor VHF 16. Time Sandy Hook for fair current. <strong>Exit Barnegat: flood tide, morning, north jetty.</strong></div>
@@ -1061,8 +1179,36 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
       </div>
     </div>
 
+
+    <!-- WESTBROOK CT INJECT (dynamic) -->
+    <div id="wb-inject-card" style="display:none" class="ac-inject" style="border-color:rgba(99,102,241,0.25)">
+      <div class="ac-inject-hdr" style="background:rgba(99,102,241,0.04)">
+        <span class="ac-inject-icon">⛽</span>
+        <div class="ac-inject-title" style="color:#a5b4fc">Westbrook CT</div>
+        <span class="ac-inject-badge" id="wb-inject-badge" style="background:rgba(99,102,241,0.15);color:#a5b4fc">Fuel Stop</span>
+      </div>
+      <div class="ac-inject-body">
+        <div class="ac-inject-note">~95 nm from Port Washington · ~90 nm to Falmouth · Splits the final leg almost exactly in half · Easy Sound access · good if Vineyard Sound looks better in the afternoon</div>
+        <div class="resources" style="margin-top:0">
+          <a class="dockwa-btn" href="https://dockwa.com/explore/destination/safe-harbor-pilots-point" target="_blank">📅 Safe Harbor Pilots Point · 40 transient slips · ValvTect diesel &amp; gas · VHF 16</a>
+          <a class="res-link" href="https://shmarinas.com/locations/safe-harbor-pilots-point/" target="_blank">↗ safeharbor-pilotspoint.com</a>
+          <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8467150" target="_blank">↗ Connecticut River / Old Saybrook Tides</a>
+        </div>
+        <div class="ac-inject-overnight">
+          <div style="margin-top:10px;font-size:11px;font-weight:700;color:#d8b4fe;">🏨 Overnight — Pilots Point</div>
+          <div class="ac-inject-note" style="margin-top:4px">10 ft approach, 6 ft dockside · on-site restaurant · pool · quick Sound access for early departure toward The Race · reviewers consistently call it one of the best transit stops on LI Sound</div>
+          <div class="resources" style="margin-top:4px">
+            <a class="res-link" href="https://www.ndbc.noaa.gov/station_page.php?station=44017" target="_blank">↗ Buoy 44017 Montauk Pt</a>
+            <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8461490" target="_blank">↗ The Race / New London Tides ⚠</a>
+            <a class="res-link cg" href="https://captaingeorgia.com/north-east-port-weather" target="_blank">↗ NE Port Weather</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="segment" id="seg13">
-      <div class="seg-header"><div class="seg-dot dot-green">&#9324;</div><div class="seg-info"><div class="seg-name">New York City &#8594; Falmouth MA &#127937;</div><div class="seg-route">New York City &middot; LI Sound &middot; The Race &middot; Vineyard Sound</div></div><span class="seg-dist">~185 nm</span><button class="vl-log-btn" id="vl-btn-seg13" onclick="vlOpenLog('seg13','Port Washington to Falmouth MA','nb',185)">&#x1F4CB; Log</button></div>
+      <div class="seg-header"><div class="seg-dot dot-green">&#9324;</div><div class="seg-info"><div class="seg-name">New York City &#8594; Falmouth MA &#127937;</div><div class="seg-route">New York City &middot; LI Sound &middot; The Race &middot; Vineyard Sound</div></div><span class="seg-dist">~185 nm</span><button class="vl-log-btn" id="vl-btn-seg13" onclick="vlOpenLog('seg13','New York City to Falmouth MA','nb',185)">&#x1F4CB; Log</button></div>
+      <span class="segment-skip-bar" onclick="mtSegForceShow('seg13',this)">▸ skipped this trip — tap to show resources anyway</span>
       <span class="seg-toggle" onclick="toggleSeg('sb13',this)">show notes + resources &#9662;</span> <span class="map-toggle" onclick="toggleMap('seg13',this)">&#x1F5FA; map &#9662;</span>
       <div class="seg-body" id="sb13">
         <div class="note-green"><strong>185 nm total &mdash; fuel stop required.</strong> Your real-world range is 150&ndash;160 nm. Do not attempt this non-stop. Depart early &mdash; time The Race for fair current (+1&ndash;2 kts). Two good fuel stop options:</div>
@@ -1082,7 +1228,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
         <div class="sub-section"><span class="sub-toggle" onclick="toggleSub('things-seg13',this)">Around Falmouth &mdash; home base</span><div class="sub-body" id="things-seg13"><div class="town-block"><div class="town-block-title">&#x1F3E0; You're home</div><div class="town-block-body">Green Pond Marina, East Falmouth. Lincoln Road comparison: Falmouth has Shuckers for seafood on the water, Flying Bridge at Falmouth Marina, and Quarterdeck right in Falmouth village. Walkable to everything.</div></div><div class="town-block"><div class="town-block-title">&#x1F6E5; Fuel note</div><div class="town-block-body">Falmouth Inner Harbor fuel dock if needed before heading to Green Pond. Falmouth Marine and MacDougalls both on Dockwa for any service needs.</div></div></div></div>
         <div class="map-body-wrap" id="seg13-map-wrap">
       <div id="seg13-map" class="leg-map"></div>
-      <div class="map-caption">Leg 13: Port Washington &rarr; Falmouth MA &middot; ~185 nm &middot; LI Sound, The Race, Vineyard Sound, East Falmouth</div>
+      <div class="map-caption">Leg 13: New York City &rarr; Falmouth MA &middot; ~185 nm &middot; LI Sound, The Race, Vineyard Sound, East Falmouth</div>
     </div>
       </div>
     </div>
@@ -1092,7 +1238,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
   <div class="sb-only">
 
     <div class="segment" id="sseg1">
-      <div class="seg-header"><div class="seg-dot dot-green">&#9312;</div><div class="seg-info"><div class="seg-name">Falmouth MA &#8594; New York City</div><div class="seg-route">Vineyard Sound &#8594; The Race &#8594; Long Island Sound &middot; time The Race for fair current</div></div><span class="seg-dist">~185 nm</span><button class="vl-log-btn" id="vl-btn-sseg1" onclick="vlOpenLog('sseg1','Falmouth MA  to  Port Washington','sb',185)">&#x1F4CB; Log</button></div>
+      <div class="seg-header"><div class="seg-dot dot-green">&#9312;</div><div class="seg-info"><div class="seg-name">Falmouth MA &#8594; New York City</div><div class="seg-route">Vineyard Sound &#8594; The Race &#8594; Long Island Sound &middot; time The Race for fair current</div></div><span class="seg-dist">~185 nm</span><button class="vl-log-btn" id="vl-btn-sseg1" onclick="vlOpenLog('sseg1','Falmouth MA to New York City','sb',185)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('ssb1',this)">show notes + resources &#9662;</span> <span class="map-toggle" onclick="toggleMap('sseg1',this)">&#x1F5FA; map &#9662;</span>
       <div class="seg-body" id="ssb1">
         <div class="note"><strong>Depart early &#8212; time The Race for fair current westbound.</strong> Depart Falmouth before 8 am to clear the Sound before afternoon SW against ebb builds chop.</div>
@@ -1118,13 +1264,13 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
         <div class="sub-section"><span class="sub-toggle" onclick="toggleSub('things-sseg1',this)">Around Port Washington &mdash; things to do</span><div class="sub-body" id="things-sseg1"><div class="town-block"><div class="town-block-title">&#x1F37D; Restaurants</div><div class="town-block-body">Louie's Oyster Bar on the waterfront. Sound View. Bar Frites for French. Easy LIRR to Manhattan (35 min).</div></div><div class="town-block"><div class="town-block-title">&#x1F327;&#xFE0F; Weather hold</div><div class="town-block-body">Sands Point Preserve nearby &mdash; Gold Coast mansion and grounds on the Sound. Manhasset Bay is beautiful and very protected.</div></div></div></div>
         <div class="map-body-wrap" id="sseg1-map-wrap">
       <div id="sseg1-map" class="leg-map"></div>
-      <div class="map-caption">SB Leg 1: Falmouth MA &rarr; Port Washington &middot; ~185 nm &middot; Vineyard Sound, The Race, LI Sound</div>
+      <div class="map-caption">SB Leg 1: Falmouth MA &rarr; New York City &middot; ~185 nm &middot; Vineyard Sound, The Race, LI Sound</div>
     </div>
       </div>
     </div>
 
     <div class="segment" id="sseg2">
-      <div class="seg-header"><div class="seg-dot dot-sky">&#9313;</div><div class="seg-info"><div class="seg-name">New York City &#8594; Barnegat Light NJ</div><div class="seg-route">Long Island Sound &middot; Ambrose Channel &middot; outside around Sandy Hook &middot; Barnegat Inlet</div></div><span class="seg-dist">~110 nm</span><button class="vl-log-btn" id="vl-btn-sseg2" onclick="vlOpenLog('sseg2','Port Washington  to  Barnegat Light','sb',110)">&#x1F4CB; Log</button></div>
+      <div class="seg-header"><div class="seg-dot dot-sky">&#9313;</div><div class="seg-info"><div class="seg-name">New York City &#8594; Barnegat Light NJ</div><div class="seg-route">Long Island Sound &middot; Ambrose Channel &middot; outside around Sandy Hook &middot; Barnegat Inlet</div></div><span class="seg-dist">~110 nm</span><button class="vl-log-btn" id="vl-btn-sseg2" onclick="vlOpenLog('sseg2','New York City to Barnegat Light','sb',110)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('ssb2',this)">show notes + resources &#9662;</span> <span class="map-toggle" onclick="toggleMap('sseg2',this)">&#x1F5FA; map &#9662;</span>
       <div class="seg-body" id="ssb2">
         <div class="note"><strong>Barnegat Inlet: enter mid-flood only, morning, favor north jetty. Same rules as northbound passage &#8212; no exceptions.</strong></div>
@@ -1180,7 +1326,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
         <div class="sub-section"><span class="sub-toggle" onclick="toggleSub('cont-sseg2',this)">Cape May &mdash; alternate if Barnegat timing is off</span><div class="sub-body" id="cont-sseg2"><div class="cont-card"><div class="cont-marina">South Jersey Marina</div><div class="cont-meta"><strong>VHF 16</strong> &middot; Cape May harbor &middot; sheltered &middot; walk to downtown</div><div class="cont-actions"><a class="dockwa-btn" href="https://dockwa.com/explore/destination/wgce4d-south-jersey-marina" target="_blank">&#x1F4C5; Book on Dockwa</a></div></div></div></div>
         <div class="map-body-wrap" id="sseg2-map-wrap">
       <div id="sseg2-map" class="leg-map"></div>
-      <div class="map-caption">SB Leg 2: Port Washington &rarr; Barnegat Light NJ &middot; ~110 nm &middot; Ambrose Channel, outside around Sandy Hook</div>
+      <div class="map-caption">SB Leg 2: New York City &rarr; Barnegat Light NJ &middot; ~110 nm &middot; Ambrose Channel, outside around Sandy Hook</div>
     </div>
       </div>
     </div>
@@ -1571,9 +1717,10 @@ var NB_STOPS=[
   {name:'Southport',segIdx:5,legId:'spt-mhc',hasTide:false},
   {name:'Oriental, NC (River Dunes)',segIdx:6,legId:'mhc-cjk',hasTide:false},
   {name:'Coinjock',segIdx:8,legId:'cjk-hva',hasTide:false},
-  {name:'Norfolk',segIdx:9,legId:'hva-ocy',hasTide:false},
+  {name:'Hampton VA',segIdx:9,legId:'hva-ocy',hasTide:false},
   {name:'Ocean City MD',segIdx:10,legId:'ocy-bnl',hasTide:true,tideId:'8534720',tideName:'Barnegat Inlet',tideNm:75,exitOnly:false},
   {name:'Cape May NJ',segIdx:10,legId:'ocy-bnl',hasTide:true,tideId:'8534720',tideName:'Barnegat Inlet',tideNm:40,exitOnly:false},
+  {name:'Atlantic City NJ',segIdx:10,legId:'ocy-nyc',hasTide:false,fuelOnly:true},
   {name:'Barnegat Light',segIdx:12,legId:'bnl-pwy',hasTide:true,tideId:'8534720',tideName:'Barnegat Inlet (exit)',tideNm:0,exitOnly:true},
   {name:'New York City',segIdx:13,legId:'pwy-fal',hasTide:true,tideId:'8461490',tideName:'The Race',tideNm:95,exitOnly:false}
 ];
@@ -1604,11 +1751,12 @@ var NB_LEGS={
   'cjk-hva':{name:'Coinjock \u2192 Hampton VA (Bluewater)',nm:40,buoys:[],go:'Great Bridge lock: check schedule night before; Protected route; Elizabeth River: 6 kts from MM 8 to Bluewater',wait:'Great Bridge lock out of service; Severe weather only',nextLeg:'Hampton VA to Ocean City MD (~125 nm) \u2014 outside, wants SW/W under 15 kts, no NE for 24 hrs',nwsZones:['ANZ633', 'ANZ634'],nwsLabel:'Currituck Sound / Hampton Roads',centerLat:36.7,centerLon:-76.2},
   'hva-ocy':{name:'Hampton VA \u2192 Ocean City MD',nm:125,buoys:['44099','44009'],go:'Winds SW\u2013W under 15 kts; Seas under 4 ft; No NE in 36-hr forecast',wait:'NE winds building; Seas 5 ft+; Front timing uncertain',nextLeg:'Ocean City to Barnegat Light \u2014 Barnegat Inlet timing is critical. Check tide before committing.',nwsZones:['ANZ650', 'ANZ652', 'ANZ654'],nwsLabel:'VA / MD Offshore',centerLat:37.8,centerLon:-75.6},
   'ocy-bnl':{name:'Ocean City MD \u2192 Barnegat Light NJ',nm:75,buoys:['44091','44025'],go:'Barnegat: FLOOD tide mid-flood only; Morning entry only; Winds W or SW under 10 kts; No NE swell whatsoever; North jetty',wait:'ANY NE wind or swell; Ebb tide \u2014 never; Afternoon \u2014 dangerous; Any doubt: Cape May instead',nextLeg:'Barnegat Light stay \u2014 cousin visit, rest, compare exit windows',nwsZones:['ANZ455', 'ANZ454', 'ANZ453', 'ANZ451'],nwsLabel:'DE / NJ Offshore',centerLat:39.2,centerLon:-74.5},
-  'bnl-pwy':{name:'Barnegat Light \u2192 New York City',nm:110,buoys:['44025'],go:'Winds SW\u2013W under 15 kts; Seas under 3 ft; Barnegat exit: flood tide morning only north jetty',wait:'NE or E winds; Seas 4 ft+',nextLeg:'Port Washington to Falmouth (~185 nm) \u2014 time The Race for fair current, arrive before early afternoon',nwsZones:['ANZ451', 'ANZ450', 'ANZ355', 'ANZ338'],nwsLabel:'NJ Coast / NY Harbor',centerLat:40.3,centerLon:-74.0},
+  'ocy-nyc':{name:'Ocean City MD → New York City (via Atlantic City fuel)',nm:170,buoys:['44025','44009'],go:'Winds SW–W under 15 kts; Seas under 3 ft; No NE for 24 hrs; AC fuel stop ~55 nm in',wait:'NE building; Seas 4 ft+; Depart OC before 7:30 am to make NYC by 3 pm',nextLeg:'New York City to Falmouth (~185 nm) — time The Race for fair current',nwsZones:['ANZ455','ANZ454','ANZ453','ANZ451','ANZ450'],nwsLabel:'DE \/ NJ \/ NY Offshore',centerLat:39.8,centerLon:-74.0},
+  'bnl-pwy':{name:'Barnegat Light \u2192 New York City',nm:110,buoys:['44025'],go:'Winds SW\u2013W under 15 kts; Seas under 3 ft; Barnegat exit: flood tide morning only north jetty',wait:'NE or E winds; Seas 4 ft+',nextLeg:'New York City to Falmouth (~185 nm) \u2014 time The Race for fair current, arrive before early afternoon',nwsZones:['ANZ451', 'ANZ450', 'ANZ355', 'ANZ338'],nwsLabel:'NJ Coast / NY Harbor',centerLat:40.3,centerLon:-74.0},
   'pwy-fal':{name:'New York City \u2192 Falmouth MA',nm:174,buoys:['44017','44020'],go:'Winds SW\u2013W under 15 kts; The Race: timed for fair current; Vineyard Sound seas under 3 ft; Arrive Falmouth before 2pm',wait:'NE winds anywhere along route; Vineyard Sound NE building against ebb',nextLeg:'You are home \u2014 East Falmouth, MA \ud83c\udfc1',nwsZones:['ANZ335', 'ANZ331', 'ANZ332'],nwsLabel:'Long Island Sound',centerLat:41.2,centerLon:-71.8}
 };
 var SB_LEGS={
-  'fal-pwy':{name:'Falmouth MA \u2192 New York City',nm:185,buoys:['44020','44017'],go:'Depart before 8 am; The Race: timed for fair current westbound; Winds SW\u2013W under 15 kts; Vineyard Sound clear in the morning',wait:'NE winds; Afternoon SW against ebb in Vineyard Sound',nextLeg:'Port Washington to Barnegat Light \u2014 Barnegat Inlet: flood tide, morning only, north jetty',nwsZones:['ANZ335', 'ANZ331', 'ANZ332'],nwsLabel:'Long Island Sound',centerLat:41.2,centerLon:-71.8},
+  'fal-pwy':{name:'Falmouth MA \u2192 New York City',nm:185,buoys:['44020','44017'],go:'Depart before 8 am; The Race: timed for fair current westbound; Winds SW\u2013W under 15 kts; Vineyard Sound clear in the morning',wait:'NE winds; Afternoon SW against ebb in Vineyard Sound',nextLeg:'New York City to Barnegat Light \u2014 Barnegat Inlet: flood tide, morning only, north jetty',nwsZones:['ANZ335', 'ANZ331', 'ANZ332'],nwsLabel:'Long Island Sound',centerLat:41.2,centerLon:-71.8},
   'pwy-bnl':{name:'New York City \u2192 Barnegat Light NJ',nm:64,buoys:['44025'],go:'Winds SW\u2013W under 15 kts; Barnegat: FLOOD tide mid-flood only; Morning entry; North jetty',wait:'ANY NE wind or swell; Ebb tide \u2014 never; Afternoon \u2014 dangerous',nextLeg:'Barnegat stay \u2014 exit same rules: flood tide, morning, north jetty',nwsZones:['ANZ355', 'ANZ338', 'ANZ451'],nwsLabel:'NY Harbor / NJ Coast',centerLat:40.3,centerLon:-74.0},
   'bnl-cpm':{name:'Barnegat Light (exit) \u2192 Cape May / Ocean City',nm:75,buoys:['44091','44025'],go:'Flood tide exit morning only; No NE swell; North jetty; Winds SW or W',wait:'NE wind or swell; Ebb tide; Afternoon; Any doubt',nextLeg:'Ocean City to Hampton VA (~125 nm) \u2014 outside, wants SW/W winds, no NE',nwsZones:['ANZ451', 'ANZ453', 'ANZ455'],nwsLabel:'NJ / DE Offshore',centerLat:39.4,centerLon:-74.3},
   'cpm-ocy':{name:'Cape May \u2192 Ocean City MD',nm:40,buoys:['44009'],go:'Winds under 15 kts; Seas under 3 ft; Ocean City Inlet conditions acceptable',wait:'NE building; Seas 4 ft+',nextLeg:'Ocean City to Hampton VA (~125 nm) \u2014 outside, check Cape Henry approach conditions',nwsZones:['ANZ455', 'ANZ650'],nwsLabel:'DE / MD Offshore',centerLat:38.7,centerLon:-74.8},
@@ -2365,10 +2513,10 @@ var MAP_DEFS = {
   'seg7':  {coords:[[34.86,-76.64,'Oriental, NC (River Dunes)','start'],[35.10,-76.43,'Neuse River','waypoint'],[35.90,-75.90,'Pamlico Sound','waypoint'],[36.05,-75.85,'Alligator River','waypoint'],[36.35,-75.99,'Coinjock','end']], center:[35.5,-76.3], zoom:7},
   'seg9':  {coords:[[36.85,-76.30,'Waterside Norfolk','start'],[36.97,-75.72,'Cape Henry','waypoint'],[37.01,-74.74,'Chesapeake Light','waypoint'],[38.33,-75.09,'Ocean City MD','end']], center:[37.7,-75.5], zoom:7},
   'seg10': {coords:[[38.33,-75.09,'Ocean City MD','start'],[38.97,-74.96,'Cape May (opt)','waypoint'],[39.76,-74.11,'Barnegat Light','end']], center:[39.0,-74.7], zoom:7},
-  'seg12': {coords:[[39.76,-74.11,'Barnegat Light','start'],[40.45,-73.85,'Sandy Hook','waypoint'],[40.83,-73.70,'Port Washington NY','end']], center:[40.3,-74.0], zoom:8},
-  'seg13': {coords:[[40.83,-73.70,'Port Washington NY','start'],[41.29,-72.45,'Westbrook CT (fuel opt)','waypoint'],[41.23,-72.05,'The Race','waypoint'],[41.57,-70.60,'East Falmouth MA','end']], center:[41.2,-71.7], zoom:7},
-  'sseg1': {coords:[[41.57,-70.60,'East Falmouth MA','start'],[41.23,-72.05,'The Race','waypoint'],[41.29,-72.45,'Westbrook CT (fuel opt)','waypoint'],[40.83,-73.70,'Port Washington NY','end']], center:[41.2,-71.7], zoom:7},
-  'sseg2': {coords:[[40.83,-73.70,'Port Washington NY','start'],[40.45,-73.85,'Sandy Hook','waypoint'],[39.76,-74.11,'Barnegat Light','end']], center:[40.3,-74.0], zoom:8},
+  'seg12': {coords:[[39.76,-74.11,'Barnegat Light','start'],[40.45,-73.85,'Sandy Hook','waypoint'],[40.83,-73.70,'New York City','end']], center:[40.3,-74.0], zoom:8},
+  'seg13': {coords:[[40.83,-73.70,'New York City','start'],[41.29,-72.45,'Westbrook CT (fuel opt)','waypoint'],[41.23,-72.05,'The Race','waypoint'],[41.57,-70.60,'East Falmouth MA','end']], center:[41.2,-71.7], zoom:7},
+  'sseg1': {coords:[[41.57,-70.60,'East Falmouth MA','start'],[41.23,-72.05,'The Race','waypoint'],[41.29,-72.45,'Westbrook CT (fuel opt)','waypoint'],[40.83,-73.70,'New York City','end']], center:[41.2,-71.7], zoom:7},
+  'sseg2': {coords:[[40.83,-73.70,'New York City','start'],[40.45,-73.85,'Sandy Hook','waypoint'],[39.76,-74.11,'Barnegat Light','end']], center:[40.3,-74.0], zoom:8},
   'sseg4': {coords:[[39.76,-74.11,'Barnegat Light','start'],[38.97,-74.96,'Cape May (opt)','waypoint'],[38.33,-75.09,'Ocean City MD','end']], center:[39.0,-74.7], zoom:7},
   'sseg5': {coords:[[38.33,-75.09,'Ocean City MD','start'],[37.01,-74.74,'Chesapeake Light','waypoint'],[36.97,-75.72,'Cape Henry','waypoint'],[36.85,-76.30,'Waterside Norfolk','end']], center:[37.7,-75.5], zoom:7},
   'sseg8': {coords:[[36.35,-75.99,'Coinjock','start'],[35.90,-75.90,'Albemarle Sound','waypoint'],[35.10,-76.43,'Pamlico Sound','waypoint'],[34.86,-76.64,'Oriental, NC (River Dunes)','end']], center:[35.5,-76.3], zoom:7},
@@ -2656,6 +2804,326 @@ function vlRenderAnalytics(){
 
   // Init on load
   if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initDates);}else{initDates();}
+})();
+
+// ── MY TRIP FLEXIBLE PANEL ───────────────────────────────────────────────
+(function(){
+  // Northern stops only (seg8 onward) with distances to next stop
+  var MT_STOPS=[
+    {id:'coinjock',  name:'Coinjock',              icon:'⚓', nm:40,  legId:'cjk-hva'},
+    {id:'hampton',   name:'Hampton VA',             icon:'⚓', nm:125, legId:'hva-ocy'},
+    {id:'oceancity', name:'Ocean City MD',          icon:'⚓', nm:55,  legId:'ocy-atc', nmAlt:{barnegat:75,nyc:170}},
+    {id:'atlcity',   name:'Atlantic City NJ',       icon:'⛽', nm:115, legId:'ocy-nyc', fuelOnly:true},
+    {id:'barnegat',  name:'Barnegat Light',         icon:'⚓', nm:110, legId:'bnl-pwy'},
+    {id:'nyc',       name:'New York City',          icon:'⚓', nm:95,  legId:'pwy-fal'},
+    {id:'westbrook',  name:'Westbrook CT',              icon:'⛽', nm:90,  legId:'pwy-fal', fuelOnly:true},
+    {id:'falmouth',  name:'East Falmouth MA 🏁',    icon:'🏁', nm:0,   legId:null}
+  ];
+
+  // Distances between non-adjacent stops when intermediates are skipped
+  var MT_DIST={
+    'hampton-nyc':     170, // OC+AC bypass
+    'hampton-barnegat':200, // Hampton direct to Barnegat (OC skipped) - approx
+    'oceancity-nyc':   170, // OC → AC fuel → NYC
+    'oceancity-barnegat': 75,
+    'barnegat-nyc':    110,
+    'nyc-falmouth':    185,
+    'westbrook-falmouth': 90,
+    'atlcity-nyc':     115,
+  };
+
+  var LS_KEY='mytrip_v2';
+  var STATE={};  // id -> 'done'|'here'|'planned'|'fuel'|'skip'
+  var menuOpen=null;
+
+  function save(){ try{localStorage.setItem(LS_KEY,JSON.stringify(STATE));}catch(e){} }
+  function load(){
+    try{
+      var s=localStorage.getItem(LS_KEY);
+      if(s) STATE=JSON.parse(s);
+    }catch(e){}
+    // defaults
+    MT_STOPS.forEach(function(s){
+      if(!STATE[s.id]) STATE[s.id]= s.fuelOnly?'skip':'planned';
+    });
+  }
+
+  var BADGE_LABEL={done:'✓ Done',here:'📍 Here',planned:'→ Planned',fuel:'⛽ Fuel',overnight:'🏨 Overnight',skip:'✕ Skip'};
+  var BADGE_CLASS={done:'badge-done',here:'badge-here',planned:'badge-next',fuel:'badge-fuel',overnight:'badge-overnight',skip:'badge-skip'};
+  var STOP_CLASS={done:'ms-done',here:'ms-here',planned:'ms-next',fuel:'ms-fuel',overnight:'ms-overnight',skip:'ms-skip'};
+
+  function getIcon(stop){
+    var s=STATE[stop.id];
+    if(s==='done') return '✓';
+    if(s==='here') return '📍';
+    if(s==='fuel') return '⛽';
+    if(s==='overnight') return '🏨';
+    if(s==='skip') return '✕';
+    return stop.icon;
+  }
+
+  // Compute leg distances for active (non-skipped) stops
+  function computeLegs(){
+    var active=MT_STOPS.filter(function(s){ return STATE[s.id]!=='skip'; });
+    var legs=[];
+    for(var i=0;i<active.length-1;i++){
+      var from=active[i], to=active[i+1];
+      // look up direct distance
+      var key=from.id+'-'+to.id;
+      var nm=MT_DIST[key]||from.nm||'?';
+      // if adjacent in original array, use stop's own nm
+      var origFrom=MT_STOPS.indexOf(from), origTo=MT_STOPS.indexOf(to);
+      if(origTo===origFrom+1) nm=from.nm;
+      legs.push({from:from.name,to:to.name,nm:nm});
+    }
+    return legs;
+  }
+
+  function render(){
+    var el=document.getElementById('mytrip-stops');
+    if(!el) return;
+    var html='';
+    MT_STOPS.forEach(function(stop){
+      var s=STATE[stop.id]||'planned';
+      var sc=STOP_CLASS[s]||'';
+      var bc=BADGE_CLASS[s]||'';
+      var bl=BADGE_LABEL[s]||'';
+      // dist label — only show on non-final, non-skipped
+      var distHtml='';
+      if(stop.nm&&s!=='skip'&&s!=='done'){
+        distHtml='<span class="mytrip-stop-dist">~'+stop.nm+' nm →</span>';
+      }
+      html+='<div class="mytrip-stop '+sc+'" id="mts-'+stop.id+'" onclick="mtMenu(\''+stop.id+'\',this,event)" style="position:relative">'+
+        '<span class="mytrip-stop-icon">'+getIcon(stop)+'</span>'+
+        '<span class="mytrip-stop-name">'+stop.name+'</span>'+
+        distHtml+
+        '<span class="mytrip-stop-badge '+bc+'">'+bl+'</span>'+
+        '<div class="mytrip-stop-menu" id="mtm-'+stop.id+'">'+
+          '<div class="mytrip-menu-item" onclick="mtSet(\''+stop.id+'\',\'done\',event)">✓ Mark Done</div>'+
+          '<div class="mytrip-menu-item" onclick="mtSet(\''+stop.id+'\',\'here\',event)">📍 I\'m Here Now</div>'+
+          '<div class="mytrip-menu-item" onclick="mtSet(\''+stop.id+'\',\'planned\',event)">→ Planned Stop</div>'+
+          '<div class="mytrip-menu-item" onclick="mtSet(\''+stop.id+'\',\'fuel\',event)">⛽ Fuel Stop Only</div>'+
+          '<div class="mytrip-menu-item" onclick="mtSet(\''+stop.id+'\',\'overnight\',event)">🏨 Overnight Stop</div>'+
+          '<div class="mytrip-menu-item" onclick="mtSet(\''+stop.id+'\',\'skip\',event)">✕ Skip This Stop</div>'+
+        '</div>'+
+      '</div>';
+    });
+    el.innerHTML=html;
+    renderSummary();
+    syncPlannerStop();
+    syncSegments();
+  }
+
+  function renderSummary(){
+    var el=document.getElementById('mytrip-summary');
+    if(!el) return;
+    var legs=computeLegs();
+    if(!legs.length){el.innerHTML='';return;}
+    var total=0;
+    var html='<div class="mytrip-summary-title">Remaining passage</div><div class="mytrip-summary-legs">';
+    legs.forEach(function(l){
+      var nm=typeof l.nm==='number'?l.nm:0;
+      total+=nm;
+      html+='<div class="mytrip-summary-leg"><span class="mytrip-summary-leg-name">'+l.from+' → '+l.to+'</span><span class="mytrip-summary-leg-nm">~'+l.nm+' nm</span></div>';
+    });
+    html+='</div><div class="mytrip-summary-total"><span class="mytrip-summary-total-lbl">Total remaining</span><span class="mytrip-summary-total-nm">~'+total+' nm</span></div>';
+    // Fuel note
+    var here=MT_STOPS.filter(function(s){return STATE[s.id]==='here';})[0];
+    if(here&&here.id==='hampton'){
+      html+='<div class="mytrip-fuel-note">⛽ At 30 GPH / 170 nm leg you\'ll want ~5.7 hrs fuel. Top up in Ocean City or Atlantic City. Farley State Marina AC is easy off the inlet.</div>';
+    }
+    html+='</div>';  // close mytrip-summary div started outside
+    // wrap
+    el.innerHTML='<div class="mytrip-summary">'+html+'</div>';
+  }
+
+  window.mtMenu=function(id,el,e){
+    e.stopPropagation();
+    var menu=document.getElementById('mtm-'+id);
+    if(!menu) return;
+    // close any open menu
+    if(menuOpen&&menuOpen!==menu){ menuOpen.classList.remove('open'); }
+    menu.classList.toggle('open');
+    menuOpen=menu.classList.contains('open')?menu:null;
+  };
+
+  window.mtSet=function(id,status,e){
+    if(e) e.stopPropagation();
+    // If setting 'here', mark all prior stops done
+    if(status==='here'){
+      var idx=MT_STOPS.findIndex(function(s){return s.id===id;});
+      MT_STOPS.forEach(function(s,i){
+        if(i<idx&&STATE[s.id]!=='skip') STATE[s.id]='done';
+      });
+    }
+    STATE[id]=status;
+    // If Barnegat skipped, auto-activate Atlantic City fuel stop
+    if(id==='barnegat'&&status==='skip'&&STATE['atlcity']==='skip'){
+      STATE['atlcity']='fuel';
+    }
+    save(); render();
+    // close menu
+    if(menuOpen){menuOpen.classList.remove('open');menuOpen=null;}
+  };
+
+  // Sync the main passage planner "current stop" picker with My Trip state
+  function syncPlannerStop(){
+    var hereStop=MT_STOPS.filter(function(s){return STATE[s.id]==='here';})[0];
+    if(!hereStop) return;
+    // Map mytrip id to NB_STOPS name
+    var nameMap={
+      'coinjock':'Coinjock',
+      'hampton':'Hampton VA',
+      'oceancity':'Ocean City MD',
+      'barnegat':'Barnegat Light',
+      'nyc':'New York City',
+      'falmouth':'East Falmouth MA'
+    };
+    var targetName=nameMap[hereStop.id];
+    if(!targetName) return;
+    var idx=NB_STOPS.findIndex(function(s){return s.name===targetName;});
+    if(idx>=0 && idx!==currentStop){
+      currentStop=idx;
+      // update planner UI if visible
+      var btns=document.querySelectorAll('.stop-btn');
+      btns.forEach(function(b,i){ b.classList.toggle('active', i===idx); });
+    }
+  }
+
+  window.mtReset=function(){
+    STATE={};
+    MT_STOPS.forEach(function(s){ STATE[s.id]=s.fuelOnly?'skip':'planned'; });
+    save(); render();
+  };
+
+  // Override buildClaudePrompt to use My Trip state when available
+  var _origBuildPrompt=window.buildClaudePrompt;
+  window.buildClaudePrompt=function(){
+    var hereStop=MT_STOPS.filter(function(s){return STATE[s.id]==='here';})[0];
+    var nextStop=null;
+    if(hereStop){
+      var hIdx=MT_STOPS.findIndex(function(s){return s.id===hereStop.id;});
+      for(var i=hIdx+1;i<MT_STOPS.length;i++){
+        if(STATE[MT_STOPS[i].id]!=='skip'&&STATE[MT_STOPS[i].id]!=='done'){
+          nextStop=MT_STOPS[i]; break;
+        }
+      }
+    }
+    // Build the My Trip context string to inject into the prompt
+    if(hereStop&&nextStop){
+      var legs=computeLegs();
+      var remainingStr=legs.map(function(l){return l.from+' \u2192 '+l.to+' (~'+l.nm+' nm)';}).join(', ');
+      var acNote=(STATE['atlcity']==='fuel'||STATE['atlcity']==='overnight')?' (with Atlantic City stop ~55 nm in)':'';
+      var barnNote=STATE['barnegat']==='skip'?' Note: Barnegat Light is being SKIPPED this passage \u2014 going direct from Ocean City to NYC'+acNote+'.':'';
+      // Patch currentStop to match hereStop for the original prompt builder
+      var origIdx=NB_STOPS.findIndex(function(s){return s.name===hereStop.name||s.name.indexOf(hereStop.name.split(' ')[0])===0;});
+      var savedStop=currentStop;
+      if(origIdx>=0) currentStop=origIdx;
+      var basePrompt=_origBuildPrompt();
+      currentStop=savedStop;
+      // Append My Trip context
+      basePrompt+='\n\nMy Trip (actual current plan):\nI am currently at: '+hereStop.name+'\nNext stop: '+nextStop.name+acNote+barnNote+'\nFull remaining route: '+remainingStr+'\nPlease use this actual route, not the default planner stops.';
+      return basePrompt;
+    }
+    return _origBuildPrompt();
+  };
+
+
+// ── SEGMENT SYNC ─────────────────────────────────────────────────────────
+// Maps mytrip stop IDs to the segment(s) they control
+var MT_SEG_MAP={
+  'coinjock': ['seg8'],           // Coinjock stay / depart leg
+  'hampton':  ['seg9'],           // Hampton→OceanCity leg
+  'oceancity':['seg10'],          // OceanCity→Barnegat leg
+  'barnegat': ['seg11','seg12'],  // Barnegat stay + exit leg
+  'nyc':      ['seg13'],          // NYC→Falmouth leg
+  'westbrook':[]                  // no fixed card, handled by summary
+};
+
+function syncSegments(){
+  // Clear all states first
+  ['seg8','seg9','seg10','seg11','seg12','seg13'].forEach(function(id){
+    var el=document.getElementById(id);
+    if(!el) return;
+    el.classList.remove('trip-active','trip-done','trip-skip');
+  });
+
+  // Determine states from MT_STOPS
+  MT_STOPS.forEach(function(stop){
+    var segs=MT_SEG_MAP[stop.id];
+    if(!segs||!segs.length) return;
+    var s=STATE[stop.id]||'planned';
+    segs.forEach(function(segId){
+      var el=document.getElementById(segId);
+      if(!el) return;
+      if(s==='done'){
+        el.classList.add('trip-done');
+      } else if(s==='here'){
+        el.classList.add('trip-active');
+        // Auto-open the body if not already open
+        var body=document.getElementById('s'+segId.replace('seg','b'));
+        if(body&&!body.classList.contains('open')){
+          body.classList.add('open');
+          var tog=el.querySelector('.seg-toggle');
+          if(tog) tog.textContent=tog.textContent.replace('show','hide').replace('\u25be','\u25b4');
+        }
+      } else if(s==='skip'){
+        el.classList.add('trip-skip');
+      }
+      // planned / fuel / overnight = normal, no class
+    });
+  });
+
+  // Atlantic City inject card
+  var acCard=document.getElementById('ac-inject-card');
+  if(acCard){
+    var acState=STATE['atlcity']||'skip';
+    if(acState==='fuel'||acState==='overnight'||acState==='planned'){
+      acCard.style.display='block';
+      acCard.classList.toggle('is-overnight', acState==='overnight');
+      var badge=document.getElementById('ac-inject-badge');
+      if(badge) badge.textContent=acState==='overnight'?'🏨 Overnight':'⛽ Fuel Stop';
+    } else {
+      acCard.style.display='none';
+    }
+  }
+  // Westbrook inject card
+  var wbCard=document.getElementById('wb-inject-card');
+  if(wbCard){
+    var wbState=STATE['westbrook']||'skip';
+    if(wbState==='fuel'||wbState==='overnight'||wbState==='planned'){
+      wbCard.style.display='block';
+      wbCard.classList.toggle('is-overnight', wbState==='overnight');
+      var wbBadge=document.getElementById('wb-inject-badge');
+      if(wbBadge) wbBadge.textContent=wbState==='overnight'?'🏨 Overnight':'⛽ Fuel Stop';
+    } else {
+      wbCard.style.display='none';
+    }
+  }
+}
+
+window.mtSegForceShow=function(segId, barEl){
+  var body=document.getElementById('sb'+segId.replace('seg',''));
+  if(!body) return;
+  body.classList.toggle('force-show');
+  barEl.textContent=body.classList.contains('force-show')?
+    '▾ hiding resources — tap to collapse':'▸ skipped this trip — tap to show resources anyway';
+};
+
+  // Close menu on outside click
+  document.addEventListener('click',function(){
+    if(menuOpen){menuOpen.classList.remove('open');menuOpen=null;}
+  });
+
+  function init(){
+    load(); render(); syncSegments();
+    // Set today's date on date inputs if not already set
+    var today=new Date();
+    var td=today.getFullYear()+'-'+String(today.getMonth()+1).padStart(2,'0')+'-'+String(today.getDate()).padStart(2,'0');
+    ['mytrip-date'].forEach(function(id){var el=document.getElementById(id);if(el&&!el.value)el.value=td;});
+  }
+
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}else{init();}
 })();
 
 </script>
