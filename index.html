@@ -246,7 +246,11 @@ body{background:var(--navy);color:var(--text);font-family:-apple-system,BlinkMac
 .mytrip-stop.ms-here{background:rgba(99,102,241,0.10);border-color:rgba(99,102,241,0.5);}
 .mytrip-stop.ms-next{background:rgba(14,165,233,0.06);border-color:rgba(14,165,233,0.25);}
 .mytrip-stop.ms-fuel{background:rgba(251,191,36,0.05);border-color:rgba(251,191,36,0.2);}
-.mytrip-stop.ms-skip{opacity:0.35;}
+.mytrip-stop.ms-skip .mytrip-stop-icon,
+.mytrip-stop.ms-skip .mytrip-stop-name,
+.mytrip-stop.ms-skip .mytrip-stop-dist,
+.mytrip-stop.ms-skip .mytrip-stop-badge{opacity:0.35;}
+.mytrip-stop.ms-skip .mytrip-stop-menu{opacity:1;}
 .mytrip-stop.ms-overnight{background:rgba(168,85,247,0.08);border-color:rgba(168,85,247,0.3);}
 .mytrip-stop-icon{font-size:14px;width:18px;text-align:center;flex-shrink:0;}
 .mytrip-stop-name{flex:1;font-size:12px;font-weight:600;color:var(--text);}
