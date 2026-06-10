@@ -203,6 +203,71 @@ body{background:var(--navy);color:var(--text);font-family:-apple-system,BlinkMac
 .bp-miss{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:6px;padding:8px 10px;margin-top:8px;font-size:11px;color:var(--text-muted);line-height:1.5;}
 .bp-miss strong{color:var(--text);font-weight:600;}
 .bp-note{font-size:10px;color:var(--text-dim);margin-top:8px;padding:6px 8px;border-left:2px solid rgba(255,255,255,0.08);line-height:1.5;}
+/* ── BARNEGAT WINDOW WIDGET ── */
+.bnl-widget{margin-top:14px;background:rgba(59,130,246,0.04);border:1px solid rgba(59,130,246,0.18);border-radius:var(--radius);overflow:hidden;}
+.bnl-widget-hdr{padding:10px 14px;cursor:pointer;display:flex;align-items:center;gap:8px;user-select:none;-webkit-user-select:none;}
+.bnl-widget-hdr:hover{background:rgba(59,130,246,0.06);}
+.bnl-widget-title{font-size:12px;font-weight:700;color:#7dd3fc;flex:1;}
+.bnl-widget-sub{font-size:10px;color:var(--text-dim);}
+.bnl-widget-chev{font-size:9px;color:var(--text-dim);transition:transform 0.2s;}
+.bnl-widget-chev.open{transform:rotate(180deg);}
+.bnl-widget-body{display:none;border-top:1px solid rgba(59,130,246,0.12);padding:14px;}
+.bnl-widget-body.open{display:block;}
+/* explain accordion */
+.bnl-explain{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:12px;overflow:hidden;}
+.bnl-explain-hdr{padding:8px 12px;cursor:pointer;display:flex;align-items:center;gap:6px;user-select:none;-webkit-user-select:none;}
+.bnl-explain-hdr:hover{background:rgba(255,255,255,0.03);}
+.bnl-explain-lbl{font-size:11px;color:var(--text-muted);flex:1;}
+.bnl-explain-chev{font-size:9px;color:var(--text-dim);transition:transform 0.2s;}
+.bnl-explain-chev.open{transform:rotate(180deg);}
+.bnl-explain-body{display:none;padding:0 12px 12px;border-top:1px solid var(--border);}
+.bnl-explain-body.open{display:block;}
+.bnl-explain-item{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);}
+.bnl-explain-item:last-child{border-bottom:none;}
+.bnl-explain-icon{font-size:15px;flex-shrink:0;margin-top:1px;}
+.bnl-explain-text-title{font-size:11px;font-weight:600;color:var(--text);margin-bottom:3px;}
+.bnl-explain-text-body{font-size:11px;color:var(--text-muted);line-height:1.6;}
+/* criteria chips */
+.bnl-crit-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:12px;}
+@media(max-width:480px){.bnl-crit-grid{grid-template-columns:1fr 1fr;}}
+.bnl-crit-chip{background:var(--card-bg);border:1px solid rgba(34,197,94,0.2);border-radius:var(--radius-sm);padding:6px 10px;}
+.bnl-crit-chip-lbl{font-size:11px;font-weight:600;color:#86efac;}
+.bnl-crit-chip-sub{font-size:10px;color:var(--text-dim);}
+/* date picker row */
+.bnl-picker-row{display:flex;gap:8px;align-items:center;margin-bottom:12px;}
+.bnl-date-inp{background:var(--navy);border:1px solid rgba(59,130,246,0.3);border-radius:var(--radius-sm);padding:7px 10px;font-family:inherit;font-size:12px;color:var(--text);outline:none;flex:1;color-scheme:dark;}
+.bnl-date-inp:focus{border-color:rgba(59,130,246,0.6);}
+.bnl-fetch-btn{background:rgba(14,165,233,0.9);color:#040a12;border:none;border-radius:var(--radius-sm);padding:8px 16px;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;transition:background 0.15s;}
+.bnl-fetch-btn:hover{background:#38bdf8;}
+.bnl-fetch-btn:disabled{background:var(--card-bg);color:var(--text-dim);cursor:not-allowed;}
+/* window cards */
+.bnl-cycle{margin-bottom:14px;}
+.bnl-cycle-lbl{font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:6px;}
+.bnl-window-card{border-radius:var(--radius-sm);padding:10px 12px;margin-bottom:6px;border:1px solid;}
+.bnl-window-card.go{background:rgba(34,197,94,0.06);border-color:rgba(34,197,94,0.25);}
+.bnl-window-card.caution{background:rgba(245,158,11,0.06);border-color:rgba(245,158,11,0.25);}
+.bnl-wc-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;}
+.bnl-wc-type{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-muted);}
+.bnl-wc-badge{font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:0.05em;}
+.bnl-wc-badge.go{background:rgba(34,197,94,0.2);color:#86efac;}
+.bnl-wc-badge.caution{background:rgba(245,158,11,0.2);color:#fcd34d;}
+.bnl-wc-time{font-size:17px;font-weight:700;font-family:monospace;color:var(--text);margin-bottom:3px;}
+.bnl-wc-note{font-size:10px;color:var(--text-muted);line-height:1.5;}
+/* tide table */
+.bnl-tide-table{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-sm);margin-top:10px;overflow:hidden;}
+.bnl-tide-table-lbl{font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.07em;padding:8px 12px;border-bottom:1px solid var(--border);}
+.bnl-tide-row{display:flex;justify-content:space-between;align-items:center;padding:7px 12px;border-bottom:1px solid var(--border);font-size:12px;}
+.bnl-tide-row:last-child{border-bottom:none;}
+.bnl-tide-type{font-weight:700;width:60px;}
+.bnl-tide-type.low{color:#fca5a5;}
+.bnl-tide-type.high{color:#86efac;}
+.bnl-tide-time{color:var(--text);font-family:monospace;}
+.bnl-tide-ht{color:var(--text-muted);}
+/* error / status */
+.bnl-status{font-size:11px;color:var(--text-muted);margin-bottom:8px;min-height:14px;}
+.bnl-error{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:var(--radius-sm);padding:8px 12px;font-size:11px;color:#fca5a5;margin-bottom:10px;}
+.bnl-empty{font-size:12px;color:var(--text-dim);text-align:center;padding:16px 0;}
+.bnl-footnote{font-size:10px;color:var(--text-dim);margin-top:10px;padding:8px 10px;border-left:2px solid rgba(255,255,255,0.06);line-height:1.5;}
 /* Direction visibility */
 .nb-only{display:block;}.sb-only{display:none;}
 body.southbound .nb-only{display:none;}body.southbound .sb-only{display:block;}
@@ -406,7 +471,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
       <button class="stop-btn" onclick="setStop(3)">Hilton Head</button>
       <button class="stop-btn" onclick="setStop(4)">Charleston</button>
       <button class="stop-btn" onclick="setStop(5)">Southport</button>
-      <button class="stop-btn" onclick="setStop(6)">Jarrett Bay</button>
+      <button class="stop-btn" onclick="setStop(6)">Oriental, NC (River Dunes)</button>
       <button class="stop-btn" onclick="setStop(7)">Coinjock</button>
       <button class="stop-btn" onclick="setStop(8)">Norfolk</button>
       <button class="stop-btn" onclick="setStop(9)">Ocean City MD</button>
@@ -425,7 +490,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
       <button class="stop-btn" onclick="setSbStop(4)">Ocean City MD</button>
       <button class="stop-btn" onclick="setSbStop(5)">Norfolk</button>
       <button class="stop-btn" onclick="setSbStop(6)">Coinjock</button>
-      <button class="stop-btn" onclick="setSbStop(7)">Jarrett Bay</button>
+      <button class="stop-btn" onclick="setSbStop(7)">Oriental, NC (River Dunes)</button>
       <button class="stop-btn" onclick="setSbStop(8)">Southport</button>
       <button class="stop-btn" onclick="setSbStop(9)">Charleston</button>
       <button class="stop-btn" onclick="setSbStop(10)">Hilton Head</button>
@@ -445,9 +510,9 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
       <div class="pace-day"><div class="pace-day-num">Day 2</div><div class="pace-day-leg">Ft. Pierce &#8594; St. Augustine or Fernandina</div><div class="pace-day-dist">~60&ndash;75 nm</div></div>
       <div class="pace-day"><div class="pace-day-num">Day 3</div><div class="pace-day-leg">St. Aug &#8594; Charleston</div><div class="pace-day-dist">~165&ndash;175 nm</div></div>
       <div class="pace-day"><div class="pace-day-num">Day 4</div><div class="pace-day-leg">Charleston &#8594; Southport</div><div class="pace-day-dist">~135 nm</div></div>
-      <div class="pace-day"><div class="pace-day-num">Day 5</div><div class="pace-day-leg">Southport &#8594; Jarrett Bay</div><div class="pace-day-dist">~90 nm</div></div>
+      <div class="pace-day"><div class="pace-day-num">Day 5</div><div class="pace-day-leg">Southport &#8594; Oriental, NC (River Dunes)</div><div class="pace-day-dist">~90 nm</div></div>
       
-      <div class="pace-day"><div class="pace-day-num">Day ?</div><div class="pace-day-leg">Jarrett Bay &#8594; Coinjock</div><div class="pace-day-dist">~110 nm</div></div>
+      <div class="pace-day"><div class="pace-day-num">Day ?</div><div class="pace-day-leg">Oriental, NC (River Dunes) &#8594; Coinjock</div><div class="pace-day-dist">~110 nm</div></div>
       <div class="pace-day"><div class="pace-day-num">Day ?+1</div><div class="pace-day-leg">Coinjock &#8594; Norfolk / Waterside</div><div class="pace-day-dist">~40 nm</div></div>
       <div class="pace-day"><div class="pace-day-num">Day ?+2</div><div class="pace-day-leg">Norfolk / Waterside &#8594; Ocean City MD</div><div class="pace-day-dist">~125 nm</div></div>
       <div class="pace-day"><div class="pace-day-num">Day ?+3</div><div class="pace-day-leg">Ocean City &#8594; Barnegat Light</div><div class="pace-day-dist">~75 nm</div></div>
@@ -468,8 +533,8 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
       <div class="pace-day"><div class="pace-day-num">Day 5</div><div class="pace-day-leg">Ocean City &#8594; Hampton VA</div><div class="pace-day-dist">~125 nm</div></div>
       <div class="pace-day"><div class="pace-day-num">Day 6</div><div class="pace-day-leg">Norfolk / Waterside &#8594; Coinjock</div><div class="pace-day-dist">~40 nm</div></div>
       <div class="pace-day"><div class="pace-day-num">Day 7+</div><div class="pace-day-leg">Coinjock &#8212; Weather Hold</div><div class="pace-day-dist">wait for window</div></div>
-      <div class="pace-day"><div class="pace-day-num">Day ?</div><div class="pace-day-leg">Coinjock &#8594; Jarrett Bay</div><div class="pace-day-dist">~110 nm</div></div>
-      <div class="pace-day"><div class="pace-day-num">Day ?+1</div><div class="pace-day-leg">Jarrett Bay &#8594; Southport</div><div class="pace-day-dist">~90 nm</div></div>
+      <div class="pace-day"><div class="pace-day-num">Day ?</div><div class="pace-day-leg">Coinjock &#8594; Oriental, NC (River Dunes)</div><div class="pace-day-dist">~110 nm</div></div>
+      <div class="pace-day"><div class="pace-day-num">Day ?+1</div><div class="pace-day-leg">Oriental, NC (River Dunes) &#8594; Southport</div><div class="pace-day-dist">~90 nm</div></div>
       <div class="pace-day"><div class="pace-day-num">Day ?+2</div><div class="pace-day-leg">Southport &#8594; Charleston</div><div class="pace-day-dist">~135 nm</div></div>
       <div class="pace-day"><div class="pace-day-num">Day ?+3</div><div class="pace-day-leg">Charleston &#8594; St. Augustine</div><div class="pace-day-dist">~200 nm</div></div>
       <div class="pace-day"><div class="pace-day-num">Day ?+4</div><div class="pace-day-leg">St. Aug &#8594; Ft. Pierce</div><div class="pace-day-dist">~160 nm</div></div>
@@ -492,7 +557,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
       <div class="route-conn" id="rc3"></div>
       <div class="route-stop"><div class="route-dot" id="rd4"></div><div class="route-lbl" id="rl4">Southport</div></div>
       <div class="route-conn" id="rc4"></div>
-      <div class="route-stop"><div class="route-dot dot-red" id="rd5"></div><div class="route-lbl" id="rl5">Jarrett Bay &#9888;&#65039;</div></div>
+      <div class="route-stop"><div class="route-dot dot-red" id="rd5"></div><div class="route-lbl" id="rl5">Oriental, NC (River Dunes) &#9888;&#65039;</div></div>
       <div class="route-conn conn-inside" id="rc5"></div>
       <div class="route-stop"><div class="route-dot dot-purple" id="rd6"></div><div class="route-lbl" id="rl6">Coinjock</div></div>
       <div class="route-conn" id="rc6"></div>
@@ -526,7 +591,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
       <div class="route-conn" id="src5"></div>
       <div class="route-stop"><div class="route-dot dot-purple" id="srd6"></div><div class="route-lbl" id="srl6">Coinjock</div></div>
       <div class="route-conn conn-inside" id="src6"></div>
-      <div class="route-stop"><div class="route-dot dot-red" id="srd7"></div><div class="route-lbl" id="srl7">Jarrett Bay &#9888;&#65039;</div></div>
+      <div class="route-stop"><div class="route-dot dot-red" id="srd7"></div><div class="route-lbl" id="srl7">Oriental, NC (River Dunes) &#9888;&#65039;</div></div>
       <div class="route-conn" id="src7"></div>
       <div class="route-stop"><div class="route-dot" id="srd8"></div><div class="route-lbl" id="srl8">Southport</div></div>
       <div class="route-conn" id="src8"></div>
@@ -718,7 +783,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
     </div>
 
     <div class="segment" id="seg5">
-      <div class="seg-header"><div class="seg-dot dot-amber">&#9316;</div><div class="seg-info"><div class="seg-name">Southport &#8594; Jarrett Bay</div><div class="seg-route">Day 5 &middot; ICW via Snow's Cut &#8594; Myrtle Grove &#8594; Masonboro Inlet &#8594; outside &#8594; Jarrett Bay / Core Creek</div></div><span class="seg-dist">~90 nm</span><button class="vl-log-btn" id="vl-btn-seg5" onclick="vlOpenLog('seg5','Southport to Jarrett Bay','nb',90)">&#x1F4CB; Log</button></div>
+      <div class="seg-header"><div class="seg-dot dot-amber">&#9316;</div><div class="seg-info"><div class="seg-name">Southport &#8594; Oriental, NC (River Dunes)</div><div class="seg-route">Day 5 &middot; ICW via Snow's Cut &#8594; Myrtle Grove &#8594; Masonboro Inlet &#8594; outside &#8594; Oriental, NC (River Dunes) / Oriental NC</div></div><span class="seg-dist">~90 nm</span><button class="vl-log-btn" id="vl-btn-seg5" onclick="vlOpenLog('seg5','Southport to Oriental, NC (River Dunes)','nb',90)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('sb5',this)">show notes + resources &#9662;</span> <span class="map-toggle" onclick="toggleMap('seg5',this)">&#x1F5FA; map &#9662;</span>
       <div class="seg-body" id="sb5">
         <div class="note"><strong>ICW routing:</strong> Cape Fear River &#8594; Snow's Cut (MM 295) &#8594; Myrtle Grove &#8594; exit Masonboro Inlet &#8594; outside to Morehead City. <strong>Transit at mid-to-high tide.</strong> Check Aqua Map for shoaling at MM 293.7.</div>
@@ -727,11 +792,12 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
           <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8656483" target="_blank">&#8599; Wrightsville / Masonboro Tides</a>
         </div>
       
-        <div class="resources" style="margin-top:8px"><a class="dockwa-btn" href="https://dockwa.com/explore/destination/63c2zd-safe-harbor-jarrett-bay" target="_blank">&#x1F4C5; Safe Harbor Jarrett Bay &middot; VHF 16</a>
+        <div class="resources" style="margin-top:8px"><a class="dockwa-btn" href="https://riverdunes.com/marina-facilities/" target="_blank">&#x1F4C5; River Dunes &mdash; Grace Harbor &middot; Oriental NC &middot; ICW MM 173 &middot; (800) 348-7618</a>
+          <a class="dockwa-btn" href="https://dockwa.com/explore/destination/63c2zd-safe-harbor-jarrett-bay" target="_blank">&#x1F4C5; Safe Harbor Jarrett Bay &middot; VHF 16 (alt)</a>
           <a class="dockwa-btn" href="https://dockwa.com/explore/destination/x1c195-sea-gate-marina" target="_blank">&#x1F4C5; Sea Gate Marina &middot; Southport NC &middot; VHF 16 (alt)</a>
           <a class="dockwa-btn" href="https://dockwa.com/explore/destination/16cwdr-morehead-city-yacht-basin" target="_blank">&#x1F4C5; Morehead City Yacht Basin (alt / Beaufort)</a></div>
-        <div class="sub-section"><span class="sub-toggle" onclick="toggleSub('things-seg5',this)">Around Morehead City &mdash; things to do</span><div class="sub-body" id="things-seg5"><div class="town-block"><div class="town-block-title">&#x1F37D; Restaurants</div><div class="town-block-body">Ruddy Duck Tavern right by the waterfront. El's Drive-In &mdash; local institution. Circa 81 for upscale. Short bridge to Beaufort for more options &mdash; Front Street is worth the walk.</div></div><div class="town-block"><div class="town-block-title">&#x1F3E2; Safe Harbor Jarrett Bay</div><div class="town-block-body">Full-service boatyard marina on the Intracoastal at Core Creek &mdash; one of the best facilities on the East Coast. Comfortable, known quantity. Short uber or taxi ride to Beaufort and Morehead City for weather hold days.</div></div>
-            <div class="town-block"><div class="town-block-title">&#x1F327;&#xFE0F; Weather hold &mdash; Beaufort (short Uber/taxi)</div><div class="town-block-body">North Carolina Maritime Museum in Beaufort (free, excellent). Fort Macon State Park. Island Express Ferry to Cape Lookout lighthouse. Front Street waterfront &mdash; great restaurants and atmosphere. If you prefer to be in Beaufort proper while waiting for the Pamlico window, any of these are easy alternatives to Jarrett Bay:</div></div>
+        <div class="sub-section"><span class="sub-toggle" onclick="toggleSub('things-seg5',this)">Around Morehead City &mdash; things to do</span><div class="sub-body" id="things-seg5"><div class="town-block"><div class="town-block-title">&#x1F37D; Restaurants</div><div class="town-block-body">Ruddy Duck Tavern right by the waterfront. El's Drive-In &mdash; local institution. Circa 81 for upscale. Short bridge to Beaufort for more options &mdash; Front Street is worth the walk.</div></div><div class="town-block"><div class="town-block-title">&#x1F3E2; River Dunes &mdash; Grace Harbor</div><div class="town-block-body">Award-winning 400-slip protected inland basin at ICW MM 173 near Oriental. Floating docks to 150 ft, 7 ft MLW, fuel dock, pool, restaurant (Harbor Club), provisions store, showers, laundry, wi-fi to slips. A genuine resort marina &mdash; far more comfortable than a boatyard for a weather hold. Jarrett Bay (Safe Harbor, Core Creek) remains a solid backup if Oriental, NC (River Dunes) is full.</div></div>
+            <div class="town-block"><div class="town-block-title">&#x1F327;&#xFE0F; Weather hold &mdash; Beaufort (short Uber/taxi)</div><div class="town-block-body">North Carolina Maritime Museum in Beaufort (free, excellent). Fort Macon State Park. Island Express Ferry to Cape Lookout lighthouse. Front Street waterfront &mdash; great restaurants and atmosphere. If you prefer to be in Beaufort proper while waiting for the Pamlico window, any of these are easy alternatives:</div></div>
             <div class="town-block">
               <div class="resources" style="margin-top:0">
                 <a class="dockwa-btn" href="https://dockwa.com/explore/destination/2gc7l9-town-creek-marina" target="_blank">&#x1F4C5; Town Creek Marina &middot; on-site restaurant &middot; VHF 16</a>
@@ -740,7 +806,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
               </div></div></div></div>
         <div class="map-body-wrap" id="seg5-map-wrap">
       <div id="seg5-map" class="leg-map"></div>
-      <div class="map-caption">Leg 5: Southport &rarr; Jarrett Bay &middot; ~90 nm &middot; ICW via Snow's Cut + Masonboro, then outside</div>
+      <div class="map-caption">Leg 5: Southport &rarr; Oriental, NC (River Dunes) &middot; ~90 nm &middot; ICW via Snow's Cut + Masonboro, then outside</div>
     </div>
       </div>
     </div>
@@ -750,7 +816,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
       <div style="background:rgba(239,68,68,0.07);border:1px solid rgba(239,68,68,0.25);border-left:4px solid #ef4444;border-radius:var(--radius);padding:10px 14px;display:flex;align-items:center;gap:10px;cursor:pointer;" onclick="toggleSeg('sb6',document.getElementById('seg6-tog'))">
         <span style="font-size:16px">&#9940;</span>
         <div style="flex:1">
-          <div style="font-size:12px;font-weight:700;color:#fca5a5">Jarrett Bay &mdash; Pamlico Sound Decision Point</div>
+          <div style="font-size:12px;font-weight:700;color:#fca5a5">River Dunes &mdash; Pamlico Sound Decision Point</div>
           <div style="font-size:11px;color:var(--text-muted);margin-top:2px">Do not leave until the window is right &mdash; tap to review go/no-go criteria</div>
         </div>
         <span id="seg6-tog" style="font-size:10px;color:var(--text-dim)">&#9662;</span>
@@ -761,7 +827,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
         <div class="note"><strong>Do not rush this decision.</strong> Pamlico Sound builds steep chop quickly in NE or N winds. <strong>Depart early morning, cross before noon.</strong></div>
         <div class="crit-grid">
           <div class="crit-box crit-go"><div class="crit-title">&#10003; Go &#8212; depart for Coinjock</div><ul class="crit-list"><li>Winds SW&#8211;NW under 15 kts</li><li>Pamlico Sound seas under 2 ft</li><li>No fronts within 36 hrs</li><li>Cross before noon</li></ul></div>
-          <div class="crit-box crit-wait"><div class="crit-title">&#10007; Wait in Jarrett Bay / Beaufort</div><ul class="crit-list"><li>NE or N winds 15 kts+</li><li>Any wind 20+ kts</li><li>Front approaching from west</li><li>Pamlico buoy 2 ft+</li></ul></div>
+          <div class="crit-box crit-wait"><div class="crit-title">&#10007; Wait in Oriental, NC (River Dunes) / Beaufort</div><ul class="crit-list"><li>NE or N winds 15 kts+</li><li>Any wind 20+ kts</li><li>Front approaching from west</li><li>Pamlico buoy 2 ft+</li></ul></div>
         </div>
         <div class="resources">
           <a class="res-link key" href="https://www.ndbc.noaa.gov/station_page.php?station=41036" target="_blank">&#8599; Buoy 41036 Pamlico Sound &#9888;</a>
@@ -772,7 +838,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
     </div>
 
     <div class="segment" id="seg7">
-      <div class="seg-header"><div class="seg-dot dot-purple">&#9318;</div><div class="seg-info"><div class="seg-name">Jarrett Bay &#8594; Coinjock</div><div class="seg-route">Core Creek &#8594; Neuse River &#8594; Pamlico Sound &#8594; Alligator River &#8594; Albemarle Sound</div></div><span class="seg-dist">~110 nm</span><button class="vl-log-btn" id="vl-btn-seg7" onclick="vlOpenLog('seg7','Jarrett Bay to Coinjock','nb',110)">&#x1F4CB; Log</button></div>
+      <div class="seg-header"><div class="seg-dot dot-purple">&#9318;</div><div class="seg-info"><div class="seg-name">Oriental, NC (River Dunes) &#8594; Coinjock</div><div class="seg-route">Broad Creek &#8594; Neuse River &#8594; Pamlico Sound &#8594; Alligator River &#8594; Albemarle Sound</div></div><span class="seg-dist">~110 nm</span><button class="vl-log-btn" id="vl-btn-seg7" onclick="vlOpenLog('seg7','Oriental, NC (River Dunes) to Coinjock','nb',110)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('sb7',this)">show notes + resources &#9662;</span> <span class="map-toggle" onclick="toggleMap('seg7',this)">&#x1F5FA; map &#9662;</span>
       <div class="seg-body" id="sb7">
         <div class="note"><strong>Speed:</strong> Rivers + open water: on plane. <strong>Pamlico + Albemarle: on plane, cross before noon.</strong> Canal sections: 6&#8211;7 kts no wake. Coinjock Marina: easy approach, great prime rib. <strong>VHF 16</strong>.</div>
@@ -786,7 +852,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
         <div class="sub-section"><span class="sub-toggle" onclick="toggleSub('things-seg7',this)">Around Coinjock &mdash; the one and only</span><div class="sub-body" id="things-seg7"><div class="town-block"><div class="town-block-title">&#x1F969; The prime rib</div><div class="town-block-body">Coinjock Marina Restaurant &mdash; home of the 32 oz prime rib. Call ahead to reserve yours: (252) 453-3271. Open to locals and transients. Waterfront deck. They do run out &mdash; call before you arrive.</div></div><div class="town-block"><div class="town-block-title">&#x1F4CD; About this place</div><div class="town-block-body">Mile Marker 50 on the ICW. The halfway point between New England and Florida on the inside route. More liveaboards and loopers than you can count. Everyone ends up here.</div></div></div></div>
         <div class="map-body-wrap" id="seg7-map-wrap">
       <div id="seg7-map" class="leg-map"></div>
-      <div class="map-caption">Leg 7: Jarrett Bay &rarr; Coinjock &middot; ~110 nm &middot; Neuse River, Pamlico Sound, Alligator River, Albemarle Sound</div>
+      <div class="map-caption">Leg 7: Oriental, NC (River Dunes) &rarr; Coinjock &middot; ~110 nm &middot; Neuse River, Pamlico Sound, Alligator River, Albemarle Sound</div>
     </div>
       </div>
     </div>
@@ -881,12 +947,50 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
         </div>
         <div class="resources">
           <a class="res-link key tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8534720" target="_blank">&#8599; Barnegat Inlet Tides &#9888;</a>
+          <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=ACT4171" target="_blank">&#8599; Barnegat Current &#9888;</a>
           <a class="res-link" href="https://www.ndbc.noaa.gov/station_page.php?station=44091" target="_blank">&#8599; Buoy 44091 Barnegat NJ</a>
           <a class="res-link" href="https://www.ndbc.noaa.gov/station_page.php?station=44025" target="_blank">&#8599; Buoy 44025 NY Bight</a>
           <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8536110" target="_blank">&#8599; Cape May Inlet Tides</a>
           <a class="res-link" href="https://windy.com/?waves,39.7,-74.1,8" target="_blank">&#8599; Windy &#8212; NJ Shore</a>
         </div>
-      
+        <div id="bnl-widget-nb" class="bnl-widget">
+          <div class="bnl-widget-hdr" onclick="bnlToggle('nb')">
+            <span style="font-size:16px">🕐</span>
+            <div style="flex:1"><div class="bnl-widget-title">Optimal Entry &amp; Exit Windows</div><div class="bnl-widget-sub">Live NOAA tide data &middot; current lag applied &middot; morning bias</div></div>
+            <span class="bnl-widget-chev" id="bnl-chev-nb">&#9660;</span>
+          </div>
+          <div class="bnl-widget-body" id="bnl-body-nb">
+            <div class="bnl-explain">
+              <div class="bnl-explain-hdr" onclick="bnlExplainToggle(this)">
+                <span style="font-size:13px">📖</span>
+                <span class="bnl-explain-lbl">Why Barnegat requires careful timing &mdash; tap to read</span>
+                <span class="bnl-explain-chev">&#9660;</span>
+              </div>
+              <div class="bnl-explain-body">
+                <div class="bnl-explain-item"><span class="bnl-explain-icon">🌊</span><div><div class="bnl-explain-text-title">Shoaling &amp; a narrow channel</div><div class="bnl-explain-text-body">Barnegat Inlet is naturally shallow and constantly shifting. The channel is maintained by dredging but still runs 6&ndash;10 ft in spots at low tide. Depth alone isn&rsquo;t the issue &mdash; it&rsquo;s what the water does at those depths when conditions stack up against each other.</div></div></div>
+                <div class="bnl-explain-item"><span class="bnl-explain-icon">⬇️</span><div><div class="bnl-explain-text-title">Ebb current &mdash; never enter</div><div class="bnl-explain-text-body">On the ebb, Barnegat Bay drains through a narrow slot. The outflow runs 2&ndash;4 knots. Any swell or wind from the east meets this outbound current head-on, creating steep, short, breaking waves &mdash; not rolly offshore swells, but vertical walls that can stop a boat cold or broach it. No exceptions.</div></div></div>
+                <div class="bnl-explain-item"><span class="bnl-explain-icon">⬆️</span><div><div class="bnl-explain-text-title">Flood is your friend &mdash; but the current lags the tide table</div><div class="bnl-explain-text-body">On the flood, current flows in from sea, smoothing the inlet. But Barnegat Bay is large and shallow &mdash; the actual current reversal from ebb to flood happens roughly <strong>1.5 hours after</strong> low water on the tide table. &ldquo;Low water&rdquo; on the NOAA chart does <em>not</em> mean the current has turned. This calculator applies that lag automatically.</div></div></div>
+                <div class="bnl-explain-item"><span class="bnl-explain-icon">💨</span><div><div class="bnl-explain-text-title">Wind against current &mdash; the real danger</div><div class="bnl-explain-text-body">Even on the flood, NE wind blowing onshore opposes the inbound current and builds breaking chop right in the inlet mouth. W or SW wind is fine &mdash; it runs with the flood. NE wind is an absolute veto regardless of tide stage. Check Buoy 44091 for actual sea state offshore before committing.</div></div></div>
+                <div class="bnl-explain-item"><span class="bnl-explain-icon">🕗</span><div><div class="bnl-explain-text-title">Morning only</div><div class="bnl-explain-text-body">NJ shore sea breezes typically build by midday. Morning entries are calmer and more predictable. If the flood window doesn&rsquo;t line up for a morning entry, stage in Atlantic City or Cape May and wait for the next morning flood. An afternoon entry into Barnegat is avoidable risk.</div></div></div>
+                <div class="bnl-explain-item"><span class="bnl-explain-icon">🔴</span><div><div class="bnl-explain-text-title">North jetty &mdash; always favor on entry</div><div class="bnl-explain-text-body">The deepest water and smoothest surface hugs the north jetty on entry. Keep it close to port coming in. The south side shallows and breaks first. If you see breaking water anywhere in the inlet mouth, stop and reassess. Don&rsquo;t commit.</div></div></div>
+              </div>
+            </div>
+            <div class="bnl-crit-grid">
+              <div class="bnl-crit-chip"><div class="bnl-crit-chip-lbl">✓ Mid-flood tide</div><div class="bnl-crit-chip-sub">2+ hrs after low</div></div>
+              <div class="bnl-crit-chip"><div class="bnl-crit-chip-lbl">✓ Morning entry</div><div class="bnl-crit-chip-sub">Before noon</div></div>
+              <div class="bnl-crit-chip"><div class="bnl-crit-chip-lbl">✓ W or SW wind</div><div class="bnl-crit-chip-sub">Under 10 kts</div></div>
+              <div class="bnl-crit-chip"><div class="bnl-crit-chip-lbl">✓ No NE swell</div><div class="bnl-crit-chip-sub">Absolute veto</div></div>
+              <div class="bnl-crit-chip"><div class="bnl-crit-chip-lbl">✓ North jetty</div><div class="bnl-crit-chip-sub">Favor on entry</div></div>
+              <div class="bnl-crit-chip"><div class="bnl-crit-chip-lbl">✓ Current turned</div><div class="bnl-crit-chip-sub">Not just tide stage</div></div>
+            </div>
+            <div class="bnl-picker-row">
+              <input type="date" class="bnl-date-inp" id="bnl-date-nb" />
+              <button class="bnl-fetch-btn" id="bnl-btn-nb" onclick="bnlFetch('nb')">Get Windows</button>
+            </div>
+            <div class="bnl-status" id="bnl-status-nb"></div>
+            <div id="bnl-results-nb"></div>
+          </div>
+        </div>
         <div class="resources" style="margin-top:8px"><a class="dockwa-btn" href="https://dockwa.com/explore/destination/mncle5-bayview-harbor" target="_blank">&#x1F4C5; Bayview Harbor Barnegat Light</a></div>
         <div class="sub-section"><span class="sub-toggle" onclick="toggleSub('cont-seg10',this)">Cape May &mdash; staging option</span><div class="sub-body" id="cont-seg10"><div class="cont-card"><div class="cont-marina">South Jersey Marina</div><div class="cont-meta"><strong>VHF 16</strong> &middot; Cape May harbor &middot; sheltered &middot; walkable to downtown</div>
               <div class="cont-actions"><a class="dockwa-btn" href="https://dockwa.com/explore/destination/wgce4d-south-jersey-marina" target="_blank">&#x1F4C5; Book on Dockwa</a></div></div><div class="cont-card"><div class="cont-marina">Cape May Marina</div><div class="cont-meta"><strong>VHF 16</strong> &middot; Off Delaware Canal &middot; fuel &middot; restaurants within walking distance</div>
@@ -902,10 +1006,27 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
       <div class="seg-header"><div class="seg-dot dot-green">&#9322;</div><div class="seg-info"><div class="seg-name">Barnegat Light &#8212; 2+ nights &#127881;</div><div class="seg-route">Cousin visit &middot; rest &middot; use Passage Planner to find your ideal exit window</div></div><button class="vl-log-btn" id="vl-btn-seg11" onclick="vlOpenLog('seg11','Barnegat Light — Stay','nb',0)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('sb11',this)">show notes + resources &#9662;</span>
       <div class="seg-body" id="sb11">
-        <div class="note-green"><strong>Stay as long as conditions and the visit warrant.</strong> Exit Barnegat: same rules as entry &#8212; flood tide, morning only, north jetty.</div>
+        <div class="note-green"><strong>Stay as long as conditions and the visit warrant.</strong> Exit Barnegat: same rules as entry &mdash; flood tide, morning only, north jetty.</div>
         <div class="resources">
-          <a class="res-link key tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8534720" target="_blank">&#8599; Barnegat Inlet Tides &#8212; exit planning &#9888;</a>
+          <a class="res-link key tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8534720" target="_blank">&#8599; Barnegat Inlet Tides &mdash; exit planning &#9888;</a>
+          <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=ACT4171" target="_blank">&#8599; Barnegat Current &#9888;</a>
           <a class="res-link cg" href="https://captaingeorgia.com/north-east-port-weather" target="_blank">&#8599; NE Port Weather</a>
+        </div>
+        <div id="bnl-widget-nb-exit" class="bnl-widget" style="margin-top:10px;">
+          <div class="bnl-widget-hdr" onclick="bnlToggle('nb-exit')">
+            <span style="font-size:16px">🚪</span>
+            <div style="flex:1"><div class="bnl-widget-title">Exit Window Planner</div><div class="bnl-widget-sub">Pick your departure date &middot; same flood rules &middot; exit slightly tighter than entry</div></div>
+            <span class="bnl-widget-chev" id="bnl-chev-nb-exit">&#9660;</span>
+          </div>
+          <div class="bnl-widget-body" id="bnl-body-nb-exit">
+            <div class="note-blue" style="margin-bottom:10px;"><strong>Exit = same rules as entry.</strong> Flood tide, morning only, north jetty. The exit window closes 45 min earlier than entry &mdash; you&rsquo;re moving with the current, so you clear the inlet faster, but you want to be well through before the current starts turning ebb.</div>
+            <div class="bnl-picker-row">
+              <input type="date" class="bnl-date-inp" id="bnl-date-nb-exit" />
+              <button class="bnl-fetch-btn" id="bnl-btn-nb-exit" onclick="bnlFetch('nb-exit')">Get Exit Windows</button>
+            </div>
+            <div class="bnl-status" id="bnl-status-nb-exit"></div>
+            <div id="bnl-results-nb-exit"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -1014,9 +1135,47 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
         <div class="resources">
           <a class="res-link" href="https://www.ndbc.noaa.gov/station_page.php?station=44025" target="_blank">&#8599; Buoy 44025 NY Bight</a>
           <a class="res-link tide key" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8534720" target="_blank">&#8599; Barnegat Inlet Tides &#9888;</a>
+          <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=ACT4171" target="_blank">&#8599; Barnegat Current &#9888;</a>
           <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8531680" target="_blank">&#8599; Sandy Hook Tides</a>
         </div>
-      
+        <div id="bnl-widget-sb" class="bnl-widget">
+          <div class="bnl-widget-hdr" onclick="bnlToggle('sb')">
+            <span style="font-size:16px">🕐</span>
+            <div style="flex:1"><div class="bnl-widget-title">Optimal Entry &amp; Exit Windows</div><div class="bnl-widget-sub">Live NOAA tide data &middot; current lag applied &middot; morning bias</div></div>
+            <span class="bnl-widget-chev" id="bnl-chev-sb">&#9660;</span>
+          </div>
+          <div class="bnl-widget-body" id="bnl-body-sb">
+            <div class="bnl-explain">
+              <div class="bnl-explain-hdr" onclick="bnlExplainToggle(this)">
+                <span style="font-size:13px">📖</span>
+                <span class="bnl-explain-lbl">Why Barnegat requires careful timing &mdash; tap to read</span>
+                <span class="bnl-explain-chev">&#9660;</span>
+              </div>
+              <div class="bnl-explain-body">
+                <div class="bnl-explain-item"><span class="bnl-explain-icon">🌊</span><div><div class="bnl-explain-text-title">Shoaling &amp; a narrow channel</div><div class="bnl-explain-text-body">Barnegat Inlet is naturally shallow and constantly shifting. The channel is maintained by dredging but still runs 6&ndash;10 ft in spots at low tide. Depth alone isn&rsquo;t the issue &mdash; it&rsquo;s what the water does at those depths when conditions stack up against each other.</div></div></div>
+                <div class="bnl-explain-item"><span class="bnl-explain-icon">⬇️</span><div><div class="bnl-explain-text-title">Ebb current &mdash; never enter</div><div class="bnl-explain-text-body">On the ebb, Barnegat Bay drains through a narrow slot. The outflow runs 2&ndash;4 knots. Any swell or wind from the east meets this outbound current head-on, creating steep, short, breaking waves &mdash; not rolly offshore swells, but vertical walls that can stop a boat cold or broach it. No exceptions.</div></div></div>
+                <div class="bnl-explain-item"><span class="bnl-explain-icon">⬆️</span><div><div class="bnl-explain-text-title">Flood is your friend &mdash; but the current lags the tide table</div><div class="bnl-explain-text-body">On the flood, current flows in from sea, smoothing the inlet. But Barnegat Bay is large and shallow &mdash; the actual current reversal from ebb to flood happens roughly <strong>1.5 hours after</strong> low water on the tide table. &ldquo;Low water&rdquo; on the NOAA chart does <em>not</em> mean the current has turned. This calculator applies that lag automatically.</div></div></div>
+                <div class="bnl-explain-item"><span class="bnl-explain-icon">💨</span><div><div class="bnl-explain-text-title">Wind against current &mdash; the real danger</div><div class="bnl-explain-text-body">Even on the flood, NE wind blowing onshore opposes the inbound current and builds breaking chop right in the inlet mouth. W or SW wind is fine &mdash; it runs with the flood. NE wind is an absolute veto regardless of tide stage. Check Buoy 44091 for actual sea state offshore before committing.</div></div></div>
+                <div class="bnl-explain-item"><span class="bnl-explain-icon">🕗</span><div><div class="bnl-explain-text-title">Morning only</div><div class="bnl-explain-text-body">NJ shore sea breezes typically build by midday. Morning entries are calmer and more predictable. If the flood window doesn&rsquo;t line up for a morning entry, stage in Cape May or Atlantic City and wait for the next morning flood.</div></div></div>
+                <div class="bnl-explain-item"><span class="bnl-explain-icon">🔴</span><div><div class="bnl-explain-text-title">North jetty &mdash; always favor on entry</div><div class="bnl-explain-text-body">The deepest water and smoothest surface hugs the north jetty on entry. Keep it close to port coming in. If you see breaking water anywhere in the inlet mouth, stop and reassess. Don&rsquo;t commit.</div></div></div>
+              </div>
+            </div>
+            <div class="bnl-crit-grid">
+              <div class="bnl-crit-chip"><div class="bnl-crit-chip-lbl">✓ Mid-flood tide</div><div class="bnl-crit-chip-sub">2+ hrs after low</div></div>
+              <div class="bnl-crit-chip"><div class="bnl-crit-chip-lbl">✓ Morning entry</div><div class="bnl-crit-chip-sub">Before noon</div></div>
+              <div class="bnl-crit-chip"><div class="bnl-crit-chip-lbl">✓ W or SW wind</div><div class="bnl-crit-chip-sub">Under 10 kts</div></div>
+              <div class="bnl-crit-chip"><div class="bnl-crit-chip-lbl">✓ No NE swell</div><div class="bnl-crit-chip-sub">Absolute veto</div></div>
+              <div class="bnl-crit-chip"><div class="bnl-crit-chip-lbl">✓ North jetty</div><div class="bnl-crit-chip-sub">Favor on entry</div></div>
+              <div class="bnl-crit-chip"><div class="bnl-crit-chip-lbl">✓ Current turned</div><div class="bnl-crit-chip-sub">Not just tide stage</div></div>
+            </div>
+            <div class="bnl-picker-row">
+              <input type="date" class="bnl-date-inp" id="bnl-date-sb" />
+              <button class="bnl-fetch-btn" id="bnl-btn-sb" onclick="bnlFetch('sb')">Get Windows</button>
+            </div>
+            <div class="bnl-status" id="bnl-status-sb"></div>
+            <div id="bnl-results-sb"></div>
+          </div>
+        </div>
         <div class="resources" style="margin-top:8px"><a class="dockwa-btn" href="https://dockwa.com/explore/destination/mncle5-bayview-harbor" target="_blank">&#x1F4C5; Bayview Harbor Barnegat Light</a></div>
         <div class="sub-section"><span class="sub-toggle" onclick="toggleSub('cont-sseg2',this)">Cape May &mdash; alternate if Barnegat timing is off</span><div class="sub-body" id="cont-sseg2"><div class="cont-card"><div class="cont-marina">South Jersey Marina</div><div class="cont-meta"><strong>VHF 16</strong> &middot; Cape May harbor &middot; sheltered &middot; walk to downtown</div><div class="cont-actions"><a class="dockwa-btn" href="https://dockwa.com/explore/destination/wgce4d-south-jersey-marina" target="_blank">&#x1F4C5; Book on Dockwa</a></div></div></div></div>
         <div class="map-body-wrap" id="sseg2-map-wrap">
@@ -1030,11 +1189,28 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
       <div class="seg-header"><div class="seg-dot dot-green">&#9314;</div><div class="seg-info"><div class="seg-name">Barnegat Light &#8212; overnight &#127881;</div><div class="seg-route">Rest &middot; use Passage Planner to find your exit window south</div></div><button class="vl-log-btn" id="vl-btn-sseg3" onclick="vlOpenLog('sseg3','Barnegat Light — Stay','sb',0)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('ssb3',this)">show notes + resources &#9662;</span>
       <div class="seg-body" id="ssb3">
-        <div class="note-green"><strong>Same exit rules as entry &#8212; flood tide, morning only, north jetty.</strong> Use the Passage Planner above to compare exit windows.</div>
+        <div class="note-green"><strong>Same exit rules as entry &mdash; flood tide, morning only, north jetty.</strong> Pick your departure date below to find your exit window.</div>
         <div class="resources">
-          <a class="res-link key tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8534720" target="_blank">&#8599; Barnegat Inlet Tides &#8212; exit &#9888;</a>
+          <a class="res-link key tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8534720" target="_blank">&#8599; Barnegat Inlet Tides &mdash; exit &#9888;</a>
+          <a class="res-link tide" href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=ACT4171" target="_blank">&#8599; Barnegat Current &#9888;</a>
           <a class="res-link" href="https://www.ndbc.noaa.gov/station_page.php?station=44091" target="_blank">&#8599; Buoy 44091 Barnegat NJ</a>
           <a class="res-link cg" href="https://captaingeorgia.com/north-east-port-weather" target="_blank">&#8599; NE Port Weather</a>
+        </div>
+        <div id="bnl-widget-sb-exit" class="bnl-widget" style="margin-top:10px;">
+          <div class="bnl-widget-hdr" onclick="bnlToggle('sb-exit')">
+            <span style="font-size:16px">🚪</span>
+            <div style="flex:1"><div class="bnl-widget-title">Exit Window Planner</div><div class="bnl-widget-sub">Pick your departure date &middot; same flood rules &middot; exit slightly tighter than entry</div></div>
+            <span class="bnl-widget-chev" id="bnl-chev-sb-exit">&#9660;</span>
+          </div>
+          <div class="bnl-widget-body" id="bnl-body-sb-exit">
+            <div class="note-blue" style="margin-bottom:10px;"><strong>Exit = same rules as entry.</strong> Flood tide, morning only, north jetty. The exit window closes 45 min earlier than entry &mdash; you&rsquo;re moving with the current, so you clear the inlet faster, but you want to be well through before the current starts turning ebb.</div>
+            <div class="bnl-picker-row">
+              <input type="date" class="bnl-date-inp" id="bnl-date-sb-exit" />
+              <button class="bnl-fetch-btn" id="bnl-btn-sb-exit" onclick="bnlFetch('sb-exit')">Get Exit Windows</button>
+            </div>
+            <div class="bnl-status" id="bnl-status-sb-exit"></div>
+            <div id="bnl-results-sb-exit"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -1156,7 +1332,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
       <div class="seg-body" id="ssb7">
         <div class="note"><strong>Do not rush the Pamlico Sound decision.</strong> Southbound you cross Albemarle Sound then Pamlico Sound &#8212; same chop risk in NE or N winds. <strong>Depart early, cross before noon.</strong></div>
         <div class="crit-grid">
-          <div class="crit-box crit-go"><div class="crit-title">&#10003; Go &#8212; depart for Jarrett Bay</div><ul class="crit-list"><li>Winds SW&#8211;NW under 15 kts</li><li>Pamlico Sound seas under 2 ft</li><li>No fronts within 36 hrs</li><li>Cross before noon</li></ul></div>
+          <div class="crit-box crit-go"><div class="crit-title">&#10003; Go &#8212; depart for Oriental, NC (River Dunes)</div><ul class="crit-list"><li>Winds SW&#8211;NW under 15 kts</li><li>Pamlico Sound seas under 2 ft</li><li>No fronts within 36 hrs</li><li>Cross before noon</li></ul></div>
           <div class="crit-box crit-wait"><div class="crit-title">&#10007; Wait in Coinjock</div><ul class="crit-list"><li>NE or N winds 15 kts+</li><li>Any wind 20+ kts</li><li>Front approaching from west</li><li>Pamlico buoy 2 ft+</li></ul></div>
         </div>
         <div class="resources">
@@ -1168,7 +1344,7 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
     </div>
 
     <div class="segment" id="sseg8">
-      <div class="seg-header"><div class="seg-dot dot-purple">&#9319;</div><div class="seg-info"><div class="seg-name">Coinjock &#8594; Jarrett Bay</div><div class="seg-route">Albemarle Sound &#8594; Alligator River &#8594; Pamlico Sound &#8594; Neuse River</div></div><span class="seg-dist">~110 nm</span><button class="vl-log-btn" id="vl-btn-sseg8" onclick="vlOpenLog('sseg8','Coinjock to Jarrett Bay','sb',110)">&#x1F4CB; Log</button></div>
+      <div class="seg-header"><div class="seg-dot dot-purple">&#9319;</div><div class="seg-info"><div class="seg-name">Coinjock &#8594; Oriental, NC (River Dunes)</div><div class="seg-route">Albemarle Sound &#8594; Alligator River &#8594; Pamlico Sound &#8594; Neuse River</div></div><span class="seg-dist">~110 nm</span><button class="vl-log-btn" id="vl-btn-sseg8" onclick="vlOpenLog('sseg8','Coinjock to Oriental, NC (River Dunes)','sb',110)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('ssb8',this)">show notes + resources &#9662;</span> <span class="map-toggle" onclick="toggleMap('sseg8',this)">&#x1F5FA; map &#9662;</span>
       <div class="seg-body" id="ssb8">
         <div class="note"><strong>Speed:</strong> Canal sections: 6&#8211;7 kts no wake. Rivers + Albemarle + Pamlico: on plane, cross before noon. <strong>Depart Coinjock early.</strong></div>
@@ -1178,17 +1354,18 @@ body.southbound .nb-flex{display:none;}body.southbound .sb-flex{display:flex;}
         </div>
       
         <div class="resources" style="margin-top:8px"><a class="dockwa-btn" href="https://dockwa.com/explore/destination/63c2zd-safe-harbor-jarrett-bay" target="_blank">&#x1F4C5; Safe Harbor Jarrett Bay &middot; VHF 16</a>
+          <a class="dockwa-btn" href="https://riverdunes.com/marina-facilities/" target="_blank">&#x1F4C5; River Dunes &mdash; Grace Harbor &middot; Oriental NC &middot; ICW MM 173 &middot; (800) 348-7618</a>
           <a class="dockwa-btn" href="https://dockwa.com/explore/destination/x1c195-sea-gate-marina" target="_blank">&#x1F4C5; Sea Gate Marina &middot; Southport NC &middot; VHF 16 (alt)</a>
           <a class="dockwa-btn" href="https://dockwa.com/explore/destination/16cwdr-morehead-city-yacht-basin" target="_blank">&#x1F4C5; Morehead City Yacht Basin (alt / Beaufort)</a></div>
         <div class="map-body-wrap" id="sseg8-map-wrap">
       <div id="sseg8-map" class="leg-map"></div>
-      <div class="map-caption">SB Leg 8: Coinjock &rarr; Jarrett Bay &middot; ~110 nm &middot; Albemarle Sound, Alligator River, Pamlico Sound, Neuse River</div>
+      <div class="map-caption">SB Leg 8: Coinjock &rarr; Oriental, NC (River Dunes) &middot; ~110 nm &middot; Albemarle Sound, Alligator River, Pamlico Sound, Neuse River</div>
     </div>
       </div>
     </div>
 
     <div class="segment" id="sseg9">
-      <div class="seg-header"><div class="seg-dot dot-amber">&#9320;</div><div class="seg-info"><div class="seg-name">Jarrett Bay &#8594; Southport</div><div class="seg-route">Outside to Masonboro Inlet &#8594; ICW via Myrtle Grove &#8594; Snow's Cut &#8594; Cape Fear River</div></div><span class="seg-dist">~90 nm</span><button class="vl-log-btn" id="vl-btn-sseg9" onclick="vlOpenLog('sseg9','Jarrett Bay to Southport','sb',90)">&#x1F4CB; Log</button></div>
+      <div class="seg-header"><div class="seg-dot dot-amber">&#9320;</div><div class="seg-info"><div class="seg-name">Oriental, NC (River Dunes) &#8594; Southport</div><div class="seg-route">Outside to Masonboro Inlet &#8594; ICW via Myrtle Grove &#8594; Snow's Cut &#8594; Cape Fear River</div></div><span class="seg-dist">~90 nm</span><button class="vl-log-btn" id="vl-btn-sseg9" onclick="vlOpenLog('sseg9','Oriental, NC (River Dunes) to Southport','sb',90)">&#x1F4CB; Log</button></div>
       <span class="seg-toggle" onclick="toggleSeg('ssb9',this)">show notes + resources &#9662;</span> <span class="map-toggle" onclick="toggleMap('sseg9',this)">&#x1F5FA; map &#9662;</span>
       <div class="seg-body" id="ssb9">
         <div class="note"><strong>Masonboro Inlet: enter at mid-to-high tide.</strong> Check Aqua Map for shoaling at MM 293.7.</div>
@@ -1392,7 +1569,7 @@ var NB_STOPS=[
   {name:'Hilton Head',segIdx:3,legId:'hh-chs',hasTide:false},
   {name:'Charleston',segIdx:4,legId:'chs-spt',hasTide:false},
   {name:'Southport',segIdx:5,legId:'spt-mhc',hasTide:false},
-  {name:'Jarrett Bay',segIdx:6,legId:'mhc-cjk',hasTide:false},
+  {name:'Oriental, NC (River Dunes)',segIdx:6,legId:'mhc-cjk',hasTide:false},
   {name:'Coinjock',segIdx:8,legId:'cjk-hva',hasTide:false},
   {name:'Norfolk',segIdx:9,legId:'hva-ocy',hasTide:false},
   {name:'Ocean City MD',segIdx:10,legId:'ocy-bnl',hasTide:true,tideId:'8534720',tideName:'Barnegat Inlet',tideNm:75,exitOnly:false},
@@ -1408,7 +1585,7 @@ var SB_STOPS=[
   {name:'Ocean City MD',segIdx:5,legId:'ocy-hva',hasTide:false},
   {name:'Norfolk',segIdx:6,legId:'hva-cjk',hasTide:false},
   {name:'Coinjock',segIdx:7,legId:'cjk-mhc',hasTide:false},
-  {name:'Jarrett Bay',segIdx:8,legId:'mhc-spt',hasTide:false},
+  {name:'Oriental, NC (River Dunes)',segIdx:8,legId:'mhc-spt',hasTide:false},
   {name:'Southport',segIdx:9,legId:'spt-chs',hasTide:false},
   {name:'Charleston',segIdx:10,legId:'chs-hh',hasTide:false},
   {name:'Hilton Head',segIdx:11,legId:'hh-sta',hasTide:false},
@@ -1421,9 +1598,9 @@ var NB_LEGS={
     'sta-hh':{name:'St. Augustine / Fernandina \u2192 Hilton Head',nm:147,buoys:['41112','41008'],go:'Winds SW\u2013W under 15 kts; Seas under 3 ft; No fronts within 24 hrs',wait:'NE winds; Seas 4 ft+',nextLeg:'Hilton Head to Charleston (~63 nm) \u2014 easy morning run, depart 8-9am',nwsZones:['AMZ452', 'AMZ450', 'AMZ354'],nwsLabel:'NE FL / GA Coast',centerLat:31.0,centerLon:-81.0},
   'hh-chs':{name:'Hilton Head \u2192 Charleston',nm:63,buoys:['41008'],go:'Winds under 15 kts; Seas under 3 ft',wait:'NE winds 20+ kts; Seas 5 ft+',nextLeg:'Charleston to Southport (~130 nm) \u2014 Cape Fear River tidal current on arrival',nwsZones:['AMZ354', 'AMZ352'],nwsLabel:'GA / SC Coast',centerLat:32.4,centerLon:-80.3},
   'sta-chs':{name:'St. Augustine / Fernandina \u2192 Charleston',nm:200,buoys:['41112','41008'],go:'Winds SW\u2013W under 15 kts; Seas under 4 ft full leg; No fronts within 36 hrs',wait:'NE winds; Seas 5 ft+',nextLeg:'Charleston to Southport (~145 nm)',nwsZones:['AMZ452', 'AMZ450', 'AMZ354', 'AMZ352'],nwsLabel:'NE FL / GA / SC Coast',centerLat:31.3,centerLon:-80.7},
-  'chs-spt':{name:'Charleston \u2192 Southport',nm:135,buoys:['41008'],go:'Winds SW\u2013NW under 15 kts; Seas under 4 ft',wait:'NE or E winds building; Seas 5 ft+',nextLeg:'Southport to Jarrett Bay \u2014 Masonboro Inlet + outside run. Pamlico Sound planning begins after you arrive at Jarrett Bay.',nwsZones:['AMZ350', 'AMZ352', 'AMZ252', 'AMZ250'],nwsLabel:'SC / NC Coast',centerLat:33.4,centerLon:-78.9},
-  'spt-mhc':{name:'Southport \u2192 Jarrett Bay',nm:90,buoys:[],go:'Winds under 15 kts; Masonboro Inlet calm; Mid-to-high tide for ICW',wait:'Strong NE at Masonboro exit; LNM advisory for shoaling',nextLeg:'Jarrett Bay \u2014 settle in and rest. Pamlico Sound planning begins here once you arrive and check the forecast.',nwsZones:['AMZ250', 'AMZ158', 'AMZ156'],nwsLabel:'NC Coast / Cape Lookout',centerLat:34.3,centerLon:-77.5},
-  'mhc-cjk':{name:'Jarrett Bay \u2192 Coinjock (via Pamlico Sound)',nm:110,buoys:['41036'],go:'Winds SW\u2013NW under 15 kts; Pamlico Sound buoy (41036) seas under 2 ft; No NE in 24-hr forecast; Cross before noon',wait:'NE or N winds 15 kts+; Pamlico Sound showing 2 ft+; Front approaching from west',nextLeg:'Coinjock to Hampton VA (~40 nm) \u2014 plan bridge timing the night before. Great Bridge Lock northbound on the hour.',nwsZones:['AMZ135', 'AMZ137', 'AMZ136', 'AMZ230'],nwsLabel:'Pamlico / Albemarle Sound',centerLat:35.3,centerLon:-76.5},
+  'chs-spt':{name:'Charleston \u2192 Southport',nm:135,buoys:['41008'],go:'Winds SW\u2013NW under 15 kts; Seas under 4 ft',wait:'NE or E winds building; Seas 5 ft+',nextLeg:'Southport to Oriental, NC (River Dunes) \u2014 Masonboro Inlet + outside run. Pamlico Sound planning begins after you arrive at Oriental, NC (River Dunes).',nwsZones:['AMZ350', 'AMZ352', 'AMZ252', 'AMZ250'],nwsLabel:'SC / NC Coast',centerLat:33.4,centerLon:-78.9},
+  'spt-mhc':{name:'Southport \u2192 Oriental, NC (River Dunes)',nm:90,buoys:[],go:'Winds under 15 kts; Masonboro Inlet calm; Mid-to-high tide for ICW',wait:'Strong NE at Masonboro exit; LNM advisory for shoaling',nextLeg:'Oriental, NC (River Dunes) \u2014 settle in, great facilities. Pamlico Sound planning begins here once you arrive and check the forecast.',nwsZones:['AMZ250', 'AMZ158', 'AMZ156'],nwsLabel:'NC Coast / Cape Lookout',centerLat:34.3,centerLon:-77.5},
+  'mhc-cjk':{name:'Oriental, NC (River Dunes) \u2192 Coinjock (via Pamlico Sound)',nm:110,buoys:['41036'],go:'Winds SW\u2013NW under 15 kts; Pamlico Sound buoy (41036) seas under 2 ft; No NE in 24-hr forecast; Cross before noon',wait:'NE or N winds 15 kts+; Pamlico Sound showing 2 ft+; Front approaching from west',nextLeg:'Coinjock to Hampton VA (~40 nm) \u2014 plan bridge timing the night before. Great Bridge Lock northbound on the hour.',nwsZones:['AMZ135', 'AMZ137', 'AMZ136', 'AMZ230'],nwsLabel:'Pamlico / Albemarle Sound',centerLat:35.3,centerLon:-76.5},
   'cjk-hva':{name:'Coinjock \u2192 Hampton VA (Bluewater)',nm:40,buoys:[],go:'Great Bridge lock: check schedule night before; Protected route; Elizabeth River: 6 kts from MM 8 to Bluewater',wait:'Great Bridge lock out of service; Severe weather only',nextLeg:'Hampton VA to Ocean City MD (~125 nm) \u2014 outside, wants SW/W under 15 kts, no NE for 24 hrs',nwsZones:['ANZ633', 'ANZ634'],nwsLabel:'Currituck Sound / Hampton Roads',centerLat:36.7,centerLon:-76.2},
   'hva-ocy':{name:'Hampton VA \u2192 Ocean City MD',nm:125,buoys:['44099','44009'],go:'Winds SW\u2013W under 15 kts; Seas under 4 ft; No NE in 36-hr forecast',wait:'NE winds building; Seas 5 ft+; Front timing uncertain',nextLeg:'Ocean City to Barnegat Light \u2014 Barnegat Inlet timing is critical. Check tide before committing.',nwsZones:['ANZ650', 'ANZ652', 'ANZ654'],nwsLabel:'VA / MD Offshore',centerLat:37.8,centerLon:-75.6},
   'ocy-bnl':{name:'Ocean City MD \u2192 Barnegat Light NJ',nm:75,buoys:['44091','44025'],go:'Barnegat: FLOOD tide mid-flood only; Morning entry only; Winds W or SW under 10 kts; No NE swell whatsoever; North jetty',wait:'ANY NE wind or swell; Ebb tide \u2014 never; Afternoon \u2014 dangerous; Any doubt: Cape May instead',nextLeg:'Barnegat Light stay \u2014 cousin visit, rest, compare exit windows',nwsZones:['ANZ455', 'ANZ454', 'ANZ453', 'ANZ451'],nwsLabel:'DE / NJ Offshore',centerLat:39.2,centerLon:-74.5},
@@ -2184,8 +2361,8 @@ var MAP_DEFS = {
   'seg3':  {coords:[[29.90,-81.26,'St. Augustine','start'],[30.67,-81.46,'Fernandina Beach','waypoint'],[31.13,-81.39,'St. Simons Island (cont)','waypoint'],[32.13,-80.68,'Hilton Head — Harbour Town','end']], center:[30.9,-81.0], zoom:7},
   'seg3b': {coords:[[32.13,-80.68,'Hilton Head — Harbour Town','start'],[32.46,-80.46,'Calibogue Sound exit','waypoint'],[32.77,-79.93,'Charleston','end']], center:[32.45,-80.30], zoom:9},
   'seg4':  {coords:[[32.77,-79.93,'Charleston','start'],[33.92,-78.00,'Southport / Cape Fear','end']], center:[33.3,-79.0], zoom:7},
-  'seg5':  {coords:[[33.92,-78.00,'Southport','start'],[34.19,-77.80,'Masonboro Inlet','waypoint'],[34.86,-76.64,'Jarrett Bay','end']], center:[34.3,-77.5], zoom:8},
-  'seg7':  {coords:[[34.86,-76.64,'Jarrett Bay','start'],[35.10,-76.43,'Neuse River','waypoint'],[35.90,-75.90,'Pamlico Sound','waypoint'],[36.05,-75.85,'Alligator River','waypoint'],[36.35,-75.99,'Coinjock','end']], center:[35.5,-76.3], zoom:7},
+  'seg5':  {coords:[[33.92,-78.00,'Southport','start'],[34.19,-77.80,'Masonboro Inlet','waypoint'],[34.86,-76.64,'Oriental, NC (River Dunes)','end']], center:[34.3,-77.5], zoom:8},
+  'seg7':  {coords:[[34.86,-76.64,'Oriental, NC (River Dunes)','start'],[35.10,-76.43,'Neuse River','waypoint'],[35.90,-75.90,'Pamlico Sound','waypoint'],[36.05,-75.85,'Alligator River','waypoint'],[36.35,-75.99,'Coinjock','end']], center:[35.5,-76.3], zoom:7},
   'seg9':  {coords:[[36.85,-76.30,'Waterside Norfolk','start'],[36.97,-75.72,'Cape Henry','waypoint'],[37.01,-74.74,'Chesapeake Light','waypoint'],[38.33,-75.09,'Ocean City MD','end']], center:[37.7,-75.5], zoom:7},
   'seg10': {coords:[[38.33,-75.09,'Ocean City MD','start'],[38.97,-74.96,'Cape May (opt)','waypoint'],[39.76,-74.11,'Barnegat Light','end']], center:[39.0,-74.7], zoom:7},
   'seg12': {coords:[[39.76,-74.11,'Barnegat Light','start'],[40.45,-73.85,'Sandy Hook','waypoint'],[40.83,-73.70,'Port Washington NY','end']], center:[40.3,-74.0], zoom:8},
@@ -2194,8 +2371,8 @@ var MAP_DEFS = {
   'sseg2': {coords:[[40.83,-73.70,'Port Washington NY','start'],[40.45,-73.85,'Sandy Hook','waypoint'],[39.76,-74.11,'Barnegat Light','end']], center:[40.3,-74.0], zoom:8},
   'sseg4': {coords:[[39.76,-74.11,'Barnegat Light','start'],[38.97,-74.96,'Cape May (opt)','waypoint'],[38.33,-75.09,'Ocean City MD','end']], center:[39.0,-74.7], zoom:7},
   'sseg5': {coords:[[38.33,-75.09,'Ocean City MD','start'],[37.01,-74.74,'Chesapeake Light','waypoint'],[36.97,-75.72,'Cape Henry','waypoint'],[36.85,-76.30,'Waterside Norfolk','end']], center:[37.7,-75.5], zoom:7},
-  'sseg8': {coords:[[36.35,-75.99,'Coinjock','start'],[35.90,-75.90,'Albemarle Sound','waypoint'],[35.10,-76.43,'Pamlico Sound','waypoint'],[34.86,-76.64,'Jarrett Bay','end']], center:[35.5,-76.3], zoom:7},
-  'sseg9': {coords:[[34.86,-76.64,'Jarrett Bay','start'],[34.19,-77.80,'Masonboro Inlet','waypoint'],[33.92,-78.00,'Southport','end']], center:[34.3,-77.5], zoom:8},
+  'sseg8': {coords:[[36.35,-75.99,'Coinjock','start'],[35.90,-75.90,'Albemarle Sound','waypoint'],[35.10,-76.43,'Pamlico Sound','waypoint'],[34.86,-76.64,'Oriental, NC (River Dunes)','end']], center:[35.5,-76.3], zoom:7},
+  'sseg9': {coords:[[34.86,-76.64,'Oriental, NC (River Dunes)','start'],[34.19,-77.80,'Masonboro Inlet','waypoint'],[33.92,-78.00,'Southport','end']], center:[34.3,-77.5], zoom:8},
   'sseg10':{coords:[[33.92,-78.00,'Southport','start'],[32.77,-79.93,'Charleston','end']], center:[33.3,-79.0], zoom:7},
   'sseg11':{coords:[[32.77,-79.93,'Charleston','start'],[32.16,-80.74,'Hilton Head (cont)','waypoint'],[31.13,-81.39,'St. Simons Island (cont)','waypoint'],[29.90,-81.26,'St. Augustine','end']], center:[31.3,-80.6], zoom:6},
   'sseg12':{coords:[[29.90,-81.26,'St. Augustine','start'],[27.49,-80.28,'Ft. Pierce','end']], center:[28.7,-80.8], zoom:7},
@@ -2358,6 +2535,128 @@ function vlRenderAnalytics(){
   dc('eng-hrs');
   if(eh.length){var ctx=document.getElementById('chart-eng-hrs');if(ctx){vlChartInstances['eng-hrs']=new Chart(ctx,{type:'bar',data:{labels:eh.map(function(e){return ll(e);}),datasets:[{data:eh.map(function(e){return Math.round((e.engine_hours_port_end-e.engine_hours_port_start)*10)/10;}),backgroundColor:BA,borderRadius:3}]},options:Object.assign({},bOpts,{plugins:Object.assign({},bOpts.plugins,{tooltip:{callbacks:{label:function(c){return c.parsed.y.toFixed(1)+' hrs';}}}})})});}}
 }
+
+// ── BARNEGAT WINDOW WIDGET ──────────────────────────────────────────────────
+(function(){
+  var TIDE_STATION='8534720';
+  var NOAA_API='https://api.tidesandcurrents.noaa.gov/api/prod/datagetter';
+  var LAG=1.5;          // current lags tide table by ~1.5 hrs
+  var E_OPEN=2.0;       // entry: open 2 hrs after actual current reversal
+  var E_CLOSE=1.0;      // entry: close 1 hr before high (+ lag)
+  var X_OPEN=2.0;       // exit: same open
+  var X_CLOSE=0.75;     // exit: close 45 min before high (moves faster with current)
+
+  function fmtTime(dateStr){
+    var d=new Date(dateStr.replace(' ','T')+':00');
+    return d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',hour12:true});
+  }
+  function addHrs(dateStr,hrs){
+    var d=new Date(dateStr.replace(' ','T')+':00');
+    d.setMinutes(d.getMinutes()+Math.round(hrs*60));
+    return d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',hour12:true});
+  }
+  function todayVal(){
+    var d=new Date();
+    return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+  }
+
+  // Set today as default value on all date inputs
+  function initDates(){
+    var t=todayVal();
+    ['bnl-date-nb','bnl-date-nb-exit','bnl-date-sb','bnl-date-sb-exit'].forEach(function(id){
+      var el=document.getElementById(id);
+      if(el&&!el.value) el.value=t;
+    });
+  }
+
+  window.bnlToggle=function(id){
+    var body=document.getElementById('bnl-body-'+id);
+    var chev=document.getElementById('bnl-chev-'+id);
+    if(!body) return;
+    body.classList.toggle('open');
+    if(chev) chev.classList.toggle('open');
+  };
+
+  window.bnlExplainToggle=function(hdr){
+    var body=hdr.nextElementSibling;
+    var chev=hdr.querySelector('.bnl-explain-chev');
+    if(body) body.classList.toggle('open');
+    if(chev) chev.classList.toggle('open');
+  };
+
+  window.bnlFetch=function(id){
+    var dateEl=document.getElementById('bnl-date-'+id);
+    var btn=document.getElementById('bnl-btn-'+id);
+    var status=document.getElementById('bnl-status-'+id);
+    var results=document.getElementById('bnl-results-'+id);
+    if(!dateEl||!dateEl.value){status.textContent='Please select a date.';return;}
+    var dateVal=dateEl.value.replace(/-/g,'');
+    var isExit=(id==='nb-exit'||id==='sb-exit');
+    btn.disabled=true;btn.textContent='Loading\u2026';
+    status.textContent='';results.innerHTML='';
+    var url=NOAA_API+'?begin_date='+dateVal+'&end_date='+dateVal+'&station='+TIDE_STATION+'&product=predictions&datum=MLLW&time_zone=lst_ldt&interval=hilo&units=english&application=genius2go&format=json';
+    fetch(url).then(function(r){return r.json();}).then(function(json){
+      btn.disabled=false;btn.textContent=isExit?'Get Exit Windows':'Get Windows';
+      if(json.error){results.innerHTML='<div class="bnl-error">'+json.error.message+'</div>';return;}
+      renderBnlResults(id,json.predictions,isExit);
+    }).catch(function(){
+      btn.disabled=false;btn.textContent=isExit?'Get Exit Windows':'Get Windows';
+      results.innerHTML='<div class="bnl-error">Could not fetch tide data. Check connection and try again.</div>';
+    });
+  };
+
+  function renderBnlResults(id,tides,isExit){
+    var results=document.getElementById('bnl-results-'+id);
+    var dateEl=document.getElementById('bnl-date-'+id);
+    var dateLabel=dateEl?new Date(dateEl.value+'T12:00:00').toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'}):'';
+    var html='<div style="font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px;">'+
+      (isExit?'Exit':'Entry &amp; exit')+' windows for '+dateLabel+'</div>';
+    var hasWindow=false;
+    for(var i=0;i<tides.length-1;i++){
+      var t=tides[i], next=tides[i+1];
+      if(t.type!=='L'||next.type!=='H') continue;
+      var lowHour=new Date(t.t.replace(' ','T')+':00').getHours();
+      var isMorning=(lowHour<11);
+      var cls=isMorning?'go':'caution';
+      var badge=isMorning?'GO':'CAUTION';
+      var cycleNum=(hasWindow?2:1);
+      html+='<div class="bnl-cycle"><div class="bnl-cycle-lbl">Tide cycle '+cycleNum+
+        ' &mdash; Low '+fmtTime(t.t)+' ('+parseFloat(t.v).toFixed(1)+' ft) &rarr; High '+fmtTime(next.t)+' ('+parseFloat(next.v).toFixed(1)+' ft)</div>';
+      if(!isExit){
+        var eOpen=addHrs(t.t,LAG+E_OPEN);
+        var eClose=addHrs(next.t,-(LAG+E_CLOSE));
+        var eNote=isMorning?'Morning flood &mdash; ideal entry window.':'Afternoon flood &mdash; conditions met but morning strongly preferred. Consider waiting for next day.';
+        html+=windowCard('ENTRY','&#8599; Enter','entry',cls,badge,eOpen,eClose,eNote);
+      }
+      var xOpen=addHrs(t.t,LAG+X_OPEN);
+      var xClose=addHrs(next.t,-(LAG+X_CLOSE));
+      var xNote=isMorning?"Morning flood \u2014 ideal departure. You'll clear the inlet well before current turns.":"Afternoon departure \u2014 avoid if possible. Wait for next morning flood.";
+      html+=windowCard('EXIT','&#8592; Depart','exit',cls,badge,xOpen,xClose,xNote);
+      html+='</div>';
+      hasWindow=true;
+    }
+    // Full tide table
+    html+='<div class="bnl-tide-table"><div class="bnl-tide-table-lbl">Full tide table</div>';
+    tides.forEach(function(t){
+      var isLow=(t.type==='L');
+      html+='<div class="bnl-tide-row"><span class="bnl-tide-type '+(isLow?'low':'high')+'">'+(isLow?'&#8595; LOW':'&#8593; HIGH')+'</span><span class="bnl-tide-time">'+fmtTime(t.t)+'</span><span class="bnl-tide-ht">'+parseFloat(t.v).toFixed(1)+' ft</span></div>';
+    });
+    html+='</div>';
+    html+='<div class="bnl-footnote">Current lag of 1.5 hrs applied to all windows. Entry opens 2 hrs after actual current reversal. Exit window closes 45 min earlier than entry. Always verify with live Buoy 44091 and NOAA current station before committing.</div>';
+    results.innerHTML=html;
+  }
+
+  function windowCard(type,icon,key,cls,badge,open,close,note){
+    return '<div class="bnl-window-card '+cls+'">'+
+      '<div class="bnl-wc-top"><span class="bnl-wc-type">'+icon+' '+type+'</span>'+
+      '<span class="bnl-wc-badge '+cls+'">'+badge+'</span></div>'+
+      '<div class="bnl-wc-time">'+open+' &ndash; '+close+'</div>'+
+      '<div class="bnl-wc-note">'+note+'</div></div>';
+  }
+
+  // Init on load
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initDates);}else{initDates();}
+})();
 
 </script>
 
