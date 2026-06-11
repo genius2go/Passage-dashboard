@@ -2017,46 +2017,199 @@ async function fetchOpenMeteo(lat, lon) {
 async function fetchTides(stationId,daysAhead){var base=new Date();base.setDate(base.getDate()+daysAhead);var end=new Date(base);end.setDate(end.getDate()+1);function fmt(d){return d.getFullYear()+''+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0');}var url='https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?begin_date='+fmt(base)+'&end_date='+fmt(end)+'&station='+stationId+'&product=predictions&datum=MLLW&time_zone=lst_ldt&interval=hilo&units=english&application=passage_dashboard&format=json';try{var resp=await fetch(url);var data=await resp.json();return data.predictions||[];}catch(e){return[];}}
 function fmtTime(h,m){var h12=h>12?h-12:(h===0?12:h);return h12+':'+String(m).padStart(2,'0')+(h>=12?' PM':' AM');}
 function analyzeTide(preds,depTime,legNm,speedKt){var parts=depTime.split(':').map(Number);var depMin=parts[0]*60+parts[1];var travelMin=legNm>0?Math.round((legNm/speedKt)*60):0;var arrMin=depMin+travelMin;var arrH=Math.floor(arrMin/60)%24;var arrM=arrMin%60;var arrDec=arrH+arrM/60;var depDec=parts[0]+parts[1]/60;var checkDec=legNm>0?arrDec:depDec;var prev=null,next=null;for(var i=0;i<preds.length;i++){var t=preds[i].t.split(' ')[1].split(':');var td=parseInt(t[0])+parseInt(t[1])/60;if(td<=checkDec)prev=preds[i];if(td>checkDec&&!next)next=preds[i];}var isFlood=prev&&next&&prev.type==='L'&&next.type==='H';var minsToNext=next?(function(){var nt=next.t.split(' ')[1].split(':');return Math.round(((parseInt(nt[0])+parseInt(nt[1])/60)-checkDec)*60);})():null;var state,favorable;if(isFlood){state=minsToNext!==null&&minsToNext<=90?'FLOODING \u2014 HIGH in '+minsToNext+' min \u2713':'FLOODING \u2191 \u2713';favorable=true;}else if(prev&&next&&prev.type==='H'){state='EBBING \u2193 \u2717';favorable=false;}else{state='Tide state unknown';favorable=null;}var tideSummary=preds.slice(0,6).map(function(p){var t=p.t.split(' ')[1].split(':');var h12=parseInt(t[0])>12?parseInt(t[0])-12:(parseInt(t[0])===0?12:parseInt(t[0]));var ampm=parseInt(t[0])>=12?'PM':'AM';return(p.type==='H'?'\u25b2HIGH':'\u25bdLOW')+' '+h12+':'+t[1]+' '+ampm+' ('+parseFloat(p.v).toFixed(1)+'ft)';}).join(' \u00b7 ');return{depDisplay:fmtTime(parts[0],parts[1]),arrDisplay:legNm>0?fmtTime(arrH,arrM):null,travelHrs:legNm>0?Math.round(travelMin/6)/10:0,state:state,favorable:favorable,tideSummary:tideSummary,speedKt:speedKt};}
+
 async function runPlanner(){
-  var activeStop=currentDir==='nb'?(currentStop>=0?NB_STOPS[currentStop]:null):(sbCurrentStop>=0?SB_STOPS[sbCurrentStop]:null);
-  var activeLegs=currentDir==='nb'?NB_LEGS:SB_LEGS;
-  if(!activeStop){alert('Tap your current location first.');return;}
-  var leg=activeLegs[activeStop.legId];
-  var btn=document.getElementById('analyze-btn'),statusEl=document.getElementById('p-status'),chipsEl=document.getElementById('p-chips'),resultEl=document.getElementById('p-result');
-  var isManual=document.getElementById('manual-area').classList.contains('open');
-  btn.disabled=true;resultEl.innerHTML='';chipsEl.innerHTML='';chipsEl.style.display='none';
-  var setStatus=function(h){statusEl.innerHTML=h;};var context='',tideCtx='';
-  if(isManual){var txt=document.getElementById('manual-input').value.trim();if(!txt){btn.disabled=false;return;}context='MANUALLY PROVIDED CONDITIONS:\n'+txt;setStatus('\u2713 Using your provided data');}
-  else{
-    var buoySuccess=false;
-    // Always fetch Open-Meteo in parallel — supplements buoys even when partially available
-    var omPromise = (leg.centerLat&&leg.centerLon) ? fetchOpenMeteo(leg.centerLat,leg.centerLon) : Promise.resolve(null);
-    if(leg.buoys&&leg.buoys.length>0){setStatus('<span class="sp"></span> Fetching live buoy data + model forecast...');
-      for(var bi=0;bi<leg.buoys.length;bi++){var d=await fetchBuoy(leg.buoys[bi]);if(d&&d['WSPD']&&d['WSPD']!=='MM'){var wspd=(parseFloat(d['WSPD'])*1.944).toFixed(1);var wvht=d['WVHT']&&d['WVHT']!=='MM'?d['WVHT']+'m/'+(parseFloat(d['WVHT'])*3.28).toFixed(1)+'ft':'N/A (wave sensor offline)';var wdir=d['WDIR']&&d['WDIR']!=='MM'?'from '+d['WDIR']+'°':'';chipsEl.style.display='flex';chipsEl.innerHTML+='<span class="chip">Buoy '+leg.buoys[bi]+': '+wspd+'kts '+wdir+' · Waves '+wvht+'</span>';context+='\nBuoy '+leg.buoys[bi]+' (live): Wind '+wspd+' kts '+wdir+', Waves '+wvht+'\n';buoySuccess=true;}}}
-    // Always add Open-Meteo as forecast supplement
-    setStatus('<span class="sp"></span> Loading forecast model data...');
-    var omForecast=await omPromise;
-    if(omForecast){chipsEl.style.display='flex';chipsEl.innerHTML+='<span class="chip chip-tide">Open-Meteo 3-day forecast loaded ✓</span>';context+='\n'+omForecast+'\n';}else if(!buoySuccess){context+='\nNo buoy or model data available. Use Windy or paste conditions manually.\n';chipsEl.style.display='flex';chipsEl.innerHTML+='<span class="chip" style="border-color:rgba(239,68,68,0.3);color:#fca5a5">All sources unavailable — paste Windy data below</span>';}
-    if(activeStop.hasTide){setStatus('<span class="sp"></span> Fetching tide predictions...');
-      var depTime=document.getElementById('plan-deptime').value||'07:00';var speedKt=parseFloat(document.getElementById('plan-speed').value)||28;
-      var dayLabels=['Tomorrow','+1 day','+2 days'];
-      for(var dayOff=0;dayOff<=2;dayOff++){var preds=await fetchTides(activeStop.tideId,dayOff+1);if(preds.length>0){var ta=analyzeTide(preds,depTime,activeStop.tideNm,speedKt);var label=dayLabels[dayOff];var chipCls=ta.favorable===true?'chip-ok':(ta.favorable===false?'chip-bad':'chip-tide');chipsEl.style.display='flex';var chipText=label+' \u00b7 '+activeStop.tideName+': ';if(ta.arrDisplay)chipText+='Arrive '+ta.arrDisplay+' \u00b7 ';chipText+=ta.state;chipsEl.innerHTML+='<span class="chip '+chipCls+'">'+chipText+'</span>';tideCtx+='\n'+label+' \u2014 '+activeStop.tideName+':\n  Depart '+ta.depDisplay+' at '+speedKt+' kts';if(ta.arrDisplay)tideCtx+='\u2192 arrive '+ta.arrDisplay+' ('+ta.travelHrs+' hrs)';tideCtx+='\n  Tide: '+ta.state+' \u2014 '+(ta.favorable?'FAVORABLE \u2713':'UNFAVORABLE \u2717')+'\n  Tides: '+ta.tideSummary+'\n';}}}
+  // Get from/to directly from dropdowns — single source of truth
+  var fromVal = (document.getElementById('pp-from').value||'').trim();
+  var toVal   = (document.getElementById('pp-to').value||'').trim().replace(' (fuel)','');
+  if(!fromVal || !toVal){
+    alert('Please select where you are and where you want to go.');
+    return;
   }
-  setStatus('<span class="sp"></span> Analyzing all options...');
+
+  // Resolve leg
+  var legKey = ppResolveLeg(fromVal, toVal);
+  if(!legKey){
+    alert('No route data for '+fromVal+' \u2192 '+toVal+'. Try the manual forecast option below.');
+    return;
+  }
+  var leg = NB_LEGS[legKey] || SB_LEGS[legKey];
+  if(!leg){
+    alert('No leg data found. Try manual forecast.');
+    return;
+  }
+
+  // Tide info for legs with critical inlets
+  var TIDE_MAP = {
+    'ocy-bnl': {tideId:'8534720', tideName:'Barnegat Inlet',        tideNm:75,  exitOnly:false},
+    'bnl-pwy': {tideId:'8534720', tideName:'Barnegat Inlet (exit)', tideNm:0,   exitOnly:true},
+    'pwy-fal': {tideId:'8461490', tideName:'The Race',              tideNm:95,  exitOnly:false},
+    'fal-pwy': {tideId:'8461490', tideName:'The Race',              tideNm:95,  exitOnly:false},
+    'ftp-sta': {tideId:'8720218', tideName:'St. Augustine Inlet',   tideNm:160, exitOnly:false},
+  };
+  var tideInfo = TIDE_MAP[legKey] || null;
+
+  var btn      = document.getElementById('analyze-btn');
+  var statusEl = document.getElementById('p-status');
+  var chipsEl  = document.getElementById('p-chips');
+  var resultEl = document.getElementById('p-result');
+  btn.disabled = true;
+  resultEl.innerHTML = '';
+  chipsEl.innerHTML = '';
+  chipsEl.style.display = 'none';
+
+  var setStatus = function(h){ statusEl.innerHTML = h; };
+  var context = '', tideCtx = '';
+  var isManual = document.getElementById('manual-area').classList.contains('open');
+
+  if(isManual){
+    var txt = document.getElementById('manual-input').value.trim();
+    if(!txt){ btn.disabled=false; return; }
+    context = 'MANUALLY PROVIDED CONDITIONS:\n' + txt;
+    setStatus('\u2713 Using your provided data');
+  } else {
+    // Fetch buoys + Open-Meteo in parallel
+    var omPromise = (leg.centerLat && leg.centerLon)
+      ? fetchOpenMeteo(leg.centerLat, leg.centerLon)
+      : Promise.resolve(null);
+
+    if(leg.buoys && leg.buoys.length > 0){
+      setStatus('<span class="sp"></span> Fetching live buoy data...');
+      for(var bi=0; bi<leg.buoys.length; bi++){
+        var d = await fetchBuoy(leg.buoys[bi]);
+        if(d && d['WSPD'] && d['WSPD']!=='MM'){
+          var wspd = (parseFloat(d['WSPD'])*1.944).toFixed(1);
+          var wvht = (d['WVHT'] && d['WVHT']!=='MM')
+            ? d['WVHT']+'m / '+(parseFloat(d['WVHT'])*3.28).toFixed(1)+'ft'
+            : 'N/A (wave sensor offline)';
+          var wdir = (d['WDIR'] && d['WDIR']!=='MM') ? 'from '+d['WDIR']+'\u00b0' : '';
+          chipsEl.style.display = 'flex';
+          chipsEl.innerHTML += '<span class="chip">Buoy '+leg.buoys[bi]+': '+wspd+' kts '+wdir+' \u00b7 Waves '+wvht+'</span>';
+          context += '\nBuoy '+leg.buoys[bi]+' (live): Wind '+wspd+' kts '+wdir+', Waves '+wvht+'\n';
+        }
+      }
+    }
+
+    setStatus('<span class="sp"></span> Loading 3-day forecast...');
+    var omForecast = await omPromise;
+    if(omForecast){
+      chipsEl.style.display = 'flex';
+      chipsEl.innerHTML += '<span class="chip chip-tide">Open-Meteo 3-day forecast \u2713</span>';
+      context += '\n' + omForecast + '\n';
+    } else if(!context){
+      context = 'No buoy or model data available. Use Windy or paste conditions manually.';
+      chipsEl.style.display = 'flex';
+      chipsEl.innerHTML += '<span class="chip" style="border-color:rgba(239,68,68,0.3);color:#fca5a5">All sources unavailable \u2014 paste Windy data below</span>';
+    }
+
+    // Tide predictions for critical inlets
+    if(tideInfo && tideInfo.tideId){
+      setStatus('<span class="sp"></span> Fetching tide predictions...');
+      var depTime = document.getElementById('plan-deptime').value || '07:00';
+      var speedKt = parseFloat(document.getElementById('plan-speed').value) || 28;
+      var dayLabels = ['Tomorrow', '+1 day', '+2 days'];
+      for(var dayOff=0; dayOff<=2; dayOff++){
+        var preds = await fetchTides(tideInfo.tideId, dayOff+1);
+        if(preds.length > 0){
+          var ta = analyzeTide(preds, depTime, tideInfo.tideNm, speedKt);
+          var label = dayLabels[dayOff];
+          var chipCls = ta.favorable===true ? 'chip-ok' : (ta.favorable===false ? 'chip-bad' : 'chip-tide');
+          chipsEl.style.display = 'flex';
+          var chipText = label + ' \u00b7 ' + tideInfo.tideName + ': ';
+          if(ta.arrDisplay) chipText += 'Arrive ' + ta.arrDisplay + ' \u00b7 ';
+          chipText += ta.state;
+          chipsEl.innerHTML += '<span class="chip '+chipCls+'">'+chipText+'</span>';
+          tideCtx += '\n'+label+' \u2014 '+tideInfo.tideName+':\n  Depart '+ta.depDisplay+' at '+speedKt+' kts';
+          if(ta.arrDisplay) tideCtx += ' \u2192 arrive '+ta.arrDisplay+' ('+ta.travelHrs+' hrs)';
+          tideCtx += '\n  Tide: '+ta.state+' \u2014 '+(ta.favorable?'FAVORABLE \u2713':'UNFAVORABLE \u2717')+'\n  Tides: '+ta.tideSummary+'\n';
+        }
+      }
+    }
+  }
+
+  setStatus('<span class="sp"></span> Analyzing...');
+
+  // Build date label
+  var _today = new Date();
+  var _months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var _days   = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var _depDate = new Date(_today); _depDate.setDate(_today.getDate() + selectedOpt + 1);
+  var _dateStr = _days[_depDate.getDay()] + ', ' + _months[_depDate.getMonth()] + ' ' + _depDate.getDate();
+  var todayStr = _months[_today.getMonth()] + ' ' + _today.getDate() + ', ' + _today.getFullYear();
+  var optLabel = selectedOpt===0 ? 'tomorrow ('+_dateStr+')' : (selectedOpt===1 ? 'the day after tomorrow ('+_dateStr+')' : '+2 days ('+_dateStr+')');
+
+  var sys = 'You are a passage weather advisor for Peter, a solo powerboat captain on a Formula 40PC with twin Volvo Penta IPS500/D6 engines and T4 props. Today is '+todayStr+'.\n\nLeg: '+fromVal+' \u2192 '+toVal+' (~'+leg.nm+' nm)\nComfort zone: winds under 15 kts, seas under 3-4 ft. Hard off-water-by-3pm rule.\nContext: previous Barnegat Inlet incident \u2014 extra caution always. Pamlico Sound unexpectedly rough on a past crossing. Solo passage. Goal: harmonious, low-stress trip.\nNever give CAUTION just because a buoy is offline.\n\nFormat \u2014 Line 1: VERDICT for '+optLabel+' \u2014 GO / WAIT / CAUTION \u2014 one line reason (no markdown symbols)\n1. Immediate assessment (2-3 sentences)\n2. Tide assessment if relevant (1-2 sentences)\n3. Comparing all three days (2-3 sentences)\n4. Watch for (1 sentence)\n\nDo not use ## or ** or --- in your response.';
+
+  var usr = 'From: '+fromVal+'\nTo: '+toVal+' (~'+leg.nm+' nm)\nDeparture: '+optLabel+'\nToday: '+todayStr+'\n\nGO criteria: '+leg.go+'\nWAIT criteria: '+leg.wait+'\nNext leg after this: '+leg.nextLeg+'\n\nWeather data:\n'+(context||'No live data.')+(tideCtx?'\n\nTide predictions:\n'+tideCtx:'')+'\n\nAnalyze all three departure options and give your recommendation.';
+
+  try{
+    var resp = await fetch('https://passage-advisor.soap-and-water-newport.workers.dev/', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({model:'claude-sonnet-4-6', max_tokens:1000, system:sys, messages:[{role:'user',content:usr}]})
+    });
+    var json = await resp.json();
+    var text = ((json.content && json.content[0] && json.content[0].text) || 'Unable to get recommendation.').trim();
+    // Strip any markdown that slips through
+    text = text.replace(/#{1,3}\s*/g,'').replace(/\*\*/g,'').replace(/\*([^*]+)\*/g,'$1').replace(/^---\s*$/gm,'').replace(/\n{3,}/g,'\n\n').trim();
+    var fl = text.split('\n')[0].toUpperCase();
+    var cls='r-caution', icon='\u26a0\ufe0f';
+    if(fl.replace(/[*#_ ]/g,'').indexOf('GO')>-1 && fl.indexOf('WAIT')===-1 && fl.indexOf('CAUTION')===-1){cls='r-go';icon='\u2705';}
+    if(fl.indexOf('WAIT')>-1){cls='r-wait';icon='\uD83D\uDED1';}
+    var lines = text.split('\n');
+    resultEl.innerHTML = '<div class="p-result"><div class="r-hdr '+cls+'"><span class="r-icon">'+icon+'</span><span class="r-verdict">'+lines[0]+'</span></div><div class="r-body"><div class="r-text">'+lines.slice(1).join('\n').trim()+'</div></div></div>';
+  } catch(e){
+    resultEl.innerHTML = '<div class="p-result"><div class="r-hdr r-caution"><span class="r-icon">\u26a0\ufe0f</span><span class="r-verdict">Could not reach the advisor. Use the manual forecast option above.</span></div></div>';
+    showClaudeButton();
+  }
+  setStatus(''); btn.disabled=false; showClaudeButton();
+}
+
+function buildClaudePrompt(){
+  var fromVal = (document.getElementById('pp-from').value||'').trim();
+  var toVal   = (document.getElementById('pp-to').value||'').trim().replace(' (fuel)','');
+  if(!fromVal||!toVal) return '';
+  var legKey = ppResolveLeg(fromVal, toVal);
+  if(!legKey) return '';
+  var leg = NB_LEGS[legKey] || SB_LEGS[legKey];
+  if(!leg) return '';
   var _today=new Date();
-  var _days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
   var _months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var _days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
   var _depDate=new Date(_today); _depDate.setDate(_today.getDate()+selectedOpt+1);
   var _dateStr=_days[_depDate.getDay()]+', '+_months[_depDate.getMonth()]+' '+_depDate.getDate();
+  var todayStr=_months[_today.getMonth()]+' '+_today.getDate()+', '+_today.getFullYear();
   var optLabel=selectedOpt===0?'tomorrow ('+_dateStr+')':(selectedOpt===1?'the day after tomorrow ('+_dateStr+')':('+2 days ('+_dateStr+')'));
-  var dirLabel=currentDir==='nb'?'northbound (Miami Beach to East Falmouth MA)':'southbound (East Falmouth MA to Miami Beach)';
-  var sys='You are a passage weather advisor for Peter, an experienced solo powerboat captain on a '+dirLabel+' passage on a Formula 40PC with twin Volvo Penta IPS500/D6 engines and T4 props (~200 nm comfortable range). Currently stopped at '+activeStop.name+'.\n\nContext: PREVIOUS INCIDENT at Barnegat Inlet. Pamlico Sound unexpectedly rough on a past crossing. Solo passage. Comfort zone: winds under 15 kts, seas under 3-4 ft. Tide timing at Barnegat, St. Augustine bar, and The Race is as important as wind/wave. Goal: harmonious, low-stress trip. If NWS forecast text is provided instead of live buoys use it fully. Never give CAUTION just because a buoy is offline - a missing buoy is a data gap not a weather problem.\n\nFormat \u2014 Line 1: VERDICT for '+optLabel+' \u2014 GO / WAIT / CAUTION \u2014 brief reason\n1. Immediate assessment (2-3 sentences)\n2. Tide assessment if relevant (1-2 sentences)\n3. Downstream flow (2 sentences)\n4. Comparing all three options (2-3 sentences)\n5. Watch for (1 sentence)';
-  var usr='Current stop: '+activeStop.name+'\nNext leg: '+leg.name+' (~'+leg.nm+' nm)\nRequested departure: '+optLabel+'\n\nGO criteria: '+leg.go+'\nWAIT criteria: '+leg.wait+'\nNext leg context: '+leg.nextLeg+'\n\nLive buoy data:\n'+(context||'No live buoy data available.')+(tideCtx?'\n\nTIDE ANALYSIS:\n'+tideCtx:'')+'\n\nAnalyze all three departure options and give your recommendation.';
-  try{var resp=await fetch('https://passage-advisor.soap-and-water-newport.workers.dev/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:1000,system:sys,messages:[{role:'user',content:usr}]})});var json=await resp.json();var text=((json.content&&json.content[0]&&json.content[0].text)||'Unable to get recommendation.').trim();var fl=text.split('\n')[0].toUpperCase();var cls='r-caution',icon='\u26a0\ufe0f';if(fl.replace(/[*#_ ]/g,'').indexOf('GO')>-1&&fl.indexOf('WAIT')===-1&&fl.indexOf('CAUTION')===-1){cls='r-go';icon='\u2705';}if(fl.indexOf('WAIT')>-1){cls='r-wait';icon='\ud83d\uded1';}var lines=text.split('\n');resultEl.innerHTML='<div class="p-result"><div class="r-hdr '+cls+'"><span class="r-icon">'+icon+'</span><span class="r-verdict">'+lines[0]+'</span></div><div class="r-body"><div class="r-text">'+lines.slice(1).join('\n').trim()+'</div></div></div>';}catch(e){resultEl.innerHTML='<div class="p-result"><div class="r-hdr r-caution"><span class="r-icon">⚠️</span><span class="r-verdict">Could not reach the AI advisor. If testing locally, tap \"or paste your own forecast data\" above and enter conditions manually, then use the Ask Claude button below.</span></div></div>';showClaudeButton();}
-  setStatus('');btn.disabled=false;showClaudeButton();
+  var chipsEl=document.getElementById('p-chips');
+  var chipsText='';
+  if(chipsEl&&chipsEl.style.display!=='none'){
+    chipsEl.querySelectorAll('.chip').forEach(function(c){chipsText+=c.textContent+'\n';});
+  }
+  var manualText='';
+  var manualArea=document.getElementById('manual-area');
+  if(manualArea&&manualArea.classList.contains('open')){
+    var inp=document.getElementById('manual-input');
+    if(inp&&inp.value.trim()) manualText=inp.value.trim();
+  }
+  var prompt='Solo passage on a Formula 40PC, twin Volvo Penta IPS500/D6, T4 props.\n\nFrom: '+fromVal+'\nTo: '+toVal+' (~'+leg.nm+' nm)\nDeparture: '+optLabel+'\nToday: '+todayStr+'\n\nGO criteria: '+leg.go+'\nWAIT criteria: '+leg.wait+'\nNext leg context: '+leg.nextLeg+'\n\n';
+  if(chipsText) prompt+='Live data:\n'+chipsText+'\n';
+  if(manualText) prompt+='Conditions:\n'+manualText+'\n\n';
+  prompt+='Context: previous Barnegat Inlet incident; comfort zone winds under 15 kts, seas under 3-4 ft; solo; 3pm arrival rule.\n\nGive GO / WAIT / CAUTION for all three departure options and tell me what to watch for.';
+  return prompt;
 }
-function buildClaudePrompt(){var activeStop=currentDir==='nb'?(currentStop>=0?NB_STOPS[currentStop]:null):(sbCurrentStop>=0?SB_STOPS[sbCurrentStop]:null);if(!activeStop)return'';var leg=(currentDir==='nb'?NB_LEGS:SB_LEGS)[activeStop.legId];var optLabel=selectedOpt===0?'tomorrow':(selectedOpt===1?'the day after tomorrow':'in two days');var chipsEl=document.getElementById('p-chips');var chipsText='';if(chipsEl&&chipsEl.style.display!=='none'){chipsEl.querySelectorAll('.chip').forEach(function(c){chipsText+='- '+c.textContent+'\n';});}var manualText='';var manualArea=document.getElementById('manual-area');if(manualArea&&manualArea.classList.contains('open')){var inp=document.getElementById('manual-input');if(inp&&inp.value.trim())manualText=inp.value.trim();}var dirLabel=currentDir==='nb'?'northbound (Miami Beach to East Falmouth MA)':'southbound (East Falmouth MA to Miami Beach)';var prompt='I am making a solo '+dirLabel+' passage on a Formula 40PC with twin Volvo Penta IPS500/D6 engines and T4 props (~200 nm comfortable range).\n\nCurrent stop: '+activeStop.name+'\nNext leg: '+leg.name+' (~'+leg.nm+' nm)\nConsidering departure: '+optLabel+'\n\nGO criteria: '+leg.go+'\nWAIT criteria: '+leg.wait+'\n\n';if(chipsText)prompt+='Live data:\n'+chipsText+'\n';if(manualText)prompt+='Current conditions:\n'+manualText+'\n\n';prompt+='Context:\n- Previous incident at Barnegat Inlet \u2014 extra caution always\n- Pamlico Sound was unexpectedly rough on a past crossing\n- Comfort zone: winds under 15 kts, seas under 3-4 ft\n- Goal: harmonious, low-stress passage \u2014 extra days are fine\n\nPlease give me a GO / WAIT / CAUTION recommendation, compare all three departure options, and tell me what to watch for.\n\nNext leg context: '+leg.nextLeg;return prompt;}
-function openClaude(){var p=buildClaudePrompt();if(!p){alert('Please select your current stop first.');return false;}if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(p).then(function(){alert('Your passage brief has been copied to clipboard.\n\nClaude.ai will open \u2014 paste it into the chat with Cmd+V or long-press \u2192 Paste.');window.open('https://claude.ai/new','_blank');}).catch(function(){window.open('https://claude.ai/new','_blank');});}else{window.open('https://claude.ai/new','_blank');}return false;}
+
+function openClaude(){
+  var p=buildClaudePrompt();
+  if(!p){alert('Please select your from and to stops first.');return false;}
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(p).then(function(){
+      alert('Passage brief copied.\n\nClaude.ai will open \u2014 paste with Cmd+V or long-press \u2192 Paste.');
+      window.open('https://claude.ai/new','_blank');
+    }).catch(function(){ window.open('https://claude.ai/new','_blank'); });
+  } else { window.open('https://claude.ai/new','_blank'); }
+  return false;
+}
+
 function showClaudeButton(){var btn=document.getElementById('ask-claude-btn'),note=document.getElementById('ask-claude-note');if(btn)btn.style.display='flex';if(note)note.style.display='block';}
 
 // Bridge timing calculators
@@ -3121,37 +3274,7 @@ function ppResolveLeg(from,to){
     save(); render();
   };
 
-  // Override buildClaudePrompt to use My Trip state when available
-  var _origBuildPrompt=window.buildClaudePrompt;
-  window.buildClaudePrompt=function(){
-    var hereStop=MT_STOPS.filter(function(s){return STATE[s.id]==='here';})[0];
-    var nextStop=null;
-    if(hereStop){
-      var hIdx=MT_STOPS.findIndex(function(s){return s.id===hereStop.id;});
-      for(var i=hIdx+1;i<MT_STOPS.length;i++){
-        if(STATE[MT_STOPS[i].id]!=='skip'&&STATE[MT_STOPS[i].id]!=='done'){
-          nextStop=MT_STOPS[i]; break;
-        }
-      }
-    }
-    // Build the My Trip context string to inject into the prompt
-    if(hereStop&&nextStop){
-      var legs=computeLegs();
-      var remainingStr=legs.map(function(l){return l.from+' \u2192 '+l.to+' (~'+l.nm+' nm)';}).join(', ');
-      var acNote=(STATE['atlcity']==='fuel'||STATE['atlcity']==='overnight')?' (with Atlantic City stop ~55 nm in)':'';
-      var barnNote=STATE['barnegat']==='skip'?' Note: Barnegat Light is being SKIPPED this passage \u2014 going direct from Ocean City to NYC'+acNote+'.':'';
-      // Patch currentStop to match hereStop for the original prompt builder
-      var origIdx=NB_STOPS.findIndex(function(s){return s.name===hereStop.name||s.name.indexOf(hereStop.name.split(' ')[0])===0;});
-      var savedStop=currentStop;
-      if(origIdx>=0) currentStop=origIdx;
-      var basePrompt=_origBuildPrompt();
-      currentStop=savedStop;
-      // Append My Trip context
-      basePrompt+='\n\nMy Trip (actual current plan):\nI am currently at: '+hereStop.name+'\nNext stop: '+nextStop.name+acNote+barnNote+'\nFull remaining route: '+remainingStr+'\nPlease use this actual route, not the default planner stops.';
-      return basePrompt;
-    }
-    return _origBuildPrompt();
-  };
+  // buildClaudePrompt override removed — dropdowns handle leg selection directly
 
 
 // ── SEGMENT SYNC ─────────────────────────────────────────────────────────
