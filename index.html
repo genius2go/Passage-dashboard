@@ -2043,7 +2043,12 @@ async function runPlanner(){
       for(var dayOff=0;dayOff<=2;dayOff++){var preds=await fetchTides(activeStop.tideId,dayOff+1);if(preds.length>0){var ta=analyzeTide(preds,depTime,activeStop.tideNm,speedKt);var label=dayLabels[dayOff];var chipCls=ta.favorable===true?'chip-ok':(ta.favorable===false?'chip-bad':'chip-tide');chipsEl.style.display='flex';var chipText=label+' \u00b7 '+activeStop.tideName+': ';if(ta.arrDisplay)chipText+='Arrive '+ta.arrDisplay+' \u00b7 ';chipText+=ta.state;chipsEl.innerHTML+='<span class="chip '+chipCls+'">'+chipText+'</span>';tideCtx+='\n'+label+' \u2014 '+activeStop.tideName+':\n  Depart '+ta.depDisplay+' at '+speedKt+' kts';if(ta.arrDisplay)tideCtx+='\u2192 arrive '+ta.arrDisplay+' ('+ta.travelHrs+' hrs)';tideCtx+='\n  Tide: '+ta.state+' \u2014 '+(ta.favorable?'FAVORABLE \u2713':'UNFAVORABLE \u2717')+'\n  Tides: '+ta.tideSummary+'\n';}}}
   }
   setStatus('<span class="sp"></span> Analyzing all options...');
-  var optLabel=selectedOpt===0?'tomorrow':(selectedOpt===1?'the day after tomorrow':'in two days');
+  var _today=new Date();
+  var _days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var _months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var _depDate=new Date(_today); _depDate.setDate(_today.getDate()+selectedOpt+1);
+  var _dateStr=_days[_depDate.getDay()]+', '+_months[_depDate.getMonth()]+' '+_depDate.getDate();
+  var optLabel=selectedOpt===0?'tomorrow ('+_dateStr+')':(selectedOpt===1?'the day after tomorrow ('+_dateStr+')':('+2 days ('+_dateStr+')'));
   var dirLabel=currentDir==='nb'?'northbound (Miami Beach to East Falmouth MA)':'southbound (East Falmouth MA to Miami Beach)';
   var sys='You are a passage weather advisor for Peter, an experienced solo powerboat captain on a '+dirLabel+' passage on a Formula 40PC with twin Volvo Penta IPS500/D6 engines and T4 props (~200 nm comfortable range). Currently stopped at '+activeStop.name+'.\n\nContext: PREVIOUS INCIDENT at Barnegat Inlet. Pamlico Sound unexpectedly rough on a past crossing. Solo passage. Comfort zone: winds under 15 kts, seas under 3-4 ft. Tide timing at Barnegat, St. Augustine bar, and The Race is as important as wind/wave. Goal: harmonious, low-stress trip. If NWS forecast text is provided instead of live buoys use it fully. Never give CAUTION just because a buoy is offline - a missing buoy is a data gap not a weather problem.\n\nFormat \u2014 Line 1: VERDICT for '+optLabel+' \u2014 GO / WAIT / CAUTION \u2014 brief reason\n1. Immediate assessment (2-3 sentences)\n2. Tide assessment if relevant (1-2 sentences)\n3. Downstream flow (2 sentences)\n4. Comparing all three options (2-3 sentences)\n5. Watch for (1 sentence)';
   var usr='Current stop: '+activeStop.name+'\nNext leg: '+leg.name+' (~'+leg.nm+' nm)\nRequested departure: '+optLabel+'\n\nGO criteria: '+leg.go+'\nWAIT criteria: '+leg.wait+'\nNext leg context: '+leg.nextLeg+'\n\nLive buoy data:\n'+(context||'No live buoy data available.')+(tideCtx?'\n\nTIDE ANALYSIS:\n'+tideCtx:'')+'\n\nAnalyze all three departure options and give your recommendation.';
@@ -3245,6 +3250,85 @@ window.mtSegForceShow=function(segId, barEl){
 
   if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}else{init();}
 })();
+
+// ── TRIP BRIEF ───────────────────────────────────────────────────────────
+async function runTripBrief(){
+  var fromVal=(document.getElementById('pp-from').value||'').trim();
+  var btn=document.getElementById('trip-brief-btn');
+  var resultEl=document.getElementById('tb-result');
+  if(!btn||!resultEl) return;
+  if(!fromVal){alert('Select your current location in the "I am in" dropdown first.');return;}
+
+  var ALL_LEGS=[
+    {from:'Hampton VA',      to:'Ocean City MD',        key:'hva-ocy'},
+    {from:'Ocean City MD',   to:'NYC via Atlantic City', key:'ocy-nyc'},
+    {from:'Barnegat Light',  to:'New York City',         key:'bnl-pwy'},
+    {from:'New York City',   to:'East Falmouth MA',      key:'pwy-fal'},
+  ];
+  var fromLower=fromVal.toLowerCase();
+  var startIdx=0;
+  if(fromLower.includes('ocean city')||fromLower.includes('atlantic city')) startIdx=1;
+  else if(fromLower.includes('barnegat')) startIdx=2;
+  else if(fromLower.includes('new york')||fromLower.includes('westbrook'))  startIdx=3;
+  var remaining=ALL_LEGS.slice(startIdx);
+  if(!remaining.length){
+    resultEl.innerHTML='<div style="font-size:12px;color:var(--text-dim);padding:8px 0">No remaining legs found from '+fromVal+'.</div>';
+    resultEl.classList.add('open'); return;
+  }
+
+  btn.disabled=true;
+  resultEl.innerHTML='<div class="tb-loading"><span class="sp"></span> Fetching weather for '+remaining.length+' legs...</div>';
+  resultEl.classList.add('open');
+
+  var today=new Date();
+  var months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var todayStr=months[today.getMonth()]+' '+today.getDate()+', '+today.getFullYear();
+
+  var wxByKey={};
+  await Promise.all(remaining.map(async function(l){
+    var leg=NB_LEGS[l.key]; if(!leg){wxByKey[l.key]='No data.';return;}
+    var wx='';
+    if(leg.centerLat&&leg.centerLon){try{var om=await fetchOpenMeteo(leg.centerLat,leg.centerLon);if(om)wx+=om+'\n';}catch(e){}}
+    if(leg.buoys){for(var i=0;i<leg.buoys.length;i++){try{var d=await fetchBuoy(leg.buoys[i]);if(d&&d['WSPD']&&d['WSPD']!=='MM'){var wspd=(parseFloat(d['WSPD'])*1.944).toFixed(1);var wvht=d['WVHT']&&d['WVHT']!=='MM'?d['WVHT']+'m':'N/A';wx+='Buoy '+leg.buoys[i]+': '+wspd+' kts, waves '+wvht+'\n';}}catch(e){}}}
+    wxByKey[l.key]=wx||'Model forecast only.';
+  }));
+
+  var legLines=remaining.map(function(l,i){
+    var leg=NB_LEGS[l.key]||{};
+    var depDay=i===0?'tomorrow':('day '+(i+1)+' from now');
+    return 'LEG '+(i+1)+' ('+depDay+'): '+l.from+' to '+l.to+' (~'+(leg.nm||'?')+' nm)\nGo: '+(leg.go||'standard offshore')+'\nWait: '+(leg.wait||'')+'\nWeather:\n'+(wxByKey[l.key]||'unavailable');
+  }).join('\n---\n');
+
+  var sys='You are a passage weather advisor for Peter, a solo powerboat captain on a northbound passage to East Falmouth MA on a Formula 40PC, twin Volvo Penta IPS500/D6, T4 props, ~200 nm range, hard off-water-by-3pm rule. Today is '+todayStr+'. Context: previous Barnegat Inlet incident; comfort zone winds under 15 kts, seas under 3-4 ft; The Race timing critical on NYC-Falmouth leg.\n\nFor EACH leg output exactly:\nLEG N (date): [from] to [to] — VERDICT: GO/WAIT/CAUTION\nBest departure: [time]\nWatch for: [one item]\n\nThen one sentence overall outlook.';
+  var usr='Currently at: '+fromVal+'\nToday: '+todayStr+'\n\n'+legLines;
+
+  try{
+    var resp=await fetch('https://passage-advisor.soap-and-water-newport.workers.dev/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:1000,system:sys,messages:[{role:'user',content:usr}]})});
+    var json=await resp.json();
+    var text=((json.content&&json.content[0]&&json.content[0].text)||'No response.').trim();
+    var html='<div style="font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px">Full trip brief from '+fromVal+' &middot; today is '+todayStr+'</div>';
+    var sections=text.split(/(?=LEG\s+\d)/i);
+    if(sections.length<=1){
+      html+='<div class="tb-leg-block"><div class="tb-leg-body">'+text+'</div></div>';
+    } else {
+      sections.forEach(function(sec){
+        if(!sec.trim()) return;
+        var upper=sec.toUpperCase();
+        var cls='caution',icon='\u26a0\ufe0f';
+        if(/VERDICT[:\s\u2014]*GO/.test(upper)){cls='go';icon='\u2705';}
+        if(/VERDICT[:\s\u2014]*WAIT/.test(upper)){cls='wait';icon='\uD83D\uDED1';}
+        var lines=sec.split('\n');
+        var hdr=lines[0].replace(/\*\*/g,'').trim();
+        var body=lines.slice(1).join('\n').trim();
+        html+='<div class="tb-leg-block"><div class="tb-leg-hdr '+cls+'"><span>'+icon+'</span><span class="tb-leg-name">'+hdr+'</span></div><div class="tb-leg-body">'+body+'</div></div>';
+      });
+    }
+    resultEl.innerHTML=html;
+  }catch(e){
+    resultEl.innerHTML='<div class="tb-leg-block"><div class="tb-leg-body">Could not reach advisor. Check connection and try again.</div></div>';
+  }
+  btn.disabled=false;
+}
 
 </script>
 
