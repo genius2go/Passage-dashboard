@@ -528,6 +528,37 @@
       "notes": "Slow down in the North River, it's so circuitous that it’s easy to veer outside of the narrow channel (I ended up in 1 foot of muck)",
       "ec_ref": "2026-06-09",
       "logged_at": "2026-06-09T18:25:52.115Z"
+    },
+    {
+      "id": "seg8-2026-06-10-0014",
+      "date": "2026-06-10",
+      "leg": "Coinjock to Hampton VA",
+      "leg_id": "seg8",
+      "direction": "nb",
+      "depart_time": "07:30",
+      "arrive_time": "12:30",
+      "duration_hrs": 5,
+      "planned_nm": 40,
+      "actual_nm": 54,
+      "avg_speed_kts": 10.8,
+      "fuel_used_gal": 58,
+      "fuel_price_per_gal": 5.72,
+      "fuel_cost": 331.76,
+      "engine_hours_port_start": 1117,
+      "engine_hours_port_end": 1122,
+      "engine_hours_stbd_start": 1117,
+      "engine_hours_stbd_end": 1122,
+      "wind_speed": "Calm",
+      "wind_dir": "NE",
+      "seas": "Flat",
+      "sky": "Partly cloudy",
+      "visibility": "Clear",
+      "crew": "Solo",
+      "faults": false,
+      "fault_notes": null,
+      "notes": "Slow down on the ICW where it curves around below Coinjock",
+      "ec_ref": "2026-06-10",
+      "logged_at": "2026-06-11T10:13:40.015Z"
     }
   ]
 }
