@@ -561,10 +561,10 @@
       "logged_at": "2026-06-11T10:13:40.015Z"
     },
     {
-      "id": "seg9-2026-06-11-9688",
+      "id": "-2026-06-11-1496",
       "date": "2026-06-11",
       "leg": "Hampton VA to Ocean City MD",
-      "leg_id": "seg9",
+      "leg_id": "",
       "direction": "nb",
       "depart_time": "07:15",
       "arrive_time": "00:45",
@@ -572,9 +572,9 @@
       "planned_nm": 125,
       "actual_nm": 109,
       "avg_speed_kts": 6.2,
-      "fuel_used_gal": 175,
+      "fuel_used_gal": 135,
       "fuel_price_per_gal": 5.4,
-      "fuel_cost": 945,
+      "fuel_cost": 729,
       "engine_hours_port_start": 1122,
       "engine_hours_port_end": 1128,
       "engine_hours_stbd_start": 1122,
@@ -589,7 +589,7 @@
       "fault_notes": null,
       "notes": null,
       "ec_ref": "2026-06-11",
-      "logged_at": "2026-06-12T06:13:09.689Z"
+      "logged_at": "2026-06-12T06:18:21.497Z"
     }
   ]
 }
