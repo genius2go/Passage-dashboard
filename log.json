@@ -590,6 +590,37 @@
       "notes": null,
       "ec_ref": "2026-06-11",
       "logged_at": "2026-06-12T06:18:21.497Z"
+    },
+    {
+      "id": "manual-2026-06-12-5920",
+      "date": "2026-06-12",
+      "leg": "Ocean City, MD to Jersey City, NJ",
+      "leg_id": "manual",
+      "direction": "nb",
+      "depart_time": "05:55",
+      "arrive_time": "13:15",
+      "duration_hrs": 7.333333333333333,
+      "planned_nm": 0,
+      "actual_nm": 165,
+      "avg_speed_kts": 22.5,
+      "fuel_used_gal": 208,
+      "fuel_price_per_gal": 6.3,
+      "fuel_cost": 1310.4,
+      "engine_hours_port_start": 1128,
+      "engine_hours_port_end": 1135,
+      "engine_hours_stbd_start": 1128,
+      "engine_hours_stbd_end": 1135,
+      "wind_speed": "5–10",
+      "wind_dir": "SW",
+      "seas": "1–2 ft",
+      "sky": "Sunny",
+      "visibility": "Clear",
+      "crew": "Solo",
+      "faults": false,
+      "fault_notes": null,
+      "notes": "Dual pumps in AC, was in and out in 20 minutes",
+      "ec_ref": "2026-06-12",
+      "logged_at": "2026-06-12T17:58:45.921Z"
     }
   ]
 }
